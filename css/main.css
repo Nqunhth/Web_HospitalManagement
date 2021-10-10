@@ -1,0 +1,185 @@
+
+/* Reset CSS*/
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+/*header__news*/
+.header__news{
+    width: 100%;
+    height: 30%;
+    display: flex;
+}
+.header__news--img{
+    flex: 2 1;
+}
+.header__news--newslist{
+    flex: 1 2;
+    background-color: #1C2244;
+}
+
+
+
+/*main__content background*/
+.container__background{
+    width: 100%;
+    height: 1500px;
+    background-image: url('/img/dành-cho-bác-sỹ.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/*main__content navbar*/
+.container__navbar{
+    width: 100%;
+    height: 80px;
+    background-color: #5D5FEF;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 5px;
+    /* margin: 0 0 1.5rem; */
+}
+.navbar--list{
+    height: 80px;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto 200px;
+}
+.navbar--item-link{
+    display: flex;
+    text-decoration: none;
+    align-items: center;
+    justify-content: center;
+}
+.navbar--item-link{
+    height: 80px;
+    line-height: 80px!important;
+    padding: 0 1em!important;
+    position: relative;
+    color: white;
+    font-size: 200%;
+    font-weight: 900; /* Same as Bold */
+}
+.navbar--flex-spacer{
+    flex-grow: 1;
+}
+
+/*main__content navbar navbar_dropdown*/
+.has-dropdown-menu{
+    position: relative;
+}
+.dropdown-menu{
+    display: none;
+    width: auto;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #7C88F5;
+    list-style: none;
+}
+.dropdown-menu a{
+    display: block;
+    white-space: nowrap;
+    text-decoration: none;
+    color: white;
+    padding: 15px 70px;
+    font-size: 180%;
+    font-weight: 600;
+}
+    /*navbar + dropdown effect*/
+.navbar--item a:hover{
+    background-color: #7C88F5;
+}
+.dropdown-menu a:hover{
+    background-color: #5A66D0;
+}
+.has-dropdown-menu:hover .dropdown-menu{
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 10px;
+    display: block;
+}
+.has-dropdown-menu:hover{
+    background-color: #7C88F5;
+}
+
+/*main__content logo*/
+.container__logo{
+    padding: 10rem 18rem;
+}
+.logo--background{
+    width: 800px;
+    height: 900px;
+    border-radius: 3em;
+    background-color: #ff0000;
+    background: rgba(32, 37, 77, 0.9);
+    font-size: 170%;
+}
+.logo--content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+.icon{
+    padding-top: 100px;
+    padding-bottom: 50px;
+    font-size: 250px;
+}
+#logo-title{
+    padding-top: 10px;
+    font-size: 280%;
+}
+#logo-slogan{
+    padding-top: 20px;
+    font-size: 250%;
+}
+.logo--content h3{
+    padding-top: 40px;
+    font-weight: 500;
+}
+
+
+
+
+
+.footer__content{
+    width: 100%;
+    height: 400px;
+    background-color: #070B32;
+}
+.footer__content{
+    padding: 40px 50px;
+    color: white;
+    font-size: 230%;
+}
+.content-title{
+    text-align: center;
+}
+.content-main{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    justify-content: center;
+    align-content: center;
+}
+.main-column{
+    width: max-content;
+    margin: 0 auto;    
+}
+.column-content{
+    width: max-content;
+
+}
+.column-link-list{  
+    /* display: flex;   */
+    width: max-content;
+    flex-direction: column;    
+    list-style: none;
+}
+.content-conclude{
+    padding-top: 50px;
+    text-align: center;
+}
+
+
+
