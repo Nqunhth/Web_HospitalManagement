@@ -8,7 +8,7 @@
 /*header__news*/
 .header__news{
     width: 100%;
-    height: 30%;
+    height: 350px;
     display: flex;
 }
 .header__news--img{
@@ -24,7 +24,7 @@
 /*main__content background*/
 .container__background{
     width: 100%;
-    height: 1200px;
+    height: 800px;
     background-image: url('/img/dành-cho-bác-sỹ.jpg');
     background-repeat: no-repeat;
     background-size: cover;
@@ -33,13 +33,13 @@
 /*main__content navbar*/
 .container__navbar{
     width: 100%;
-    height: 80px;
+    height: 70px;
     background-color: #5D5FEF;
     box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 5px;
     /* margin: 0 0 1.5rem; */
 }
 .navbar--list{
-    height: 80px;
+    height: 70px;
     list-style: none;
     display: flex;
     align-items: center;
@@ -53,12 +53,12 @@
     justify-content: center;
 }
 .navbar--item-link{
-    height: 80px;
+    height: 70px;
     line-height: 80px!important;
     padding: 0 1em!important;
     position: relative;
     color: white;
-    font-size: 200%;
+    font-size: 180%;
     font-weight: 900; /* Same as Bold */
 }
 .navbar--flex-spacer{
@@ -104,16 +104,17 @@
 
 /*main__content logo*/
 .container__logo{
-    padding: 10% 10%;
+    padding-top: 80px;
+    padding-left: 60px;
 }
 .logo--background{
-    width: 50%;
-    height: 75%;
+    width: 522px;
+    height: 549px;
     min-width: 500px;
-    border-radius: 3em;
+    border-radius: 20px;
     background-color: #ff0000;
     background: rgba(32, 37, 77, 0.9);
-    font-size: 170%;
+    font-size: 150%;
 }
 .logo--content{
     display: flex;
@@ -123,17 +124,17 @@
     color: white;
 }
 .icon{
-    padding-top: 100px;
+    padding-top: 50px;
     padding-bottom: 50px;
-    font-size: 250px;
+    font-size: 150px;
 }
 #logo-title{
     padding-top: 10px;
-    font-size: 200%;
+    font-size: 180%;
 }
 #logo-slogan{
     padding-top: 20px;
-    font-size: 200%;
+    font-size: 180%;
 }
 .logo--content h3{
     padding-top: 40px;
@@ -147,13 +148,13 @@
 
 .footer__content{
     width: 100%;
-    height: 400px;
+    height: 360px;
     background-color: #070B32;
 }
 .footer__content{
     padding: 40px 50px;
     color: white;
-    font-size: 230%;
+    font-size: 200%;
 }
 .content-title{
     text-align: center;
