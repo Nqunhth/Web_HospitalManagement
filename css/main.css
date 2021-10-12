@@ -25,26 +25,31 @@
 .container__background{
     width: 100%;
     height: 800px;
-    background-image: url('/img/dành-cho-bác-sỹ.jpg');
+    background-image: url('/img/Home_page_Background.jpg');
     background-repeat: no-repeat;
     background-size: cover;
+}
+.container__background_color{
+    width: 100%;
+    height: 800px;
+    background-color: #F2F2FF;
 }
 
 /*main__content navbar*/
 .container__navbar{
+    position: sticky;
+    top: 0;
     width: 100%;
-    height: 70px;
+    height: 60px;
     background-color: #5D5FEF;
     box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 5px;
     /* margin: 0 0 1.5rem; */
 }
 .navbar--list{
-    height: 70px;
+    height: 60px;
     list-style: none;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: auto 200px;
+    margin: 0 90px;
 }
 .navbar--item-link{
     display: flex;
@@ -53,13 +58,14 @@
     justify-content: center;
 }
 .navbar--item-link{
-    height: 70px;
+    width: 160px;
+    height: 60px;
     line-height: 80px!important;
     padding: 0 1em!important;
     position: relative;
     color: white;
-    font-size: 180%;
-    font-weight: 900; /* Same as Bold */
+    font-size: 24px;
+    font-weight: 700; /* Same as Bold */
 }
 .navbar--flex-spacer{
     flex-grow: 1;
@@ -79,13 +85,19 @@
     list-style: none;
 }
 .dropdown-menu a{
-    display: block;
     white-space: nowrap;
     text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.dropdown-menu a{
+    width: 310px;
+    height: 50px;
     color: white;
-    padding: 15px 70px;
-    font-size: 180%;
-    font-weight: 600;
+    font-size: 24px;
+    font-weight: 500;
 }
     /*navbar + dropdown effect*/
 .navbar--item a:hover{
@@ -96,7 +108,8 @@
 }
 .has-dropdown-menu:hover .dropdown-menu{
     box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 10px;
-    display: block;
+    display: flex;
+    flex-direction: column;
 }
 .has-dropdown-menu:hover{
     background-color: #7C88F5;
@@ -114,7 +127,6 @@
     border-radius: 20px;
     background-color: #ff0000;
     background: rgba(32, 37, 77, 0.9);
-    font-size: 150%;
 }
 .logo--content{
     display: flex;
@@ -122,30 +134,28 @@
     align-items: center;
     justify-content: center;
     color: white;
+    font-weight: 500;
 }
 .icon{
-    padding-top: 50px;
-    padding-bottom: 50px;
+    padding: 50px 0;
     font-size: 150px;
 }
 #logo-title{
     padding-top: 10px;
-    font-size: 180%;
+    font-size: 50px;
 }
 #logo-slogan{
-    padding-top: 20px;
-    font-size: 180%;
+    padding-top: 10px;
+    font-size: 35px;
 }
 .logo--content h3{
-    padding-top: 40px;
-    padding-bottom: 80px;
+    padding-top: 50px;
+    font-size: 35px;
     font-weight: 500;
 }
 
 
-
-
-
+/*footer__main__content*/
 .footer__content{
     width: 100%;
     height: 360px;
@@ -154,10 +164,14 @@
 .footer__content{
     padding: 40px 50px;
     color: white;
-    font-size: 200%;
+    font-size: 24px;
+    font-weight: 400;
 }
 .content-title{
+    height: 65px;
     text-align: center;
+    font-size: 30px;
+    font-weight: 700;
 }
 .content-main{
     display: grid;
