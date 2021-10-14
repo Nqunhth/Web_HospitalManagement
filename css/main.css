@@ -61,7 +61,15 @@
 .navbar--flex-spacer{
     flex-grow: 1;
 }
-
+/*Current selected page*/
+.is-active-in-navbar{
+    background-color: #7C88F5;
+}
+.is-active-in-menu{
+    border-radius: 20px;
+    background-color:#D1E7F3;
+    font-weight: 700;
+}
 /*main__content navbar navbar_dropdown*/
 .has-dropdown-menu{
     position: relative;
