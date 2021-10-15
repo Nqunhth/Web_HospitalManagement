@@ -174,7 +174,7 @@
     flex-grow: 1;
 }
 .container__content{
-    flex-grow: 3;
+    flex-grow: 10;
 }
 .box{
     display: block;      
@@ -229,13 +229,7 @@
     background-color:#D1E7F3;
     font-weight: 700;
 }
-/* .menu__box ul:hover .fas{
-    font-size: 40px;
-}
-.menu__box ul:hover li a{
-    font-size: 20px;
-    
-} */
+
 .content__box{
     width: 80%;
     height: 560px;
@@ -271,6 +265,76 @@
 }
 .button-confirm{
     margin-right: 12%;
+}
+.card-list{
+    list-style: none;
+    margin: 30px 100px 20px 60px;
+}
+.card-list li:first-child{
+    margin-top: 50px;
+}
+.card-list li{
+    position: relative;
+    margin-top: 20px;
+    background: #FFF;    
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+}
+.short-card{
+    display: flex;
+}
+.full-card{
+    display: none;
+}
+.number-card{
+    width: 15%;
+    background-color: #3348B8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+}
+.number-card h1{
+    color: white;
+}
+.card-list .in-waiting{
+    width: 80%;
+    padding: 10px 30px;
+}
+.card-list .in-database{
+    width: 95%;
+    padding: 10px 50px;
+}
+.has-border-top{
+    border-top: 1px solid #ECECEC;
+}
+.card-list .fas{
+    width: 5%;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin:0 50px 0 30px;
+}
+
+.dropdown > [type="checkbox"] {
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    position: absolute;
+    cursor: pointer;
+}
+.dropdown > input[type="checkbox"]:checked ~ .full-card {
+    display: flex;
+}
+.dropdown > input[type="checkbox"]:checked ~ .short-card i.fa-chevron-down{
+    transform: rotate(180deg);
+}
+.dropdown > input[type="checkbox"]:checked ~ .short-card .number-card{
+    border-radius: 10px 10px 0 0;
+}
+.dropdown > input[type="checkbox"]:checked ~ .full-card .number-card{
+    border-radius: 0 0 10px 10px;
 }
 /*footer__main__content*/
 .footer__content{
