@@ -1,0 +1,431 @@
+/* Reset CSS*/
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    position: relative;
+}
+/* Hàng xài chung chung  */
+.center{
+    /* only for flex display */
+    display: flex;
+    align-items: center;
+    justify-content: center;    
+}
+.take_remain_space{
+    flex: 1!important;
+    margin: 0!important;
+
+}
+
+
+/* Navbar Start */
+.header__navbar{
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    height: 60px;
+    background-color: #5D5FEF;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 5px;
+    z-index: 9999;
+}
+.navbar--list{
+    height: 60px;
+    list-style: none;
+    display: flex;
+    margin: 0 90px;
+}
+.navbar--item-link{
+    display: flex;
+    text-decoration: none;
+    align-items: center;
+    justify-content: center;
+}
+.navbar--item-link{
+    width: 160px;
+    height: 60px;
+    line-height: 60px;
+    padding: 0 1em;
+    position: relative;
+    color: white;
+    font-size: 24px;
+    font-weight: 700; /* Same as Bold */
+}
+.navbar--flex-spacer{
+    flex-grow: 1;
+}
+/*Current selected page*/
+.is-active-in-navbar{
+    background-color: #7C88F5;
+}
+.is-active-in-menu{
+    border-radius: 20px;
+    background-color:#D1E7F3;
+    font-weight: 700;
+}
+/*main__content navbar navbar_dropdown*/
+.has-dropdown-menu{
+    position: relative;
+}
+.dropdown-menu{
+    display: none;
+    width: auto;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #7C88F5;
+    list-style: none;
+}
+.dropdown-menu a{
+    white-space: nowrap;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.dropdown-menu a{
+    width: 310px;
+    height: 50px;
+    color: white;
+    font-size: 24px;
+    font-weight: 500;
+}
+    /*navbar + dropdown effect*/
+.navbar--item a:hover{
+    background-color: #7C88F5;
+}
+.dropdown-menu a:hover{
+    background-color: #5A66D0;
+}
+.has-dropdown-menu:hover .dropdown-menu{
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 10px;
+    display: flex;
+    flex-direction: column;
+}
+.has-dropdown-menu:hover{
+    background-color: #7C88F5;
+}
+/* End Navbar */
+
+/* Start Body */
+.body{
+    height: max-content;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    top: 60px;
+}
+.body .content{
+    background-color: #CFD3FA;
+    width: 100%;
+    height: calc(100vh - 120px);
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-weight: 500;
+}
+
+.body .mini_nav{
+    position: fixed;
+    z-index: 999;
+    right: 3vw;
+    top: calc(60px + 2vh);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    
+}
+
+.mini_nav .mini_head{
+    text-align: center;
+    line-height: 40px;
+    background-color: #546ADE;
+    width: 100px;
+    height: 30px;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 10px;
+}
+.mini_nav .mini_card{
+    background-color: #fff;
+    height: 60px;
+    width: 520px;
+    z-index: 999;
+    border-radius: 50px 0 20px 20px;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 5px;
+}
+.mini_nav .opt_list{
+    list-style-type: none;
+    height: 50px;
+}
+.mini_nav .index{
+    
+}
+.mini_nav .icon{
+    color: #546ADE;
+    font-size: 30px;
+    line-height: 40px;
+    padding-right: 15px;
+}
+.mini_nav button{
+    border: none;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 40px;
+    background-color: #fff;
+    color: #546ADE;
+    padding: 0 15px;
+    border-radius: 25px;
+}
+.mini_nav button:hover{
+    background-color: rgba(67, 93, 241, 0.2);
+}
+.mini_nav .current{
+    background-color: #546ADE;
+    width: 100%;
+    height: 2px;
+    bottom: 5px;
+    /* display: none; */
+}
+
+
+.body .hospital{
+    /* none */
+}
+.hospital .photo{
+    height: inherit;
+    width: 50%;
+    left: 45%;
+    background-image: url('/img/hospital-img.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.p_card{
+    position: absolute;
+    min-height: 85%;
+    height: max-content;
+    width: 42%;
+    background-color: #fff;
+    top: 50%;
+    transform: translate(0, -50%);
+    left: 7%;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 5px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.p_card h1{
+    margin-top: 10%;
+    text-align: center;
+    line-height: 45px;
+    text-size-adjust: 30px;
+    color: #0A144B;
+}
+.p_card h2{
+    text-align: center;
+    text-size-adjust: 24px;
+    line-height: 31px;
+    color: #283DAC;
+    margin-bottom: 5%;
+}
+.p_card p{
+    margin: 0 10% 10% 10%;
+    text-align: center;
+}
+
+.body .staff{
+    background-color: #F2F2FF;
+    display: flex;
+    height: max-content;
+}
+.staff .column{
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+    margin-left: 50px;
+}
+.staff .doctor{
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 5px;
+    border-radius: 0px;
+    width: 460px;
+    height: 70vh;
+    flex-direction: column;
+}
+.staff .doc_photo{
+    background-color: #D7DAF8;
+    height: 75%;
+    width: 90%;
+    margin-top: 5%;
+    flex-direction: row;
+}
+.photo_icon{
+    font-size: 180px;
+    color: #fff;
+}
+.staff .photo_foot{
+    width: inherit;
+    flex: 1;
+    justify-content: space-between;
+}
+.staff .circle{
+    background-color: #C7E1EF;
+    height: 30px;
+    width: 30px;
+    border-radius: 15px;
+    margin-left: 7%;
+}
+.staff .doc_info{
+    margin-right: 7%;
+    text-align: right;
+}
+.doc_info .doc_name{
+    font-size: 24px;
+    color: #000;
+    font-weight: 400;
+}
+.doc_info .doc_field{
+    font-size: 16px;
+    color: #3348B8;
+    font-weight: 400;
+}
+.staff .p_card{
+    position: relative;
+    top: 0px;
+    transform: none;
+    left: 0px;
+
+    width: 50vw;
+    height: 300px;
+    min-height: 300px;
+    margin-top: 10vh;
+}
+.p_card .d_title{
+    margin-top: 5vh;
+}
+.staff .doc_list{
+    display: flex;
+    margin-top: 5vh;
+    margin-bottom: 10vh;
+    list-style-type: none;
+}
+.doc_list .doctor{
+    height: 320px;
+    width: 280px;
+}
+
+.doc_list .photo_icon{
+    font-size: 100px;
+}
+
+.doc_list .circle{
+    width: 15px;
+    height: 15px;
+}
+.doc_list .doc_name{
+    font-size: 18px;
+}
+
+.body .facility{
+    height: calc(100vh - 60px);
+}
+.facility .fc_card{
+    width: 45vw;
+    height: 100%;
+    background-color: #291072;
+}
+.facility .fc_title{
+    color: #fff;
+    position: absolute;
+    top: 10vh;
+    left: 5vw;
+
+    font-weight: 500;
+}
+.facility .fc_content{
+    color: #fff;
+    top: 20vh;
+    left: 7vw;
+    height: max-content;
+    width: 30vw;
+
+    font-weight: 400;
+}
+.facility .photo_list{
+    padding: 5px 0;
+    position: absolute;
+    left: 40vw;
+    top: 20vh;
+    background-color: #CFD3FA;
+    list-style-type: none;
+}
+.photo_list .contain{
+    height: 65vh;
+    width: 18vw;
+    flex-direction: column;
+    display: flex;
+    justify-content: space-around;
+}
+.photo_list .photo{
+    background-color: #fff;
+    height: 47%;
+    width: 90%;
+}
+.photo_list .whole{
+    height: 97%;
+    width: 100%;
+}
+.photo_list .photo_icon{
+    color: #CFD3FA;
+    font-size: 100px;
+}
+
+
+/* Body End */
+
+/*footer__main__content*/
+.footer__content{
+    width: 100%;
+    height: 360px;
+    background-color: #070B32;
+}
+.footer__content{
+    margin-top: 60px;
+    padding: 40px 50px;
+    color: white;
+    font-size: 24px;
+    font-weight: 400;
+}
+.content-title{
+    height: 65px;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 700;
+}
+.content-main{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    justify-content: center;
+    align-content: center;
+}
+.main-column{
+    width: max-content;
+    margin: 0 auto;    
+}
+.column-content{
+    width: max-content;
+
+}
+.column-link-list{  
+    /* display: flex;   */
+    width: max-content;
+    flex-direction: column;    
+    list-style: none;
+}
+.content-conclude{
+    padding-top: 50px;
+    text-align: center;
+}
+/* End Footer */
