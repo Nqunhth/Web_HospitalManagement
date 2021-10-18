@@ -17,6 +17,12 @@
     margin: 0!important;
 
 }
+.roboto {
+    font-family: 'Roboto', sans-serif;
+}
+.roundedfont{
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+}
 
 /*header__news*/
 .home-page{
@@ -203,11 +209,11 @@
     padding: 50px 0;
     font-size: 150px;
 }
-#logo-title{
+.logo-title{
     padding-top: 10px;
     font-size: 50px;
 }
-#logo-slogan{
+.logo-slogan{
     padding-top: 10px;
     font-size: 35px;
 }
@@ -716,3 +722,136 @@
     margin-top: 60px;
 }
 /* About Body End */
+
+/* Start Login */
+.login-page{
+    height: 100vh;
+    width: 100vw;
+    background-image: url(/img/login-background.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-x: 40%;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+}
+.login-page .group{
+    position: absolute;
+    height: 80%;
+    width: 80%;
+    top: 8vh;
+    left: 7vw;
+    display: flex;
+}
+.login-page .card{
+    background-color: #fff;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+}
+.rounded_left_border{
+    border-radius: 30px 0 0 30px;
+}
+.rounded_right_border{
+    border-radius: 0 30px 30px 0;
+}
+.login-page .blue{
+    background-color: #4960DC;
+}
+
+.login-page .card_heading{
+    height: 30%;
+    flex-direction: column;
+}
+.card_heading .head_prefix{
+    font-size: 18px;
+    font-weight: 500;
+}
+.card_heading .head_title{
+    font-size: 30px;
+    font-weight: 500;
+    color: #283DAC;
+}
+.card_heading .head_subtitle{
+    color: #8C8C8C;
+    font-size: 18px;
+    font-weight: 300;
+}
+
+.input_section{
+    flex-direction: column;
+    width: 100%;
+}
+.input_section .input{
+    border: 1px solid #B6B6B6;
+    border-radius: 25px;
+    height: 50px;
+    width: 65%;
+    margin: 5px 0;
+}
+.login_icon{
+    text-align: center;
+    font-size: 30px;
+    width: 64px;
+    color: #B6B6B6;
+}
+.input_section input{
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 20px;
+    margin: 0 20px 0 10px;
+}
+.forget_section{
+    margin-left: 30%;
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 5px;
+}
+.forget_section .Recovery{
+    color: #7C88F5;
+    margin-left: 5px;
+}
+.login-page .login_btn{
+    font-size: 20px;
+    font-weight: 500;
+    width: 65%;
+    height: 50px;
+    border-radius: 25px;
+    border: none;
+    background-color: #546ADE;
+    color: #fff;
+    margin: 25px 0 100px 0;
+}
+.login-page .login_btn:hover{
+    background-color: #8395ee;
+}
+.login-page .login_btn:active{
+    background-color: #2c3b8a;
+}
+.login-page .login_btn:visited{
+    background-color: #546ADE;
+}
+
+.login-page .logo_in_login{
+    font-size: 100px;
+    width: 900;
+    margin-bottom: 50px;
+}
+.login-page h1{
+
+}
+.login-page .logo-slogan{
+    padding-top: 0px;
+    font-size: 35px;
+}
+.login-page h3{
+    font-size: 30px;
+    font-weight: 300;
+}
+
+/* End Login */
+
+/* Start Forget Page */
+.in_forgetpassPage{
+    margin: 50px 0;
+}
+/* End Forget Page */
