@@ -161,7 +161,12 @@
     background-color:#D1E7F3;
     font-weight: 700;
 }
-
+.is-active-in-user{
+    border-radius: 20px;
+    background-color:#C9CCED;
+    color: #5D5FEF;
+    font-weight: 700;
+}
 /*main__content navbar navbar_dropdown*/
 
 .has-dropdown-menu{
@@ -240,8 +245,9 @@
 
 .has-dropdown-menu:hover .dropdown-user{
     box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 10px;
-    display: flex;
-    flex-direction: column;
+    display: flex !important;
+    flex-direction: column !important;
+    z-index: 9999;
 }
 .has-dropdown-menu:hover{
     background-color: #7C88F5;
@@ -302,7 +308,48 @@
     font-size: 35px;
     font-weight: 300;
 }
+/*User-Info Management Page*/
+.user__box{
+    width: 300px;
+    height: 205px;
+    margin: 50px 0 0 70px;
+    padding: 20px 20px 0;
+    font-weight: 600;
+    font-size: 20px;
+    font-family: 'Roboto', sans-serif;
+}
 
+.user__box ul{
+    white-space: nowrap;
+    list-style: none;
+    font-weight: normal;  
+}
+.user__box ul li{
+    height: 50px;
+    display: flex;
+    margin-top: 20px;
+}
+.user__box ul li a{
+    display: block;
+    flex-direction: column;
+    min-width: 260px;
+    padding: 0 10px;
+    height: 50px;
+    font-size: 18px;
+    line-height: 50px;
+    text-decoration: none;
+    color:#9D9EA5;
+}
+.user__box .fas{
+    float: right;
+    line-height: 50px;
+}
+.user__box ul li a:hover{
+    border-radius: 20px;
+    background-color:#C9CCED;
+    color: #5D5FEF;
+    font-weight: 700;
+}
 /*Doctor_container Page*/
 .container__menu{
     flex-grow: 1;
