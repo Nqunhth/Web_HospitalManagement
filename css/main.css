@@ -111,6 +111,17 @@
 .navbar--flex-spacer{
     flex-grow: 1;
 }
+.navbar--item-link .fa-user{
+	width: 50px;
+	height:50px;
+	background-color:white;
+    color: #3348B8;
+	border-radius:50px;
+	text-align:center;
+    padding-top: 10px;
+    font-size: 28px;
+	border: 1px solid #D6D6D6;
+}
 
 /*Current selected page*/
 .is-active-in-navbar{
@@ -123,42 +134,82 @@
 }
 
 /*main__content navbar navbar_dropdown*/
+
 .has-dropdown-menu{
     position: relative;
 }
-.dropdown-menu{
-    display: none;
-    width: auto;
-    position: absolute;
+.trans-layer{
+    position: absolute;  
     top: 100%;
-    left: 0;
-    background: #7C88F5;
-    list-style: none;
+    right: 0;
+    width: 310px;
+    height: calc(max-content + 20px);
+    padding: 20px 0;
 }
-.dropdown-menu a{
+.dropdown-user{
+    display: none;
+    position: absolute;
+    background: white;
+    flex-direction: column;
+    border-radius: 10px;
+    font-family: 'Roboto', sans-serif;
+}
+.dropdown-user a{
     white-space: nowrap;
     text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
 }
-.dropdown-menu a{
+.dropdown-user a{
     width: 310px;
     height: 50px;
-    color: white;
-    font-size: 24px;
-    font-family: 'Roboto', sans-serif;
+    color: rgb(0, 0, 0);
+    font-size: 18px;
     font-weight: 300;
+}
+.user-info{
+    padding: 10px 0;
+    display: block;
+    text-align: center;
+}
+.user-info i{
+    font-size: 50px;
+    border-radius:100px;
+    padding: 13px 15px;
+	border: 5px solid rgb(182, 182, 182);
+}
+.user{
+    border-top: 1px solid rgb(182, 182, 182);
+    
+}
+.user p{
+    font-size: 20px;
+    font-weight: 700;
+    padding-left: 20px;
+    padding-top: 10px;
+}
+.user a{
+    display: block;
+    flex-direction: column;
+    min-width: 310px;
+    padding: 0 30px;
+    line-height: 50px;
+    font-weight: 300;
+}
+.user .fas{
+    float: right;
+    line-height: 50px;
 }
     /*navbar + dropdown effect*/
 .navbar--item a:hover{
     background-color: #7C88F5;
 }
-.dropdown-menu a:hover{
-    background-color: #5A66D0;
+.user a:hover{
+    color: #5D5FEF;
+    background-color: white;
+    font-weight: 400;
+    border-radius: 10px;
 }
-.has-dropdown-menu:hover .dropdown-menu{
+
+.has-dropdown-menu:hover .dropdown-user{
     box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 10px;
     display: flex;
     flex-direction: column;
@@ -223,7 +274,7 @@
     font-weight: 300;
 }
 
-/*Doctor_content Spec Consult Register*/
+/*Doctor_container Page*/
 .container__menu{
     flex-grow: 1;
 }
@@ -236,6 +287,7 @@
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 25%) 0px 4px 4px;
 }
+    /*DoctorPage - Menu*/
 .menu__box{
     width: 300px;
     height: 205px;
@@ -248,7 +300,6 @@
 }
 .menu__box ul{
     list-style: none;
-    /* padding: 20px 20px 0; */
     font-weight: normal;
 }
 .menu__box ul li{
@@ -277,14 +328,14 @@
 }
 .has-border-bottom{
     border-bottom: 1px solid #ECECEC;
-    /* margin-right: 20px; */
 }
 .menu__box ul li:hover{
     border-radius: 20px;
     background-color:#D1E7F3;
     font-weight: 700;
 }
-
+    /*DoctorPage - Content Area*/
+    /*Form Register*/
 .content__box{
     width: 80%;
     height: 560px;
@@ -325,7 +376,8 @@
 .button-confirm{
     margin-right: 12%;
 }
-
+    /*DoctorPage - Content Area*/
+    /*Card List*/
 .card-list{
     list-style: none;
     margin: 30px 100px 20px 60px;
@@ -376,9 +428,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    /* margin:0 50px 0 30px; */
 }
-
+    /*DoctorPage - Content Area*/
+    /*Card List - Yransfer from short to full card*/
 .dropdown > [type="checkbox"] {
     width: 15%;
     height: 100%;
@@ -399,6 +451,25 @@
 }
 .dropdown > input[type="checkbox"]:checked ~ .full-card .number-card{
     border-radius: 0 0 10px 10px;
+}
+    /*DoctorPage - Content Area*/
+    /*Float Button*/
+.float{
+    position:fixed;
+    width: 50px;
+    height:50px;
+    bottom:30px;
+    right:30px;
+    background-color:#5D5FEF;
+    color:white;
+    border-radius:50px;
+    text-align:center;
+    box-shadow: 2px 2px 3px #999;
+    z-index: 10;
+    padding-top: 16px;
+}
+.container__floatbutton .button-up{
+    margin-bottom: 70px;
 }
 /*footer__main__content*/
 .footer__content{
