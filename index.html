@@ -4,11 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <title>HealthCareManagement</title>
-    
+
     <!--"Roboto" & "M PLUS Rounded 1c font" -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap">
 
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="./icon/fontawesome-free-5.15.4-web/css/all.min.css">
@@ -45,25 +46,30 @@
                         <li class="navbar--item">
                             <a href="/Doctor/patientCaring.html" class="navbar--item-link">Workspace</a>
                         </li>
-                        <li class="navbar--item has-dropdown-menu">
+                        <li class="navbar--item">
                             <a href="/About/aboutPage.html" class="navbar--item-link">About</a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="/About/aboutPage.html">Our Hospital</a>
-                                </li>
-                                <li>
-                                    <a href="">Our Staff</a>
-                                </li>
-                                <li>
-                                    <a href=""> Our Facibilities</a>
-                                </li>
-                            </ul>
                         </li>
                         <li class="navbar--flex-spacer">
                             <!-- Search Area -->
                         </li>
-                        <li class="navbar--item">
-                            <a href="/Login/loginPage.html" class="navbar--item-link">LOGIN</a>
+                        <li class="navbar--item has-dropdown-menu">
+                            <a href="/Login/loginPage.html" class="navbar--item-link"><i class="far fa-user"></i></a>
+                            <div class="trans-layer">
+                                <div class="dropdown-user center">
+                                    <div class="user-info">
+                                        <i class="far fa-user"></i>
+                                        <p>User Name</p>
+                                        <p>XXY@gmail.com</p>
+                                    </div>
+                                    <div class="user user-manage">
+                                        <p>My Account</p>
+                                        <a href="#">Account Management<i class="fas fa-chevron-right"></i></a>
+                                    </div>
+                                    <div class="user user-logout">
+                                        <a href="#">Logout<i class="fas fa-sign-out-alt"></i></a>
+                                    </div>
+                                </div>                         
+                            </div>
                         </li>
                     </ul>
                 </div>
