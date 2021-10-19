@@ -10,7 +10,9 @@
     <!--"Roboto" & "M PLUS Rounded 1c font" -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
@@ -22,10 +24,27 @@
             <li class="navbar--item">
                 <a href="/News/newsPage.html" class="navbar--item-link">News</a>
             </li>
-            <li class="navbar--item">
+            <li class="navbar--item has-dropdown-menu">
                 <a href="/Doctor/patientCaring.html" class="navbar--item-link">Workspace</a>
+                <div class="temporary">
+                    <div class="dropdown-user center">
+                        <div class="user">
+                            <a href="/Manager/accountManager.html">Manager<i class="fas fa-chevron-right"></i></a>
+                        </div>
+                        <div class="user">
+                            <a href="/Receptionist/formMedical.html">Receptionist<i
+                                    class="fas fa-chevron-right"></i></a>
+                        </div>
+                        <div class="user">
+                            <a href="/Doctor/patientCaring.html">Doctor<i class="fas fa-chevron-right"></i></a>
+                        </div>
+                        <div class="user">
+                            <a href="/Pharmacist/formInvoice.html">Pharmacist<i class="fas fa-chevron-right"></i></a>
+                        </div>
+                    </div>
+                </div>
             </li>
-            <li class="navbar--item">
+            <li class="navbar--item has-dropdown-menu">
                 <a href="/About/aboutPage.html" class="navbar--item-link">About</a>
             </li>
             <li class="navbar--flex-spacer">
@@ -47,12 +66,11 @@
                         <div class="user user-logout">
                             <a href="/">Logout<i class="fas fa-sign-out-alt"></i></a>
                         </div>
-                    </div>                         
+                    </div>
                 </div>
             </li>
         </ul>
     </div>
-    
     <div class="login-page">
         <div class="group">
             <div class="card rounded_left_border center">

@@ -54,10 +54,10 @@
 }
 
 /*header__news*/
-.home-page{
+/* .home-page{
     display: flex;
     flex-direction: column;
-}
+} */
 .header__news{
     display: flex;
 }
@@ -172,6 +172,14 @@
 .has-dropdown-menu{
     position: relative;
 }
+.temporary{
+    position: absolute;  
+    top: 100%;
+    left: 0;
+    width: 310px;
+    height: calc(max-content + 20px);
+    padding: 20px 0; 
+}
 .trans-layer{
     position: absolute;  
     top: 100%;
@@ -263,10 +271,11 @@
 }
 .container__background_color{
     width: 100%;
-    height: 800px;
+    height: max-content;
     background-color: #F2F2FF;
     display: flex;
     flex-direction: row;
+    padding: 50px 0;
 }
 
 /*main__content logo*/
@@ -366,10 +375,10 @@
     /*DoctorPage - Menu*/
 .menu__box{
     width: 300px;
-    height: 205px;
+    height: max-content;
     color:#546ADE;
     margin-left: 70px;
-    padding: 20px 20px 0;
+    padding: 20px 20px;
     font-weight: 600;
     font-size: 20px;
     font-family: 'Roboto', sans-serif;
@@ -412,20 +421,18 @@
 }
     /*DoctorPage - Content Area*/
     /*Form Register*/
+.first__box{
+    margin-top: 50px;
+}
+.middle__box{
+    margin-top: 30px;
+}
+
 .content__box{
     width: 80%;
     height: 560px;
     color:#000000;
     margin: 50px 10%;
-}
- .patient-list{
-    margin-top: 50px;
-}
-.create-form{
-    margin-top: 30px;
-}
-.form-list{
-    margin-top: 30px;
 }
 .button{
     width: 160px;
@@ -506,7 +513,62 @@
     justify-content: center;
 }
     /*DoctorPage - Content Area*/
-    /*Card List - Yransfer from short to full card*/
+    /*Card List - Toggle Button- Transfer inWaiting to Done*/
+.switch-container{
+    width: 7%;
+}
+.switch{
+    position: relative;
+    display: block;
+    width: 60px;
+    height: 34px;
+}
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #2196F3;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+input:checked + .slider {
+    background-color: #e42242;
+}
+input:focus + .slider {
+    box-shadow: 0 0 1px #e42242;
+}
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+.slider.round {
+    border-radius: 34px;
+}
+.slider.round:before {
+    border-radius: 50%;
+}
+    /*DoctorPage - Content Area*/
+    /*Card List - Transfer from short to full card*/
 .dropdown > [type="checkbox"] {
     width: 15%;
     height: 100%;
@@ -874,7 +936,7 @@
 .login-page{
     top: 60px;
     height: 100vh;
-    width: 100vw;
+    width: 100%;
     background-image: url(/img/login-background.jpg);
     background-repeat: no-repeat;
     background-size: cover;
