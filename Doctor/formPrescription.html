@@ -4,146 +4,148 @@
 <head>
     <meta charset="UTF-8">
     <title>HealthCareManagement</title>
-        
+
     <!--"Roboto" & "M PLUS Rounded 1c font" -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap">
 
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../icon/fontawesome-free-5.15.4-web/css/all.min.css">
 </head>
 
 <body>
-    <div class="home-page">
-        <div class="header__navbar">
-            <ul class="navbar--list">
-                <li class="navbar--item">
-                    <a href="/" class="navbar--item-link">HOME</a>
-                </li>
-                <li class="navbar--item">
-                    <a href="../News/newsPage.html" class="navbar--item-link">News</a>
-                </li>
-                <li class="navbar--item">
-                    <a href="./patientCaring.html" class="navbar--item-link is-active-in-navbar">Workspace</a>
-                </li>
-                <li class="navbar--item has-dropdown-menu">
-                    <a href="../About/aboutPage.html" class="navbar--item-link">About</a>
-                </li>
-                <li class="navbar--flex-spacer">
-                    <!-- Search Area -->
-                </li>
-                <li class="navbar--item has-dropdown-menu">
-                    <a href="/Login/loginPage.html" class="navbar--item-link"><i class="far fa-user"></i></a>
-                    <div class="trans-layer">
-                        <div class="dropdown-user center">
-                            <div class="user-info">
-                                <i class="far fa-user"></i>
-                                <p>User Name</p>
-                                <p>XXY@gmail.com</p>
-                            </div>
-                            <div class="user user-manage">
-                                <p>My Account</p>
-                                <a href="/User/infoManage.html">Account Management<i class="fas fa-chevron-right"></i></a>
-                            </div>
-                            <div class="user user-logout">
-                                <a href="/">Logout<i class="fas fa-sign-out-alt"></i></a>
-                            </div>
-                        </div>                         
+    <div class="header__navbar not_navbar_at_home">
+        <ul class="navbar--list">
+            <li class="navbar--item">
+                <a href="/" class="navbar--item-link">HOME</a>
+            </li>
+            <li class="navbar--item">
+                <a href="/News/newsPage.html" class="navbar--item-link">News</a>
+            </li>
+            <li class="navbar--item has-dropdown-menu">
+                <a href="/Doctor/patientCaring.html" class="navbar--item-link is-active-in-navbar">Workspace</a>
+                <div class="temporary">
+                    <div class="dropdown-user center">
+                        <div class="user">
+                            <a href="/Manager/accountManager.html">Manager<i class="fas fa-chevron-right"></i></a>
+                        </div>
+                        <div class="user">
+                            <a href="/Receptionist/formMedical.html">Receptionist<i
+                                    class="fas fa-chevron-right"></i></a>
+                        </div>
+                        <div class="user">
+                            <a href="/Doctor/patientCaring.html">Doctor<i class="fas fa-chevron-right"></i></a>
+                        </div>
+                        <div class="user">
+                            <a href="/Pharmacist/formInvoice.html">Pharmacist<i class="fas fa-chevron-right"></i></a>
+                        </div>
                     </div>
-                </li>
-            </ul>
-        </div>
-
-        <div class="container">
-            <div class="container__background_color">
-                <div class="container__menu">
-                    <div class="box menu__box patient-list">
-                        <p>Patient List</p>
-                        <ul>
-                            <li class="has-border-bottom">
-                                <i class="fas fa-user-injured"></i>
-                                <a href="./patientCaring.html">Caring</a>
-                            </li>
-                            <li>
-                                <i class="fas fa-address-book"></i>
-                                <a href="./patientList.html">All Patients</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="box menu__box create-form">
-                        <p>Create New Form</p>
-                        <ul>
-                            <li class="has-border-bottom">
-                                <i class="fas fa-hand-holding-medical"></i>
-                                <a href="./formSpecCon.html">Special Consulting Register</a>
-                            </li>
-                            <li class="is-active-in-menu">
-                                <i class="fas fa-briefcase-medical"></i>
-                                <a href="./formPrescription.html">Prescription</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="box menu__box form-list">
-                        <p>Form Lists</p>
-                        <ul>
-                            <li class="has-border-bottom">
-                                <i class="fas fa-hand-holding-medical"></i>
-                                <a href="./listSpecCon.html">Special Consulting Register</a>
-                            </li>
-                            <li>
-                                <i class="fas fa-briefcase-medical"></i>
-                                <a href="./formPrescription.html">Prescription</a>
-                            </li>
-                        </ul>
-                    </div>    
                 </div>
-                <div class="container__content">
-                    <div class="box content__box spec-consult-form">
-
+            </li>
+            <li class="navbar--item has-dropdown-menu">
+                <a href="/About/aboutPage.html" class="navbar--item-link">About</a>
+            </li>
+            <li class="navbar--flex-spacer">
+                <!-- Search Area -->
+            </li>
+            <li class="navbar--item has-dropdown-menu">
+                <a href="/Login/loginPage.html" class="navbar--item-link"><i class="far fa-user"></i></a>
+                <div class="trans-layer">
+                    <div class="dropdown-user center">
+                        <div class="user-info">
+                            <i class="far fa-user"></i>
+                            <p>User Name</p>
+                            <p>XXY@gmail.com</p>
+                        </div>
+                        <div class="user user-manage">
+                            <p>My Account</p>
+                            <a href="/User/infoManage.html">Account Management<i class="fas fa-chevron-right"></i></a>
+                        </div>
+                        <div class="user user-logout">
+                            <a href="/">Logout<i class="fas fa-sign-out-alt"></i></a>
+                        </div>
                     </div>
-                    <div class="content__button">
-                        <button class="button button-confirm">
-                            <i class="fas fa-check"></i>
-                            Confirm
-                        </button>                        
-                        <button class="button button-reset">
-                            <i class="fas fa-eraser"></i>
-                            Reset
-                        </button>
-                        <button class="button button-print">
-                            <i class="fas fa-print"></i>
-                            Print
-                        </button> 
-                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
 
+    <div class="container">
+        <div class="container__background_color">
+            <div class="container__menu">
+                <div class="box menu__box first__box">
+                    <p>Patient List</p>
+                    <ul>
+                        <li class="has-border-bottom">
+                            <i class="fas fa-user-injured"></i>
+                            <a href="./patientCaring.html">Caring</a>
+                        </li>
+                        <li>
+                            <i class="fas fa-address-book"></i>
+                            <a href="./patientList.html">All Patients</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="box menu__box middle__box">
+                    <p>Create New Form</p>
+                    <ul>
+                        <li class="has-border-bottom">
+                            <i class="fas fa-hand-holding-medical"></i>
+                            <a href="./formSpecCon.html">Special Consulting Register</a>
+                        </li>
+                        <li class="is-active-in-menu">
+                            <i class="fas fa-briefcase-medical"></i>
+                            <a href="./formPrescription.html">Prescription</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="box menu__box middle__box">
+                    <p>Form Lists</p>
+                    <ul>
+                        <li class="has-border-bottom">
+                            <i class="fas fa-hand-holding-medical"></i>
+                            <a href="./listSpecCon.html">Special Consulting Register</a>
+                        </li>
+                        <li>
+                            <i class="fas fa-briefcase-medical"></i>
+                            <a href="./listPrescription.html">Prescription</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
-
-        </div>
-
-        <div class="footer__content">
-            <div class="content-title">
-                <p>Contact:</p>
-            </div>
-            <div class="content-main">
-                <div class="main-column">
-                    <div class="column-content">
-                        <ul class="column-link-list">
-                            <li class="column-link-list-item">
-                                <p>Address : XX AAA....</p>
-                            </li>
-                            <li class="column-link-list-item">
-                                <p>Hotline : XX AAA....</p>
-                            </li>
-                            <li class="column-link-list-item">
-                                <p>Email : XX AAA@Mail.com</p>
-                            </li>
-                        </ul>
-                    </div>
+            <div class="container__content">
+                <div class="box content__box spec-consult-form">
 
                 </div>
-                <div class="main-column">
+                <div class="content__button">
+                    <button class="button button-confirm">
+                        <i class="fas fa-check"></i>
+                        Confirm
+                    </button>
+                    <button class="button button-reset">
+                        <i class="fas fa-eraser"></i>
+                        Reset
+                    </button>
+                    <button class="button button-print">
+                        <i class="fas fa-print"></i>
+                        Print
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer__content">
+        <div class="content-title">
+            <p>Contact:</p>
+        </div>
+        <div class="content-main">
+            <div class="main-column">
+                <div class="column-content">
                     <ul class="column-link-list">
                         <li class="column-link-list-item">
                             <p>Address : XX AAA....</p>
@@ -156,12 +158,27 @@
                         </li>
                     </ul>
                 </div>
+
             </div>
-            <div class="content-conclude">
-                <p>Copyright Copyright Pisces/Thu/Anh blah blah blah.....</p>
-                <p>More Thing Is Needed</p>
+            <div class="main-column">
+                <ul class="column-link-list">
+                    <li class="column-link-list-item">
+                        <p>Address : XX AAA....</p>
+                    </li>
+                    <li class="column-link-list-item">
+                        <p>Hotline : XX AAA....</p>
+                    </li>
+                    <li class="column-link-list-item">
+                        <p>Email : XX AAA@Mail.com</p>
+                    </li>
+                </ul>
             </div>
         </div>
+        <div class="content-conclude">
+            <p>Copyright Copyright Pisces/Thu/Anh blah blah blah.....</p>
+            <p>More Thing Is Needed</p>
+        </div>
+    </div>
 </body>
 
 </html>
