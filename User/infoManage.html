@@ -15,52 +15,68 @@
 </head>
 
 <body>
-    <div class="home-page">
-        <div class="header__navbar">
-            <ul class="navbar--list">
-                <li class="navbar--item">
-                    <a href="/" class="navbar--item-link">HOME</a>
-                </li>
-                <li class="navbar--item">
-                    <a href="../News/newsPage.html" class="navbar--item-link">News</a>
-                </li>
-                <li class="navbar--item">
-                    <a href="../Doctor/patientCaring.html" class="navbar--item-link">Workspace</a>
-                </li>
-                <li class="navbar--item has-dropdown-menu">
-                    <a href="../About/aboutPage.html" class="navbar--item-link">About</a>
-                </li>
-                <li class="navbar--flex-spacer">
-                    <!-- Search Area -->
-                </li>
-                <li class="navbar--item has-dropdown-menu">
-                    <a href="/Login/loginPage.html" class="navbar--item-link"><i class="far fa-user"></i></a>
-                    <div class="trans-layer">
-                        <div class="dropdown-user center">
-                            <div class="user-info">
-                                <i class="far fa-user"></i>
-                                <p>User Name</p>
-                                <p>XXY@gmail.com</p>
-                            </div>
-                            <div class="user user-manage">
-                                <p>My Account</p>
-                                <a href="/User/infoManage.html">Account Management<i class="fas fa-chevron-right"></i></a>
-                            </div>
-                            <div class="user user-logout">
-                                <a href="/">Logout<i class="fas fa-sign-out-alt"></i></a>
-                            </div>
-                        </div>                         
+    <div class="header__navbar not_navbar_at_home">
+        <ul class="navbar--list">
+            <li class="navbar--item">
+                <a href="/" class="navbar--item-link">HOME</a>
+            </li>
+            <li class="navbar--item">
+                <a href="/News/newsPage.html" class="navbar--item-link">News</a>
+            </li>
+            <li class="navbar--item has-dropdown-menu">
+                <a href="/Doctor/patientCaring.html" class="navbar--item-link is-active-in-navbar">Workspace</a>
+                <div class="temporary">
+                    <div class="dropdown-user center">
+                        <div class="user">
+                            <a href="/Manager/accountManager.html">Manager<i class="fas fa-chevron-right"></i></a>
+                        </div>
+                        <div class="user">
+                            <a href="/Receptionist/formMedical.html">Receptionist<i
+                                    class="fas fa-chevron-right"></i></a>
+                        </div>
+                        <div class="user">
+                            <a href="/Doctor/patientCaring.html">Doctor<i class="fas fa-chevron-right"></i></a>
+                        </div>
+                        <div class="user">
+                            <a href="/Pharmacist/formInvoice.html">Pharmacist<i class="fas fa-chevron-right"></i></a>
+                        </div>
                     </div>
-                </li>
-            </ul>
-        </div>
+                </div>
+            </li>
+            <li class="navbar--item has-dropdown-menu">
+                <a href="/About/aboutPage.html" class="navbar--item-link">About</a>
+            </li>
+            <li class="navbar--flex-spacer">
+                <!-- Search Area -->
+            </li>
+            <li class="navbar--item has-dropdown-menu">
+                <a href="/Login/loginPage.html" class="navbar--item-link"><i class="far fa-user"></i></a>
+                <div class="trans-layer">
+                    <div class="dropdown-user center">
+                        <div class="user-info">
+                            <i class="far fa-user"></i>
+                            <p>User Name</p>
+                            <p>XXY@gmail.com</p>
+                        </div>
+                        <div class="user user-manage">
+                            <p>My Account</p>
+                            <a href="/User/infoManage.html">Account Management<i class="fas fa-chevron-right"></i></a>
+                        </div>
+                        <div class="user user-logout">
+                            <a href="/">Logout<i class="fas fa-sign-out-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
 
         <div class="container">
             <div class="container__background_color">
                 <div class="container__menu">
                     <div class="box user__box info-manage">
                         <ul>
-                            <li >
+                            <li class="is-active-in-user">
                                 <a href="./infoManage.html">Infomation Management <i class="fas fa-chevron-right"></i></a>
                             </li>
                             <li >
