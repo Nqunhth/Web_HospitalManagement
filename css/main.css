@@ -161,12 +161,13 @@
     background-color:#D1E7F3;
     font-weight: 700;
 }
-.is-active-in-user{
+.is-active-in-user a{
     border-radius: 20px;
     background-color:#C9CCED;
-    color: #5D5FEF;
+    color: #5D5FEF !important;
     font-weight: 700;
 }
+
 /*main__content navbar navbar_dropdown*/
 
 .has-dropdown-menu{
@@ -320,23 +321,26 @@
 /*User-Info Management Page*/
 .user__box{
     width: 300px;
-    height: 205px;
-    margin: 50px 0 0 70px;
-    padding: 20px 20px 0;
+    height: max-content;
+    margin-top: 50px;
+    margin-left: 70px;
+    padding: 20px 20px;
     font-weight: 600;
     font-size: 20px;
     font-family: 'Roboto', sans-serif;
+    color:#9D9EA5;
 }
 
 .user__box ul{
     white-space: nowrap;
     list-style: none;
-    font-weight: normal;  
+    font-weight: normal; 
 }
 .user__box ul li{
     height: 50px;
     display: flex;
-    margin-top: 20px;
+    margin-top: 20px;  
+
 }
 .user__box ul li a{
     display: block;
