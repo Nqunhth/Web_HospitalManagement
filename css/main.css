@@ -423,15 +423,14 @@
     background-color:#D1E7F3;
     font-weight: 700;
 }
-    /*DoctorPage - Content Area*/
-    /*Form Register*/
 .first__box{
     margin-top: 50px;
 }
 .middle__box{
     margin-top: 30px;
 }
-
+    /*DoctorPage - Content Area*/
+    /*Form Register*/
 .content__box{
     width: 80%;
     height: 560px;
@@ -498,9 +497,35 @@
 .number-card h1{
     color: white;
 }
-.card-list .in-waiting{
+
+/* Start card inner content - patient in waiting list */
+.card-list .inner-card{
     width: 70%;
-    padding: 10px 30px;
+    padding: 20px 30px;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 22px;
+}
+.inner-card .i-title{
+    font-weight: 700;
+}
+.inner-card input{
+    font-size: 20px;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    padding: 8px 10px;
+    margin: 4px 0;
+    border: none;
+}
+/* #i-name{
+    margin-right: 20px;
+} */
+#doctor-inwaiting-card-age{
+    width: 50px;
+}
+#doctor-inwaiting-card-reason{
+    width: 70%;
+}
+#doctor-inwaiting-card-listSC{
+    width: 80%;
 }
 .card-list .in-database{
     width: 85%;
@@ -580,7 +605,7 @@ input:checked + .slider:before {
     /*Card List - Transfer from short to full card*/
 .dropdown > [type="checkbox"] {
     width: 15%;
-    height: 100%;
+    height: 145px;
     opacity: 0;
     position: absolute;
     cursor: pointer;
@@ -599,6 +624,7 @@ input:checked + .slider:before {
 .dropdown > input[type="checkbox"]:checked ~ .full-card .number-card{
     border-radius: 0 0 10px 10px;
 }
+/* End card inner content - patient in waiting list */
     /*DoctorPage - Content Area*/
     /*Float Button*/
 .float{
