@@ -500,7 +500,7 @@
 
 /* Start card inner content - patient in waiting list */
 .card-list .inner-card{
-    width: 70%;
+    width: 85%;
     padding: 20px 30px;
     font-family: 'M PLUS Rounded 1c', sans-serif;
     font-size: 22px;
@@ -515,16 +515,10 @@
     margin: 4px 0;
     border: none;
 }
-/* #i-name{
-    margin-right: 20px;
-} */
-#doctor-inwaiting-card-age{
+.short-input{
     width: 50px;
 }
-#doctor-inwaiting-card-reason{
-    width: 70%;
-}
-#doctor-inwaiting-card-listSC{
+.long-input{
     width: 80%;
 }
 .card-list .in-database{
