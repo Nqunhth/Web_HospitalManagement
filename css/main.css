@@ -264,14 +264,14 @@
 
 /*main__content background*/
 .container__background{
-    width: 100%;
+    width: 100vw;
     height: 800px;
     background-image: url('/img/Home_page_Background.jpg');
     background-repeat: no-repeat;
     background-size: cover;
 }
 .container__background_color{
-    width: 100%;
+    width: 100vw;
     height: max-content;
     background-color: #F2F2FF;
     display: flex;
@@ -365,10 +365,10 @@
 }
 /*Doctor_container Page*/
 .container__menu{
-    flex-grow: 1;
+    width: 25vw;
 }
 .container__content{
-    flex-grow: 10;
+    width: 75vw;
 }
 .box{
     display: block;      
@@ -486,40 +486,115 @@
     display: none;
 }
 .number-card{
-    width: 15%;
+    width: 130px;
     background-color: #3348B8;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 10px;
     font-family: 'M PLUS Rounded 1c', sans-serif;
-}
-.number-card h1{
     color: white;
 }
 
 /* Start card inner content - patient in waiting list */
-.card-list .inner-card{
+.inner-card {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+}
+.card-list .inner-detail{
     width: 85%;
-    padding: 20px 30px;
+    padding: 15px 30px 10px;
     font-family: 'M PLUS Rounded 1c', sans-serif;
     font-size: 22px;
 }
-.inner-card .i-title{
-    font-weight: 700;
+.card-list .account-card{
+    width: 100%;
 }
-.inner-card input{
-    font-size: 20px;
+.inner-detail .i-datetime{
+    font-style: italic;
+    display: inline-block;
+    font-size: 16px;
+    text-align: right
+}
+.inner-detail .datetime-containter{
+    text-align: right;
+}
+.inner-detail .i-title{
+    font-weight: 700;
+    height: 40px;
+    display: inline-block;
+}
+.inner-detail .i-value{ 
+    display: inline-block;
+    padding: 0px 10px;     
+}
+.inner-detail .i-avatar{
+    display: block;
+    align-items: center;
+}
+.i-avatar .fa-user-circle{
+    width: 100% !important;
+    font-size: 200px !important;
+}
+.inner-detail .short-text-inwaiting{
+    width: 300px;
+    height: 40px;    
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1; /* number of lines to show */
+    -webkit-box-orient: vertical;
+    vertical-align: top; 
+}
+.inner-detail .medium-text-inwaiting{
+    width: 460px;
+    height: 40px;    
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1; /* number of lines to show */
+    -webkit-box-orient: vertical;
+    vertical-align: top; 
+}
+.inner-detail .short-text{
+    width: 400px;
+    height: 40px;    
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1; /* number of lines to show */
+    -webkit-box-orient: vertical;
+    vertical-align: top; 
+}
+.inner-detail .medium-text{
+    width: 520px;
+    height: 40px;    
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1; /* number of lines to show */
+    -webkit-box-orient: vertical;
+    vertical-align: top; 
+}
+.inner-detail .long-text{
+    width: 100%; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* number of lines to show */
+    -webkit-box-orient: vertical;
+}
+.inner-detail input{
+    font-size: 22px;
     font-family: 'M PLUS Rounded 1c', sans-serif;
     padding: 8px 10px;
     margin: 4px 0;
     border: none;
 }
-.short-input{
-    width: 50px;
-}
 .long-input{
-    width: 80%;
+    width:75%;
 }
 .card-list .in-database{
     width: 85%;
@@ -528,8 +603,11 @@
 .has-border-top{
     border-top: 1px solid #ECECEC;
 }
-.card-list .fas{
+.icon-container{
     width: 15%;
+}
+.card-list .fas{
+    width: 250px;
     font-size: 30px;
     display: flex;
     align-items: center;
@@ -542,7 +620,7 @@
 }
 .switch{
     position: relative;
-    display: block;
+    display: inline-block;
     width: 60px;
     height: 34px;
 }
@@ -597,25 +675,26 @@ input:checked + .slider:before {
 }
     /*DoctorPage - Content Area*/
     /*Card List - Transfer from short to full card*/
-.dropdown > [type="checkbox"] {
-    width: 15%;
-    height: 145px;
+
+.card-drop > input[type = "checkbox"] {
+    width: 12%;
+    height: 25vh;
     opacity: 0;
     position: absolute;
     cursor: pointer;
     z-index: 10;
-    margin-left: 85%;
+    margin-left: 88%;
 }
-.dropdown > input[type="checkbox"]:checked ~ .full-card {
+.card-drop > input[type = "checkbox"]:checked ~ .full-card {
     display: flex;
 }
-.dropdown > input[type="checkbox"]:checked ~ .short-card i.fa-chevron-down{
+.card-drop > input[type = "checkbox"]:checked ~ .short-card i.fa-chevron-down{
     transform: rotate(180deg);
 }
-.dropdown > input[type="checkbox"]:checked ~ .short-card .number-card{
+.card-drop > input[type = "checkbox"]:checked ~ .short-card .number-card{
     border-radius: 10px 10px 0 0;
 }
-.dropdown > input[type="checkbox"]:checked ~ .full-card .number-card{
+.card-drop > input[type = "checkbox"]:checked ~ .full-card .number-card{
     border-radius: 0 0 10px 10px;
 }
 /* End card inner content - patient in waiting list */
