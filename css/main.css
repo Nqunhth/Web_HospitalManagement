@@ -612,7 +612,13 @@
     border-bottom: 1px solid black;
 }
 .inner-box table input{
-    border: 1px solid black !important;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid black ;
+}
+.inner-box table tr td:first-child input{
+    border: none !important;
 }
 .inner-box table{
     width:100%;
