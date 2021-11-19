@@ -66,7 +66,7 @@
 .header__news .header__news--img{
     width: 60%;
     height: 40vh;  
-    background-image: url('/img/_116734510_fb04a850-8d34-421d-aff1-988acc6efabb.jpg');
+    background-image: url('../img/_116734510_fb04a850-8d34-421d-aff1-988acc6efabb.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     /* position: relative; */
@@ -268,7 +268,7 @@
 .container__background{
     width: 100vw;
     height: 800px;
-    background-image: url('/img/Home_page_Background.jpg');
+    background-image: url('../img/Home_page_Background.jpg');
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -856,22 +856,24 @@ input:checked + .slider:before {
     background-color: rgba(0, 0, 0, 0.5);
 }
 .modal__body{
-    width: 40vw;
-    height: 70vh;
     background-color: white;
     position: relative;
     z-index: 21;
     border-radius: 5px;
     display: flex;
 }
-.modal__inner{
-    width: 100%;
-    height: 100%;
+.modal__inner .inner-box{
+    height: max-content;
+    padding: 40px 100px;
 }
 .modal__inner .inner-box input{
     border: 1px solid #82AADA !important;
     width: 300px;
     border-radius: 20px;
+    padding: 5px 20px;
+}
+.modal__inner .inner-box input:focus{
+    outline: none!important;
 }
 .modal__inner .inner-box .i-title{
     font-weight: 700;
@@ -883,10 +885,15 @@ input:checked + .slider:before {
     margin-top: 2px;
 }
 .modal__inner .inner-box button{
-    margin-top: 50px;
+    margin: 30px -20px 50px auto;
     height: 50px;
+    width: 170px;
     background-color: #6679DD;
-    border-radius: 20px;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+    padding: 0 24px;
 }
 .inner-title{
     width: 100%;
@@ -995,7 +1002,7 @@ input:checked + .slider:before {
     height: inherit;
     width: 50%;
     left: 45%;
-    background-image: url('/img/hospital-img.jpg');
+    background-image: url('../img/hospital-img.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
@@ -1190,7 +1197,7 @@ input:checked + .slider:before {
     top: 60px;
     height: 100vh;
     width: 100%;
-    background-image: url(/img/login-background.jpg);
+    background-image: url(../img/login-background.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-position-x: 40%;
@@ -1238,7 +1245,6 @@ input:checked + .slider:before {
     font-size: 18px;
     font-weight: 300;
 }
-
 .input_section{
     flex-direction: column;
     width: 100%;
