@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 19, 2021 at 07:05 AM
+-- Generation Time: Nov 26, 2021 at 10:22 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `ooap_hhm`
+-- Database: `ooad_hhm`
 --
 
 -- --------------------------------------------------------
@@ -44,7 +44,8 @@ CREATE TABLE `account` (
 INSERT INTO `account` (`user_id`, `username`, `password`, `position`, `email`, `status`, `created_date`) VALUES
 (00001, 'CreaMiraelle', '$2y$10$ExU/XRICW880BD/KDxNXTuk31ZwTaiVhnVvoi6fPUQu0ip3O4FBZS', 'manager', 'ngocanhcao7i@gmail.com', 'enabled', '2021-11-18 16:23:44'),
 (00002, 'nqunhth', '$2y$10$m0YXc.V0ubshC8gCp5FNMeBIAzx0mZ/veZ0uAzuo4RJObEP4.8en6', 'manager', '123sdf@gmail.com', 'enabled', '2021-11-19 03:18:38'),
-(00003, '3', '$2y$10$.DXTHwP/V8NVjRUQ2KwasObFl9pKRJnC24qKQOvLaJRdBEv.ScU2W', 'doctor', '3', 'enabled', '2021-11-19 03:25:49');
+(00003, '3', '$2y$10$.DXTHwP/V8NVjRUQ2KwasObFl9pKRJnC24qKQOvLaJRdBEv.ScU2W', 'doctor', '3', 'enabled', '2021-11-19 03:25:49'),
+(00006, 'aaa', '$2y$10$joclZCG46Bb/KF4t8pvXuuRtqxpLOmsTBfpJ7dleydBjrUYHfNFF.', 'doctor', 'dgfdg', 'enabled', '2021-11-20 06:39:11');
 
 -- --------------------------------------------------------
 
@@ -72,7 +73,9 @@ CREATE TABLE `doctor` (
 --
 
 INSERT INTO `doctor` (`doctor_id`) VALUES
-(00003);
+(00003),
+(00005),
+(00006);
 
 -- --------------------------------------------------------
 
@@ -135,6 +138,19 @@ CREATE TABLE `medicine` (
   `medicine_producer` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `medicine_quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `medicine`
+--
+
+INSERT INTO `medicine` (`medicine_id`, `medicine_seri`, `medicine_name`, `medicine_unit_price`, `medicine_unit`, `medicine_producer`, `medicine_quantity`) VALUES
+(00001, 'ABC123', 'Thuốc cảm', 3000, 'viên', 'Tự chế', 200),
+(00002, 'XYZ456', 'Thuốc ho', 5000, 'viên', 'Tự chế', 200),
+(00003, 'DEF789', 'Thuốc ngủ', 1000, 'viên', 'Tự chế', 100),
+(00004, 'ABC456', 'Thuốc giảm đau', 10000, 'viên', 'Tự chế', 100),
+(00005, 'DEF123', 'Thuốc hạ sốt', 6000, 'viên', 'Tự chế', 100),
+(00006, 'XYZ123', 'Thuốc bôi', 8000, 'tuýp', 'Tự chế', 100),
+(00007, 'XYZ456', 'Thuốc ho', 18000, 'lọ', 'Tự chế', 100);
 
 -- --------------------------------------------------------
 
@@ -266,7 +282,9 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`user_id`) VALUES
 (00001),
 (00002),
-(00003);
+(00003),
+(00005),
+(00006);
 
 --
 -- Indexes for dumped tables
@@ -359,13 +377,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `account`
 --
 ALTER TABLE `account`
-  MODIFY `user_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `user_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `doctor`
 --
 ALTER TABLE `doctor`
-  MODIFY `doctor_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `doctor_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `invoice`
@@ -383,7 +401,7 @@ ALTER TABLE `medical_register`
 -- AUTO_INCREMENT for table `medicine`
 --
 ALTER TABLE `medicine`
-  MODIFY `medicine_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT;
+  MODIFY `medicine_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `news`
@@ -431,7 +449,7 @@ ALTER TABLE `specialist_consulting`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `user_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

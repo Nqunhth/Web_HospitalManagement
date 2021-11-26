@@ -848,6 +848,17 @@ input:checked + .slider:before {
     left: 0;
     z-index: 20;
     animation: fadeIn ease-in 0.15s;
+    display: none;
+}
+.center_hide{
+    display: none;
+    align-items: center;
+    justify-content: center; 
+}
+.open{
+    display: flex;
+    align-items: center;
+    justify-content: center;  
 }
 .modal__overlay{
     position: absolute;
