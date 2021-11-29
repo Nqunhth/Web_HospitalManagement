@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 26, 2021 at 10:22 AM
+-- Generation Time: Nov 29, 2021 at 04:16 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -45,7 +45,11 @@ INSERT INTO `account` (`user_id`, `username`, `password`, `position`, `email`, `
 (00001, 'CreaMiraelle', '$2y$10$ExU/XRICW880BD/KDxNXTuk31ZwTaiVhnVvoi6fPUQu0ip3O4FBZS', 'manager', 'ngocanhcao7i@gmail.com', 'enabled', '2021-11-18 16:23:44'),
 (00002, 'nqunhth', '$2y$10$m0YXc.V0ubshC8gCp5FNMeBIAzx0mZ/veZ0uAzuo4RJObEP4.8en6', 'manager', '123sdf@gmail.com', 'enabled', '2021-11-19 03:18:38'),
 (00003, '3', '$2y$10$.DXTHwP/V8NVjRUQ2KwasObFl9pKRJnC24qKQOvLaJRdBEv.ScU2W', 'doctor', '3', 'enabled', '2021-11-19 03:25:49'),
-(00006, 'aaa', '$2y$10$joclZCG46Bb/KF4t8pvXuuRtqxpLOmsTBfpJ7dleydBjrUYHfNFF.', 'doctor', 'dgfdg', 'enabled', '2021-11-20 06:39:11');
+(00006, 'aaa', '$2y$10$joclZCG46Bb/KF4t8pvXuuRtqxpLOmsTBfpJ7dleydBjrUYHfNFF.', 'doctor', 'dgfdg', 'enabled', '2021-11-20 06:39:11'),
+(00007, 'bbb', '$2y$10$dCFbF1Y4c96zsTnzm4Go4ub.Hgx4hI5l0gR6VaaVMBEmhqXyss09e', 'receptionist', 'bbbb', 'enabled', '2021-11-29 11:31:26'),
+(00008, 'ccc', '$2y$10$joVCfa1SA7a4W2p9RDjZNuaEELr5NADAD09ZnAxM8fh.SxnACNw26', 'receptionist', 'cccc', 'enabled', '2021-11-29 11:31:45'),
+(00009, 'ddd', '$2y$10$7dLKMEIzXZw/wSdLZrpfp.jXVDjA6U4Own0LAderF8Q7OODKMYh7m', 'pharmacist', 'dddd', 'enabled', '2021-11-29 11:32:07'),
+(00010, 'eee', '$2y$10$/zxKQPy7S1kX06JyxWFeXeQwKl.Q8KZT.1y04cjmWhKrMc4F9jT0y', 'pharmacist', 'eeee', 'enabled', '2021-11-29 11:32:18');
 
 -- --------------------------------------------------------
 
@@ -74,7 +78,6 @@ CREATE TABLE `doctor` (
 
 INSERT INTO `doctor` (`doctor_id`) VALUES
 (00003),
-(00005),
 (00006);
 
 -- --------------------------------------------------------
@@ -200,6 +203,20 @@ CREATE TABLE `personal_info` (
   `avatar` varchar(200) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `personal_info`
+--
+
+INSERT INTO `personal_info` (`user_id`, `full_name`, `age`, `gender`, `birthday`, `specialized_field`, `address`, `phone_number`, `id_card_number`, `id_card_date`, `avatar`) VALUES
+(00001, 'Cao Ngọc Anh', 20, 'female', '2001-03-08', 'Nhân sự', 'xxx XXX yy YY zz ZZZZZ', '123456789', '123456789', '2021-11-10', ''),
+(00002, 'Nguyễn Hồ Quỳnh Thư', 20, 'female', '2001-02-19', 'Nhân sự', 'xxx XXX yy YY zz ZZZZZ', '123456789', '123456789', '2021-11-10', ''),
+(00003, 'Người nào đó', 20, 'male', '2001-04-01', 'Tổng quát', 'xxx XXX yy YY zz ZZZZZ', '123456789', '123456789', '2021-11-10', ''),
+(00006, 'Please update', 20, 'female', '2000-05-20', 'Răng hàm mặt', 'xxx XXX yy YY zz ZZZZZ', '123456789', '123456789', '2021-11-10', ''),
+(00007, 'Please update', 20, 'male', '2001-12-09', 'Tiếp tân', 'xxx XXX yy YY zz ZZZZZ', '123456789', '123456789', '2021-11-10', ''),
+(00008, 'Please update', 20, 'male', '2002-09-19', 'Tiếp tân', 'xxx XXX yy YY zz ZZZZZ', '123456789', '123456789', '2021-11-10', ''),
+(00009, 'Please update', 20, 'male', '1998-05-09', 'Dược sĩ', 'xxx XXX yy YY zz ZZZZZ', '123456789', '123456789', '2021-11-10', ''),
+(00010, 'Please update', 20, 'male', '2000-04-23', 'Tiếp tân', 'xxx XXX yy YY zz ZZZZZ', '123456789', '123456789', '2021-11-10', '');
+
 -- --------------------------------------------------------
 
 --
@@ -209,6 +226,14 @@ CREATE TABLE `personal_info` (
 CREATE TABLE `pharmacist` (
   `pharmacist_id` int(5) UNSIGNED ZEROFILL NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `pharmacist`
+--
+
+INSERT INTO `pharmacist` (`pharmacist_id`) VALUES
+(00009),
+(00010);
 
 -- --------------------------------------------------------
 
@@ -245,6 +270,14 @@ CREATE TABLE `pres_medicine` (
 CREATE TABLE `receptionist` (
   `receptionist_id` int(5) UNSIGNED ZEROFILL NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `receptionist`
+--
+
+INSERT INTO `receptionist` (`receptionist_id`) VALUES
+(00007),
+(00008);
 
 -- --------------------------------------------------------
 
@@ -283,8 +316,11 @@ INSERT INTO `user` (`user_id`) VALUES
 (00001),
 (00002),
 (00003),
-(00005),
-(00006);
+(00006),
+(00007),
+(00008),
+(00009),
+(00010);
 
 --
 -- Indexes for dumped tables
@@ -377,7 +413,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `account`
 --
 ALTER TABLE `account`
-  MODIFY `user_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `user_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `doctor`
@@ -419,13 +455,13 @@ ALTER TABLE `patient`
 -- AUTO_INCREMENT for table `personal_info`
 --
 ALTER TABLE `personal_info`
-  MODIFY `user_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `pharmacist`
 --
 ALTER TABLE `pharmacist`
-  MODIFY `pharmacist_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT;
+  MODIFY `pharmacist_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `prescription`
@@ -437,7 +473,7 @@ ALTER TABLE `prescription`
 -- AUTO_INCREMENT for table `receptionist`
 --
 ALTER TABLE `receptionist`
-  MODIFY `receptionist_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT;
+  MODIFY `receptionist_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `specialist_consulting`
@@ -449,7 +485,7 @@ ALTER TABLE `specialist_consulting`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `user_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

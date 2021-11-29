@@ -1,3 +1,11 @@
+<?php
+require "../php/ConnectionConfig/DataBase.php";
+
+$db = new Database();
+$conn = $db->dbConnect();
+$sql = "SELECT * FROM medicine";
+$result = $conn->query($sql);
+?>
 
 <html>
 
@@ -8,11 +16,10 @@
     <!--"Roboto" & "M PLUS Rounded 1c font" -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap">
 
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../icon/fontawesome-free-5.15.4-web/css/all.min.css">
+    <link rel="stylesheet" href="/Web_HospitalManagement/css/main.css">
+    <link rel="stylesheet" href="/Web_HospitalManagement/icon/fontawesome-free-5.15.4-web/css/all.min.css">
 </head>
 
 <body>
@@ -22,36 +29,35 @@
                 <a href="/Web_HospitalManagement" class="navbar--item-link">HOME</a>
             </li>
             <li class="navbar--item">
-                <a href="/Web_HospitalManagement/News/newsPage.html" class="navbar--item-link">News</a>
+                <a href="/Web_HospitalManagement/News/newsPage.php" class="navbar--item-link">News</a>
             </li>
             <li class="navbar--item has-dropdown-menu">
-                <a href="/Web_HospitalManagement/Doctor/patientCaring.html" class="navbar--item-link is-active-in-navbar">Workspace</a>
+                <a href="/Web_HospitalManagement/Doctor/patientCaring.php" class="navbar--item-link is-active-in-navbar">Workspace</a>
                 <div class="temporary">
                     <div class="dropdown-user center">
                         <div class="user">
-                            <a href="/Web_HospitalManagement/Manager/accountManager.html">Manager<i class="fas fa-chevron-right"></i></a>
+                            <a href="/Web_HospitalManagement/Manager/accountManager.php">Manager<i class="fas fa-chevron-right"></i></a>
                         </div>
                         <div class="user">
-                            <a href="/Web_HospitalManagement/Receptionist/formMedical.html">Receptionist<i
-                                    class="fas fa-chevron-right"></i></a>
+                            <a href="/Web_HospitalManagement/Receptionist/formMedical.php">Receptionist<i class="fas fa-chevron-right"></i></a>
                         </div>
                         <div class="user">
-                            <a href="/Web_HospitalManagement/Doctor/patientCaring.html">Doctor<i class="fas fa-chevron-right"></i></a>
+                            <a href="/Web_HospitalManagement/Doctor/patientCaring.php">Doctor<i class="fas fa-chevron-right"></i></a>
                         </div>
                         <div class="user">
-                            <a href="/Web_HospitalManagement/Pharmacist/formInvoice.html">Pharmacist<i class="fas fa-chevron-right"></i></a>
+                            <a href="/Web_HospitalManagement/Pharmacist/formInvoice.php">Pharmacist<i class="fas fa-chevron-right"></i></a>
                         </div>
                     </div>
                 </div>
             </li>
             <li class="navbar--item has-dropdown-menu">
-                <a href="/Web_HospitalManagement/About/aboutPage.html" class="navbar--item-link">About</a>
+                <a href="/Web_HospitalManagement/About/aboutPage.php" class="navbar--item-link">About</a>
             </li>
             <li class="navbar--flex-spacer">
                 <!-- Search Area -->
             </li>
             <li class="navbar--item has-dropdown-menu">
-                <a href="/Web_HospitalManagement/Login/loginPage.html" class="navbar--item-link"><i class="far fa-user"></i></a>
+                <a href="/Web_HospitalManagement/Login/loginPage.php" class="navbar--item-link"><i class="far fa-user"></i></a>
                 <div class="trans-layer">
                     <div class="dropdown-user center">
                         <div class="user-info">
@@ -61,7 +67,7 @@
                         </div>
                         <div class="user user-manage">
                             <p>My Account</p>
-                            <a href="/Web_HospitalManagement/User/infoManage.html">Account Management<i class="fas fa-chevron-right"></i></a>
+                            <a href="/Web_HospitalManagement/User/infoManage.php">Account Management<i class="fas fa-chevron-right"></i></a>
                         </div>
                         <div class="user user-logout">
                             <a href="/Web_HospitalManagement">Logout<i class="fas fa-sign-out-alt"></i></a>
@@ -80,7 +86,7 @@
                     <ul>
                         <li class="is-active-in-menu">
                             <i class="fas fa-box-open"></i>
-                            <a href="/Web_HospitalManagement/php/Medicines/medicines.php">Check in Stock</a>
+                            <a href="/Web_HospitalManagement/Pharmacist/checkStock.php">Check in Stock</a>
                         </li>
                     </ul>
                 </div>
@@ -89,7 +95,7 @@
                     <ul>
                         <li>
                             <i class="fas fa-receipt"></i>
-                            <a href="/Web_HospitalManagement/Pharmacist/formInvoice.html">Invoice</a>
+                            <a href="/Web_HospitalManagement/Pharmacist/formInvoice.php">Invoice</a>
                         </li>
                     </ul>
                 </div>
@@ -98,25 +104,78 @@
                     <ul>
                         <li>
                             <i class="fas fa-receipt"></i>
-                            <a href="/Web_HospitalManagement/Pharmacist/listInvoice.html">Invoice</a>
+                            <a href="/Web_HospitalManagement/Pharmacist/listInvoice.php">Invoice</a>
                         </li>
                     </ul>
                 </div>
             </div>
             <div class="container__content">
                 <ul class="card-list">
-                    <li class="card-drop"> 
-                        <input type="checkbox"/>       
+                    <?php if ($result->num_rows > 0) {
+                        // Load dữ liệu lên website
+                        while ($row = $result->fetch_assoc()) {
+                    ?>
+                            <li class="card-drop">
+                                <input type="checkbox" />
+                                <div class="short-card">
+                                    <div class="inner-card">
+                                        <div class="inner-detail">
+                                            <p class="i-title">
+                                                Medicine Name:
+                                            <p class="i-value short-text"> <?php echo $row["medicine_name"]; ?></p>
+                                            </p>
+                                            <p class="i-title">
+                                                Unit Price:
+                                            <p class="i-value short-text"><?php echo $row["medicine_unit_price"]; ?></p>
+                                            </p>
+                                        </div>
+                                        <div class="switch-container center">
+                                        </div>
+                                        <div class="icon-container center">
+                                            <i class="fas fa-chevron-down"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="full-card">
+                                    <div class="inner-card">
+                                        <div class="inner-detail has-border-top">
+                                            <p class="i-title">
+                                                Unit:
+                                            <p class="i-value short-text"><?php echo $row["medicine_unit"]; ?></p>
+                                            </p>
+                                            <p class="i-title">
+                                                Quantity:
+                                            <p class="i-value short-text"><?php echo $row["medicine_quantity"]; ?></p>
+                                            </p>
+                                            <p class="i-title">
+                                                Producer:
+                                            <p class="i-value short-text"><?php echo $row["medicine_producer"]; ?></p>
+                                            </p>
+                                        </div>
+                                        <div class="switch-container center">
+                                        </div>
+                                        <div class="icon-container center">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                    <?php
+                        }
+                    }
+                    $conn->close();
+                    ?>
+                    <!-- <li class="card-drop">
+                        <input type="checkbox" />
                         <div class="short-card">
                             <div class="inner-card">
                                 <div class="inner-detail">
                                     <p class="i-title">
                                         Medicine Name:
-                                    <p class="i-value short-text"> someName</p>                                    
+                                    <p class="i-value short-text"> someName</p>
                                     </p>
                                     <p class="i-title">
                                         Unit Price:
-                                    <p class="i-value short-text">xxxxxx 000 VND</p>                                    
+                                    <p class="i-value short-text">xxxxxx 000 VND</p>
                                     </p>
                                 </div>
                                 <div class="switch-container center">
@@ -131,15 +190,15 @@
                                 <div class="inner-detail has-border-top">
                                     <p class="i-title">
                                         Unit:
-                                    <p class="i-value short-text">1000</p>                                    
+                                    <p class="i-value short-text">1000</p>
                                     </p>
                                     <p class="i-title">
                                         Quantity:
-                                    <p class="i-value short-text">Bar</p>                                    
-                                    </p>                                    
+                                    <p class="i-value short-text">Bar</p>
+                                    </p>
                                     <p class="i-title">
                                         Producer:
-                                    <p class="i-value short-text">myProducer</p>                                    
+                                    <p class="i-value short-text">myProducer</p>
                                     </p>
                                 </div>
                                 <div class="switch-container center">
@@ -148,51 +207,7 @@
                                 </div>
                             </div>
                         </div>
-                    </li>
-                    <li class="card-drop"> 
-                        <input type="checkbox"/>       
-                        <div class="short-card">
-                            <div class="inner-card">
-                                <div class="inner-detail">
-                                    <p class="i-title">
-                                        Medicine Name:
-                                    <p class="i-value short-text"> someName</p>                                    
-                                    </p>
-                                    <p class="i-title">
-                                        Unit Price:
-                                    <p class="i-value short-text">xxxxxx 000 VND</p>                                    
-                                    </p>
-                                </div>
-                                <div class="switch-container center">
-                                </div>
-                                <div class="icon-container center">
-                                    <i class="fas fa-chevron-down"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="full-card">
-                            <div class="inner-card">
-                                <div class="inner-detail has-border-top">
-                                    <p class="i-title">
-                                        Unit:
-                                    <p class="i-value short-text">1000</p>                                    
-                                    </p>
-                                    <p class="i-title">
-                                        Quantity:
-                                    <p class="i-value short-text">Bar</p>                                    
-                                    </p>                                    
-                                    <p class="i-title">
-                                        Producer:
-                                    <p class="i-value short-text">myProducer</p>                                    
-                                    </p>
-                                </div>
-                                <div class="switch-container center">
-                                </div>
-                                <div class="icon-container center">
-                                </div>
-                            </div>
-                        </div>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
             <div class="container__floatbutton">
@@ -203,8 +218,8 @@
                     <i class="fas fa-search"></i>
                 </a>
             </div>
-            </div>
         </div>
+    </div>
 
     </div>
 

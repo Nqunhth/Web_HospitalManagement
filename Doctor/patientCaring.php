@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html>
 
 <head>
@@ -22,36 +22,36 @@
                 <a href="/Web_HospitalManagement" class="navbar--item-link">HOME</a>
             </li>
             <li class="navbar--item">
-                <a href="/Web_HospitalManagement/News/newsPage.html" class="navbar--item-link">News</a>
+                <a href="/Web_HospitalManagement/News/newsPage.php" class="navbar--item-link">News</a>
             </li>
             <li class="navbar--item has-dropdown-menu">
-                <a href="/Web_HospitalManagement/Doctor/patientCaring.html" class="navbar--item-link is-active-in-navbar">Workspace</a>
+                <a href="/Web_HospitalManagement/Doctor/patientCaring.php" class="navbar--item-link is-active-in-navbar">Workspace</a>
                 <div class="temporary">
                     <div class="dropdown-user center">
                         <div class="user">
-                            <a href="/Web_HospitalManagement/Manager/accountManager.html">Manager<i class="fas fa-chevron-right"></i></a>
+                            <a href="/Web_HospitalManagement/Manager/accountManager.php">Manager<i class="fas fa-chevron-right"></i></a>
                         </div>
                         <div class="user">
-                            <a href="/Web_HospitalManagement/Receptionist/formMedical.html">Receptionist<i
+                            <a href="/Web_HospitalManagement/Receptionist/formMedical.php">Receptionist<i
                                     class="fas fa-chevron-right"></i></a>
                         </div>
                         <div class="user">
-                            <a href="/Web_HospitalManagement/Doctor/patientCaring.html">Doctor<i class="fas fa-chevron-right"></i></a>
+                            <a href="/Web_HospitalManagement/Doctor/patientCaring.php">Doctor<i class="fas fa-chevron-right"></i></a>
                         </div>
                         <div class="user">
-                            <a href="/Web_HospitalManagement/Pharmacist/formInvoice.html">Pharmacist<i class="fas fa-chevron-right"></i></a>
+                            <a href="/Web_HospitalManagement/Pharmacist/formInvoice.php">Pharmacist<i class="fas fa-chevron-right"></i></a>
                         </div>
                     </div>
                 </div>
             </li>
             <li class="navbar--item has-dropdown-menu">
-                <a href="/Web_HospitalManagement/About/aboutPage.html" class="navbar--item-link">About</a>
+                <a href="/Web_HospitalManagement/About/aboutPage.php" class="navbar--item-link">About</a>
             </li>
             <li class="navbar--flex-spacer">
                 <!-- Search Area -->
             </li>
             <li class="navbar--item has-dropdown-menu">
-                <a href="/Web_HospitalManagement/Login/loginPage.html" class="navbar--item-link"><i class="far fa-user"></i></a>
+                <a href="/Web_HospitalManagement/Login/loginPage.php" class="navbar--item-link"><i class="far fa-user"></i></a>
                 <div class="trans-layer">
                     <div class="dropdown-user center">
                         <div class="user-info">
@@ -61,7 +61,7 @@
                         </div>
                         <div class="user user-manage">
                             <p>My Account</p>
-                            <a href="/Web_HospitalManagement/User/infoManage.html">Account Management<i class="fas fa-chevron-right"></i></a>
+                            <a href="/Web_HospitalManagement/User/infoManage.php">Account Management<i class="fas fa-chevron-right"></i></a>
                         </div>
                         <div class="user user-logout">
                             <a href="/Web_HospitalManagement">Logout<i class="fas fa-sign-out-alt"></i></a>
@@ -81,11 +81,11 @@
                     <ul>
                         <li class="has-border-bottom is-active-in-menu">
                             <i class="fas fa-user-injured"></i>
-                            <a href="./patientCaring.html">Caring</a>
+                            <a href="./patientCaring.php">Caring</a>
                         </li>
                         <li>
                             <i class="fas fa-address-book"></i>
-                            <a href="./patientList.html">All Patients</a>
+                            <a href="./patientList.php">All Patients</a>
                         </li>
                     </ul>
                 </div>
@@ -94,11 +94,11 @@
                     <ul>
                         <li class="has-border-bottom">
                             <i class="fas fa-hand-holding-medical"></i>
-                            <a href="./formSpecCon.html">Special Consulting Register</a>
+                            <a href="./formSpecCon.php">Special Consulting Register</a>
                         </li>
                         <li>
                             <i class="fas fa-briefcase-medical"></i>
-                            <a href="./formPrescription.html">Prescription</a>
+                            <a href="./formPrescription.php">Prescription</a>
                         </li>
                     </ul>
                 </div>
@@ -107,11 +107,11 @@
                     <ul>
                         <li class="has-border-bottom">
                             <i class="fas fa-hand-holding-medical"></i>
-                            <a href="./listSpecCon.html">Special Consulting Register</a>
+                            <a href="./listSpecCon.php">Special Consulting Register</a>
                         </li>
                         <li>
                             <i class="fas fa-briefcase-medical"></i>
-                            <a href="./listPrescription.html">Prescription</a>
+                            <a href="./listPrescription.php">Prescription</a>
                         </li>
                     </ul>
                 </div>
