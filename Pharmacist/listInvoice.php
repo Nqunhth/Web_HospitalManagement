@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html>
 
 <head>
@@ -19,39 +19,39 @@
     <div class="header__navbar not_navbar_at_home">
         <ul class="navbar--list">
             <li class="navbar--item">
-                <a href="/" class="navbar--item-link">HOME</a>
+                <a href="/Web_HospitalManagement" class="navbar--item-link">HOME</a>
             </li>
             <li class="navbar--item">
-                <a href="/News/newsPage.html" class="navbar--item-link">News</a>
+                <a href="/Web_HospitalManagement/News/newsPage.php" class="navbar--item-link">News</a>
             </li>
             <li class="navbar--item has-dropdown-menu">
-                <a href="/Doctor/patientCaring.html" class="navbar--item-link is-active-in-navbar">Workspace</a>
+                <a href="/Web_HospitalManagement/Doctor/patientCaring.php" class="navbar--item-link is-active-in-navbar">Workspace</a>
                 <div class="temporary">
                     <div class="dropdown-user center">
                         <div class="user">
-                            <a href="/Manager/accountManager.html">Manager<i class="fas fa-chevron-right"></i></a>
+                            <a href="/Web_HospitalManagement/Manager/accountManager.php">Manager<i class="fas fa-chevron-right"></i></a>
                         </div>
                         <div class="user">
-                            <a href="/Receptionist/formMedical.html">Receptionist<i
+                            <a href="/Web_HospitalManagement/Receptionist/formMedical.php">Receptionist<i
                                     class="fas fa-chevron-right"></i></a>
                         </div>
                         <div class="user">
-                            <a href="/Doctor/patientCaring.html">Doctor<i class="fas fa-chevron-right"></i></a>
+                            <a href="/Web_HospitalManagement/Doctor/patientCaring.php">Doctor<i class="fas fa-chevron-right"></i></a>
                         </div>
                         <div class="user">
-                            <a href="/Pharmacist/formInvoice.html">Pharmacist<i class="fas fa-chevron-right"></i></a>
+                            <a href="/Web_HospitalManagement/Pharmacist/formInvoice.php">Pharmacist<i class="fas fa-chevron-right"></i></a>
                         </div>
                     </div>
                 </div>
             </li>
             <li class="navbar--item has-dropdown-menu">
-                <a href="/About/aboutPage.html" class="navbar--item-link">About</a>
+                <a href="/Web_HospitalManagement/About/aboutPage.php" class="navbar--item-link">About</a>
             </li>
             <li class="navbar--flex-spacer">
                 <!-- Search Area -->
             </li>
             <li class="navbar--item has-dropdown-menu">
-                <a href="/Login/loginPage.html" class="navbar--item-link"><i class="far fa-user"></i></a>
+                <a href="/Web_HospitalManagement/Login/loginPage.php" class="navbar--item-link"><i class="far fa-user"></i></a>
                 <div class="trans-layer">
                     <div class="dropdown-user center">
                         <div class="user-info">
@@ -61,55 +61,44 @@
                         </div>
                         <div class="user user-manage">
                             <p>My Account</p>
-                            <a href="/User/infoManage.html">Account Management<i class="fas fa-chevron-right"></i></a>
+                            <a href="/Web_HospitalManagement/User/infoManage.php">Account Management<i class="fas fa-chevron-right"></i></a>
                         </div>
                         <div class="user user-logout">
-                            <a href="/">Logout<i class="fas fa-sign-out-alt"></i></a>
+                            <a href="/Web_HospitalManagement">Logout<i class="fas fa-sign-out-alt"></i></a>
                         </div>
                     </div>
                 </div>
             </li>
         </ul>
     </div>
-    <!-- Workspace for Manager -->
+
     <div class="container">
         <div class="container__background_color">
             <div class="container__menu">
                 <div class="box menu__box first__box">
-                    <p>Account Lists</p>
+                    <p>Medicines Stock</p>
                     <ul>
-                        <li class="has-border-bottom">
-                            <i class="fas fa-users-cog"></i>
-                            <a href="/Manager/accountManager.html">Manager Account</a>
-                        </li>
-                        <li class="has-border-bottom">
-                            <i class="fas fa-concierge-bell"></i>
-                            <a href="/Manager/accountRecept.html">Receptionist Accounts</a>
-                        </li>
-                        <li class="has-border-bottom">
-                            <i class="fas fa-stethoscope"></i>
-                            <a href="/Manager/accountDoctor.html">Doctor Account</a>
-                        </li>
                         <li>
-                            <i class="fas fa-pills"></i>
-                            <a href="/Manager/accountPharma.html">Pharmacist Account</a>
+                            <i class="fas fa-box-open"></i>
+                            <a href="/Web_HospitalManagement/Pharmacist/checkStock.php">Check in Stock</a>
                         </li>
                     </ul>
                 </div>
                 <div class="box menu__box middle__box">
-                    <p>Form Lists</p>
+                    <p>Ceate New Form</p>
                     <ul>
-                        <li class="has-border-bottom">
-                            <i class="fas fa-comment-medical"></i>
-                            <a href="/Manager/listMedical.html">Medical Register</a>
+                        <li>
+                            <i class="fas fa-receipt"></i>
+                            <a href="/Web_HospitalManagement/Pharmacist/formInvoice.php">Invoice</a>
                         </li>
-                        <li class="has-border-bottom">
-                            <i class="fas fa-hand-holding-medical"></i>
-                            <a href="/Manager/listSpecCon.html">Special Consulting Register</a>
-                        </li>
+                    </ul>
+                </div>
+                <div class="box menu__box middle__box">
+                    <p>Forms List</p>
+                    <ul>
                         <li class="is-active-in-menu">
-                            <i class="fas fa-briefcase-medical"></i>
-                            <a href="/Manager/listPrescription.html">Prescription</a>
+                            <i class="fas fa-receipt"></i>
+                            <a href="/Web_HospitalManagement/Pharmacist/listInvoice.php">Invoice</a>
                         </li>
                     </ul>
                 </div>
@@ -127,20 +116,16 @@
                                         </p>                                       
                                     </div>
                                     <p class="i-title">
-                                        Patient Full Name:
-                                    <p class="i-value short-text">Nguyen Van A</p>
+                                        Customer Full Name:
+                                    <p class="i-value short-text">Nguyen Van A</p>                                    
+                                    </p>
                                     <p class="i-title">
-                                        Age:
-                                    <p class="i-value">99</p>
-                                    </p>                                    
+                                        Address:
+                                    <p class="i-value short-text">XXX YYY ZZZ</p>                                    
                                     </p>
-                                    <p class="i-title change-element">
-                                        Conclusion:
-                                    <p class="i-value long-text">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita voluptatum,
-                                        animi aspernatur vel quas beatae natus dolore, iusto tenetur magni hic nam?
-                                        Dolores iste esse fuga excepturi. Magni, culpa. Deleniti?
-                                    </p>
+                                    <p class="i-title">
+                                        Total Bill:
+                                    <p class="i-value short-text">xxxxxx 000 VND</p>                                    
                                     </p>
                                 </div>
                                 <div class="switch-container center">
@@ -157,25 +142,6 @@
                         <div class="full-card">
                             <div class="inner-card">
                                 <div class="inner-detail has-border-top">
-                                    <p class="i-title">
-                                        Phone Number:
-                                    <p class="i-value  medium-text">
-                                        Load data from Database
-                                    </p>
-                                    </p>
-                                    <p class="i-title">
-                                        Job:
-                                    <p class="i-value medium-text">
-                                        Load data from Database
-                                    </p>
-                                    </p>
-                                    <p class="i-title change-element ">
-                                        Address:
-                                    <p class="i-value medium-text">
-                                        Load data from Database
-                                    </p>
-                                    </p>
-                                    </p>
                                     <p class="i-title">
                                         List of Medicines:
                                     <p class="i-value long-text">
@@ -204,20 +170,16 @@
                                         </p>                                       
                                     </div>
                                     <p class="i-title">
-                                        Patient Full Name:
-                                    <p class="i-value short-text">Nguyen Van A</p>
+                                        Customer Full Name:
+                                    <p class="i-value short-text">Nguyen Van A</p>                                    
+                                    </p>
                                     <p class="i-title">
-                                        Age:
-                                    <p class="i-value">99</p>
-                                    </p>                                    
+                                        Address:
+                                    <p class="i-value short-text">XXX YYY ZZZ</p>                                    
                                     </p>
-                                    <p class="i-title change-element">
-                                        Conclusion:
-                                    <p class="i-value long-text">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita voluptatum,
-                                        animi aspernatur vel quas beatae natus dolore, iusto tenetur magni hic nam?
-                                        Dolores iste esse fuga excepturi. Magni, culpa. Deleniti?
-                                    </p>
+                                    <p class="i-title">
+                                        Total Bill:
+                                    <p class="i-value short-text">xxxxxx 000 VND</p>                                    
                                     </p>
                                 </div>
                                 <div class="switch-container center">
@@ -234,25 +196,6 @@
                         <div class="full-card">
                             <div class="inner-card">
                                 <div class="inner-detail has-border-top">
-                                    <p class="i-title">
-                                        Phone Number:
-                                    <p class="i-value  medium-text">
-                                        Load data from Database
-                                    </p>
-                                    </p>
-                                    <p class="i-title">
-                                        Job:
-                                    <p class="i-value medium-text">
-                                        Load data from Database
-                                    </p>
-                                    </p>
-                                    <p class="i-title change-element ">
-                                        Address:
-                                    <p class="i-value medium-text">
-                                        Load data from Database
-                                    </p>
-                                    </p>
-                                    </p>
                                     <p class="i-title">
                                         List of Medicines:
                                     <p class="i-value long-text">
@@ -301,6 +244,7 @@
                         </li>
                     </ul>
                 </div>
+
             </div>
             <div class="main-column">
                 <ul class="column-link-list">

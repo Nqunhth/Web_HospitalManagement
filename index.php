@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html>
 
 <head>
@@ -11,7 +11,7 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap">
 
-    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="./css/main.css">
     <link rel="stylesheet" href="./icon/fontawesome-free-5.15.4-web/css/all.min.css">
 </head>
 
@@ -41,39 +41,39 @@
                             <a href="/" class="navbar--item-link  is-active-in-navbar">HOME</a>
                         </li>
                         <li class="navbar--item">
-                            <a href="/News/newsPage.html" class="navbar--item-link">News</a>
+                            <a href="/Web_HospitalManagement/News/newsPage.php" class="navbar--item-link">News</a>
                         </li>
                         <li class="navbar--item has-dropdown-menu">
-                            <a href="/Doctor/patientCaring.html" class="navbar--item-link">Workspace</a>
+                            <a href="/Web_HospitalManagement/Doctor/patientCaring.php" class="navbar--item-link">Workspace</a>
                             <div class="temporary">
                                 <div class="dropdown-user center">
                                     <div class="user">
-                                        <a href="/Manager/accountManager.html">Manager<i
+                                        <a href="/Web_HospitalManagement/Manager/accountManager.php">Manager<i
                                                 class="fas fa-chevron-right"></i></a>
                                     </div>
                                     <div class="user">
-                                        <a href="/Receptionist/formMedical.html">Receptionist<i
+                                        <a href="/Web_HospitalManagement/Receptionist/formMedical.php">Receptionist<i
                                                 class="fas fa-chevron-right"></i></a>
                                     </div>
                                     <div class="user">
-                                        <a href="/Doctor/patientCaring.html">Doctor<i
+                                        <a href="/Web_HospitalManagement/Doctor/patientCaring.php">Doctor<i
                                                 class="fas fa-chevron-right"></i></a>
                                     </div>
                                     <div class="user">
-                                        <a href="/Pharmacist/formInvoice.html">Pharmacist<i
+                                        <a href="/Web_HospitalManagement/Pharmacist/formInvoice.php">Pharmacist<i
                                                 class="fas fa-chevron-right"></i></a>
                                     </div>
                                 </div>
                             </div>
                         </li>
                         <li class="navbar--item has-dropdown-menu">
-                            <a href="/About/aboutPage.html" class="navbar--item-link">About</a>
+                            <a href="/Web_HospitalManagement/About/aboutPage.php" class="navbar--item-link">About</a>
                         </li>
                         <li class="navbar--flex-spacer">
                             <!-- Search Area -->
                         </li>
                         <li class="navbar--item has-dropdown-menu">
-                            <a href="/Login/loginPage.html" class="navbar--item-link"><i class="far fa-user"></i></a>
+                            <a href="/Web_HospitalManagement/Login/loginPage.php" class="navbar--item-link"><i class="far fa-user"></i></a>
                             <div class="trans-layer">
                                 <div class="dropdown-user center">
                                     <div class="user-info">
@@ -83,11 +83,11 @@
                                     </div>
                                     <div class="user user-manage">
                                         <p>My Account</p>
-                                        <a href="/User/infoManage.html">Account Management<i
+                                        <a href="/Web_HospitalManagement/User/infoManage.php">Account Management<i
                                                 class="fas fa-chevron-right"></i></a>
                                     </div>
                                     <div class="user user-logout">
-                                        <a href="/">Logout<i class="fas fa-sign-out-alt"></i></a>
+                                        <a href="/Web_HospitalManagement">Logout<i class="fas fa-sign-out-alt"></i></a>
                                     </div>
                                 </div>
                             </div>

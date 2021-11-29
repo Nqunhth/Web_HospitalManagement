@@ -1,4 +1,12 @@
-<!DOCTYPE html>
+<?php
+require "../php/ConnectionConfig/DataBase.php";
+
+$db = new Database();
+$conn = $db->dbConnect();
+$sql = "SELECT * FROM account JOIN personal_info ON account.user_id = personal_info.user_id 
+                            WHERE account.position = 'manager'";
+$result = $conn->query($sql);
+?>
 <html>
 
 <head>
@@ -19,39 +27,39 @@
     <div class="header__navbar not_navbar_at_home">
         <ul class="navbar--list">
             <li class="navbar--item">
-                <a href="/" class="navbar--item-link">HOME</a>
+                <a href="/Web_HospitalManagement" class="navbar--item-link">HOME</a>
             </li>
             <li class="navbar--item">
-                <a href="/News/newsPage.html" class="navbar--item-link">News</a>
+                <a href="/Web_HospitalManagement/News/newsPage.php" class="navbar--item-link">News</a>
             </li>
             <li class="navbar--item has-dropdown-menu">
-                <a href="/Doctor/patientCaring.html" class="navbar--item-link is-active-in-navbar">Workspace</a>
+                <a href="/Web_HospitalManagement/Doctor/patientCaring.php" class="navbar--item-link is-active-in-navbar">Workspace</a>
                 <div class="temporary">
                     <div class="dropdown-user center">
                         <div class="user">
-                            <a href="/Manager/accountManager.html">Manager<i class="fas fa-chevron-right"></i></a>
+                            <a href="/Web_HospitalManagement/Manager/accountManager.php">Manager<i class="fas fa-chevron-right"></i></a>
                         </div>
                         <div class="user">
-                            <a href="/Receptionist/formMedical.html">Receptionist<i
+                            <a href="/Web_HospitalManagement/Receptionist/formMedical.php">Receptionist<i
                                     class="fas fa-chevron-right"></i></a>
                         </div>
                         <div class="user">
-                            <a href="/Doctor/patientCaring.html">Doctor<i class="fas fa-chevron-right"></i></a>
+                            <a href="/Web_HospitalManagement/Doctor/patientCaring.php">Doctor<i class="fas fa-chevron-right"></i></a>
                         </div>
                         <div class="user">
-                            <a href="/Pharmacist/formInvoice.html">Pharmacist<i class="fas fa-chevron-right"></i></a>
+                            <a href="/Web_HospitalManagement/Pharmacist/formInvoice.php">Pharmacist<i class="fas fa-chevron-right"></i></a>
                         </div>
                     </div>
                 </div>
             </li>
             <li class="navbar--item has-dropdown-menu">
-                <a href="/About/aboutPage.html" class="navbar--item-link">About</a>
+                <a href="/Web_HospitalManagement/About/aboutPage.php" class="navbar--item-link">About</a>
             </li>
             <li class="navbar--flex-spacer">
                 <!-- Search Area -->
             </li>
             <li class="navbar--item has-dropdown-menu">
-                <a href="/Login/loginPage.html" class="navbar--item-link"><i class="far fa-user"></i></a>
+                <a href="/Web_HospitalManagement/Login/loginPage.php" class="navbar--item-link"><i class="far fa-user"></i></a>
                 <div class="trans-layer">
                     <div class="dropdown-user center">
                         <div class="user-info">
@@ -61,10 +69,10 @@
                         </div>
                         <div class="user user-manage">
                             <p>My Account</p>
-                            <a href="/User/infoManage.html">Account Management<i class="fas fa-chevron-right"></i></a>
+                            <a href="/Web_HospitalManagement/User/infoManage.php">Account Management<i class="fas fa-chevron-right"></i></a>
                         </div>
                         <div class="user user-logout">
-                            <a href="/">Logout<i class="fas fa-sign-out-alt"></i></a>
+                            <a href="/Web_HospitalManagement">Logout<i class="fas fa-sign-out-alt"></i></a>
                         </div>
                     </div>
                 </div>
@@ -78,21 +86,21 @@
                 <div class="box menu__box first__box">
                     <p>Account Lists</p>
                     <ul>
-                        <li class="has-border-bottom">
+                        <li class="has-border-bottom is-active-in-menu">
                             <i class="fas fa-users-cog"></i>
-                            <a href="/Manager/accountManager.html">Manager Account</a>
+                            <a href="/Web_HospitalManagement/Manager/accountManager.php">Manager Account</a>
                         </li>
                         <li class="has-border-bottom">
                             <i class="fas fa-concierge-bell"></i>
-                            <a href="/Manager/accountRecept.html">Receptionist Accounts</a>
+                            <a href="/Web_HospitalManagement/Manager/accountRecept.php">Receptionist Accounts</a>
                         </li>
-                        <li class="has-border-bottom is-active-in-menu">
+                        <li class="has-border-bottom">
                             <i class="fas fa-stethoscope"></i>
-                            <a href="/Manager/accountDoctor.html">Doctor Account</a>
+                            <a href="/Web_HospitalManagement/Manager/accountDoctor.php">Doctor Account</a>
                         </li>
                         <li>
                             <i class="fas fa-pills"></i>
-                            <a href="/Manager/accountPharma.html">Pharmacist Account</a>
+                            <a href="/Web_HospitalManagement/Manager/accountPharma.php">Pharmacist Account</a>
                         </li>
                     </ul>
                 </div>
@@ -101,22 +109,109 @@
                     <ul>
                         <li class="has-border-bottom">
                             <i class="fas fa-comment-medical"></i>
-                            <a href="/Manager/listMedical.html">Medical Register</a>
+                            <a href="/Web_HospitalManagement/Manager/listMedical.php">Medical Register</a>
                         </li>
                         <li class="has-border-bottom">
                             <i class="fas fa-hand-holding-medical"></i>
-                            <a href="/Manager/listSpecCon.html">Special Consulting Register</a>
+                            <a href="/Web_HospitalManagement/Manager/listSpecCon.php">Special Consulting Register</a>
                         </li>
                         <li>
                             <i class="fas fa-briefcase-medical"></i>
-                            <a href="/Manager/listPrescription.html">Prescription</a>
+                            <a href="/Web_HospitalManagement/Manager/listPrescription.php">Prescription</a>
                         </li>
                     </ul>
                 </div>
             </div>
             <div class="container__content">
                 <ul class="card-list">
+                    <?php if ($result->num_rows > 0) {
+                        // Load dữ liệu lên website
+                        while ($row = $result->fetch_assoc()) {
+                    ?>
                     <li class="card-drop"> 
+                        <input type="checkbox"/>       
+                        <div class="short-card">
+                            <div class="inner-card">
+                                <div class="inner-detail">
+                                    <p class="i-title">
+                                        Person Full Name:
+                                    <p class="i-value medium-text">
+                                        <?php echo $row["full_name"]; ?>
+                                    </p>                                 
+                                    </p>
+                                    <p class="i-title">
+                                        Username:
+                                    <p class="i-value medium-text">
+                                        <?php echo $row["email"]; ?>
+                                    </p>                                 
+                                    </p>
+                                    <p class="i-title">
+                                        Specialized Field:
+                                    <p class="i-value short-text">
+                                        <?php echo $row["specialized_field"]; ?>
+                                    </p>
+                                </div>
+                                <div class="switch-container center">
+                                    <label class="switch">
+                                        <input type="checkbox">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                                <div class="icon-container center">
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="full-card">
+                            <div class="inner-card">
+                                <div class="inner-detail account-card has-border-top">
+                                    <p class="i-title">
+                                        BirthDay:
+                                    <p class="i-value  medium-text">
+                                        <?php echo $row["birthday"]; ?>
+                                    </p>
+                                    </p>
+                                    <p class="i-title">
+                                        Phone Number:
+                                    <p class="i-value  medium-text">
+                                        <?php echo $row["phone_number"]; ?>
+                                    </p>
+                                    </p>
+                                    <p class="i-title">
+                                        IDCard Number:
+                                    <p class="i-value medium-text">
+                                        <?php echo $row["id_card_number"]; ?>
+                                    </p>
+                                    </p>
+                                    <p class="i-title">
+                                        IDCard Date:
+                                    <p class="i-value medium-text">
+                                        <?php echo $row["id_card_date"]; ?>
+                                    </p>
+                                    </p>
+                                    <p class="i-title change-element ">
+                                        Address:
+                                    <p class="i-value medium-text">
+                                        <?php echo $row["address"]; ?>
+                                    </p>
+                                    </p>
+                                    </p>
+                                    <p class="i-title">
+                                        Avatar:
+                                    </p>
+                                    <div class="i-avatar">
+                                        <i class="fas fa-user-circle"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <?php
+                        }
+                    }
+                    $conn->close();
+                    ?>                
+                    <!-- <li class="card-drop"> 
                         <input type="checkbox"/>       
                         <div class="short-card">
                             <div class="inner-card">
@@ -193,91 +288,13 @@
                                 </div>
                             </div>
                         </div>
-                    </li>
-                    <li class="card-drop"> 
-                        <input type="checkbox"/>       
-                        <div class="short-card">
-                            <div class="inner-card">
-                                <div class="inner-detail">
-                                    <p class="i-title">
-                                        Person Full Name:
-                                    <p class="i-value medium-text">
-                                        Nguyen Van A
-                                    </p>                                 
-                                    </p>
-                                    <p class="i-title">
-                                        Username:
-                                    <p class="i-value medium-text">
-                                        This is Email
-                                    </p>                                 
-                                    </p>
-                                    <p class="i-title">
-                                        Specialized Field:
-                                    <p class="i-value short-text">
-                                        Chat and chat only
-                                    </p>
-                                </div>
-                                <div class="switch-container center">
-                                    <label class="switch">
-                                        <input type="checkbox">
-                                        <span class="slider round"></span>
-                                    </label>
-                                </div>
-                                <div class="icon-container center">
-                                    <i class="fas fa-chevron-down"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="full-card">
-                            <div class="inner-card">
-                                <div class="inner-detail account-card has-border-top">
-                                    <p class="i-title">
-                                        BirthDay:
-                                    <p class="i-value  medium-text">
-                                        Load data from Database
-                                    </p>
-                                    </p>
-                                    <p class="i-title">
-                                        Phone Number:
-                                    <p class="i-value  medium-text">
-                                        Load data from Database
-                                    </p>
-                                    </p>
-                                    <p class="i-title">
-                                        IDCard Number:
-                                    <p class="i-value medium-text">
-                                        Load data from Database
-                                    </p>
-                                    </p>
-                                    <p class="i-title">
-                                        IDCard Date:
-                                    <p class="i-value medium-text">
-                                        Load data from Database
-                                    </p>
-                                    </p>
-                                    <p class="i-title change-element ">
-                                        Address:
-                                    <p class="i-value medium-text">
-                                        Load data from Database
-                                    </p>
-                                    </p>
-                                    </p>
-                                    <p class="i-title">
-                                        Avatar:
-                                    </p>
-                                    <div class="i-avatar">
-                                        <i class="fas fa-user-circle"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
             <div class="container__floatbutton">
-                <a href="/Manager/accountCreate.html" class="float" id="button-plus">
+                <div class="float js-login" id="button-plus">
                     <i class="fas fa-plus"></i>
-                </a>
+                </div>
                 <a href="" class="float" id="button-up">
                     <i class="fas fa-arrow-up"></i>
                 </a>
@@ -325,6 +342,66 @@
                 <p>More Thing Is Needed</p>
             </div>
         </div>
+        <div class="modal center_hide">
+            <div class="modal__overlay">
+            </div>
+            <div class="modal__body">
+                <div class="modal__inner">
+                    <div class="inner-title">
+                        <h2>Create New Account
+                            <div class="js-confirm"><i class="fas fa-times center"></i></div>
+                        </h2>
+                        <p>Enter new account information...</p>
+                    </div>
+                    <div class="inner-box">
+                        <form action="../php/LogIn-SignUp/signup.php" method="post">
+                            <p class="i-title">User Full Name</p>
+                            <input type="text" class="medium-input" name="full_name">
+                            <div class="i-line">
+                                <p class="i-title">Account Type:</p>
+                                <input type="text" class="short-input" name="position">
+                            </div>
+                            <div class="i-line">
+                                <p class="i-title">Specialized Field:</p>
+                                <input type="text" class="short-input" name="mediregist">
+                            </div>
+                            <div class="i-line">
+                                <p class="i-title">Username:</p>
+                                <input type="text" class="short-input" name="username">
+                            </div>
+                            <div class="i-line">
+                                <p class="i-title">Password:</p>
+                                <input type="text" class="short-input" name="password">
+                            </div>
+                            <div class="i-line">
+                                <p class="i-title">Validated Email:</p>
+                                <input type="text" class="short-input" name="email">
+                            </div>
+                            <button type="submit" class="button button-confirm js-confirm">
+                                <i class="fas fa-check"></i>
+                                Confirm
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
 </body>
 
 </html>
+<script>
+    const loginBtn = document.querySelector('.js-login')
+    const loginBox = document.querySelector('.modal')
+    const closeBox = document.querySelector('.js-confirm')
+
+    function showLoginBox() {
+        loginBox.classList.add('open')
+    }
+    function closeLoginBox() {
+        loginBox.classList.remove('open')
+    }
+
+    loginBtn.addEventListener('click', showLoginBox)
+    closeBox.addEventListener('click', closeLoginBox)
+</script>
