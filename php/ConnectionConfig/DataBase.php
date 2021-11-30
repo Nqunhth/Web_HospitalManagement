@@ -63,15 +63,25 @@ class DataBase
         if (mysqli_num_rows($result) != 0) {
             $dbusername = $row['username'];
             $dbpassword = $row['password'];
-            if ($dbusername == $username && password_verify($password, $dbpassword)) {
-                $login = true;
-            } else $login = false;
-        } else $login = false;
-
+            $dbstatus = $row['status'];
+            if ($dbstatus == "enabled") {
+                if ($dbusername == $username && password_verify($password, $dbpassword)) {
+                    $login = 1; // success
+                } else $login = 0; // wrong username or password
+            } else $login = 2; // disabled account
+        } else $login = 3; // no fetch result
         return $login;
     }
 
     //For Sign Up
+    function getToken($table, $username)
+    {
+        $username = $this->prepareData($username);
+        $this->sql = "select token from " . $table . " where username = '" . $username . "'";
+        $result = mysqli_query($this->connect, $this->sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row['token'];
+    }
     function setToLastAccountId($table){
         $new_id = $this->connect->insert_id;
         $new_id = $this->prepareData($new_id);
@@ -95,23 +105,62 @@ class DataBase
         };
         return false;
     }
-    function signUp($table, $username, $password, $position, $email)
+    function addNameAndField($table, $fullname, $field){
+        if($this->setToLastAccountId($table)){
+            $this->sql =
+            "INSERT INTO " . $table . " (full_name, specialized_field) VALUES ('" . $fullname . "','" . $field . "')";
+            if(mysqli_query($this->connect, $this->sql)){
+                return true;
+            };            
+        }
+        else
+        {
+            echo("Error description: " . $this->connect->error);
+        };
+        return false;
+    }
+    function signUp($table, $username, $password, $position, $email, $fullname, $field)
     {
         $position = $this->prepareData($position);
         $username = $this->prepareData($username);
         $password = $this->prepareData($password);
         $email = $this->prepareData($email);
         $password = password_hash($password, PASSWORD_DEFAULT);
+        $token = $this->prepareData(md5($username . strval(time())));
+
+        $fullname = $this->prepareData($fullname);
+        $field = $this->prepareData($field);
+
         $this->sql =
-            "INSERT INTO " . $table . " (username, password, position, email) VALUES ('" . $username . "','" . $password . "','" . $position . "','" . $email . "')";
-        if (mysqli_query($this->connect, $this->sql)) {
-            $this->addUser("user");
+            "INSERT INTO " . $table . " (username, password, position, email, token) VALUES ('" . $username . "','" . $password . "','" . $position . "','" . $email . "','" . $token . "')";
+        if (mysqli_query($this->connect, $this->sql) && $this->addUser("user") && $this->addNameAndField("personal_info", $fullname, $field)) {
             if($position != "manager")
                 $this->addUser($position);
             return true;
         } else return false;
     }
+    function verify($table, $token)
+    {
+        $token = $this->prepareData($token);
 
+        $this->sql = "select * from " . $table . " where token = '" . $token . "'";
+        $result = mysqli_query($this->connect, $this->sql);
+        $row = mysqli_fetch_assoc($result);
+        if (mysqli_num_rows($result) == 0) {
+            return false;
+        } else {
+            $this->sql = "UPDATE " . $table . " SET status = 'enabled' where token = '" . $token . "'";
+            
+            if (mysqli_query($this->connect, $this->sql)) {
+                $this->discardToken($table, $token);
+                return true;
+            } else return false;
+        }
+    }
+    function discardToken($table, $token)
+    {
+        $token = $this->prepareData($token);
+        $this->sql = "UPDATE " . $table . " SET token = 'activated' where token = '" . $token . "'";
+        mysqli_query($this->connect, $this->sql);
+    }
 }
-
-?>
