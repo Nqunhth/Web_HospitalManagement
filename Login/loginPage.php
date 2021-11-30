@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -92,7 +92,7 @@
                     </div>
                     <div class="forget_section center">
                         <p class="">Forget your password?</p>
-                        <a href="/Login/forgetpassPage.php" class="Recovery">Get help here!</a>
+                        <a href="/Web_HospitalManagement/Login/forgetpassPage.php" class="Recovery">Get help here!</a>
                     </div>
                     <button type="submit" class="login_btn">
                         LOG IN

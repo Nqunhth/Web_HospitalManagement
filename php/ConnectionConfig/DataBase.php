@@ -54,7 +54,7 @@ class DataBase
 
     //For Log In
     function logIn($table, $username, $password)
-    {
+    {      
         $username = $this->prepareData($username);
         $password = $this->prepareData($password);
         $this->sql = "select * from " . $table . " where username = '" . $username . "'";
@@ -72,7 +72,13 @@ class DataBase
         } else $login = 3; // no fetch result
         return $login;
     }
-
+    function fetchLogUser($table, $username){
+        $username = $this->prepareData($username);
+        $this->sql = "select * from " . $table . " where username = '" . $username . "'";
+        $result = mysqli_query($this->connect, $this->sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row;
+    }
     //For Sign Up
     function getToken($table, $username)
     {
