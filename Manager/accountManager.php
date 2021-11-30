@@ -356,14 +356,14 @@ $result = $conn->query($sql);
                     <div class="inner-box">
                         <form action="../php/LogIn-SignUp/signup.php" method="post">
                             <p class="i-title">User Full Name</p>
-                            <input type="text" class="medium-input" name="full_name">
+                            <input type="text" class="medium-input" name="fullname">
                             <div class="i-line">
                                 <p class="i-title">Account Type:</p>
                                 <input type="text" class="short-input" name="position">
                             </div>
                             <div class="i-line">
                                 <p class="i-title">Specialized Field:</p>
-                                <input type="text" class="short-input" name="mediregist">
+                                <input type="text" class="short-input" name="field">
                             </div>
                             <div class="i-line">
                                 <p class="i-title">Username:</p>

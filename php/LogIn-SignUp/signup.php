@@ -1,12 +1,16 @@
 <?php
 require "../ConnectionConfig/DataBase.php";
+require "../Mail/SendMail.php";
+
+$comfirmMail = new ComfirmationMailing();
+$comfirmMail->SetServer();
 
 $db = new DataBase();
-if (!empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['position']) && !empty($_POST['email'])) {
+if (!empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['position']) && !empty($_POST['email']) && !empty($_POST['fullname']) && !empty($_POST['field'])) {
     if ($db->dbConnect()) {
-        // $account = new Account();
-        if ($db->signUp("account",  $_POST['username'], $_POST['password'], $_POST['position'], $_POST['email'])) {
-            echo "Sign Up Success";
+        if ($db->signUp("account",  $_POST['username'], $_POST['password'], $_POST['position'], $_POST['email'], $_POST['fullname'], $_POST['field'])
+        && $comfirmMail->SendTo($_POST['email'], $_POST['fullname'], $db->getToken("account", $_POST['username']))) {
+            echo "Account saved. Confirmation sent!";
         } else {
             echo "Sign up Failed";
         }
@@ -17,6 +21,6 @@ if (!empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['p
 } else {
     echo "All fields are required";
 };
-header( "refresh:1;url=/Web_HospitalManagement/Manager/accountManager.html" );
+header( "refresh:1;url=/Web_HospitalManagement/Manager/accountManager.php" );
 exit;
 ?>
