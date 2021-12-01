@@ -1,4 +1,11 @@
+<?php
 
+session_start();
+
+?>
+
+
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -22,55 +29,50 @@
                 <li class="navbar--item">
                     <a href="/Web_HospitalManagement" class="navbar--item-link">HOME</a>
                 </li>
-                <li class="navbar--ite nm">
+                <li class="navbar--item">
                     <a href="/Web_HospitalManagement/News/newsPage.php" class="navbar--item-link">News</a>
                 </li>
+                <?php  if (!empty($_SESSION['position'])) : ?>
+                    <li class="navbar--item has-dropdown-menu">
+                        <?php  if ($_SESSION['position'] == "manager") : ?>
+                            <a href="/Web_HospitalManagement/Manager/accountManager.php" class="navbar--item-link">Workspace</a>
+                        <?php  elseif ($_SESSION['position'] == "receptionist") : ?>
+                            <a href="/Web_HospitalManagement/Receptionist/formMedical.php" class="navbar--item-link">Workspace</a>
+                        <?php  elseif ($_SESSION['position'] == "doctor") : ?>
+                            <a href="/Web_HospitalManagement/Doctor/patientCaring.php" class="navbar--item-link">Workspace</a>
+                        <?php  elseif ($_SESSION['position'] == "pharmacist") : ?>
+                            <a href="/Web_HospitalManagement/Pharmacist/formInvoice.php" class="navbar--item-link">Workspace</a>
+                        <?php endif ?>                            
+                    </li>
+                <?php endif ?>
                 <li class="navbar--item has-dropdown-menu">
-                    <a href="/Web_HospitalManagement/Doctor/patientCaring.php" class="navbar--item-link">Workspace</a>
-                    <div class="temporary">
-                        <div class="dropdown-user center">
-                            <div class="user">
-                                <a href="/Web_HospitalManagement/Manager/accountManager.php">Manager<i class="fas fa-chevron-right"></i></a>
-                            </div>
-                            <div class="user">
-                                <a href="/Web_HospitalManagement/Receptionist/formMedical.php">Receptionist<i
-                                        class="fas fa-chevron-right"></i></a>
-                            </div>
-                            <div class="user">
-                                <a href="/Web_HospitalManagement/Doctor/patientCaring.php">Doctor<i class="fas fa-chevron-right"></i></a>
-                            </div>
-                            <div class="user">
-                                <a href="/Web_HospitalManagement/Pharmacist/formInvoice.php">Pharmacist<i
-                                        class="fas fa-chevron-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="navbar--item has-dropdown-menu">
-                    <a href="/Web_HospitalManagement/About/aboutPage.php" class="navbar--item-link  is-active-in-navbar">About</a>
+                    <a href="/Web_HospitalManagement/About/aboutPage.php" class="navbar--item-link is-active-in-navbar">About</a>
                 </li>
                 <li class="navbar--flex-spacer">
                     <!-- Search Area -->
                 </li>
                 <li class="navbar--item has-dropdown-menu">
-                    <a href="/Web_HospitalManagement/Login/loginPage.php" class="navbar--item-link"><i class="far fa-user"></i></a>
-                    <div class="trans-layer">
-                        <div class="dropdown-user center">
-                            <div class="user-info">
-                                <i class="far fa-user"></i>
-                                <p>User Name</p>
-                                <p>XXY@gmail.com</p>
-                            </div>
-                            <div class="user user-manage">
-                                <p>My Account</p>
-                                <a href="/Web_HospitalManagement/User/infoManage.php">Account Management<i
-                                        class="fas fa-chevron-right"></i></a>
-                            </div>
-                            <div class="user user-logout">
-                                <a href="/Web_HospitalManagement">Logout<i class="fas fa-sign-out-alt"></i></a>
+                    <?php  if (empty($_SESSION['username'])) : ?>
+                        <a href="/Web_HospitalManagement/Login/loginPage.php" class="navbar--item-link"><i class="far fa-user"></i></a>
+                    <?php else: ?>
+                        <a href="/Web_HospitalManagement/User/infoManage.php" class="navbar--item-link"><i class="far fa-user"></i></a>
+                        <div class="trans-layer">
+                            <div class="dropdown-user center">
+                                <div class="user-info">
+                                    <i class="far fa-user"></i>
+                                    <p><?php echo $_SESSION['username']; ?></p>
+                                    <p><?php echo $_SESSION['email']; ?></p>
+                                </div>
+                                <div class="user user-manage">
+                                    <p>My Account</p>
+                                    <a href="/Web_HospitalManagement/User/infoManage.php">Account Management<i class="fas fa-chevron-right"></i></a>
+                                </div>
+                                <div class="user user-logout">
+                                    <a href="/Web_HospitalManagement/index.php?logout=1">Logout<i class="fas fa-sign-out-alt"></i></a>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    <?php endif ?>
                 </li>
             </ul>
         </div>
