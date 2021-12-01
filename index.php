@@ -74,9 +74,10 @@ if (isset($_GET['logout'])) {
                             <?php  elseif ($_SESSION['position'] == "pharmacist") : ?>
                                 <a href="/Web_HospitalManagement/Pharmacist/formInvoice.php" class="navbar--item-link">Workspace</a>
                             <?php endif ?>
+                        </li>
                         <?php endif ?>
                             
-                        </li>
+
                         <li class="navbar--item has-dropdown-menu">
                             <a href="/Web_HospitalManagement/About/aboutPage.php" class="navbar--item-link">About</a>
                         </li>
