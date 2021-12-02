@@ -286,9 +286,9 @@ $result = $conn->query($sql);
                 </ul>
             </div>
             <div class="container__floatbutton">
-                <a href="/Manager/accountCreate.php" class="float" id="button-plus">
+                <div class="float js-login" id="button-plus">
                     <i class="fas fa-plus"></i>
-                </a>
+                </div>
                 <a href="" class="float" id="button-up">
                     <i class="fas fa-arrow-up"></i>
                 </a>
@@ -336,6 +336,66 @@ $result = $conn->query($sql);
                 <p>More Thing Is Needed</p>
             </div>
         </div>
+        <div class="modal center_hide">
+            <div class="modal__overlay">
+            </div>
+            <div class="modal__body">
+                <div class="modal__inner">
+                    <div class="inner-title">
+                        <h2>Create New Account
+                            <div class="js-confirm"><i class="fas fa-times center"></i></div>
+                        </h2>
+                        <p>Enter new account information...</p>
+                    </div>
+                    <div class="inner-box">
+                        <form action="../php/LogIn-SignUp/signup.php" method="post">
+                            <p class="i-title">User Full Name</p>
+                            <input type="text" class="medium-input" name="fullname">
+                            <div class="i-line">
+                                <p class="i-title">Account Type:</p>
+                                <input type="text" class="short-input" name="position">
+                            </div>
+                            <div class="i-line">
+                                <p class="i-title">Specialized Field:</p>
+                                <input type="text" class="short-input" name="field">
+                            </div>
+                            <div class="i-line">
+                                <p class="i-title">Username:</p>
+                                <input type="text" class="short-input" name="username">
+                            </div>
+                            <div class="i-line">
+                                <p class="i-title">Password:</p>
+                                <input type="text" class="short-input" name="password">
+                            </div>
+                            <div class="i-line">
+                                <p class="i-title">Validated Email:</p>
+                                <input type="text" class="short-input" name="email">
+                            </div>
+                            <button type="submit" class="button button-confirm js-confirm">
+                                <i class="fas fa-check"></i>
+                                Confirm
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
 </body>
 
 </html>
+<script>
+    const loginBtn = document.querySelector('.js-login')
+    const loginBox = document.querySelector('.modal')
+    const closeBox = document.querySelector('.js-confirm')
+
+    function showLoginBox() {
+        loginBox.classList.add('open')
+    }
+    function closeLoginBox() {
+        loginBox.classList.remove('open')
+    }
+
+    loginBtn.addEventListener('click', showLoginBox)
+    closeBox.addEventListener('click', closeLoginBox)
+</script>
