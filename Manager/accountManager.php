@@ -3,9 +3,29 @@ require "../php/ConnectionConfig/DataBase.php";
 session_start();
 $db = new Database();
 $conn = $db->dbConnect();
-$sql = "SELECT * FROM account JOIN personal_info ON account.user_id = personal_info.user_id 
-                            WHERE account.position = 'manager'";
-$result = $conn->query($sql);
+// $sql = "SELECT * FROM account JOIN personal_info ON account.user_id = personal_info.user_id 
+//                             WHERE account.position = 'manager'";
+// $result = $conn->query($sql);
+$result = mysqli_query($conn, "SELECT count(user_id) AS total FROM account WHERE account.position = 'manager'");
+$row = mysqli_fetch_assoc($result);
+$total_records = $row['total'];
+
+$current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+$limit = 4;
+
+$total_page = ceil($total_records / $limit);
+
+if ($current_page > $total_page){
+    $current_page = $total_page;
+}
+else if ($current_page < 1){
+    $current_page = 1;
+}
+
+$start = ($current_page - 1) * $limit;
+$result = mysqli_query($conn, "SELECT * FROM account JOIN personal_info ON account.user_id = personal_info.user_id 
+                                                    WHERE account.position = 'manager' 
+                                                    LIMIT $start, $limit");
 ?>
 
 
@@ -201,8 +221,28 @@ $result = $conn->query($sql);
                     <?php
                         }
                     }
-                    $conn->close();
-                    ?>                
+                    // $conn->close();
+                    ?>      
+                                        <div class="pagination center">
+                    <?php 
+                        if ($current_page > 1 && $total_page > 1){
+                            echo '<a class="page" href="/Web_HospitalManagement/Pharmacist/checkStock.php?page='.($current_page-1).'">Prev</a> ';
+                        }
+            
+                        for ($i = 1; $i <= $total_page; $i++){
+                            if ($i == $current_page){
+                                echo '<span class="page active" >'.$i.'</span> ';
+                            }
+                            else{
+                                echo '<a class="page" href="/Web_HospitalManagement/Pharmacist/checkStock.php?page='.$i.'">'.$i.'</a> ';
+                            }
+                        }
+                        if ($current_page < $total_page && $total_page > 1){
+                            echo '<a class="page" href="/Web_HospitalManagement/Pharmacist/checkStock.php?page='.($current_page+1).'">Next</a> ';
+                        }
+                        $conn->close();
+                    ?>
+                    </div>         
                     <!-- <li class="card-drop"> 
                         <input type="checkbox"/>       
                         <div class="short-card">
