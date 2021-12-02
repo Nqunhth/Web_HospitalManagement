@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 30, 2021 at 06:31 AM
+-- Generation Time: Dec 02, 2021 at 11:11 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -158,7 +158,16 @@ INSERT INTO `medicine` (`medicine_id`, `medicine_seri`, `medicine_name`, `medici
 (00004, 'ABC456', 'Thuốc giảm đau', 10000, 'viên', 'Tự chế', 100),
 (00005, 'DEF123', 'Thuốc hạ sốt', 6000, 'viên', 'Tự chế', 100),
 (00006, 'XYZ123', 'Thuốc bôi', 8000, 'tuýp', 'Tự chế', 100),
-(00007, 'XYZ456', 'Thuốc ho', 18000, 'lọ', 'Tự chế', 100);
+(00007, 'XYZ456', 'Thuốc ho', 18000, 'lọ', 'Tự chế', 100),
+(00008, 'DFG890', 'Cồn 70 độ nhỏ', 30000, 'bình', 'Nhà thuốc ERT', 100),
+(00009, 'DFG891', 'Cồn 70 độ vừa', 35000, 'bình', 'Nhà thuốc ERT', 100),
+(00010, 'DFG123', 'Cồn 70 độ lớn', 48000, 'bình', 'Nhà thuốc ERT', 100),
+(00011, 'GHN345', 'Kẹo the', 3000, 'viên', 'Nhà thuốc TVB', 100),
+(00012, 'GHN345', 'Kẹo cam', 15000, 'hộp', 'Nhà thuốc TVB', 100),
+(00013, 'GHN345', 'Kẹo sữa', 3000, 'viên', 'Nhà thuốc TVB', 100),
+(00014, 'UNM566', 'Vitamin C', 10000, 'viên', 'Nhà thuốc YUI', 100),
+(00015, 'UNM390', 'Vitamin D', 10000, 'viên', 'Nhà thuốc YUI', 100),
+(00016, 'UNM583', 'Vitamin E', 10000, 'viên', 'Nhà thuốc YUI', 100);
 
 -- --------------------------------------------------------
 
@@ -446,7 +455,7 @@ ALTER TABLE `medical_register`
 -- AUTO_INCREMENT for table `medicine`
 --
 ALTER TABLE `medicine`
-  MODIFY `medicine_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `medicine_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `news`
