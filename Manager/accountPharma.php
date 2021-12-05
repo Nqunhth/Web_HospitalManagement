@@ -228,7 +228,7 @@ $result = mysqli_query($conn, "SELECT * FROM pharmacist JOIN personal_info ON ph
                     <div class="pagination center">
                     <?php 
                         if ($current_page > 1 && $total_page > 1){
-                            echo '<a class="page" href="/Web_HospitalManagement/Pharmacist/checkStock.php?page='.($current_page-1).'">Prev</a> ';
+                            echo '<a class="page" href="/Web_HospitalManagement/Manager/accountPharma.php?page='.($current_page-1).'">Prev</a> ';
                         }
             
                         for ($i = 1; $i <= $total_page; $i++){
@@ -236,11 +236,11 @@ $result = mysqli_query($conn, "SELECT * FROM pharmacist JOIN personal_info ON ph
                                 echo '<span class="page active" >'.$i.'</span> ';
                             }
                             else{
-                                echo '<a class="page" href="/Web_HospitalManagement/Pharmacist/checkStock.php?page='.$i.'">'.$i.'</a> ';
+                                echo '<a class="page" href="/Web_HospitalManagement/Manager/accountPharma.php?page='.$i.'">'.$i.'</a> ';
                             }
                         }
                         if ($current_page < $total_page && $total_page > 1){
-                            echo '<a class="page" href="/Web_HospitalManagement/Pharmacist/checkStock.php?page='.($current_page+1).'">Next</a> ';
+                            echo '<a class="page" href="/Web_HospitalManagement/Manager/accountPharma.php?page='.($current_page+1).'">Next</a> ';
                         }
                         $conn->close();
                     ?>
@@ -393,11 +393,52 @@ $result = mysqli_query($conn, "SELECT * FROM pharmacist JOIN personal_info ON ph
                             <input type="text" class="medium-input" name="fullname">
                             <div class="i-line">
                                 <p class="i-title">Account Type:</p>
-                                <input type="text" class="short-input" name="position">
+                                <div class="select" id ="account_doctor_create_pos_select" name="position">
+                                    <select onchange="validateSelectBox(this)">
+                                        <option value="0" selected>doctor</option>
+                                        <option value="1">manager</option>
+                                        <option value="2">receptionist</option>
+                                        <option value="3">pharmacist</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="i-line">
                                 <p class="i-title">Specialized Field:</p>
-                                <input type="text" class="short-input" name="field">
+                                <input type="text" class="short-input" id= "mytext" name="field" style="display: none" readonly/>
+                                <div class="select" name ="field" id="div_field_select">
+                                    <select>
+                                        <option value="0" selected>Tổng quát</option>
+                                        <option value="1">Răng hàm hặt</option>
+                                        <option value="2">Tai hũi họng</option>
+                                        <option value="3">Nhãn</option>
+                                        <option value="3">Thẩm mỹ</option>
+                                    </select>
+                                </div>
+                                <script language="javascript">
+                                    function validateSelectBox(selectObject){
+                                        var div = document.getElementById('div_field_select');
+                                        var input = document.getElementById("mytext");
+                                        var pos = selectObject.value;  
+                                        if(pos == "0") {
+                                            input.style.display = "none";
+                                            div.style.display = "inline-flex";
+                                        } else if (pos == "1"){
+                                            input.value = "Nhân sự";
+                                            div.style.display = "none";
+                                            input.style.display = "inline-flex";
+        
+                                        } else if (pos == "2"){
+                                            input.value = "Tiếp tân";
+                                            div.style.display = "none";
+                                            input.style.display = "inline-flex";
+            
+                                        } else if (pos == "3"){
+                                            input.value = "Dược sĩ";
+                                            div.style.display = "none";
+                                            input.style.display = "inline-flex";
+                                        }
+                                    }
+                                </script>
                             </div>
                             <div class="i-line">
                                 <p class="i-title">Username:</p>

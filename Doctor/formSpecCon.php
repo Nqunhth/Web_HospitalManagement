@@ -76,11 +76,11 @@ session_start();
                     <ul>
                         <li class="has-border-bottom">
                             <i class="fas fa-user-injured"></i>
-                            <a href="./patientCaring.php">Caring</a>
+                            <a href="/Web_HospitalManagement/Doctor/patientCaring.php">Caring</a>
                         </li>
                         <li>
                             <i class="fas fa-address-book"></i>
-                            <a href="./patientList.php">All Patients</a>
+                            <a href="/Web_HospitalManagement/Doctor/patientList.php">All Patients</a>
                         </li>
                     </ul>
                 </div>
@@ -89,11 +89,11 @@ session_start();
                     <ul>
                         <li class="has-border-bottom is-active-in-menu">
                             <i class="fas fa-hand-holding-medical"></i>
-                            <a href="./formSpecCon.php">Special Consulting Register</a>
+                            <a href="/Web_HospitalManagement/Doctor/formSpecCon.php">Special Consulting Register</a>
                         </li>
                         <li>
                             <i class="fas fa-briefcase-medical"></i>
-                            <a href="./formPrescription.php">Prescription</a>
+                            <a href="/Web_HospitalManagement/Doctor/formPrescription.php">Prescription</a>
                         </li>
                     </ul>
                 </div>
@@ -102,11 +102,11 @@ session_start();
                     <ul>
                         <li class="has-border-bottom">
                             <i class="fas fa-hand-holding-medical"></i>
-                            <a href="./listSpecCon.php">Special Consulting Register</a>
+                            <a href="/Web_HospitalManagement/Doctor/listSpecCon.php">Special Consulting Register</a>
                         </li>
                         <li>
                             <i class="fas fa-briefcase-medical"></i>
-                            <a href="./listPrescription.php">Prescription</a>
+                            <a href="/Web_HospitalManagement/Doctor/listPrescription.php">Prescription</a>
                         </li>
                     </ul>
                 </div>
@@ -171,7 +171,6 @@ session_start();
                     </div>
                 </div>
                 <div class="content__button">
-
                     <button class="button button-confirm">
                         <i class="fas fa-check"></i>
                         Confirm
@@ -185,7 +184,13 @@ session_start();
                         Print
                     </button>
                 </div>
-
+            </div>                
+            <div class="container__select">
+                <select class="content__select">
+                    <option value="01" selected>01</option>
+                    <option value="02">02</option>
+                    <option value="03">03</option>
+                </select>
             </div>
         </div>
 
