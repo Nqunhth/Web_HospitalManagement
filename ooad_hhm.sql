@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 02, 2021 at 11:11 AM
+-- Generation Time: Dec 05, 2021 at 07:02 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -45,14 +45,14 @@ CREATE TABLE `account` (
 INSERT INTO `account` (`user_id`, `username`, `password`, `position`, `email`, `token`, `status`, `created_date`) VALUES
 (00001, 'CreaMiraelle', '$2y$10$ExU/XRICW880BD/KDxNXTuk31ZwTaiVhnVvoi6fPUQu0ip3O4FBZS', 'manager', 'ngocanhcao7i@gmail.com', 'activated', 'enabled', '2021-11-18 16:23:44'),
 (00002, 'nqunhth', '$2y$10$m0YXc.V0ubshC8gCp5FNMeBIAzx0mZ/veZ0uAzuo4RJObEP4.8en6', 'manager', '123sdf@gmail.com', 'activated', 'enabled', '2021-11-19 03:18:38'),
-(00003, '3', '$2y$10$.DXTHwP/V8NVjRUQ2KwasObFl9pKRJnC24qKQOvLaJRdBEv.ScU2W', 'doctor', '3', 'activated', 'enabled', '2021-11-19 03:25:49'),
-(00006, 'aaa', '$2y$10$joclZCG46Bb/KF4t8pvXuuRtqxpLOmsTBfpJ7dleydBjrUYHfNFF.', 'doctor', 'dgfdg', 'activated', 'enabled', '2021-11-20 06:39:11'),
-(00007, 'bbb', '$2y$10$dCFbF1Y4c96zsTnzm4Go4ub.Hgx4hI5l0gR6VaaVMBEmhqXyss09e', 'receptionist', 'bbbb', 'activated', 'enabled', '2021-11-29 11:31:26'),
-(00008, 'ccc', '$2y$10$joVCfa1SA7a4W2p9RDjZNuaEELr5NADAD09ZnAxM8fh.SxnACNw26', 'receptionist', 'cccc', 'activated', 'enabled', '2021-11-29 11:31:45'),
-(00009, 'ddd', '$2y$10$7dLKMEIzXZw/wSdLZrpfp.jXVDjA6U4Own0LAderF8Q7OODKMYh7m', 'pharmacist', 'dddd', 'activated', 'enabled', '2021-11-29 11:32:07'),
-(00010, 'eee', '$2y$10$/zxKQPy7S1kX06JyxWFeXeQwKl.Q8KZT.1y04cjmWhKrMc4F9jT0y', 'pharmacist', 'eeee', 'activated', 'enabled', '2021-11-29 11:32:18'),
-(00011, 'doc', '$2y$10$8dKiFb4MNtJD8NOdu4iM2erG2TBdtNfcFItXsjTSjFeUZmCfx/lQ6', 'doctor', 'kurocrea@gmail.com', 'bc6212b95eef912799b54a9e140d0aab', 'enabled', '2021-11-30 05:24:52'),
-(00012, 'doc1', '$2y$10$jptQwhscoGY4yI.YuWeZ.u4dxloiy1i1QscpMviotItjikcmUaKVO', 'doctor', 'kurocrea@gmail.com', 'activated', 'enabled', '2021-11-30 05:26:51');
+(00003, 'aaa', '$2y$10$K5nc9lW2qCgCfIyQFoNKquAqS.86J9xKvO9mJ/y/Bi3Np9kC7Nm6i', 'doctor', 'nqunhth@gmail.com', 'activated', 'enabled', '2021-12-05 05:23:11'),
+(00004, 'bbb', '$2y$10$Gzzga8kPLLIIzpxciJmOV.W513u2ni7W/l6SaVgXf.DjYWL1RgnXm', 'doctor', 'nqunhth@gmail.com', 'activated', 'enabled', '2021-12-05 05:34:55'),
+(00005, 'ccc', '$2y$10$23plJ5m1YoYaWwiz49T3o.z63/dOsngeTPP/IEB0EgqagV1FG0TQ2', 'doctor', 'nqunhth@gmail.com', 'activated', 'enabled', '2021-12-05 05:35:55'),
+(00006, 'ddd', '$2y$10$gzkiajOxhfQGx3YtCYQRkeqGb7ouT8tCCAkn9YQmFzooZ.ZdyW4Ty', 'doctor', 'nqunhth@gmail.com', 'activated', 'enabled', '2021-12-05 05:37:17'),
+(00007, 'eee', '$2y$10$2r5gGlUFgAVcgYiK4neg4usEeP9n3NbKz8OBHfManxOL5EgkYTG0G', 'receptionist', 'nqunhth@gmail.com', 'activated', 'enabled', '2021-12-05 05:37:52'),
+(00008, 'fff', '$2y$10$9Lhib/Lw60LSuQDxnY19B.Lky/aiPTqiGIsRabU9jOxJmQJXlHblm', 'receptionist', 'nqunhth@gmail.com', 'activated', 'enabled', '2021-12-05 05:38:51'),
+(00009, 'ggg', '$2y$10$H01NTI950QhcaFzarNCTAuHTkNdv0rjMQhm6fC8u4aOC/QckTuJ4u', 'pharmacist', 'nqunhth@gmail.com', 'activated', 'enabled', '2021-12-05 05:39:44'),
+(00010, 'hhh', '$2y$10$Ym7heY5Tk7HvCDeBHkhJR.KnOSU/6aL2608amhaWiRDEuYnjQXgni', 'pharmacist', 'nqunhth@gmail.com', 'activated', 'enabled', '2021-12-05 06:01:44');
 
 -- --------------------------------------------------------
 
@@ -81,9 +81,9 @@ CREATE TABLE `doctor` (
 
 INSERT INTO `doctor` (`doctor_id`) VALUES
 (00003),
-(00006),
-(00011),
-(00012);
+(00004),
+(00005),
+(00006);
 
 -- --------------------------------------------------------
 
@@ -194,7 +194,8 @@ CREATE TABLE `patient` (
   `pat_age` tinyint(4) NOT NULL,
   `pat_address` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `pat_phone` varchar(12) COLLATE utf8_unicode_ci NOT NULL,
-  `pat_job` varchar(100) COLLATE utf8_unicode_ci NOT NULL
+  `pat_job` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `pat_status` varchar(6) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'caring'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -224,14 +225,14 @@ CREATE TABLE `personal_info` (
 INSERT INTO `personal_info` (`user_id`, `full_name`, `age`, `gender`, `birthday`, `specialized_field`, `address`, `phone_number`, `id_card_number`, `id_card_date`, `avatar`) VALUES
 (00001, 'Cao Ngọc Anh', 20, 'female', '2001-03-08', 'Nhân sự', 'xxx XXX yy YY zz ZZZZZ', '123456789', '123456789', '2021-11-10', ''),
 (00002, 'Nguyễn Hồ Quỳnh Thư', 20, 'female', '2001-02-19', 'Nhân sự', 'xxx XXX yy YY zz ZZZZZ', '123456789', '123456789', '2021-11-10', ''),
-(00003, 'Người nào đó', 20, 'male', '2001-04-01', 'Tổng quát', 'xxx XXX yy YY zz ZZZZZ', '123456789', '123456789', '2021-11-10', ''),
-(00006, 'Please update', 20, 'female', '2000-05-20', 'Răng hàm mặt', 'xxx XXX yy YY zz ZZZZZ', '123456789', '123456789', '2021-11-10', ''),
-(00007, 'Please update', 20, 'male', '2001-12-09', 'Tiếp tân', 'xxx XXX yy YY zz ZZZZZ', '123456789', '123456789', '2021-11-10', ''),
-(00008, 'Please update', 20, 'male', '2002-09-19', 'Tiếp tân', 'xxx XXX yy YY zz ZZZZZ', '123456789', '123456789', '2021-11-10', ''),
-(00009, 'Please update', 20, 'male', '1998-05-09', 'Dược sĩ', 'xxx XXX yy YY zz ZZZZZ', '123456789', '123456789', '2021-11-10', ''),
-(00010, 'Please update', 20, 'male', '2000-04-23', 'Dược sĩ', 'xxx XXX yy YY zz ZZZZZ', '123456789', '123456789', '2021-11-10', ''),
-(00011, 'Người Mới', 0, 'male', '2021-11-30', 'lang băm', '', '', '', '2021-11-30', ''),
-(00012, 'Người Mới Mới', 0, 'male', '2021-11-30', 'lang băm', '', '', '', '2021-11-30', '');
+(00003, 'Nguyễn Văn AAA', 0, 'male', '2021-12-05', 'Tổng quát', '', '', '', '2021-12-05', ''),
+(00004, 'Trần Thị BBB', 0, 'male', '2021-12-05', 'Tổng quát', '', '', '', '2021-12-05', ''),
+(00005, 'Lê Thị CCC', 0, 'male', '2021-12-05', 'Tai mũi họng', '', '', '', '2021-12-05', ''),
+(00006, 'Nguyễn Minh DDD', 0, 'male', '2021-12-05', 'Thẩm mỹ', '', '', '', '2021-12-05', ''),
+(00007, 'Đinh Thị EEE', 0, 'male', '2021-12-05', 'Tiếp tân', '', '', '', '2021-12-05', ''),
+(00008, 'Hoàng Lê FFF', 0, 'male', '2021-12-05', 'Tiếp tân', '', '', '', '2021-12-05', ''),
+(00009, 'Nguyễn Ngọc GGG', 0, 'male', '2021-12-05', 'Dược sĩ', '', '', '', '2021-12-05', ''),
+(00010, 'Nguyễn Tiến HHH', 0, 'male', '2021-12-05', 'Dược sĩ', '', '', '', '2021-12-05', '');
 
 -- --------------------------------------------------------
 
@@ -332,13 +333,13 @@ INSERT INTO `user` (`user_id`) VALUES
 (00001),
 (00002),
 (00003),
+(00004),
+(00005),
 (00006),
 (00007),
 (00008),
 (00009),
-(00010),
-(00011),
-(00012);
+(00010);
 
 --
 -- Indexes for dumped tables
@@ -431,13 +432,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `account`
 --
 ALTER TABLE `account`
-  MODIFY `user_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `user_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `doctor`
 --
 ALTER TABLE `doctor`
-  MODIFY `doctor_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `doctor_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `invoice`
@@ -473,7 +474,7 @@ ALTER TABLE `patient`
 -- AUTO_INCREMENT for table `personal_info`
 --
 ALTER TABLE `personal_info`
-  MODIFY `user_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `user_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `pharmacist`
@@ -503,7 +504,7 @@ ALTER TABLE `specialist_consulting`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `user_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

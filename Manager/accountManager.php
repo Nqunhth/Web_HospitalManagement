@@ -226,7 +226,7 @@ $result = mysqli_query($conn, "SELECT * FROM account JOIN personal_info ON accou
                                         <div class="pagination center">
                     <?php 
                         if ($current_page > 1 && $total_page > 1){
-                            echo '<a class="page" href="/Web_HospitalManagement/Pharmacist/checkStock.php?page='.($current_page-1).'">Prev</a> ';
+                            echo '<a class="page" href="/Web_HospitalManagement/Manager/accountManager.php?page='.($current_page-1).'">Prev</a> ';
                         }
             
                         for ($i = 1; $i <= $total_page; $i++){
@@ -234,11 +234,11 @@ $result = mysqli_query($conn, "SELECT * FROM account JOIN personal_info ON accou
                                 echo '<span class="page active" >'.$i.'</span> ';
                             }
                             else{
-                                echo '<a class="page" href="/Web_HospitalManagement/Pharmacist/checkStock.php?page='.$i.'">'.$i.'</a> ';
+                                echo '<a class="page" href="/Web_HospitalManagement/Manager/accountManager.php?page='.$i.'">'.$i.'</a> ';
                             }
                         }
                         if ($current_page < $total_page && $total_page > 1){
-                            echo '<a class="page" href="/Web_HospitalManagement/Pharmacist/checkStock.php?page='.($current_page+1).'">Next</a> ';
+                            echo '<a class="page" href="/Web_HospitalManagement/Manager/accountManager.php?page='.($current_page+1).'">Next</a> ';
                         }
                         $conn->close();
                     ?>
@@ -391,11 +391,54 @@ $result = mysqli_query($conn, "SELECT * FROM account JOIN personal_info ON accou
                             <input type="text" class="medium-input" name="fullname">
                             <div class="i-line">
                                 <p class="i-title">Account Type:</p>
-                                <input type="text" class="short-input" name="position">
+                                <div class="select" id ="account_doctor_create_pos_select">
+                                    <select onchange="validateSelectBox(this)" name ="position" value="doctor">
+                                        <!-- <option selected disabled>Chọn vị trí</option> -->
+                                        <option value="doctor">doctor</option>
+                                        <option value="manager">manager</option>
+                                        <option value="receptionist">receptionist</option>
+                                        <option value="pharmacist">pharmacist</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="i-line">
                                 <p class="i-title">Specialized Field:</p>
-                                <input type="text" class="short-input" name="field">
+                                <input type="text" class="short-input" id= "mytext" name="field1" style="display: none" value="Không" readonly/>
+                                <div class="select" id="div_field_select">
+                                    <select name="field2" value="Tổng quát">
+                                        <!-- <option selected disabled>Chọn chuyên ngành</option> -->
+                                        <option value="Tổng quát">Tổng quát</option>
+                                        <option value="Răng hàm mặt">Răng hàm hặt</option>
+                                        <option value="Tai mũi họng">Tai hũi họng</option>
+                                        <option value="Nhãn">Nhãn</option>
+                                        <option value="Thẩm mỹ">Thẩm mỹ</option>
+                                    </select>
+                                </div>
+                                <script language="javascript">
+                                    function validateSelectBox(selectObject){
+                                        var div = document.getElementById('div_field_select');
+                                        var input = document.getElementById("mytext");
+                                        var pos = selectObject.value;  
+                                        if(pos == "doctor") {
+                                            input.style.display = "none";
+                                            div.style.display = "inline-flex";
+                                        } else if (pos == "manager"){
+                                            input.value = "Nhân sự";
+                                            div.style.display = "none";
+                                            input.style.display = "inline-flex";
+        
+                                        } else if (pos == "receptionist"){
+                                            input.value = "Tiếp tân";
+                                            div.style.display = "none";
+                                            input.style.display = "inline-flex";
+            
+                                        } else if (pos == "pharmacist"){
+                                            input.value = "Dược sĩ";
+                                            div.style.display = "none";
+                                            input.style.display = "inline-flex";
+                                        }
+                                    }
+                                </script>
                             </div>
                             <div class="i-line">
                                 <p class="i-title">Username:</p>
