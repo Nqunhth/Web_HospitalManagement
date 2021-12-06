@@ -703,6 +703,14 @@
 .long-input{
     width:90%;
 }
+.doctor-selection {
+    margin-top: 16px;
+}
+.doctor-selection select{
+    font-size: 20px;
+    width: 70%;
+    height: 40px;
+}
 .card-list .in-database{
     width: 85%;
     padding: 10px 50px;

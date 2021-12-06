@@ -72,13 +72,6 @@ class DataBase
         } else $login = 3; // no fetch result
         return $login;
     }
-    function fetchLogUser($table, $username){
-        $username = $this->prepareData($username);
-        $this->sql = "select * from " . $table . " where username = '" . $username . "'";
-        $result = mysqli_query($this->connect, $this->sql);
-        $row = mysqli_fetch_assoc($result);
-        return $row;
-    }
     //For Sign Up
     function getToken($table, $username)
     {
@@ -88,7 +81,7 @@ class DataBase
         $row = mysqli_fetch_assoc($result);
         return $row['token'];
     }
-    function setToLastAccountId($table){
+    function setToLastId($table){
         $new_id = $this->connect->insert_id;
         $new_id = $this->prepareData($new_id);
         $this->sql = "ALTER TABLE " . $table . " AUTO_INCREMENT = " . $new_id . "";
@@ -99,7 +92,7 @@ class DataBase
         else return false;
     }
     function addUser($table){
-        if($this->setToLastAccountId($table)){
+        if($this->setToLastId($table)){
             $this->sql = "INSERT INTO " . $table . " (" . $table . "_id) VALUES (null)";
             if(mysqli_query($this->connect, $this->sql)){
                 return true;
@@ -112,7 +105,7 @@ class DataBase
         return false;
     }
     function addNameAndField($table, $fullname, $field){
-        if($this->setToLastAccountId($table)){
+        if($this->setToLastId($table)){
             $this->sql =
             "INSERT INTO " . $table . " (full_name, specialized_field) VALUES ('" . $fullname . "','" . $field . "')";
             if(mysqli_query($this->connect, $this->sql)){
@@ -169,4 +162,14 @@ class DataBase
         $this->sql = "UPDATE " . $table . " SET token = 'activated' where token = '" . $token . "'";
         mysqli_query($this->connect, $this->sql);
     }
+    function execute($query) {
+        if(mysqli_query($this->connect,$query))
+            return true;
+        else {
+            printf("Error message: %s\n", mysqli_error($this->connect));
+            return false;
+        }
+    }
 }
+
+
