@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 05, 2021 at 07:02 AM
+-- Generation Time: Dec 06, 2021 at 09:30 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `ooap_hhm`
+-- Database: `ooap_hhm_0612`
 --
 
 -- --------------------------------------------------------
@@ -127,9 +127,27 @@ CREATE TABLE `medical_register` (
   `doctor_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `created_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `medi_reason` text COLLATE utf8_unicode_ci NOT NULL,
-  `medi_status` varchar(8) COLLATE utf8_unicode_ci NOT NULL,
+  `medi_status` varchar(8) COLLATE utf8_unicode_ci DEFAULT 'enabled',
   `queue_number` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `medical_register`
+--
+
+INSERT INTO `medical_register` (`medi_id`, `pat_id`, `creator_id`, `doctor_id`, `doctor_name`, `created_date`, `medi_reason`, `medi_status`, `queue_number`) VALUES
+(00001, 00001, 00007, 00004, 'Trần Thị BBB', '2021-12-06 07:42:52', 'Extreme Depression', 'enabled', 1),
+(00002, 00002, 00007, 00003, 'Nguyễn Văn AAA', '2021-12-06 07:43:31', 'Heart Failure', 'enabled', 2);
+
+--
+-- Triggers `medical_register`
+--
+DELIMITER $$
+CREATE TRIGGER `set_queue` BEFORE INSERT ON `medical_register` FOR EACH ROW BEGIN
+set new.queue_number = ( select count(*) from medical_register where date(created_date) = date(new.created_date)) + 1;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -197,6 +215,14 @@ CREATE TABLE `patient` (
   `pat_job` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `pat_status` varchar(6) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'caring'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `patient`
+--
+
+INSERT INTO `patient` (`pat_id`, `pat_name`, `pat_age`, `pat_address`, `pat_phone`, `pat_job`, `pat_status`) VALUES
+(1, 'Cao Ngoc A', 21, 'adddddd', '009090909', 'jobless', 'caring'),
+(2, 'Cao Ngoc B', 39, '44 Huhuhu', '444449', 'jobless', 'caring');
 
 -- --------------------------------------------------------
 
@@ -450,7 +476,7 @@ ALTER TABLE `invoice`
 -- AUTO_INCREMENT for table `medical_register`
 --
 ALTER TABLE `medical_register`
-  MODIFY `medi_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT;
+  MODIFY `medi_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `medicine`
@@ -468,7 +494,7 @@ ALTER TABLE `news`
 -- AUTO_INCREMENT for table `patient`
 --
 ALTER TABLE `patient`
-  MODIFY `pat_id` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `pat_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `personal_info`
