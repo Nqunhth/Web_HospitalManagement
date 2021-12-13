@@ -104,6 +104,27 @@ class Patient{
             WHERE DATE(medical_register.created_date) = CURRENT_DATE && medical_register.medi_status = 'enabled' && pat_status = 'caring';";
         return $conn->query($query);
     }
+    public static function fetchAllPatient(){
+        $db = new DataBase();
+        $conn = $db->dbConnect();
+        $query = 
+            "SELECT * 
+            FROM `patient`
+            JOIN `medical_register`
+            ON patient.pat_id = medical_register.pat_id";
+        return $conn->query($query);
+    }
+    public static function fetchPatientByQueue($queue){
+        $db = new DataBase();
+        $conn = $db->dbConnect();
+        $query = 
+            "SELECT * 
+            FROM `patient`
+            JOIN `medical_register`
+            ON patient.pat_id = medical_register.pat_id
+            WHERE DATE(medical_register.created_date) = CURRENT_DATE && medical_register.medi_status = 'enabled' && pat_status = 'caring' && queue_number = '" . $queue . "'";
+        return $conn->query($query);
+    }
 }
 
 ?>

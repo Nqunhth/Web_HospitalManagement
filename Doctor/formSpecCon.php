@@ -1,5 +1,10 @@
 <?php
+require "../php/ConnectionConfig/DataBase.php";
+require "../php/Patient/Patient.php";
+
 session_start();
+
+$result = Patient::fetchCaringPatient()
 ?>
 
 
@@ -13,60 +18,59 @@ session_start();
     <!--"Roboto" & "M PLUS Rounded 1c font" -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap">
 
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../icon/fontawesome-free-5.15.4-web/css/all.min.css">
 </head>
 
 <body>
-        <div class="header__navbar not_navbar_at_home">
-            <ul class="navbar--list">
-                <li class="navbar--item">
-                    <a href="/Web_HospitalManagement" class="navbar--item-link">HOME</a>
+    <div class="header__navbar not_navbar_at_home">
+        <ul class="navbar--list">
+            <li class="navbar--item">
+                <a href="/Web_HospitalManagement" class="navbar--item-link">HOME</a>
+            </li>
+            <li class="navbar--item">
+                <a href="/Web_HospitalManagement/News/newsPage.php" class="navbar--item-link">News</a>
+            </li>
+            <?php if (!empty($_SESSION['position'])) : ?>
+                <li class="navbar--item has-dropdown-menu">
+                    <a href="/Web_HospitalManagement/Doctor/formSpecCon.php" class="navbar--item-link  is-active-in-navbar">Workspace</a>
                 </li>
-                <li class="navbar--item">
-                    <a href="/Web_HospitalManagement/News/newsPage.php" class="navbar--item-link">News</a>
-                </li>
-                <?php  if (!empty($_SESSION['position'])) : ?>
-                    <li class="navbar--item has-dropdown-menu">
-                        <a href="/Web_HospitalManagement/Doctor/formSpecCon.php" class="navbar--item-link  is-active-in-navbar">Workspace</a>
-                    </li>
-                <?php endif ?>
-                            
+            <?php endif ?>
 
-                <li class="navbar--item has-dropdown-menu">
-                    <a href="/Web_HospitalManagement/About/aboutPage.php" class="navbar--item-link">About</a>
-                </li>
-                <li class="navbar--flex-spacer">
-                    <!-- Search Area -->
-                </li>
-                <li class="navbar--item has-dropdown-menu">
-                    <?php  if (empty($_SESSION['username'])) : ?>
-                        <a href="/Web_HospitalManagement/Login/loginPage.php" class="navbar--item-link"><i class="far fa-user"></i></a>
-                    <?php else: ?>
-                        <a href="/Web_HospitalManagement/User/infoManage.php" class="navbar--item-link"><i class="far fa-user"></i></a>
-                        <div class="trans-layer">
-                            <div class="dropdown-user center">
-                                <div class="user-info">
-                                    <i class="far fa-user"></i>
-                                    <p><?php echo $_SESSION['username']; ?></p>
-                                    <p><?php echo $_SESSION['email']; ?></p>
-                                </div>
-                                <div class="user user-manage">
-                                    <p>My Account</p>
-                                    <a href="/Web_HospitalManagement/User/infoManage.php">Account Management<i class="fas fa-chevron-right"></i></a>
-                                </div>
-                                <div class="user user-logout">
-                                    <a href="/Web_HospitalManagement/index.php?logout=1">Logout<i class="fas fa-sign-out-alt"></i></a>
-                                </div>
+
+            <li class="navbar--item has-dropdown-menu">
+                <a href="/Web_HospitalManagement/About/aboutPage.php" class="navbar--item-link">About</a>
+            </li>
+            <li class="navbar--flex-spacer">
+                <!-- Search Area -->
+            </li>
+            <li class="navbar--item has-dropdown-menu">
+                <?php if (empty($_SESSION['username'])) : ?>
+                    <a href="/Web_HospitalManagement/Login/loginPage.php" class="navbar--item-link"><i class="far fa-user"></i></a>
+                <?php else : ?>
+                    <a href="/Web_HospitalManagement/User/infoManage.php" class="navbar--item-link"><i class="far fa-user"></i></a>
+                    <div class="trans-layer">
+                        <div class="dropdown-user center">
+                            <div class="user-info">
+                                <i class="far fa-user"></i>
+                                <p><?php echo $_SESSION['username']; ?></p>
+                                <p><?php echo $_SESSION['email']; ?></p>
+                            </div>
+                            <div class="user user-manage">
+                                <p>My Account</p>
+                                <a href="/Web_HospitalManagement/User/infoManage.php">Account Management<i class="fas fa-chevron-right"></i></a>
+                            </div>
+                            <div class="user user-logout">
+                                <a href="/Web_HospitalManagement/index.php?logout=1">Logout<i class="fas fa-sign-out-alt"></i></a>
                             </div>
                         </div>
-                    <?php endif ?>
-                </li>
-            </ul>
-        </div>
+                    </div>
+                <?php endif ?>
+            </li>
+        </ul>
+    </div>
 
     <div class="container">
         <div class="container__background_color">
@@ -111,67 +115,108 @@ session_start();
                     </ul>
                 </div>
             </div>
-            <div class="container__content">
+            <form class="container__content" action="../php/SpecialConsulting/CreateNewSpecCon.php" method="post">
                 <div class="box content__box">
                     <div class="inner-box">
-                        <p class="i-title">
-                            Patient Full Name:
-                            <input type="text" class="medium-input" name="speccon">
-                        <p class="i-title">
-                            Age:
-                            <input type="text" class="short-input" name="speccon">
-                        </p>
-                        </p>
-                        <p class="i-title">
-                            Address:
-                            <input type="text" class="medium-input" name="speccon">
-                        </p>
-                        <p class="i-title">
-                            Phone Number:
-                            <input type="text" class="short-input" name="speccon">
-                        </p>
+                        <?php
+                        if (isset($_POST["patients"])) {
+                            $currPatient = Patient::fetchPatientByQueue($_POST["patients"]);
+                            if ($currPatient->num_rows > 0) {
+                                $currPatient = $currPatient->fetch_assoc();
+                        ?>
+                                <p class="i-title hide">
+                                    Patient ID:
+                                    <input type="text" readonly="readonly" onfocus="this.blur()" tabindex="-1" class="medium-input" name="patient_id" value="<?php echo $currPatient["pat_id"] ?>">
+                                </p>
+                                <p class="i-title">
+                                    Patient Full Name:
+                                    <input type="text" readonly="readonly" onfocus="this.blur()" tabindex="-1" class="medium-input" name="patient_name" value="<?php echo $currPatient["pat_name"] ?>">
+                                </p>
+                                <p class="i-title">
+                                    Age:
+                                    <input type="text" readonly="readonly" onfocus="this.blur()" tabindex="-1" class="short-input" name="patient_age" value="<?php echo $currPatient["pat_age"] ?>">
+                                </p>
+                                <p class="i-title">
+                                    Address:
+                                    <input type="text" readonly="readonly" onfocus="this.blur()" tabindex="-1" class="medium-input" name="patient_address" value="<?php echo $currPatient["pat_address"] ?>">
+                                </p>
+                                <p class="i-title">
+                                    Phone Number:
+                                    <input type="text" readonly="readonly" onfocus="this.blur()" tabindex="-1" class="short-input" name="patient_phone" value="<?php echo $currPatient["pat_phone"] ?>">
+                                </p>
+
+                                <p class="i-title">
+                                    Job:
+                                    <input type="text" readonly="readonly" onfocus="this.blur()" tabindex="-1" class="medium-input" name="patient_job" value="<?php echo $currPatient["pat_job"] ?>">
+                                </p>
+                            <?php }
+                        } else { ?>
+                            <p class="i-title hide">
+                                Patient ID:
+                                <input type="text" readonly="readonly" onfocus="this.blur()" tabindex="-1" class="medium-input" name="patient_id">
+                            </p>
+                            <p class="i-title">
+                                Patient Full Name:
+                                <input type="text" readonly="readonly" onfocus="this.blur()" tabindex="-1" class="medium-input" name="patient_name">
+                            </p>
+                            <p class="i-title">
+                                Age:
+                                <input type="text" readonly="readonly" onfocus="this.blur()" tabindex="-1" class="short-input" name="patient_age">
+                            </p>
+
+                            <p class="i-title">
+                                Address:
+                                <input type="text" readonly="readonly" onfocus="this.blur()" tabindex="-1" class="medium-input" name="patient_address">
+                            </p>
+                            <p class="i-title">
+                                Phone Number:
+                                <input type="text" readonly="readonly" onfocus="this.blur()" tabindex="-1" class="short-input" name="patient_phone">
+                            </p>
+
+                            <p class="i-title">
+                                Job:
+                                <input type="text" readonly="readonly" onfocus="this.blur()" tabindex="-1" class="medium-input" name="patient_job">
+                            </p>
+                        <?php } ?>
 
                         <p class="i-title">
-                            Job:
-                            <input type="text" class="medium-input" name="speccon">
-                        </p>
-                        <p class="i-title">
                             Reason:
-                            <input type="text" class="medium-input" name="speccon">
+                            <input type="text" class="medium-input" name="reason">
                         </p>
                         <p class="i-title">
-                            Text Area:
-                            <input type="text" class="short-input" name="speccon">
+                            Test Area:
+                            <input type="text" class="short-input" name="test_area">
                         </p>
                         <p class="i-title">
                             Doctor Name:
-                            <input type="text" class="medium-input" name="speccon">
+                            <input type="text" readonly="readonly" onfocus="this.blur()" tabindex="-1" class="medium-input" name="doctor_name" value="<?php echo $_SESSION["fullname"] ?>">
                         </p>
                         <div class="i-line">
                             <p class="i-title">Request:</p>
                         </div>
-                        <textarea class="long-input" name="speccon" rows="4"></textarea>
+                        <textarea class="long-input" name="request" rows="4"></textarea>
                         <div class="i-line">
                             <p class="i-title">Result:</p>
                         </div>
-                        <textarea class="long-input" name="speccon" rows="4"></textarea>
+                        <textarea class="long-input" name="result" rows="4"></textarea>
                         <div class="datetime-containter">
                             <p class="i-datetime">Day
-                            <p class="i-value i-datetime">DD</p>
+                            <p class="i-value i-datetime"><?php echo Date("d") ?></p>
                             <p class="i-datetime">Month
-                            <p class="i-value i-datetime">MM</p>
+                            <p class="i-value i-datetime"><?php echo Date("m") ?></p>
                             <p class="i-datetime">Year
-                            <p class="i-value i-datetime">YYYY</p>
+                            <p class="i-value i-datetime"><?php echo Date("Y") ?></p>
                             </p>
                             </p>
                             </p>
                         </div>
-                            <p class="i-sign" >Doctor's Sign
-                                <p class="i-sign right">X-ray Test Performer’s Sign</p></p>
+                        <p class="i-sign">Doctor's Sign
+                        <p class="i-sign right">X-ray Test Performer’s Sign</p>
+                        </p>
                     </div>
                 </div>
                 <div class="content__button">
-                    <button class="button button-confirm">
+                    <button type="submit" class="button button-confirm">
                         <i class="fas fa-check"></i>
                         Confirm
                     </button>
@@ -184,13 +229,20 @@ session_start();
                         Print
                     </button>
                 </div>
-            </div>                
+            </form>
             <div class="container__select">
-                <select class="content__select">
-                    <option value="01" selected>01</option>
-                    <option value="02">02</option>
-                    <option value="03">03</option>
-                </select>
+                <form method="POST" action="">
+                    <select name="patients" class="content__select" onchange="this.form.submit()">
+                        <option value="" disabled selected>--select--</option>
+                        <?php if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) { ?>
+                                <!-- <option value="01" selected>01</option> -->
+                                <option value=<?php echo $row['queue_number'] ?> <?= isset($_POST["patients"]) && $_POST["patients"] == $row['queue_number'] ? ' selected="selected"' : ''; ?>><?php echo $row['queue_number'] ?></option>
+                                <!-- <option value="03">03</option> -->
+                        <?php }
+                        } ?>
+                    </select>
+                </form>
             </div>
         </div>
 

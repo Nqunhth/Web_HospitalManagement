@@ -1,5 +1,10 @@
 <?php
+require "../php/ConnectionConfig/DataBase.php";
+require "../php/Patient/Patient.php";
+
 session_start();
+
+$result = Patient::fetchCaringPatient()
 ?>
 
 
@@ -113,29 +118,29 @@ session_start();
                 </div>
             </div>
             <div class="container__content">
+            <?php if ($result->num_rows > 0) { ?>
                 <ul class="card-list">
+                <?php while ($row = $result->fetch_assoc()) { ?>
                     <li class="card-drop"> 
                         <input type="checkbox"/>       
                         <div class="short-card">
                             <div class="number-card">
-                                <h1>01</h1>
+                                <h1><?php echo $row['queue_number'] ?></h1>
                             </div>
                             <div class="inner-card">
                                 <div class="inner-detail">
                                     <p class="i-title">
                                         Patient Full Name:
-                                    <p class="i-value short-text-inwaiting">Nguyen Van A</p>
+                                    <p class="i-value short-text-inwaiting"><?php echo $row['pat_name'] ?></p>
                                     <p class="i-title">
                                         Age:
-                                    <p class="i-value">99</p>
+                                    <p class="i-value"><?php echo $row['pat_age'] ?></p>
                                     </p>
                                     </p>
                                     <p class="i-title change-element">
                                         Reason:
                                     <p class="i-value long-text">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita voluptatum,
-                                        animi aspernatur vel quas beatae natus dolore, iusto tenetur magni hic nam?
-                                        Dolores iste esse fuga excepturi. Magni, culpa. Deleniti?
+                                        <?php echo $row['medi_reason'] ?>
                                     </p>
                                     </p>
                                 </div>
@@ -158,25 +163,25 @@ session_start();
                                     <p class="i-title">
                                         Phone Number:
                                     <p class="i-value  medium-text-inwaiting">
-                                        Load data from Database
+                                        <?php echo $row['pat_phone'] ?>
                                     </p>
                                     </p>
                                     <p class="i-title">
                                         Job:
                                     <p class="i-value medium-text-inwaiting">
-                                        Load data from Database
+                                        <?php echo $row['pat_job'] ?>
                                     </p>
                                     </p>
                                     <p class="i-title change-element ">
                                         Address:
                                     <p class="i-value medium-text-inwaiting">
-                                        Load data from Database
+                                        <?php echo $row['pat_address'] ?>
                                     </p>
                                     </p>
                                     <p class="i-title">
                                         Doctor's Name:
                                     <p class="i-value medium-text-inwaiting">
-                                        Load data from Database
+                                        <?php echo $row['doctor_name'] ?>
                                     </p>
                                     </p>
                                     <p class="i-title">
@@ -193,87 +198,12 @@ session_start();
                             </div>
                         </div>
                     </li>
-                    <li class="card-drop"> 
-                        <input type="checkbox"/>       
-                        <div class="short-card">
-                            <div class="number-card">
-                                <h1>02</h1>
-                            </div>
-                            <div class="inner-card">
-                                <div class="inner-detail">
-                                    <p class="i-title">
-                                        Patient Full Name:
-                                    <p class="i-value short-text-inwaiting">Tran Thi B</p>
-                                    <p class="i-title">
-                                        Age:
-                                    <p class="i-value">20</p>
-                                    </p>
-                                    </p>
-                                    <p class="i-title change-element">
-                                        Reason:
-                                    <p class="i-value long-text">
-                                        Magni, culpa. Deleniti? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita voluptatum,
-                                        animi aspernatur vel quas beatae natus dolore, iusto tenetur magni hic nam?
-                                        Dolores iste esse fuga excepturi. 
-                                    </p>
-                                    </p>
-                                </div>
-                                <div class="switch-container center">
-                                    <label class="switch-inwaiting">
-                                        <input type="checkbox">
-                                        <!-- <span class="slider round"></span> -->
-                                    </label>
-                                </div>
-                                <div class="icon-container center">
-                                    <i class="fas fa-chevron-down"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="full-card">
-                            <div class="number-card">
-                            </div>
-                            <div class="inner-card">
-                                <div class="inner-detail has-border-top">
-                                    <p class="i-title">
-                                        Phone Number:
-                                    <p class="i-value medium-text-inwaiting">
-                                        Load data from Database
-                                    </p>
-                                    </p>
-                                    <p class="i-title">
-                                        Job:
-                                    <p class="i-value medium-text-inwaiting">
-                                        Load data from Database
-                                    </p>
-                                    </p>
-                                    <p class="i-title change-element">
-                                        Address:
-                                    <p class="i-value medium-text-inwaiting">
-                                        Load data from Database
-                                    </p>
-                                    </p>
-                                    <p class="i-title">
-                                        Doctor's Name:
-                                    <p class="i-value medium-text-inwaiting">
-                                        Load data from Database
-                                    </p>
-                                    </p>
-                                    <p class="i-title">
-                                        List of Specialists Consulting Rooms (or Analysis):
-                                    </p>
-                                    <input type="text" class="long-input"
-                                        name="patient" value="Load data from Database" readonly>
-                                </div>
-                                <div class="switch-container center">
-                                </div>
-                                <div class="icon-container center">
-                                    <i class="fas fa-pen"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
+                    <?php }
+                    } ?>
                 </ul>
             </div>
+
+
             <div class="container__floatbutton">
                 <a href="" class="float" id="button-up">
                     <i class="fas fa-arrow-up"></i>

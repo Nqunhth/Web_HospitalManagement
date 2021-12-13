@@ -1,5 +1,10 @@
 <?php
+require "../php/ConnectionConfig/DataBase.php";
+require "../php/Patient/Patient.php";
+
 session_start();
+
+$result = Patient::fetchAllPatient()
 ?>
 
 
@@ -112,7 +117,9 @@ session_start();
                 </div>
             </div>
             <div class="container__content">
+            <?php if ($result->num_rows > 0) { ?>
                 <ul class="card-list">
+                <?php while ($row = $result->fetch_assoc()) { ?>
                     <li class="card-drop"> 
                         <input type="checkbox"/>       
                         <div class="short-card">
@@ -120,23 +127,21 @@ session_start();
                                 <div class="inner-detail">
                                     <div class="datetime-containter">
                                         <p class="i-datetime">Date:
-                                            <p class="i-value i-datetime">DD/MM/YYYY</p>
+                                            <p class="i-value i-datetime"><?php echo $row['created_date'] ?></p>
                                         </p>                                       
                                     </div>
                                     <p class="i-title">
                                         Patient Full Name:
-                                    <p class="i-value short-text">Nguyen Van A</p>
+                                    <p class="i-value short-text"><?php echo $row['pat_name'] ?></p>
                                     <p class="i-title">
                                         Age:
-                                    <p class="i-value">99</p>
+                                    <p class="i-value"><?php echo $row['pat_age'] ?></p>
                                     </p>
                                     </p>
                                     <p class="i-title change-element">
                                         Reason:
                                     <p class="i-value long-text">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita voluptatum,
-                                        animi aspernatur vel quas beatae natus dolore, iusto tenetur magni hic nam?
-                                        Dolores iste esse fuga excepturi. Magni, culpa. Deleniti?
+                                        <?php echo $row['medi_reason'] ?>
                                     </p>
                                     </p>
                                 </div>
@@ -151,25 +156,25 @@ session_start();
                                     <p class="i-title">
                                         Phone Number:
                                     <p class="i-value  medium-text">
-                                        Load data from Database
+                                        <?php echo $row['pat_phone'] ?>
                                     </p>
                                     </p>
                                     <p class="i-title">
                                         Job:
                                     <p class="i-value medium-text">
-                                        Load data from Database
+                                        <?php echo $row['pat_job'] ?>
                                     </p>
                                     </p>
                                     <p class="i-title change-element ">
                                         Address:
                                     <p class="i-value medium-text">
-                                        Load data from Database
+                                        <?php echo $row['pat_address'] ?>
                                     </p>
                                     </p>
                                     <p class="i-title">
                                         Doctor's Name:
                                     <p class="i-value medium-text">
-                                        Load data from Database
+                                        <?php echo $row['doctor_name'] ?>
                                     </p>
                                     </p>
                                     <p class="i-title change-element">
@@ -186,79 +191,9 @@ session_start();
                             </div>
                         </div>
                     </li>
-                    <li class="card-drop"> 
-                        <input type="checkbox"/>       
-                        <div class="short-card">
-                            <div class="inner-card">
-                                <div class="inner-detail">
-                                    <div class="datetime-containter">
-                                        <p class="i-datetime">Date:
-                                            <p class="i-value i-datetime">DD/MM/YYYY</p>
-                                        </p>                                       
-                                    </div>
-                                    <p class="i-title">
-                                        Patient Full Name:
-                                    <p class="i-value short-text">Nguyen Van A</p>
-                                    <p class="i-title">
-                                        Age:
-                                    <p class="i-value">99</p>
-                                    </p>
-                                    </p>
-                                    <p class="i-title change-element">
-                                        Reason:
-                                    <p class="i-value long-text">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita voluptatum,
-                                        animi aspernatur vel quas beatae natus dolore, iusto tenetur magni hic nam?
-                                        Dolores iste esse fuga excepturi. Magni, culpa. Deleniti?
-                                    </p>
-                                    </p>
-                                </div>
-                                <div class="icon-container center">
-                                    <i class="fas fa-chevron-down"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="full-card">
-                            <div class="inner-card">
-                                <div class="inner-detail has-border-top">
-                                    <p class="i-title">
-                                        Phone Number:
-                                    <p class="i-value  medium-text">
-                                        Load data from Database
-                                    </p>
-                                    </p>
-                                    <p class="i-title">
-                                        Job:
-                                    <p class="i-value medium-text">
-                                        Load data from Database
-                                    </p>
-                                    </p>
-                                    <p class="i-title change-element ">
-                                        Address:
-                                    <p class="i-value medium-text">
-                                        Load data from Database
-                                    </p>
-                                    </p>
-                                    <p class="i-title">
-                                        Doctor's Name:
-                                    <p class="i-value medium-text">
-                                        Load data from Database
-                                    </p>
-                                    </p>
-                                    <p class="i-title change-element">
-                                        Diagnosis Result:
-                                    <p class="i-value long-text">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita voluptatum,
-                                        animi aspernatur vel quas beatae natus dolore, iusto tenetur magni hic nam?
-                                        Dolores iste esse fuga excepturi. Magni, culpa. Deleniti?
-                                    </p>
-                                    </p>
-                                </div>
-                                <div class="icon-container center">
-                                </div>
-                            </div>
-                        </div>
-                    </li>
+                    <?php }
+                    } ?>
+                    
                 </ul>
             </div>
             <div class="container__floatbutton">
