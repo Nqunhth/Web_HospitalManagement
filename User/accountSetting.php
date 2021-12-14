@@ -85,20 +85,32 @@ session_start();
                     </div>  
                 </div>
                 <div class="container__content">
-                    <div class="box content__box spec-consult-form">
+                    <div class="box content__box">
+                        <div class="inner-box inner-box-user">
+                            <p class="i-title">
+                                Current Password:
+                                <input type="text" class="medium-input" name="prescription">
+                            </p>
+                            <p class="i-title-user">
+                                New Password:
+                                <input type="text" class="medium-input" name="prescription">
+                            </p>
+                            <p class="i-title-user">
+                                Confirm New Password:
+                                <input type="text" class="medium-input" name="prescription">
+                            </p>
+                        </div>
                     </div>
-                    <div class="container__floatbutton">
-                        <a href="" class="float button-up">
-                            <i class="fas fa-pen"></i>
-                        </a>
-                        <a href="" class="float button-search">
+                    <div class="content__button">
+                        <button class="button button-confirm">
                             <i class="fas fa-check"></i>
-                        </a>                    
+                            Confirm
+                        </button>
                     </div>
                 </div>
             </div>
-
         </div>
+
 
         <div class="footer__content">
             <div class="content-title">

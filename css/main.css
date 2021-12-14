@@ -539,9 +539,13 @@
 .inner-box{
     width: 100%;
     height: 100%; 
-    padding: 15px 30px 10px;
+    padding: 15px 30px 50px;
     font-family: 'M PLUS Rounded 1c', sans-serif;
     font-size: 22px;
+    
+}
+.inner-box-user{
+    padding: 15px 30px 150px !important;
 }
 .inner-detail{
     width: 85%;
@@ -573,6 +577,12 @@
     height: 40px;
     display: inline-block;
 }
+.i-title-user{
+    font-weight: 700;
+    height: 40px;
+    display: inline-block;
+    margin-top: 10px;
+}
 .i-value{ 
     display: inline-block;
     padding: 0px 10px;     
@@ -581,8 +591,16 @@
     display: block;
     align-items: center;
 }
+.i-avatar-user{
+    display: flex;
+    align-items: center;
+    justify-content: center;  
+}
 .i-avatar .fa-user-circle{
     width: 100% !important;
+    font-size: 200px !important;
+}
+.i-avatar-user .fa-user-circle{
     font-size: 200px !important;
 }
 .inner-detail .short-text-inwaiting{
@@ -668,6 +686,9 @@
     border-left: none;
     border-right: none;
     border-bottom: 1px solid black;
+}
+.inner-box-user .input{
+    margin-top: 50px !important;
 }
 .modal__inner .inner-box input{
     font-size: 18px;

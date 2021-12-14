@@ -85,21 +85,66 @@ session_start();
                     </div>  
                 </div>
                 <div class="container__content">
-                    <div class="box content__box spec-consult-form">
+                    <div class="box content__box">
+                        <div class="inner-box">
+                            <p class="i-title">
+                                User Full Name:
+                                <input type="text" class="medium-input" name="prescription">
+                            <p class="i-title">
+                                Age:
+                                <input type="text" class="short-input" name="prescription">
+                            </p>
+                            </p>
+                            <p class="i-title-user">
+                                Specialized_field:
+                                <input type="text" class="medium-input" name="prescription">
+                            </p>
+                            <p class="i-title-user">
+                                Birthday
+                                <input type="text" class="medium-input" name="prescription">
+                            </p>                            
+                            <p class="i-title-user">
+                                Gender:
+                                <input type="text" class="short-input" name="prescription">
+                            </p>
+                            <p class="i-title-user">
+                                Address:
+                                <input type="text" class="medium-input" name="prescription">
+                            </p>
+                            <p class="i-title-user">
+                                Phone Number:
+                                <input type="text" class="short-input" name="prescription">
+                            </p>
+                            <p class="i-title-user">
+                                ID Card Number:
+                                <input type="text" class="medium-input" name="prescription">
+                            </p>
+                            <p class="i-title-user">
+                                ID Card Date:
+                                <input type="text" class="short-input" name="prescription">
+                            </p>
+                            <p class="i-title-user">
+                                Avatar:
+                            </p>
+                            <div class="i-avatar-user">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                        </div>
                     </div>
-                    <div class="container__floatbutton">
-                        <a href="" class="float button-up">
-                            <i class="fas fa-pen"></i>
-                        </a>
-                        <a href="" class="float button-search">
+                    <div class="content__button">
+                        <button class="button button-confirm">
                             <i class="fas fa-check"></i>
-                        </a>                    
+                            Confirm
+                        </button>
+                        <button class="button button-reset">
+                            <i class="fas fa-eraser"></i>
+                            Update
+                        </button>
                     </div>
                 </div>
             </div>
-
         </div>
-
+        
         <div class="footer__content">
             <div class="content-title">
                 <p>Contact:</p>
