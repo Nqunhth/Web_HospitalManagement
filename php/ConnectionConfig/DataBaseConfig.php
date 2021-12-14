@@ -12,7 +12,7 @@ class DataBaseConfig
         $this->servername = 'localhost';
         $this->username = 'root';
         $this->password = '';
-        $this->databasename = 'ooap_hhm_0612';
+        $this->databasename = 'ooap_hhm';
 
     }
 }
