@@ -123,7 +123,7 @@ session_start();
                                 ID Card Date:
                                 <input type="text" class="short-input" name="prescription">
                             </p>
-                            <p class="i-title-user">
+                            <p class="i-title-user-avatar">
                                 Avatar:
                             </p>
                             <div class="i-avatar-user">
