@@ -281,7 +281,7 @@
 
 /*main__content background*/
 .container__background{
-    width: 100vw;
+    width: 100%;
     height: 800px;
     background-image: url('../img/Home_page_Background.jpg');
     background-repeat: no-repeat;
@@ -539,7 +539,7 @@
 .inner-box{
     width: 100%;
     height: 100%; 
-    padding: 15px 30px 50px;
+    padding: 15px 30px 30px;
     font-family: 'M PLUS Rounded 1c', sans-serif;
     font-size: 22px;
     
@@ -582,6 +582,13 @@
     height: 40px;
     display: inline-block;
     margin-top: 10px;
+}
+.i-title-user-avatar{
+    font-weight: 700;
+    height: 40px;
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 10px;
 }
 .i-value{ 
     display: inline-block;
@@ -719,10 +726,10 @@
     margin-top: 10px;
 }
 .short-input{
-    width:150px
+    width:140px
 }
 .medium-input{
-    width:350px;
+    width:310px;
 }
 .long-input{
     width:90%;
