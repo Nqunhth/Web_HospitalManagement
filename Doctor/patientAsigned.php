@@ -1,10 +1,16 @@
 <?php
 require "../php/ConnectionConfig/DataBase.php";
 require "../php/Patient/Patient.php";
+require "../php/UserClass/User.php";
 
 session_start();
 
-$result = Patient::fetchAllPatient()
+if ($_SESSION['specialized_field'] == "Tổng quát")
+    $result = Patient::fetchAsignedPatientForDoctor($_SESSION['user_id']);
+else
+    $result = Patient::fetchAsignedPatientBySpecialist($_SESSION['user_id']);
+
+$assignable = User::fetchSpecialist();
 ?>
 
 
@@ -35,7 +41,7 @@ $result = Patient::fetchAllPatient()
             </li>
             <?php if (!empty($_SESSION['position'])) : ?>
                 <li class="navbar--item has-dropdown-menu">
-                    <a href="/Web_HospitalManagement/Doctor/patientList.php" class="navbar--item-link  is-active-in-navbar">Workspace</a>
+                    <a href="/Web_HospitalManagement/Doctor/patientCaring.php" class="navbar--item-link  is-active-in-navbar">Workspace</a>
                 </li>
             <?php endif ?>
 
@@ -82,6 +88,7 @@ $result = Patient::fetchAllPatient()
         </ul>
     </div>
 
+    <!-- Workspace for Doctor -->
     <div class="container">
         <div class="container__background_color">
             <div class="container__menu">
@@ -94,11 +101,11 @@ $result = Patient::fetchAllPatient()
                                 <a href="/Web_HospitalManagement/Doctor/patientCaring.php">Caring</a>
                             </li>
                         <?php } ?>
-                        <li class="has-border-bottom">
+                        <li class="has-border-bottom is-active-in-menu">
                             <i class="fas fa-hands-helping"></i>
                             <a href="/Web_HospitalManagement/Doctor/patientAsigned.php">Asigned Patient</a>
                         </li>
-                        <li class="is-active-in-menu">
+                        <li>
                             <i class="fas fa-address-book"></i>
                             <a href="/Web_HospitalManagement/Doctor/patientList.php">All Patients</a>
                         </li>
@@ -139,81 +146,81 @@ $result = Patient::fetchAllPatient()
                     <ul class="card-list">
                         <?php while ($row = $result->fetch_assoc()) { ?>
                             <li class="card-drop">
-                                <input type="checkbox" />
-                                <div class="short-card">
-                                    <div class="inner-card">
-                                        <div class="inner-detail">
-                                            <div class="datetime-containter">
-                                                <p class="i-datetime">Date:
-                                                <p class="i-value i-datetime"><?php echo $row['created_date'] ?></p>
+                                <form class="card-drop">
+                                    <input type="checkbox" />
+                                    <div class="short-card">
+                                        <div class="number-card">
+                                            <h1><?php echo $row['queue_number'] ?></h1>
+                                        </div>
+                                        <div class="inner-card">
+                                            <div class="inner-detail">
+                                                <p class="i-title">
+                                                    Patient Full Name:
+                                                <p class="i-value short-text-inwaiting"><?php echo $row['pat_name'] ?></p>
+                                                <p class="i-title">
+                                                    Age:
+                                                <p class="i-value"><?php echo $row['pat_age'] ?></p>
+                                                </p>
+                                                </p>
+                                                <p class="i-title change-element">
+                                                    Reason:
+                                                <p class="i-value long-text">
+                                                    <?php echo $row['medi_reason'] ?>
+                                                </p>
                                                 </p>
                                             </div>
-                                            <p class="i-title">
-                                                Patient Full Name:
-                                            <p class="i-value short-text"><?php echo $row['pat_name'] ?></p>
-                                            <p class="i-title">
-                                                Age:
-                                            <p class="i-value"><?php echo $row['pat_age'] ?></p>
-                                            </p>
-                                            </p>
-                                            <p class="i-title change-element">
-                                                Reason:
-                                            <p class="i-value long-text">
-                                                <?php echo $row['medi_reason'] ?>
-                                            </p>
-                                            </p>
-                                        </div>
-                                        <div class="icon-container center">
-                                            <i class="fas fa-chevron-down"></i>
+                                            <div class="icon-container center">
+                                                <i class="fas fa-chevron-down"></i>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="full-card">
-                                    <div class="inner-card">
-                                        <div class="inner-detail has-border-top">
-                                            <p class="i-title">
-                                                Phone Number:
-                                            <p class="i-value  medium-text">
-                                                <?php echo $row['pat_phone'] ?>
-                                            </p>
-                                            </p>
-                                            <p class="i-title">
-                                                Job:
-                                            <p class="i-value medium-text">
-                                                <?php echo $row['pat_job'] ?>
-                                            </p>
-                                            </p>
-                                            <p class="i-title change-element ">
-                                                Address:
-                                            <p class="i-value medium-text">
-                                                <?php echo $row['pat_address'] ?>
-                                            </p>
-                                            </p>
-                                            <p class="i-title">
-                                                Doctor's Name:
-                                            <p class="i-value medium-text">
-                                                <?php echo $row['doctor_name'] ?>
-                                            </p>
-                                            </p>
-                                            <p class="i-title change-element">
-                                                Diagnosis Result:
-                                            <p class="i-value long-text">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita voluptatum,
-                                                animi aspernatur vel quas beatae natus dolore, iusto tenetur magni hic nam?
-                                                Dolores iste esse fuga excepturi. Magni, culpa. Deleniti?
-                                            </p>
-                                            </p>
+                                    <div class="full-card">
+                                        <div class="number-card">
                                         </div>
-                                        <div class="icon-container center">
+                                        <div class="inner-card">
+                                            <div class="inner-detail has-border-top">
+                                                <p class="i-title">
+                                                    Phone Number:
+                                                <p class="i-value  medium-text-inwaiting">
+                                                    <?php echo $row['pat_phone'] ?>
+                                                </p>
+                                                </p>
+                                                <p class="i-title">
+                                                    Job:
+                                                <p class="i-value medium-text-inwaiting">
+                                                    <?php echo $row['pat_job'] ?>
+                                                </p>
+                                                </p>
+                                                <p class="i-title change-element ">
+                                                    Address:
+                                                <p class="i-value medium-text-inwaiting">
+                                                    <?php echo $row['pat_address'] ?>
+                                                </p>
+                                                </p>
+                                                <p class="i-title">
+                                                    Doctor's Name:
+                                                <p class="i-value medium-text-inwaiting">
+                                                    <?php echo $row['doctor_name'] ?>
+                                                </p>
+                                                </p>
+                                                <p class="i-title">
+                                                    List of Specialists Consulting Rooms (or Analysis):
+                                                </p>
+                                                <p class="i-value long-input"><?php echo $row['full_name'] . " | " . $row['specialized_field'] . " " . $row['specialist_id'] ?></p>
+
+                                            </div>
+                                            <div class="switch-container center">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                </form>
                             </li>
                     <?php }
                     } ?>
-
                     </ul>
             </div>
+
+
             <div class="container__floatbutton">
                 <a href="" class="float" id="button-up">
                     <i class="fas fa-arrow-up"></i>
@@ -223,9 +230,7 @@ $result = Patient::fetchAllPatient()
                 </a>
             </div>
         </div>
-
     </div>
-
     <div class="footer__content">
         <div class="content-title">
             <p>Contact:</p>
@@ -245,7 +250,6 @@ $result = Patient::fetchAllPatient()
                         </li>
                     </ul>
                 </div>
-
             </div>
             <div class="main-column">
                 <ul class="column-link-list">

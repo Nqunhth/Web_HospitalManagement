@@ -7,6 +7,35 @@
     position: relative;
 }
 /* Hàng xài chung chung  */
+.form-error{
+    font-size: 14px;
+    color: red
+}
+.trans-button{
+    background-color: transparent;
+    outline: none;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+.trans-button:hover{
+    cursor: pointer;
+    background-color: rgba(118, 131, 230, 0.9)
+    
+}
+.flex-column{
+    display: flex;
+    flex-direction: column;
+}
+.right-margin{
+    float: right;
+    margin-top: 5px;
+    margin-bottom: 50px;
+}
+.flex-space{
+    display: flex;
+    justify-content: space-between;
+}
 .pagination .page {
     color: black;
     float: left;
@@ -172,6 +201,12 @@
     font-size: 28px;
 	border: 1px solid #D6D6D6;
 }
+.navbar--item-link .nav-avatar{
+    height: 50px;
+    width: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+}
 
 /*Current selected page*/
 .is-active-in-navbar{
@@ -232,6 +267,12 @@
     border-radius:100px;
     padding: 13px 15px;
 	border: 5px solid rgb(182, 182, 182);
+}
+.user-info .bar-avatar{
+    height: 85px;
+    width: 85px;
+    object-fit: cover;
+    border-radius: 50%;
 }
 .user{
     border-top: 1px solid rgb(182, 182, 182);
@@ -610,6 +651,12 @@
 .i-avatar-user .fa-user-circle{
     font-size: 200px !important;
 }
+.i-avatar-user .avatar{
+    border-radius: 50%!important;
+    object-fit: cover;
+    height: 140px;
+    width: 140px;
+}
 .inner-detail .short-text-inwaiting{
     width: 280px;
     height: 40px;    
@@ -918,6 +965,22 @@ input:checked + .slider:before {
         opacity: 1;
     }
 }
+.create-error{
+    float: right;
+    font-size: 14px;
+    padding: 5px 20px;
+}
+.create-success{
+    position: absolute;
+    background-color: #fff;
+    padding: 10px;
+    z-index: 99;
+    border-radius: 30px;
+    border: solid 1px;
+    left: 450px;
+    top: 400px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);;
+}
 .modal{
     position: fixed;
     top: 0;
@@ -1012,7 +1075,7 @@ select {
     margin-top: 2px;
 }
 .modal__inner .inner-box button{
-    margin: 30px -20px 50px auto;
+    margin-top: 10px;
     height: 50px;
     width: 170px;
     background-color: #6679DD;
@@ -1021,6 +1084,10 @@ select {
     align-items: center;
     justify-content:space-between;
     padding: 0 24px;
+}
+.modal__inner .inner-box button:hover{
+    cursor: pointer;
+    background-color: #82AADA;
 }
 .inner-title{
     width: 100%;
@@ -1042,6 +1109,9 @@ select {
 /* End Modal layout */
 
 /* Start About Body */
+.about-page .p_card .content-contact{
+    margin: 0px!important;
+}
 .about-page .body{
     height: max-content;
     width: 100%;
@@ -1353,7 +1423,9 @@ select {
 .login-page .blue{
     background-color: #4960DC;
 }
-
+.error-font{
+    color: red!important;
+}
 .login-page .card_heading{
     height: 30%;
     flex-direction: column;

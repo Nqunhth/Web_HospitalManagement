@@ -14,7 +14,7 @@ if (isset($_GET['logout'])) {
     unset($_SESSION['username']);
     unset($_SESSION['email']);
     unset($_SESSION['position']);
-    header( "refresh:0;url=/Web_HospitalManagement" );
+    header("refresh:0;url=/Web_HospitalManagement");
 }
 ?>
 
@@ -63,20 +63,20 @@ if (isset($_GET['logout'])) {
                         <li class="navbar--item">
                             <a href="/Web_HospitalManagement/News/newsPage.php" class="navbar--item-link">News</a>
                         </li>
-                        <?php  if (!empty($_SESSION['position'])) : ?>
-                        <li class="navbar--item has-dropdown-menu">
-                            <?php  if ($_SESSION['position'] == "manager") : ?>
-                                <a href="/Web_HospitalManagement/Manager/accountManager.php" class="navbar--item-link">Workspace</a>
-                            <?php  elseif ($_SESSION['position'] == "receptionist") : ?>
-                                <a href="/Web_HospitalManagement/Receptionist/formMedical.php" class="navbar--item-link">Workspace</a>
-                            <?php  elseif ($_SESSION['position'] == "doctor") : ?>
-                                <a href="/Web_HospitalManagement/Doctor/patientCaring.php" class="navbar--item-link">Workspace</a>
-                            <?php  elseif ($_SESSION['position'] == "pharmacist") : ?>
-                                <a href="/Web_HospitalManagement/Pharmacist/formInvoice.php" class="navbar--item-link">Workspace</a>
-                            <?php endif ?>
-                        </li>
+                        <?php if (!empty($_SESSION['position'])) : ?>
+                            <li class="navbar--item has-dropdown-menu">
+                                <?php if ($_SESSION['position'] == "manager") : ?>
+                                    <a href="/Web_HospitalManagement/Manager/accountManager.php" class="navbar--item-link">Workspace</a>
+                                <?php elseif ($_SESSION['position'] == "receptionist") : ?>
+                                    <a href="/Web_HospitalManagement/Receptionist/formMedical.php" class="navbar--item-link">Workspace</a>
+                                <?php elseif ($_SESSION['position'] == "doctor") : ?>
+                                    <a href="/Web_HospitalManagement/Doctor/patientCaring.php" class="navbar--item-link">Workspace</a>
+                                <?php elseif ($_SESSION['position'] == "pharmacist") : ?>
+                                    <a href="/Web_HospitalManagement/Pharmacist/formInvoice.php" class="navbar--item-link">Workspace</a>
+                                <?php endif ?>
+                            </li>
                         <?php endif ?>
-                            
+
 
                         <li class="navbar--item has-dropdown-menu">
                             <a href="/Web_HospitalManagement/About/aboutPage.php" class="navbar--item-link">About</a>
@@ -85,14 +85,24 @@ if (isset($_GET['logout'])) {
                             <!-- Search Area -->
                         </li>
                         <li class="navbar--item has-dropdown-menu">
-                            <?php  if (empty($_SESSION['username'])) : ?>
+                            <?php if (empty($_SESSION['username'])) : ?>
                                 <a href="/Web_HospitalManagement/Login/loginPage.php" class="navbar--item-link"><i class="far fa-user"></i></a>
-                            <?php else: ?>
-                                <a href="/Web_HospitalManagement/User/infoManage.php" class="navbar--item-link"><i class="far fa-user"></i></a>
+                            <?php else : ?>
+                                <a href="/Web_HospitalManagement/User/infoManage.php" class="navbar--item-link">
+                                    <?php if (empty($_SESSION['avatar'])) : ?>
+                                        <i class="far fa-user"></i>
+                                    <?php else : ?>
+                                        <img class="nav-avatar" src="<?php echo $_SESSION["avatar"] ?>"></i>
+                                    <?php endif ?>
+                                </a>
                                 <div class="trans-layer">
                                     <div class="dropdown-user center">
                                         <div class="user-info">
-                                            <i class="far fa-user"></i>
+                                            <?php if (empty($_SESSION['avatar'])) { ?>
+                                                <i class="far fa-user"></i>
+                                            <?php } else { ?>
+                                                <img class="bar-avatar" src="<?php echo $_SESSION['avatar']; ?>"></img>
+                                            <?php } ?>
                                             <p><?php echo $_SESSION['username']; ?></p>
                                             <p><?php echo $_SESSION['email']; ?></p>
                                         </div>

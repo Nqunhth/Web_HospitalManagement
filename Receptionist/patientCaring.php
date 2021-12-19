@@ -51,11 +51,21 @@ $result = Patient::fetchCaringPatient()
                 <?php if (empty($_SESSION['username'])) : ?>
                     <a href="/Web_HospitalManagement/Login/loginPage.php" class="navbar--item-link"><i class="far fa-user"></i></a>
                 <?php else : ?>
-                    <a href="/Web_HospitalManagement/User/infoManage.php" class="navbar--item-link"><i class="far fa-user"></i></a>
+                    <a href="/Web_HospitalManagement/User/infoManage.php" class="navbar--item-link">
+                        <?php if (empty($_SESSION['avatar'])) : ?>
+                            <i class="far fa-user"></i>
+                        <?php else : ?>
+                            <img class="nav-avatar" src="<?php echo $_SESSION["avatar"] ?>"></i>
+                        <?php endif ?>
+                    </a>
                     <div class="trans-layer">
                         <div class="dropdown-user center">
                             <div class="user-info">
-                                <i class="far fa-user"></i>
+                                <?php if (empty($_SESSION['avatar'])) { ?>
+                                    <i class="far fa-user"></i>
+                                <?php } else { ?>
+                                    <img class="bar-avatar" src="<?php echo $_SESSION['avatar']; ?>"></img>
+                                <?php } ?>
                                 <p><?php echo $_SESSION['username']; ?></p>
                                 <p><?php echo $_SESSION['email']; ?></p>
                             </div>
@@ -100,7 +110,7 @@ $result = Patient::fetchCaringPatient()
                     <ul class="card-list">
                         <?php while ($row = $result->fetch_assoc()) { ?>
                             <li class="card-drop">
-                                    <input type="checkbox" />
+                                <input type="checkbox" />
                                 <div class="short-card">
                                     <div class="number-card">
                                         <h1> <?php echo $row['queue_number'] ?> </h1>
@@ -124,10 +134,10 @@ $result = Patient::fetchCaringPatient()
                                         </div>
                                         <div class="switch-container center">
                                             <?php if ($_SESSION['position'] == "doctor") : ?>
-                                            <label class="switch-inwaiting">
-                                                <input type="checkbox">
-                                                <!-- <span class="slider round"></span> -->
-                                            </label>
+                                                <label class="switch-inwaiting">
+                                                    <input type="checkbox">
+                                                    <!-- <span class="slider round"></span> -->
+                                                </label>
                                             <?php endif ?>
                                         </div>
                                         <div class="icon-container center">
@@ -142,33 +152,33 @@ $result = Patient::fetchCaringPatient()
                                         <div class="inner-detail has-border-top">
                                             <p class="i-title">
                                                 Phone Number:
-                                                <p class="i-value  medium-text-inwaiting">
-                                                    <?php echo $row['pat_phone'] ?>
-                                                </p>
+                                            <p class="i-value  medium-text-inwaiting">
+                                                <?php echo $row['pat_phone'] ?>
+                                            </p>
                                             </p>
                                             <p class="i-title">
                                                 Job:
-                                                <p class="i-value medium-text-inwaiting">
-                                                    <?php echo $row['pat_job'] ?>
-                                                </p>
+                                            <p class="i-value medium-text-inwaiting">
+                                                <?php echo $row['pat_job'] ?>
+                                            </p>
                                             </p>
                                             <p class="i-title change-element ">
                                                 Address:
-                                                <p class="i-value medium-text-inwaiting">
-                                                    <?php echo $row['pat_address'] ?>
-                                                </p>
+                                            <p class="i-value medium-text-inwaiting">
+                                                <?php echo $row['pat_address'] ?>
+                                            </p>
                                             </p>
                                             <p class="i-title">
                                                 Doctor's Name:
-                                                <p class="i-value medium-text-inwaiting">
-                                                    <?php echo $row['doctor_name'] ?>
-                                                </p>
+                                            <p class="i-value medium-text-inwaiting">
+                                                <?php echo $row['doctor_name'] ?>
+                                            </p>
                                             </p>
                                             <?php if ($_SESSION['position'] == "doctor") : ?>
-                                            <p class="i-title">
-                                                List of Specialists Consulting Rooms (or Analysis):
-                                            </p>
-                                            <input type="text" class="long-input" name="patient" value="Load data from Database" readonly>
+                                                <p class="i-title">
+                                                    List of Specialists Consulting Rooms (or Analysis):
+                                                </p>
+                                                <input type="text" class="long-input" name="patient" value="Load data from Database" readonly>
                                             <?php endif ?>
                                         </div>
                                         <div class="switch-container center">

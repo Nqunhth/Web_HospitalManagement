@@ -103,6 +103,18 @@ class MedicalRegister{
         }
     }
 
+    static function asignSpecialist($mediId, $specialistId){
+        $db = new DataBase();
+        $db->dbConnect();
+        $query = 
+        "UPDATE medical_register
+        SET specialist_id = '" . $specialistId . "'
+        WHERE medical_register.medi_id = '" . $mediId . "' ";
+        
+        if($db->execute($query)){
+            echo "Asign specialist success";
+        }
+    }
 }
 
 ?>

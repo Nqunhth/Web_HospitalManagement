@@ -170,6 +170,14 @@ class DataBase
             return false;
         }
     }
+        // function uploadImg($table, $link)
+    // {
+    //     $link = $this->prepareData($link);
+    //     $this->sql = "INSERT INTO " . $table . " (img_link) VALUES ('" . $link . "')";
+    //     if (mysqli_query($this->connect, $this->sql)) {
+    //         return true;
+    //     } else return false;
+    // }
 }
 
 

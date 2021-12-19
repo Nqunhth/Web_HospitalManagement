@@ -4,7 +4,7 @@ require "../php/Patient/Patient.php";
 
 session_start();
 
-$result = Patient::fetchCaringPatient()
+$result = Patient::fetchAsignedPatientBySpecialist($_SESSION['user_id']);
 ?>
 
 
@@ -50,11 +50,21 @@ $result = Patient::fetchCaringPatient()
                 <?php if (empty($_SESSION['username'])) : ?>
                     <a href="/Web_HospitalManagement/Login/loginPage.php" class="navbar--item-link"><i class="far fa-user"></i></a>
                 <?php else : ?>
-                    <a href="/Web_HospitalManagement/User/infoManage.php" class="navbar--item-link"><i class="far fa-user"></i></a>
+                    <a href="/Web_HospitalManagement/User/infoManage.php" class="navbar--item-link">
+                        <?php if (empty($_SESSION['avatar'])) : ?>
+                            <i class="far fa-user"></i>
+                        <?php else : ?>
+                            <img class="nav-avatar" src="<?php echo $_SESSION["avatar"] ?>"></i>
+                        <?php endif ?>
+                    </a>
                     <div class="trans-layer">
                         <div class="dropdown-user center">
                             <div class="user-info">
-                                <i class="far fa-user"></i>
+                                <?php if (empty($_SESSION['avatar'])) { ?>
+                                    <i class="far fa-user"></i>
+                                <?php } else { ?>
+                                    <img class="bar-avatar" src="<?php echo $_SESSION['avatar']; ?>"></img>
+                                <?php } ?>
                                 <p><?php echo $_SESSION['username']; ?></p>
                                 <p><?php echo $_SESSION['email']; ?></p>
                             </div>
@@ -78,9 +88,15 @@ $result = Patient::fetchCaringPatient()
                 <div class="box menu__box first__box">
                     <p>Patient List</p>
                     <ul>
+                        <?php if ($_SESSION['specialized_field'] == "Tổng quát") { ?>
+                            <li class="has-border-bottom">
+                                <i class="fas fa-user-injured"></i>
+                                <a href="/Web_HospitalManagement/Doctor/patientCaring.php">Caring</a>
+                            </li>
+                        <?php } ?>
                         <li class="has-border-bottom">
-                            <i class="fas fa-user-injured"></i>
-                            <a href="/Web_HospitalManagement/Doctor/patientCaring.php">Caring</a>
+                            <i class="fas fa-hands-helping"></i>
+                            <a href="/Web_HospitalManagement/Doctor/patientAsigned.php">Asigned Patient</a>
                         </li>
                         <li>
                             <i class="fas fa-address-book"></i>
@@ -91,14 +107,17 @@ $result = Patient::fetchCaringPatient()
                 <div class="box menu__box middle__box">
                     <p>Create New Form</p>
                     <ul>
-                        <li class="has-border-bottom is-active-in-menu">
-                            <i class="fas fa-hand-holding-medical"></i>
-                            <a href="/Web_HospitalManagement/Doctor/formSpecCon.php">Special Consulting Register</a>
-                        </li>
-                        <li>
-                            <i class="fas fa-briefcase-medical"></i>
-                            <a href="/Web_HospitalManagement/Doctor/formPrescription.php">Prescription</a>
-                        </li>
+                        <?php if ($_SESSION['specialized_field'] != "Tổng quát") { ?>
+                            <li class="is-active-in-menu">
+                                <i class="fas fa-hand-holding-medical"></i>
+                                <a href="/Web_HospitalManagement/Doctor/formSpecCon.php">Special Consulting Register</a>
+                            </li>
+                        <?php } else { ?>
+                            <li>
+                                <i class="fas fa-briefcase-medical"></i>
+                                <a href="/Web_HospitalManagement/Doctor/formPrescription.php">Prescription</a>
+                            </li>
+                        <?php } ?>
                     </ul>
                 </div>
                 <div class="box menu__box middle__box">
