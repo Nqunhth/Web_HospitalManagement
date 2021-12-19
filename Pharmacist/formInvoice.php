@@ -12,60 +12,69 @@ session_start();
     <!--"Roboto" & "M PLUS Rounded 1c font" -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap">
 
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../icon/fontawesome-free-5.15.4-web/css/all.min.css">
 </head>
 
 <body>
-        <div class="header__navbar not_navbar_at_home">
-            <ul class="navbar--list">
-                <li class="navbar--item">
-                    <a href="/Web_HospitalManagement" class="navbar--item-link">HOME</a>
+    <div class="header__navbar not_navbar_at_home">
+        <ul class="navbar--list">
+            <li class="navbar--item">
+                <a href="/Web_HospitalManagement" class="navbar--item-link">HOME</a>
+            </li>
+            <li class="navbar--item">
+                <a href="/Web_HospitalManagement/News/newsPage.php" class="navbar--item-link">News</a>
+            </li>
+            <?php if (!empty($_SESSION['position'])) : ?>
+                <li class="navbar--item has-dropdown-menu">
+                    <a href="/Web_HospitalManagement/Pharmacist/formInvoice.php" class="navbar--item-link  is-active-in-navbar">Workspace</a>
                 </li>
-                <li class="navbar--item">
-                    <a href="/Web_HospitalManagement/News/newsPage.php" class="navbar--item-link">News</a>
-                </li>
-                <?php  if (!empty($_SESSION['position'])) : ?>
-                    <li class="navbar--item has-dropdown-menu">
-                        <a href="/Web_HospitalManagement/Pharmacist/formInvoice.php" class="navbar--item-link  is-active-in-navbar">Workspace</a>
-                    </li>
-                <?php endif ?>
-                            
+            <?php endif ?>
 
-                <li class="navbar--item has-dropdown-menu">
-                    <a href="/Web_HospitalManagement/About/aboutPage.php" class="navbar--item-link">About</a>
-                </li>
-                <li class="navbar--flex-spacer">
-                    <!-- Search Area -->
-                </li>
-                <li class="navbar--item has-dropdown-menu">
-                    <?php  if (empty($_SESSION['username'])) : ?>
-                        <a href="/Web_HospitalManagement/Login/loginPage.php" class="navbar--item-link"><i class="far fa-user"></i></a>
-                    <?php else: ?>
-                        <a href="/Web_HospitalManagement/User/infoManage.php" class="navbar--item-link"><i class="far fa-user"></i></a>
-                        <div class="trans-layer">
-                            <div class="dropdown-user center">
-                                <div class="user-info">
+
+            <li class="navbar--item has-dropdown-menu">
+                <a href="/Web_HospitalManagement/About/aboutPage.php" class="navbar--item-link">About</a>
+            </li>
+            <li class="navbar--flex-spacer">
+                <!-- Search Area -->
+            </li>
+            <li class="navbar--item has-dropdown-menu">
+                <?php if (empty($_SESSION['username'])) : ?>
+                    <a href="/Web_HospitalManagement/Login/loginPage.php" class="navbar--item-link"><i class="far fa-user"></i></a>
+                <?php else : ?>
+                    <a href="/Web_HospitalManagement/User/infoManage.php" class="navbar--item-link">
+                        <?php if (empty($_SESSION['avatar'])) : ?>
+                            <i class="far fa-user"></i>
+                        <?php else : ?>
+                            <img class="nav-avatar" src="<?php echo $_SESSION["avatar"] ?>"></i>
+                        <?php endif ?>
+                    </a>
+                    <div class="trans-layer">
+                        <div class="dropdown-user center">
+                            <div class="user-info">
+                                <?php if (empty($_SESSION['avatar'])) { ?>
                                     <i class="far fa-user"></i>
-                                    <p><?php echo $_SESSION['username']; ?></p>
-                                    <p><?php echo $_SESSION['email']; ?></p>
-                                </div>
-                                <div class="user user-manage">
-                                    <p>My Account</p>
-                                    <a href="/Web_HospitalManagement/User/infoManage.php">Account Management<i class="fas fa-chevron-right"></i></a>
-                                </div>
-                                <div class="user user-logout">
-                                    <a href="/Web_HospitalManagement/index.php?logout=1">Logout<i class="fas fa-sign-out-alt"></i></a>
-                                </div>
+                                <?php } else { ?>
+                                    <img class="bar-avatar" src="<?php echo $_SESSION['avatar']; ?>"></img>
+                                <?php } ?>
+                                <p><?php echo $_SESSION['username']; ?></p>
+                                <p><?php echo $_SESSION['email']; ?></p>
+                            </div>
+                            <div class="user user-manage">
+                                <p>My Account</p>
+                                <a href="/Web_HospitalManagement/User/infoManage.php">Account Management<i class="fas fa-chevron-right"></i></a>
+                            </div>
+                            <div class="user user-logout">
+                                <a href="/Web_HospitalManagement/index.php?logout=1">Logout<i class="fas fa-sign-out-alt"></i></a>
                             </div>
                         </div>
-                    <?php endif ?>
-                </li>
-            </ul>
-        </div>
+                    </div>
+                <?php endif ?>
+            </li>
+        </ul>
+    </div>
 
     <div class="container">
         <div class="container__background_color">
@@ -80,7 +89,7 @@ session_start();
                     </ul>
                 </div>
                 <div class="box menu__box middle__box">
-                    <p>Ceate New Form</p>
+                    <p>Create New Form</p>
                     <ul>
                         <li class="is-active-in-menu">
                             <i class="fas fa-receipt"></i>
@@ -109,7 +118,7 @@ session_start();
                             Address:
                             <input type="text" class="medium-input" name="invoice">
                         </p>
-                        <div class ="i-line">
+                        <div class="i-line">
                             <table>
                                 <tr>
                                     <th>No</th>
@@ -220,50 +229,35 @@ session_start();
                         <p class="i-sign right">Pharmacist</p>
                         </p>
                     </div>
-                    </div>
-                    <div class="content__button">
-
-                        <button class="button button-confirm">
-                            <i class="fas fa-check"></i>
-                            Confirm
-                        </button>
-                        <button class="button button-reset">
-                            <i class="fas fa-eraser"></i>
-                            Reset
-                        </button>
-                        <button class="button button-print">
-                            <i class="fas fa-print"></i>
-                            Print
-                        </button>
-                    </div>
-
                 </div>
-            </div>
+                <div class="content__button">
 
+                    <button class="button button-confirm">
+                        <i class="fas fa-check"></i>
+                        Confirm
+                    </button>
+                    <button class="button button-reset">
+                        <i class="fas fa-eraser"></i>
+                        Reset
+                    </button>
+                    <button class="button button-print">
+                        <i class="fas fa-print"></i>
+                        Print
+                    </button>
+                </div>
+
+            </div>
         </div>
 
-        <div class="footer__content">
-            <div class="content-title">
-                <p>Contact:</p>
-            </div>
-            <div class="content-main">
-                <div class="main-column">
-                    <div class="column-content">
-                        <ul class="column-link-list">
-                            <li class="column-link-list-item">
-                                <p>Address : XX AAA....</p>
-                            </li>
-                            <li class="column-link-list-item">
-                                <p>Hotline : XX AAA....</p>
-                            </li>
-                            <li class="column-link-list-item">
-                                <p>Email : XX AAA@Mail.com</p>
-                            </li>
-                        </ul>
-                    </div>
+    </div>
 
-                </div>
-                <div class="main-column">
+    <div class="footer__content">
+        <div class="content-title">
+            <p>Contact:</p>
+        </div>
+        <div class="content-main">
+            <div class="main-column">
+                <div class="column-content">
                     <ul class="column-link-list">
                         <li class="column-link-list-item">
                             <p>Address : XX AAA....</p>
@@ -276,12 +270,27 @@ session_start();
                         </li>
                     </ul>
                 </div>
+
             </div>
-            <div class="content-conclude">
-                <p>Copyright Copyright Pisces/Thu/Anh blah blah blah.....</p>
-                <p>More Thing Is Needed</p>
+            <div class="main-column">
+                <ul class="column-link-list">
+                    <li class="column-link-list-item">
+                        <p>Address : XX AAA....</p>
+                    </li>
+                    <li class="column-link-list-item">
+                        <p>Hotline : XX AAA....</p>
+                    </li>
+                    <li class="column-link-list-item">
+                        <p>Email : XX AAA@Mail.com</p>
+                    </li>
+                </ul>
             </div>
         </div>
+        <div class="content-conclude">
+            <p>Copyright Copyright Pisces/Thu/Anh blah blah blah.....</p>
+            <p>More Thing Is Needed</p>
+        </div>
+    </div>
 </body>
 
 </html>

@@ -1,6 +1,13 @@
 <?php
+require "../php/ConnectionConfig/DataBase.php";
+require "../php/UserClass/User.php";
 session_start();
+
+$owner = User::fetchUserById($_SESSION['user_id']);
+
 ?>
+<!DOCTYPE html>
+
 <html>
 
 <head>
@@ -48,11 +55,21 @@ session_start();
                     <?php  if (empty($_SESSION['username'])) : ?>
                         <a href="/Web_HospitalManagement/Login/loginPage.php" class="navbar--item-link"><i class="far fa-user"></i></a>
                     <?php else: ?>
-                        <a href="/Web_HospitalManagement/User/infoManage.php" class="navbar--item-link"><i class="far fa-user"></i></a>
+                        <a href="/Web_HospitalManagement/User/infoManage.php" class="navbar--item-link">
+                            <?php if (empty($_SESSION['avatar'])) : ?>
+                            <i class="far fa-user"></i>
+                            <?php else: ?>
+                                <img class="nav-avatar" src = "<?php echo $_SESSION["avatar"]?>"></i>
+                            <?php endif?>
+                        </a>
                         <div class="trans-layer">
                             <div class="dropdown-user center">
                                 <div class="user-info">
+                                    <?php if(empty($_SESSION['avatar'])){ ?>
                                     <i class="far fa-user"></i>
+                                    <?php } else { ?> 
+                                    <img class="bar-avatar" src="<?php echo $_SESSION['avatar']; ?>"></img>
+                                    <?php } ?>
                                     <p><?php echo $_SESSION['username']; ?></p>
                                     <p><?php echo $_SESSION['email']; ?></p>
                                 </div>
@@ -85,52 +102,72 @@ session_start();
                     </div>  
                 </div>
                 <div class="container__content">
+                    <?php 
+                    if ($owner->num_rows > 0){
+                        $owner = $owner->fetch_assoc();
+                    ?>
                     <div class="box content__box">
                         <div class="inner-box">
                             <p class="i-title">
                                 User Full Name:
-                                <input type="text" class="medium-input" name="prescription">
+                                <input type="text" readonly="readonly" onfocus="this.blur()" tabindex="-1" class="medium-input" name="full_name" value="<?php echo $_SESSION["fullname"]?>">
                             <p class="i-title">
                                 Age:
-                                <input type="text" class="short-input" name="prescription">
+                                <input type="text" readonly="readonly" onfocus="this.blur()" tabindex="-1" class="short-input" name="age" value="<?php echo $owner["age"]?>">
                             </p>
                             </p>
                             <p class="i-title-user">
                                 Specialized_field:
-                                <input type="text" class="medium-input" name="prescription">
+                                <input type="text" readonly="readonly" onfocus="this.blur()" tabindex="-1" class="medium-input" name="field" value="<?php echo $owner["specialized_field"]?>">
                             </p>
                             <p class="i-title-user">
                                 Birthday
-                                <input type="text" class="medium-input" name="prescription">
+                                <input type="text" readonly="readonly" onfocus="this.blur()" tabindex="-1" class="medium-input" name="birthday" value="<?php echo $owner["birthday"]?>">
                             </p>                            
                             <p class="i-title-user">
                                 Gender:
-                                <input type="text" class="short-input" name="prescription">
+                                <input type="text" readonly="readonly" onfocus="this.blur()" tabindex="-1" class="short-input" name="gender" value="<?php echo $owner["gender"]?>">
                             </p>
                             <p class="i-title-user">
                                 Address:
-                                <input type="text" class="medium-input" name="prescription">
+                                <input type="text" readonly="readonly" onfocus="this.blur()" tabindex="-1" class="medium-input" name="address" value="<?php echo $owner["address"]?>">
                             </p>
                             <p class="i-title-user">
                                 Phone Number:
-                                <input type="text" class="short-input" name="prescription">
+                                <input type="text" readonly="readonly" onfocus="this.blur()" tabindex="-1" class="short-input" name="phone" value="<?php echo $owner["phone_number"]?>">
                             </p>
                             <p class="i-title-user">
                                 ID Card Number:
-                                <input type="text" class="medium-input" name="prescription">
+                                <input type="text" readonly="readonly" onfocus="this.blur()" tabindex="-1" class="medium-input" name="id_number" value="<?php echo $owner["id_card_number"]?>">
                             </p>
                             <p class="i-title-user">
                                 ID Card Date:
-                                <input type="text" class="short-input" name="prescription">
+                                <input type="text" readonly="readonly" onfocus="this.blur()" tabindex="-1" class="short-input" name="id_date" value="<?php echo $owner["id_card_date"]?>">
                             </p>
                             <p class="i-title-user-avatar">
                                 Avatar:
                             </p>
+                            <?php
+                            if(empty($owner["avatar"])){
+                            ?>
                             <div class="i-avatar-user">
                                 <i class="fas fa-user-circle"></i>
                             </div>
+                            <?php
+                            }
+                            else { 
+                            ?>
+                            <div class="i-avatar-user">
+                                <img class="avatar" src="<?php echo $owner["avatar"]?>"></img>
+                            </div>
+                            <?php
+                            }
+                            ?>
                         </div>
                     </div>
+                    <?php 
+                    }
+                    ?>
                     <div class="content__button">
                         <button class="button button-confirm">
                             <i class="fas fa-check"></i>

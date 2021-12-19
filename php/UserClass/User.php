@@ -83,6 +83,17 @@ class User{
 
         return $conn->query($query);
     }
+    public static function fetchActiveDoctorForReceptionist(){
+        $db = new DataBase();
+        $conn = $db->dbConnect();
+        $query = 
+        "SELECT * FROM doctor 
+        JOIN personal_info ON doctor.doctor_id = personal_info.user_id
+        JOIN account ON doctor.doctor_id = account.user_id
+        WHERE account.status = 'enabled' && personal_info.specialized_field = 'Tổng quát'";
+
+        return $conn->query($query);
+    }
     public static function fetchUserById($userId){
         $db = new DataBase();
         $conn = $db->dbConnect();
@@ -102,6 +113,17 @@ class User{
         "SELECT * FROM account 
         JOIN personal_info ON account.user_id = personal_info.user_id
         WHERE account.username = '" . $username . "'";
+
+        return $conn->query($query);
+    }
+    public static function fetchSpecialist(){
+        $db = new DataBase();
+        $conn = $db->dbConnect();
+        $query = 
+        "SELECT * FROM doctor 
+        JOIN personal_info ON doctor.doctor_id = personal_info.user_id
+        JOIN account ON doctor.doctor_id = account.user_id
+        WHERE account.status = 'enabled' && personal_info.specialized_field <> 'Tổng quát'";
 
         return $conn->query($query);
     }

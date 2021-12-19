@@ -1,9 +1,16 @@
 <?php
 require "../php/ConnectionConfig/DataBase.php";
 require "../php/UserClass/User.php";
+require "../php/MedicalRegister/MedicalRegister.php";
+require "../php/MedicalRegister/CreateNewMediReg.php";
+require "../php/Patient/Patient.php";
 
 session_start();
-$result = User::fetchActiveUser("doctor");
+$result = User::fetchActiveDoctorForReceptionist();
+
+if(isset($_POST['submit'])){
+    $error = CreateNewMedicalReg::Create();
+}
 ?>
 
 
@@ -49,11 +56,21 @@ $result = User::fetchActiveUser("doctor");
                 <?php if (empty($_SESSION['username'])) : ?>
                     <a href="/Web_HospitalManagement/Login/loginPage.php" class="navbar--item-link"><i class="far fa-user"></i></a>
                 <?php else : ?>
-                    <a href="/Web_HospitalManagement/User/infoManage.php" class="navbar--item-link"><i class="far fa-user"></i></a>
+                    <a href="/Web_HospitalManagement/User/infoManage.php" class="navbar--item-link">
+                        <?php if (empty($_SESSION['avatar'])) : ?>
+                            <i class="far fa-user"></i>
+                        <?php else : ?>
+                            <img class="nav-avatar" src="<?php echo $_SESSION["avatar"] ?>"></i>
+                        <?php endif ?>
+                    </a>
                     <div class="trans-layer">
                         <div class="dropdown-user center">
                             <div class="user-info">
-                                <i class="far fa-user"></i>
+                                <?php if (empty($_SESSION['avatar'])) { ?>
+                                    <i class="far fa-user"></i>
+                                <?php } else { ?>
+                                    <img class="bar-avatar" src="<?php echo $_SESSION['avatar']; ?>"></img>
+                                <?php } ?>
                                 <p><?php echo $_SESSION['username']; ?></p>
                                 <p><?php echo $_SESSION['email']; ?></p>
                             </div>
@@ -93,9 +110,16 @@ $result = User::fetchActiveUser("doctor");
                     </ul>
                 </div>
             </div>
-            <form class="container__content" action="../php/MedicalRegister/CreateNewMediReg.php" method="post">
+            <form class="container__content" action="" method="post">
                 <div class="box content__box">
                     <div class="inner-box">
+                        <?php
+                            if(isset($error)){
+                        ?>
+                        <p class="form-error"><?php echo $error ?></p>
+                        <?php
+                            }
+                        ?>
                         <p class="i-title">
                             Patient Full Name:
                             <input type="text" class="medium-input" name="patient_name">
@@ -164,7 +188,7 @@ $result = User::fetchActiveUser("doctor");
                 </div>
                 <div class="content__button">
 
-                    <button type="submit" class="button button-confirm">
+                    <button type="submit" name="submit" class="button button-confirm">
                         <i class="fas fa-check"></i>
                         Confirm
                     </button>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 06, 2021 at 09:30 AM
+-- Generation Time: Dec 19, 2021 at 06:07 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -128,16 +128,22 @@ CREATE TABLE `medical_register` (
   `created_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `medi_reason` text COLLATE utf8_unicode_ci NOT NULL,
   `medi_status` varchar(8) COLLATE utf8_unicode_ci DEFAULT 'enabled',
-  `queue_number` int(11) NOT NULL
+  `queue_number` int(11) NOT NULL,
+  `specialist_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `medical_register`
 --
 
-INSERT INTO `medical_register` (`medi_id`, `pat_id`, `creator_id`, `doctor_id`, `doctor_name`, `created_date`, `medi_reason`, `medi_status`, `queue_number`) VALUES
-(00001, 00001, 00007, 00004, 'Trần Thị BBB', '2021-12-06 07:42:52', 'Extreme Depression', 'enabled', 1),
-(00002, 00002, 00007, 00003, 'Nguyễn Văn AAA', '2021-12-06 07:43:31', 'Heart Failure', 'enabled', 2);
+INSERT INTO `medical_register` (`medi_id`, `pat_id`, `creator_id`, `doctor_id`, `doctor_name`, `created_date`, `medi_reason`, `medi_status`, `queue_number`, `specialist_id`) VALUES
+(00001, 00001, 00007, 00004, 'Trần Thị BBB', '2021-12-18 07:42:52', 'Extreme Depression', 'enabled', 1, 5),
+(00002, 00002, 00007, 00003, 'Nguyễn Văn AAA', '2021-12-18 07:43:31', 'Heart Failure', 'enabled', 2, 5),
+(00003, 00003, 00007, 00003, 'Nguyễn Văn AAA', '2021-12-18 08:44:20', 'Crazy', 'enabled', 3, 5),
+(00004, 00004, 00007, 00003, 'Nguyễn Văn AAA', '2021-12-18 09:17:49', 'Test', 'enabled', 4, 5),
+(00005, 00005, 00007, 00003, 'Nguyễn Văn AAA', '2021-12-18 09:18:14', 'Sore throat', 'enabled', 5, 5),
+(00006, 00006, 00007, 00003, 'Nguyễn Văn AAA', '2021-12-18 09:18:47', 'Test', 'enabled', 6, 5),
+(00008, 00008, 00007, 00003, 'Nguyễn Văn AAA', '2021-12-19 02:55:24', 'Test', 'enabled', 1, 5);
 
 --
 -- Triggers `medical_register`
@@ -213,7 +219,7 @@ CREATE TABLE `patient` (
   `pat_address` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `pat_phone` varchar(12) COLLATE utf8_unicode_ci NOT NULL,
   `pat_job` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `pat_status` varchar(6) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'caring'
+  `pat_status` varchar(7) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'caring'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -221,8 +227,13 @@ CREATE TABLE `patient` (
 --
 
 INSERT INTO `patient` (`pat_id`, `pat_name`, `pat_age`, `pat_address`, `pat_phone`, `pat_job`, `pat_status`) VALUES
-(1, 'Cao Ngoc A', 21, 'adddddd', '009090909', 'jobless', 'caring'),
-(2, 'Cao Ngoc B', 39, '44 Huhuhu', '444449', 'jobless', 'caring');
+(1, 'Cao Ngoc A', 21, 'adddddd', '009090909', 'jobless', 'asigned'),
+(2, 'Cao Ngoc B', 39, '44 Huhuhu', '444449', 'jobless', 'asigned'),
+(3, 'Hutao', 21, '333 Washington', '444449', 'jobless', 'asigned'),
+(4, 'Ning', 23, 'fwfsdf', '24343', 'President', 'asigned'),
+(5, 'UI', 23, 'fwfsdf', '24343', 'Singer', 'caring'),
+(6, 'asa', 50, 'fwfsdf', '24343', 'fff', 'caring'),
+(8, 'Moe', 12, 'fwfsdf', '24343', 'President', 'asigned');
 
 -- --------------------------------------------------------
 
@@ -249,15 +260,15 @@ CREATE TABLE `personal_info` (
 --
 
 INSERT INTO `personal_info` (`user_id`, `full_name`, `age`, `gender`, `birthday`, `specialized_field`, `address`, `phone_number`, `id_card_number`, `id_card_date`, `avatar`) VALUES
-(00001, 'Cao Ngọc Anh', 20, 'female', '2001-03-08', 'Nhân sự', 'xxx XXX yy YY zz ZZZZZ', '123456789', '123456789', '2021-11-10', ''),
+(00001, 'Cao Ngọc Anh', 20, 'female', '2001-03-08', 'Nhân sự', 'xxx XXX yy YY zz ZZZZZ', '123456789', '123456789', '2021-11-10', 'https://i.imgur.com/uKqhZDC.jpg'),
 (00002, 'Nguyễn Hồ Quỳnh Thư', 20, 'female', '2001-02-19', 'Nhân sự', 'xxx XXX yy YY zz ZZZZZ', '123456789', '123456789', '2021-11-10', ''),
-(00003, 'Nguyễn Văn AAA', 0, 'male', '2021-12-05', 'Tổng quát', '', '', '', '2021-12-05', ''),
+(00003, 'Nguyễn Văn AAA', 0, 'male', '2021-12-05', 'Tổng quát', '', '', '', '2021-12-05', 'https://i.imgur.com/uKqhZDC.jpg'),
 (00004, 'Trần Thị BBB', 0, 'male', '2021-12-05', 'Tổng quát', '', '', '', '2021-12-05', ''),
 (00005, 'Lê Thị CCC', 0, 'male', '2021-12-05', 'Tai mũi họng', '', '', '', '2021-12-05', ''),
 (00006, 'Nguyễn Minh DDD', 0, 'male', '2021-12-05', 'Thẩm mỹ', '', '', '', '2021-12-05', ''),
-(00007, 'Đinh Thị EEE', 0, 'male', '2021-12-05', 'Tiếp tân', '', '', '', '2021-12-05', ''),
+(00007, 'Đinh Thị EEE', 0, 'male', '2021-12-05', 'Tiếp tân', '', '', '', '2021-12-05', 'https://i.imgur.com/uKqhZDC.jpg'),
 (00008, 'Hoàng Lê FFF', 0, 'male', '2021-12-05', 'Tiếp tân', '', '', '', '2021-12-05', ''),
-(00009, 'Nguyễn Ngọc GGG', 0, 'male', '2021-12-05', 'Dược sĩ', '', '', '', '2021-12-05', ''),
+(00009, 'Nguyễn Ngọc GGG', 0, 'male', '2021-12-05', 'Dược sĩ', '', '', '', '2021-12-05', 'https://i.imgur.com/uKqhZDC.jpg'),
 (00010, 'Nguyễn Tiến HHH', 0, 'male', '2021-12-05', 'Dược sĩ', '', '', '', '2021-12-05', '');
 
 -- --------------------------------------------------------
@@ -334,12 +345,21 @@ CREATE TABLE `specialist_consulting` (
   `creator_id` int(5) UNSIGNED ZEROFILL NOT NULL,
   `creator_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `created_date` timestamp NOT NULL DEFAULT current_timestamp(),
-  `spec_status` varchar(8) COLLATE utf8_unicode_ci NOT NULL,
+  `spec_status` varchar(8) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'enabled',
   `spec_reason` text COLLATE utf8_unicode_ci NOT NULL,
   `test_area` text COLLATE utf8_unicode_ci NOT NULL,
   `request` text COLLATE utf8_unicode_ci NOT NULL,
   `result` text COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `specialist_consulting`
+--
+
+INSERT INTO `specialist_consulting` (`spec_id`, `pat_id`, `creator_id`, `creator_name`, `created_date`, `spec_status`, `spec_reason`, `test_area`, `request`, `result`) VALUES
+(1, 1, 00003, 'Nguyễn Văn AAA', '2021-12-08 05:03:22', 'enabled', 'Soi không được', 'Não', 'X Quang VIP', 'Không thấy não'),
+(2, 2, 00003, 'Nguyễn Văn AAA', '2021-12-08 08:34:49', 'enabled', 'ffds', 'dfdf', 'ggggg', 'ggggg'),
+(3, 1, 00003, 'Nguyễn Văn AAA', '2021-12-08 09:41:21', 'enabled', 'dasdsd', 'Não', 'fasfhahiw', 'gsfefeaef');
 
 -- --------------------------------------------------------
 
@@ -476,7 +496,7 @@ ALTER TABLE `invoice`
 -- AUTO_INCREMENT for table `medical_register`
 --
 ALTER TABLE `medical_register`
-  MODIFY `medi_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `medi_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `medicine`
@@ -494,7 +514,7 @@ ALTER TABLE `news`
 -- AUTO_INCREMENT for table `patient`
 --
 ALTER TABLE `patient`
-  MODIFY `pat_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `pat_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `personal_info`
@@ -524,7 +544,7 @@ ALTER TABLE `receptionist`
 -- AUTO_INCREMENT for table `specialist_consulting`
 --
 ALTER TABLE `specialist_consulting`
-  MODIFY `spec_id` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `spec_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `user`
