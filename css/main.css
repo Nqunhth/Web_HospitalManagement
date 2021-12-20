@@ -7,6 +7,9 @@
     position: relative;
 }
 /* Hàng xài chung chung  */
+html{
+    scroll-behavior: smooth;
+}
 .form-error{
     font-size: 14px;
     color: red
@@ -1152,7 +1155,7 @@ select {
 .about-page .mini_nav .mini_card{
     background-color: #fff;
     height: 60px;
-    width: 520px;
+    width: 560px;
     z-index: 999;
     border-radius: 50px 0 20px 20px;
     box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 5px;
@@ -1194,6 +1197,9 @@ select {
 
 .about-page .body .hospital{
     /* none */
+}
+.fc-photo{
+ object-fit: cover;
 }
 .about-page .hospital .photo{
     height: inherit;
@@ -1263,6 +1269,8 @@ select {
     width: 90%;
     margin-top: 5%;
     flex-direction: row;
+    object-fit: cover;
+    object-position: top;
 }
 .about-page .photo_icon{
     font-size: 180px;

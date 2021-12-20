@@ -143,6 +143,20 @@ class Patient{
             ORDER BY medical_register.queue_number;";
         return $conn->query($query);
     }
+    public static function fetchConsultedPatientForDoctor($doctorId){
+        $db = new DataBase();
+        $conn = $db->dbConnect();
+        $query = 
+            "SELECT * 
+            FROM `patient`
+            JOIN `medical_register`
+            ON patient.pat_id = medical_register.pat_id
+            JOIN personal_info
+            ON personal_info.user_id = specialist_id
+            WHERE DATE(medical_register.created_date) = CURRENT_DATE && medical_register.medi_status = 'enabled' && pat_status = 'consulted' && doctor_id = '" . $doctorId . "'
+            ORDER BY medical_register.queue_number;";
+        return $conn->query($query);
+    }
     public static function fetchAsignedPatientBySpecialist($specialistId){
         $db = new DataBase();
         $conn = $db->dbConnect();
@@ -166,7 +180,7 @@ class Patient{
             ON patient.pat_id = medical_register.pat_id";
         return $conn->query($query);
     }
-    public static function fetchPatientByQueue($queue){
+    public static function fetchCaringPatientByQueue($queue){
         $db = new DataBase();
         $conn = $db->dbConnect();
         $query = 
@@ -175,6 +189,28 @@ class Patient{
             JOIN `medical_register`
             ON patient.pat_id = medical_register.pat_id
             WHERE DATE(medical_register.created_date) = CURRENT_DATE && medical_register.medi_status = 'enabled' && pat_status = 'caring' && queue_number = '" . $queue . "'";
+        return $conn->query($query);
+    }
+    public static function fetchAsignedPatientByQueue($queue){
+        $db = new DataBase();
+        $conn = $db->dbConnect();
+        $query = 
+            "SELECT * 
+            FROM `patient`
+            JOIN `medical_register`
+            ON patient.pat_id = medical_register.pat_id
+            WHERE DATE(medical_register.created_date) = CURRENT_DATE && medical_register.medi_status = 'enabled' && pat_status = 'asigned' && queue_number = '" . $queue . "'";
+        return $conn->query($query);
+    }
+    public static function fetchConsultedPatientByQueue($queue){
+        $db = new DataBase();
+        $conn = $db->dbConnect();
+        $query = 
+            "SELECT * 
+            FROM `patient`
+            JOIN `medical_register`
+            ON patient.pat_id = medical_register.pat_id
+            WHERE DATE(medical_register.created_date) = CURRENT_DATE && medical_register.medi_status = 'enabled' && pat_status = 'consulted' && queue_number = '" . $queue . "'";
         return $conn->query($query);
     }
     public static function changeStatus($patientId, $status)

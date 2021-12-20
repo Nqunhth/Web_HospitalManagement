@@ -5,6 +5,7 @@ require "../php/Patient/Patient.php";
 session_start();
 
 $result = Patient::fetchAsignedPatientBySpecialist($_SESSION['user_id']);
+
 ?>
 
 
@@ -139,7 +140,7 @@ $result = Patient::fetchAsignedPatientBySpecialist($_SESSION['user_id']);
                     <div class="inner-box">
                         <?php
                         if (isset($_POST["patients"])) {
-                            $currPatient = Patient::fetchPatientByQueue($_POST["patients"]);
+                            $currPatient = Patient::fetchAsignedPatientByQueue($_POST["patients"]);
                             if ($currPatient->num_rows > 0) {
                                 $currPatient = $currPatient->fetch_assoc();
                         ?>
@@ -252,7 +253,7 @@ $result = Patient::fetchAsignedPatientBySpecialist($_SESSION['user_id']);
             <div class="container__select">
                 <form method="POST" action="">
                     <select name="patients" class="content__select" onchange="this.form.submit()">
-                        <option value="" disabled selected>--select--</option>
+                        <option value="" disabled selected>--</option>
                         <?php if ($result->num_rows > 0) {
                             while ($row = $result->fetch_assoc()) { ?>
                                 <!-- <option value="01" selected>01</option> -->

@@ -31,8 +31,10 @@ session_start();
                         <a href="/Web_HospitalManagement/Manager/accountManager.php" class="navbar--item-link">Workspace</a>
                     <?php elseif ($_SESSION['position'] == "receptionist") : ?>
                         <a href="/Web_HospitalManagement/Receptionist/formMedical.php" class="navbar--item-link">Workspace</a>
-                    <?php elseif ($_SESSION['position'] == "doctor") : ?>
+                    <?php elseif ($_SESSION['position'] == "doctor" && $_SESSION['specialized_field'] == "Tổng quát") : ?>
                         <a href="/Web_HospitalManagement/Doctor/patientCaring.php" class="navbar--item-link">Workspace</a>
+                    <?php elseif ($_SESSION['position'] == "doctor" && $_SESSION['specialized_field'] != "Tổng quát") : ?>
+                        <a href="/Web_HospitalManagement/Doctor/patientAsigned.php" class="navbar--item-link">Workspace</a>
                     <?php elseif ($_SESSION['position'] == "pharmacist") : ?>
                         <a href="/Web_HospitalManagement/Pharmacist/formInvoice.php" class="navbar--item-link">Workspace</a>
                     <?php endif ?>
@@ -94,30 +96,30 @@ session_start();
                     </ul>
                 </div>
             </div>
-            <div class="container__content">
+            <form action = "../php/UserClass/changepassword.php" method = "post" class="container__content">
                 <div class="box content__box">
                     <div class="inner-box inner-box-user">
                         <p class="i-title">
                             Current Password:
-                            <input type="text" class="medium-input" name="prescription">
+                            <input type="text" name="current_pass" class="medium-input">
                         </p>
                         <p class="i-title-user">
                             New Password:
-                            <input type="text" class="medium-input" name="prescription">
+                            <input type="text" name="new_pass" class="medium-input">
                         </p>
                         <p class="i-title-user">
                             Confirm New Password:
-                            <input type="text" class="medium-input" name="prescription">
+                            <input type="text" name="confirm_pass" class="medium-input">
                         </p>
                     </div>
                 </div>
                 <div class="content__button">
-                    <button class="button button-confirm">
+                    <button tyoe submit class="button button-confirm">
                         <i class="fas fa-check"></i>
                         Confirm
                     </button>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 

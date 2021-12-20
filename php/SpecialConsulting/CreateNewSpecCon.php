@@ -1,5 +1,6 @@
 <?php
 require "SpecCon.php";
+require "../Patient/Patient.php";
 
 session_start();
 
@@ -16,7 +17,9 @@ if (
             $_POST['request'],
             $_POST['result']
         );
+    Patient::changeStatus($_POST['patient_id'], "consulted");
     if ($newSpecCon->postToDataBase()) {
+
         echo "Create Successfull";
     } else {
         echo "Create Failed";

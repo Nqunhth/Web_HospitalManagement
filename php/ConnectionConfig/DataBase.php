@@ -178,6 +178,45 @@ class DataBase
     //         return true;
     //     } else return false;
     // }
+
+    
+    function changePassword($table, $token, $password){
+        $password = $this->prepareData($password);
+        $password = password_hash($password, PASSWORD_DEFAULT);
+        $token = $this->prepareData($token);
+        $this->sql =
+            "UPDATE " . $table . 
+            " SET password='" . $password . "' WHERE token='" . $token . "';";
+        if (mysqli_query($this->connect, $this->sql)) {  
+            $this->discardToken($table, $token);  
+            return true;
+        } else return false;
+    }
+    function changePasswordInside($table, $userId, $password){
+        $password = $this->prepareData($password);
+        $password = password_hash($password, PASSWORD_DEFAULT);
+        $this->sql =
+            "UPDATE " . $table . 
+            " SET password='" . $password . "' WHERE user_id='" . $userId . "';";
+        if (mysqli_query($this->connect, $this->sql)) {  
+            return true;
+        } else return false;
+    }
+    function getTokenByEmail($table, $email)
+    {
+        $username = $this->prepareData($email);
+        $this->sql = "select token from " . $table . " where email = '" . $email . "'";
+        $result = mysqli_query($this->connect, $this->sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row['token'];
+    }
+    function generateTokenForRecovery($table, $email){
+        $token = $this->prepareData(md5($email . strval(time())));
+        $this->sql = "UPDATE " . $table . " SET token = '" . $token . "' where email = '" . $email . "'";
+        if (mysqli_query($this->connect, $this->sql)) {
+            return true;
+        } else return false;
+    }
 }
 
 

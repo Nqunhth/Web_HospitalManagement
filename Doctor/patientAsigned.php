@@ -41,7 +41,7 @@ $assignable = User::fetchSpecialist();
             </li>
             <?php if (!empty($_SESSION['position'])) : ?>
                 <li class="navbar--item has-dropdown-menu">
-                    <a href="/Web_HospitalManagement/Doctor/patientCaring.php" class="navbar--item-link  is-active-in-navbar">Workspace</a>
+                    <a href="/Web_HospitalManagement/Doctor/patientAsigned.php" class="navbar--item-link  is-active-in-navbar">Workspace</a>
                 </li>
             <?php endif ?>
 
