@@ -10,6 +10,11 @@ textarea{
     font-size: 16px;
 }
 /* Hàng xài chung chung  */
+.changpass-error{
+    top: 150px;
+    float: right;
+    right: 50px;
+}
 html{
     scroll-behavior: smooth;
 }
@@ -20,7 +25,7 @@ html{
 .js-error{
     position: absolute;
     top: 15px;
-    width: 800px;
+    width: 500px;
     background-color: #fff;
 }
 .trans-button{
@@ -654,8 +659,12 @@ html{
     display: block;
     align-items: center;
 }
+.i-avatar-content{
+    display: flex;
+}
 .i-avatar-user{
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;  
 }

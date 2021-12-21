@@ -1,10 +1,16 @@
 <?php
 require "../php/ConnectionConfig/DataBase.php";
 require "../php/Patient/Patient.php";
+require "../php/SpecialConsulting/SpecCon.php";
+require "../php/SpecialConsulting/CreateNewSpecCon.php";
 
 session_start();
 
 $result = Patient::fetchAsignedPatientBySpecialist($_SESSION['user_id']);
+
+if (isset($_POST['submit'])) {
+    $error = CreateSpecCon::Create();
+}
 
 ?>
 
@@ -135,9 +141,41 @@ $result = Patient::fetchAsignedPatientBySpecialist($_SESSION['user_id']);
                     </ul>
                 </div>
             </div>
-            <form class="container__content" action="../php/SpecialConsulting/CreateNewSpecCon.php" method="post">
+            <script type="text/javascript">
+                function validateForm() {
+                    const errorLog = document.querySelector('.js-error');
+
+                    var pId = document.forms["Form"]["patient_id"].value;
+                    var pName = document.forms["Form"]["patient_name"].value;
+                    var pAddress = document.forms["Form"]["patient_address"].value;
+                    var pPhone = document.forms["Form"]["patient_phone"].value;
+                    var pAge = document.forms["Form"]["patient_age"].value;
+                    var pJob = document.forms["Form"]["patient_job"].value;
+                    var reason = document.forms["Form"]["reason"].value;
+                    var request = document.forms["Form"]["request"].value;
+                    var result = document.forms["Form"]["result"].value;
+                    var testArea = document.forms["Form"]["test_area"].value;
+                    var doctor = document.forms["Form"]["doctor_name"].value;
+                    if (pId == null || pId == "" || pName == null || pName == "" || pAge == null || pAge == "" || pAddress == null || pAddress == "" ||
+                        pPhone == null || pPhone == "" || pJob == null || pJob == "" || reason == null || reason == "" || request == null || request == "" ||
+                        result == null || result == "" || testArea == null || testArea == "" || doctor == null || doctor == "" ) {
+                        errorLog.classList.remove('hide');
+                        // alert("AAAAa")
+                        return false;
+                    }
+                }
+            </script>
+            <form name="Form" class="container__content" action="" method="post" onsubmit="return validateForm();">
                 <div class="box content__box">
                     <div class="inner-box">
+                        <?php
+                        if (isset($error)) {
+                        ?>
+                            <p class="form-error"><?php echo $error ?></p>
+                        <?php
+                        }
+                        ?>
+                        <p class="form-error hide js-error">All fields are required</p>
                         <?php
                         if (isset($_POST["patients"])) {
                             $currPatient = Patient::fetchAsignedPatientByQueue($_POST["patients"]);
@@ -236,7 +274,7 @@ $result = Patient::fetchAsignedPatientBySpecialist($_SESSION['user_id']);
                     </div>
                 </div>
                 <div class="content__button">
-                    <button type="submit" class="button button-confirm">
+                    <button name="submit" type="submit" class="button button-confirm">
                         <i class="fas fa-check"></i>
                         Confirm
                     </button>

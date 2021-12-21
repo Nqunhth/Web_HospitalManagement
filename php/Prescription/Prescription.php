@@ -1,5 +1,4 @@
 <?php
-require_once("../ConnectionConfig/DataBase.php");
 
 class Prescription{
     //from patient

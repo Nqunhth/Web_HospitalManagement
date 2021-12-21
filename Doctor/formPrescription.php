@@ -1,10 +1,16 @@
 <?php
 require "../php/ConnectionConfig/DataBase.php";
 require "../php/Patient/Patient.php";
+require "../php/Prescription/Prescription.php";
+require "../php/Prescription/CreatePrescription.php";
 
 session_start();
 
 $result = Patient::fetchConsultedPatientForDoctor($_SESSION['user_id']);
+
+if (isset($_POST['submit'])) {
+    $error = CreatePrescription::Create();
+}
 ?>
 
 
@@ -134,9 +140,38 @@ $result = Patient::fetchConsultedPatientForDoctor($_SESSION['user_id']);
                     </ul>
                 </div>
             </div>
-            <form class="container__content" action="../php/Prescription/CreatePrescription.php" method="post">
+            <script type="text/javascript">
+                function validateForm() {
+                    const errorLog = document.querySelector('.js-error');
+
+                    var pId = document.forms["Form"]["patient_id"].value;
+                    var pName = document.forms["Form"]["patient_name"].value;
+                    var pAddress = document.forms["Form"]["patient_address"].value;
+                    var pPhone = document.forms["Form"]["patient_phone"].value;
+                    var pAge = document.forms["Form"]["patient_age"].value;
+                    var pJob = document.forms["Form"]["patient_job"].value;
+                    var conclusion = document.forms["Form"]["conclusion"].value;
+                    var medicines = document.forms["Form"]["medicines"].value;
+
+                    if (pId == null || pId == "" || pName == null || pName == "" || pAge == null || pAge == "" || pAddress == null || pAddress == "" ||
+                        pPhone == null || pPhone == "" || pJob == null || pJob == "" || conclusion == null || conclusion == "" || medicines == null || medicines == "") {
+                        errorLog.classList.remove('hide');
+                        // alert("AAAAa")
+                        return false;
+                    }
+                }
+            </script>
+            <form name="Form" class="container__content" action="" method="post" onsubmit="return validateForm();">
                 <div class="box content__box">
                     <div class="inner-box">
+                        <?php
+                        if (isset($error)) {
+                        ?>
+                            <p class="form-error"><?php echo $error ?></p>
+                        <?php
+                        }
+                        ?>
+                        <p class="form-error hide js-error">All fields are required</p>
                         <?php
                         if (isset($_POST["patients"])) {
                             $currPatient = Patient::fetchConsultedPatientByQueue($_POST["patients"]);
@@ -223,7 +258,7 @@ $result = Patient::fetchConsultedPatientForDoctor($_SESSION['user_id']);
                     </div>
                 </div>
                 <div class="content__button">
-                    <button type = "submit" class="button button-confirm">
+                    <button name="submit" type="submit" class="button button-confirm">
                         <i class="fas fa-check"></i>
                         Confirm
                     </button>

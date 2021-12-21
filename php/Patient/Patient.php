@@ -155,7 +155,7 @@ class Patient{
             ON patient.pat_id = medical_register.pat_id
             JOIN personal_info
             ON personal_info.user_id = specialist_id
-            WHERE DATE(medical_register.created_date) = CURRENT_DATE && medical_register.medi_status = 'enabled' && pat_status = 'c' && doctor_id = '" . $doctorId . "'
+            WHERE DATE(medical_register.created_date) = CURRENT_DATE && medical_register.medi_status = 'enabled' && pat_status = 'consulted' && doctor_id = '" . $doctorId . "'
             ORDER BY medical_register.queue_number;";
         return $conn->query($query);
     }
@@ -169,6 +169,8 @@ class Patient{
             ON patient.pat_id = medical_register.pat_id
             JOIN personal_info
             ON personal_info.user_id = specialist_id
+            LEFT JOIN `specialist_consulting`
+            ON patient.pat_id = specialist_consulting.pat_id
             WHERE DATE(medical_register.created_date) = CURRENT_DATE && medical_register.medi_status = 'enabled' && pat_status = 'asigned' && specialist_id = '" . $specialistId . "';";
         return $conn->query($query);
     }

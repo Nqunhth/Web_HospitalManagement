@@ -1,9 +1,15 @@
 <?php
 require "../php/ConnectionConfig/DataBase.php";
 require "../php/UserClass/User.php";
+require "../php/Image/Upload.php";
+
 session_start();
 
 $owner = User::fetchUserById($_SESSION['user_id']);
+
+if (isset($_POST['submit'])) {
+    $error = ImageUploader::upload();
+}
 
 ?>
 <!DOCTYPE html>
@@ -149,81 +155,75 @@ $owner = User::fetchUserById($_SESSION['user_id']);
                             <p class="i-title-user-avatar">
                                 Avatar:
                             </p>
-                            <?php
-                            if (empty($owner["avatar"])) {
-                            ?>
-                                <div class="i-avatar-user">
-                                    <i id="placeholder" class="fas fa-user-circle"></i>
-                                    <img id="output" class="avatar hide" src="<?php echo $owner["avatar"] ?>"></img>
+
+                            <div class="i-avatar-user">
                                 <?php
-                            } else {
+                                if (isset($error)) {
                                 ?>
-                                    <div class="i-avatar-user">
-                                        <i id="placeholder" class="fas fa-user-circle hide"></i>
-                                        <img id="output" class="avatar" src="<?php echo $owner["avatar"] ?>"></img>
-                                    <?php
+                                    <p class="form-error"><?php echo $error ?></p>
+                                <?php
                                 }
+                                ?>
+                                <div class="i-avatar-content">
+                                    <?php
+                                    if (empty($_SESSION['avatar'])) {
                                     ?>
-                                    <form class="i-avatar-form " action="../php/Image/Upload.php" enctype="multipart/form-data" method="POST">
+                                        <i id="placeholder" class="fas fa-user-circle"></i>
+                                        <img id="output" class="avatar hide" src="<?php echo $_SESSION['avatar'] ?>"></img>
+                                    <?php
+                                    } else {
+                                    ?>
+                                        <i id="placeholder" class="fas fa-user-circle hide"></i>
+                                        <img id="output" class="avatar" src="<?php echo $_SESSION['avatar'] ?>"></img>
+                                    <?php
+                                    }
+                                    ?>
+                                    <form class="i-avatar-form " action="" enctype="multipart/form-data" method="POST">
                                         <input id="selectedFile" class="hide" name="img" size="35" type="file" accept="image/*" onchange="loadFile(event)" /><br />
                                         <button type="button" class="browse_img" onclick="document.getElementById('selectedFile').click();"><i class="fas fa-camera"></i></button>
 
                                         <button class="submit-img" type="submit" name="submit"><i class="fas fa-check"></i></button>
                                     </form>
-                                    <script>
-                                        var loadFile = function(event) {
-                                            var output = document.getElementById('output');
-                                            var placeholder = document.getElementById('placeholder');
-                                            output.classList.remove('hide');
-                                            placeholder.classList.add('hide');
-                                            output.src = URL.createObjectURL(event.target.files[0]);
-                                            output.onload = function() {
-                                                URL.revokeObjectURL(output.src)
-                                            }
-                                        };
-                                    </script>
-                                    </div>
                                 </div>
+                                <script>
+                                    var loadFile = function(event) {
+                                        var output = document.getElementById('output');
+                                        var placeholder = document.getElementById('placeholder');
+                                        output.classList.remove('hide');
+                                        placeholder.classList.add('hide');
+                                        output.src = URL.createObjectURL(event.target.files[0]);
+                                        output.onload = function() {
+                                            URL.revokeObjectURL(output.src)
+                                        }
+                                    };
+                                </script>
+                            </div>
                         </div>
-                    <?php
+                    </div>
+                <?php
                 }
-                    ?>
-                    <div class="content__button">
-                        <button class="button button-confirm">
-                            <i class="fas fa-check"></i>
-                            Confirm
-                        </button>
-                        <button class="button button-reset">
-                            <i class="fas fa-eraser"></i>
-                            Update
-                        </button>
-                    </div>
-                    </div>
+                ?>
+                <div class="content__button">
+                    <button class="button button-confirm">
+                        <i class="fas fa-check"></i>
+                        Confirm
+                    </button>
+                    <button class="button button-reset">
+                        <i class="fas fa-eraser"></i>
+                        Update
+                    </button>
+                </div>
             </div>
         </div>
+    </div>
 
-        <div class="footer__content">
-            <div class="content-title">
-                <p>Contact:</p>
-            </div>
-            <div class="content-main">
-                <div class="main-column">
-                    <div class="column-content">
-                        <ul class="column-link-list">
-                            <li class="column-link-list-item">
-                                <p>Address : XX AAA....</p>
-                            </li>
-                            <li class="column-link-list-item">
-                                <p>Hotline : XX AAA....</p>
-                            </li>
-                            <li class="column-link-list-item">
-                                <p>Email : XX AAA@Mail.com</p>
-                            </li>
-                        </ul>
-                    </div>
-
-                </div>
-                <div class="main-column">
+    <div class="footer__content">
+        <div class="content-title">
+            <p>Contact:</p>
+        </div>
+        <div class="content-main">
+            <div class="main-column">
+                <div class="column-content">
                     <ul class="column-link-list">
                         <li class="column-link-list-item">
                             <p>Address : XX AAA....</p>
@@ -236,12 +236,27 @@ $owner = User::fetchUserById($_SESSION['user_id']);
                         </li>
                     </ul>
                 </div>
+
             </div>
-            <div class="content-conclude">
-                <p>Copyright Copyright Pisces/Thu/Anh blah blah blah.....</p>
-                <p>More Thing Is Needed</p>
+            <div class="main-column">
+                <ul class="column-link-list">
+                    <li class="column-link-list-item">
+                        <p>Address : XX AAA....</p>
+                    </li>
+                    <li class="column-link-list-item">
+                        <p>Hotline : XX AAA....</p>
+                    </li>
+                    <li class="column-link-list-item">
+                        <p>Email : XX AAA@Mail.com</p>
+                    </li>
+                </ul>
             </div>
         </div>
+        <div class="content-conclude">
+            <p>Copyright Copyright Pisces/Thu/Anh blah blah blah.....</p>
+            <p>More Thing Is Needed</p>
+        </div>
+    </div>
 </body>
 
 </html>

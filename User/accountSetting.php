@@ -1,5 +1,12 @@
 <?php
+require "../php/ConnectionConfig/DataBase.php";
+require "../php/UserClass/changepassword.php";
+
 session_start();
+
+if (isset($_POST['submit'])) {
+    $error = ChangePassword::changePassword();
+}
 ?>
 <html>
 
@@ -96,25 +103,32 @@ session_start();
                     </ul>
                 </div>
             </div>
-            <form action = "../php/UserClass/changepassword.php" method = "post" class="container__content">
+            <form action="" method="post" class="container__content">
                 <div class="box content__box">
                     <div class="inner-box inner-box-user">
                         <p class="i-title">
                             Current Password:
-                            <input type="text" name="current_pass" class="medium-input">
+                            <input type="text" name="current_pass" class="medium-input" value="<?php echo (isset($_POST['current_pass']) && $error != "Change password success" ? $_POST['current_pass'] : "") ?>">
                         </p>
                         <p class="i-title-user">
                             New Password:
-                            <input type="text" name="new_pass" class="medium-input">
+                            <input type="text" name="new_pass" class="medium-input" value="<?php echo (isset($_POST['new_pass']) && $error != "Change password success" ? $_POST['new_pass'] : "") ?>">
                         </p>
                         <p class="i-title-user">
                             Confirm New Password:
-                            <input type="text" name="confirm_pass" class="medium-input">
+                            <input type="text" name="confirm_pass" class="medium-input" value="<?php echo (isset($_POST['confirm_pass']) && $error != "Change password success" ? $_POST['confirm_pass'] : "") ?>">
                         </p>
+                        <?php
+                        if (isset($error)) {
+                        ?>
+                            <p class="form-error changpass-error"><?php echo $error ?></p>
+                        <?php
+                        }
+                        ?>
                     </div>
                 </div>
                 <div class="content__button">
-                    <button tyoe submit class="button button-confirm">
+                    <button type="submit" name="submit" class="button button-confirm">
                         <i class="fas fa-check"></i>
                         Confirm
                     </button>
