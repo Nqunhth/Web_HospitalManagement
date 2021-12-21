@@ -1,14 +1,16 @@
 <?php
 require "../ConnectionConfig/DataBase.php";
 
+session_start();
+
     $img=$_FILES['img'];
     if(isset($_POST['submit'])){ 
         if($img['name']==''){  
-            echo "<h2>An Image Please.</h2>";
+            echo "Image not found";
         }
         else{ 
             $filename = $img['tmp_name'];
-            echo json_encode($img, JSON_UNESCAPED_UNICODE);;
+            // echo json_encode($img, JSON_UNESCAPED_UNICODE);
             $client_id="2ea9bd6c41d0bf2";
             $handle = fopen($filename, "r");
             $data = fread($handle, filesize($filename));
@@ -26,28 +28,21 @@ require "../ConnectionConfig/DataBase.php";
             $pms = json_decode($out,true);
             $url=$pms['data']['link'];
             if($url!=""){
-                // echo "<h2>Uploaded Without Any Problem</h2>";
-                // echo "<img src='$url'/>";
-                // echo $url;
-
                 $db = new DataBase();
                 if ($db->dbConnect()) {
-                    if($db->uploadImg("img_test", $url)){
+                    // echo $db->uploadImg("personal_info", $_SESSION['user_id'], $url);
+                    if($db->uploadImg("personal_info", $_SESSION['user_id'], $url)){
+                        $_SESSION['avatar'] = $url;
                         echo "Img uploaded to db successfully!";
                     }
                     else {
                         echo "Couldn't upload to db" ;
-                    };
-                        
+                    };                        
                 }
                 else{
                     echo "DB Connection Error";
                 };
             }
-            // else{
-            //     echo "<h2>There's a Problem</h2>";
-            //     echo $pms['data']['error'];  
-            // } 
         }
     }
 ?>

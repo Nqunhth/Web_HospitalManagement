@@ -204,10 +204,17 @@ $assignable = User::fetchSpecialist();
                                                 </p>
                                                 </p>
                                                 <p class="i-title">
-                                                    List of Specialists Consulting Rooms (or Analysis):
+                                                    Specialist Consulting Room (or Analysis):
                                                 </p>
                                                 <p class="i-value long-input"><?php echo $row['full_name'] . " | " . $row['specialized_field'] . " " . $row['specialist_id'] ?></p>
-
+                                                <div class="i-line">
+                                                    <p class="i-title">Request:</p>
+                                                </div>
+                                                <textarea readonly="readonly" onfocus="this.blur()" tabindex="-1" class="long-input" name="request" rows="4"><?php echo $row['request']?></textarea>
+                                                <div class="i-line">
+                                                    <p class="i-title">Result:</p>
+                                                </div>
+                                                <textarea readonly="readonly" onfocus="this.blur()" tabindex="-1" class="long-input" name="result" rows="4"><?php echo $row['result']?></textarea>
                                             </div>
                                             <div class="switch-container center">
                                             </div>

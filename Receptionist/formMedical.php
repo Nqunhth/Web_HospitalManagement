@@ -8,7 +8,7 @@ require "../php/Patient/Patient.php";
 session_start();
 $result = User::fetchActiveDoctorForReceptionist();
 
-if(isset($_POST['submit'])){
+if (isset($_POST['submit'])) {
     $error = CreateNewMedicalReg::Create();
 }
 ?>
@@ -101,7 +101,7 @@ if(isset($_POST['submit'])){
                     </ul>
                 </div>
                 <div class="box menu__box middle__box">
-                    <p>Ceate New Form</p>
+                    <p>Create New Form</p>
                     <ul>
                         <li class="is-active-in-menu">
                             <i class="fas fa-notes-medical"></i>
@@ -110,16 +110,36 @@ if(isset($_POST['submit'])){
                     </ul>
                 </div>
             </div>
-            <form class="container__content" action="" method="post">
+            <script type="text/javascript">
+                function validateForm() {
+                    const errorLog = document.querySelector('.js-error');
+
+                    var name = document.forms["Form"]["patient_name"].value;
+                    var age = document.forms["Form"]["patient_age"].value;
+                    var address = document.forms["Form"]["patient_address"].value;
+                    var phone = document.forms["Form"]["patient_phone"].value;
+                    var job = document.forms["Form"]["patient_job"].value;
+                    var reason = document.forms["Form"]["reason"].value;
+                    var doctors = document.forms["Form"]["doctors"].value;
+
+                    if (name == null || name == "" || age == null || age == "" || address == null || address == "" ||
+                        phone == null || phone == "" || job == null || job == "" || reason == null || reason == "" || doctors == null || doctors == "") {
+                        errorLog.classList.remove('hide');
+                        return false;
+                    }
+                }
+            </script>
+            <form method="post" name="Form" class="container__content" onsubmit="return validateForm()" action="">
                 <div class="box content__box">
                     <div class="inner-box">
                         <?php
-                            if(isset($error)){
+                        if (isset($error)) {
                         ?>
-                        <p class="form-error"><?php echo $error ?></p>
+                            <p class="form-error"><?php echo $error ?></p>
                         <?php
-                            }
+                        }
                         ?>
+                        <p class="form-error hide js-error">All fields are required</p>
                         <p class="i-title">
                             Patient Full Name:
                             <input type="text" class="medium-input" name="patient_name">
@@ -167,7 +187,7 @@ if(isset($_POST['submit'])){
 
                         <?php if ($_SESSION['position'] == "doctor") : ?>
                             <div class="i-line">
-                                <p class="i-title">List of Specialists Consulting Rooms (or Analysis):</p>
+                                <p class="i-title">Specialist Consulting Room (or Analysis):</p>
                             </div>
                             <textarea class="long-input" name="mediregist" rows="5"></textarea>
                         <?php endif ?>
@@ -187,7 +207,6 @@ if(isset($_POST['submit'])){
                     </div>
                 </div>
                 <div class="content__button">
-
                     <button type="submit" name="submit" class="button button-confirm">
                         <i class="fas fa-check"></i>
                         Confirm
@@ -201,8 +220,8 @@ if(isset($_POST['submit'])){
                         Print
                     </button>
                 </div>
-
             </form>
+
         </div>
 
     </div>

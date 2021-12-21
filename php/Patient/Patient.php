@@ -139,7 +139,9 @@ class Patient{
             ON patient.pat_id = medical_register.pat_id
             JOIN personal_info
             ON personal_info.user_id = specialist_id
-            WHERE DATE(medical_register.created_date) = CURRENT_DATE && medical_register.medi_status = 'enabled' && pat_status = 'asigned' && doctor_id = '" . $doctorId . "'
+            LEFT JOIN `specialist_consulting`
+            ON patient.pat_id = specialist_consulting.pat_id
+            WHERE DATE(medical_register.created_date) = CURRENT_DATE && medical_register.medi_status = 'enabled' && (pat_status = 'asigned' || pat_status = 'consulted') && doctor_id = '" . $doctorId . "'
             ORDER BY medical_register.queue_number;";
         return $conn->query($query);
     }
@@ -153,7 +155,7 @@ class Patient{
             ON patient.pat_id = medical_register.pat_id
             JOIN personal_info
             ON personal_info.user_id = specialist_id
-            WHERE DATE(medical_register.created_date) = CURRENT_DATE && medical_register.medi_status = 'enabled' && pat_status = 'consulted' && doctor_id = '" . $doctorId . "'
+            WHERE DATE(medical_register.created_date) = CURRENT_DATE && medical_register.medi_status = 'enabled' && pat_status = 'c' && doctor_id = '" . $doctorId . "'
             ORDER BY medical_register.queue_number;";
         return $conn->query($query);
     }
@@ -177,7 +179,9 @@ class Patient{
             "SELECT * 
             FROM `patient`
             JOIN `medical_register`
-            ON patient.pat_id = medical_register.pat_id";
+            ON patient.pat_id = medical_register.pat_id
+            LEFT JOIN prescription
+            ON patient.pat_id = prescription.pat_id";
         return $conn->query($query);
     }
     public static function fetchCaringPatientByQueue($queue){

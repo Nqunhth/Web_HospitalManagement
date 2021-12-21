@@ -159,7 +159,7 @@ if (isset($_POST['queue'])) {
                                         </div>
                                         <div class="inner-card">
                                             <div class="inner-detail">
-                                                <?php if (isset($error)) { ?>
+                                                <?php if (isset($error) && $_POST['queue'] == $row['queue_number']) { ?>
                                                     <p class="form-error"><?php echo $error ?></p>
                                                 <?php } ?>
                                                 <p class="i-title">
@@ -216,7 +216,9 @@ if (isset($_POST['queue'])) {
                                                 </p>
                                                 <select name="specialist_id" id="doctors" class="long-input">
                                                     <option value="" disabled selected>--select--</option>
-                                                    <?php if ($result->num_rows > 0) {
+                                                    <?php 
+                                                    $assignable->data_seek(0);
+                                                    if ($assignable->num_rows > 0) {
                                                         // Load dữ liệu lên website
                                                         while ($assign = $assignable->fetch_assoc()) {
                                                     ?>

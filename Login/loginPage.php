@@ -71,20 +71,34 @@ if (isset($_POST['submit'])) {
                     <h1 class="head_title">HOSPITAL NAME</h1>
                     <p class="head_subtitle">Log in to get in and start your new day!</p>
                 </div>
-                <?php 
-                if(isset($error)){
+                <?php
+                if (isset($error)) {
                 ?>
-                <p class="error-font"><?php echo $error ?></p>
+                    <p class="error-font"><?php echo $error ?></p>
                 <?php } ?>
-                <form action="" method="post" class="input_section center">
+                <p class="error-font js-error login-input hide">All fields are required</p>
+                <script type="text/javascript">
+                    function validateForm() {
+                        const errorLog = document.querySelector('.js-error');
+
+                        var username = document.forms["Form"]["username"].value;
+                        var password = document.forms["Form"]["password"].value;
+
+                        if (username == null || username == "" || password == null || password == "") {
+                            errorLog.classList.remove('hide');
+                            return false;
+                        }
+                    }
+                </script>
+                <form name="Form" action="" method="post" class="input_section center" onsubmit="return validateForm()">
                     <div class="input_section center">
                         <div class="input center">
                             <i class="far fa-user login_icon"></i>
-                            <input type="text" name="username" id="" placeholder="Username">
+                            <input type="text" name="username" id="" placeholder="Username" value="<?php echo (isset($_POST['username']) ? $_POST['username'] : "") ?>">
                         </div>
                         <div class="input center">
                             <i class="fas fa-key login_icon"></i>
-                            <input type="text" name="password" id="" placeholder="Password">
+                            <input type="text" name="password" id="" placeholder="Password" value="<?php echo (isset($_POST['username']) ? $_POST['password'] : "") ?>">
                         </div>
                     </div>
                     <div class="forget_section center">
