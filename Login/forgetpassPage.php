@@ -1,7 +1,15 @@
 <?php
+require "../php/ConnectionConfig/DataBase.php";
+require "../php/Mail/SendMail.php";
+require '../php/lib/PHPMailer/src/Exception.php';
+require '../php/lib/PHPMailer/src/PHPMailer.php';
+require '../php/lib/PHPMailer/src/SMTP.php';
+require '../php/LogIn-SignUp/forgetpassword.php';
 
-
+if (isset($_POST['submit']))
+    $error = ForgerPassword::forgetPassword();
 ?>
+
 <!DOCTYPE html>
 <html>
 
@@ -59,20 +67,26 @@
     </div>
     <div class="login-page">
         <div class="group">
-            <form action="../php/LogIn-SignUp/forgetpassword.php" method="post" class="card rounded_left_border center">
+            <form action="" method="post" class="card rounded_left_border center">
                 <div class="card_heading center">
                     <h2 class="head_prefix">WELCOME TO</h2>
                     <h1 class="head_title">HOSPITAL NAME</h1>
                     <p class="head_subtitle">Remember your validated Email?</p>
                     <p class="head_subtitle">Enter it here and we will send you a recovery link</p>
                 </div>
+
                 <div class="input_section center in_forgetpassPage">
+                    <?php
+                    if (isset($error)) {
+                    ?>
+                        <p class="error-font"><?php echo $error ?></p>
+                    <?php } ?>
                     <div class="input center">
                         <i class="far fa-envelope login_icon"></i>
                         <input type="text" name="email" id="" placeholder="Validated Email...">
                     </div>
                 </div>
-                <button type="submit" class="login_btn">
+                <button name="submit" type="submit" class="login_btn">
                     SEND RECOVERY LINK
                 </button>
             </form>

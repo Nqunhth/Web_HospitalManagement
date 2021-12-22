@@ -11,7 +11,8 @@ textarea{
 }
 /* Hàng xài chung chung  */
 .changpass-error{
-    top: 150px;
+    position: absolute;
+    top: 240px;
     float: right;
     right: 50px;
 }
@@ -1726,6 +1727,9 @@ select {
     left: 10vw;
     flex-direction: column;
     
+}
+.fn_paragraph{
+    text-align: justify;
 }
 .full_news .fn_header{
     height: 120px;

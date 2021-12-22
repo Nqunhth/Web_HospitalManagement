@@ -115,8 +115,8 @@
                 <?php } ?>
             </div>
             <div class="section column-flex">
-                <input type="password" name="new_pass" id="pass1">
-                <input type="password" name="confirm_pass" id="pass2">
+                <input type="password" name="new_pass" id="pass1" value="<?php echo (isset($_POST['new_pass']) ? $_POST['new_pass'] : "") ?>">
+                <input type="password" name="confirm_pass" id="pass2" value="<?php echo (isset($_POST['confirm_pass']) ? $_POST['confirm_pass'] : "") ?>">
                 <div class="hide-show">
                     <input type="checkbox" onclick="myFunction()">
                     <p>Show Password</p>

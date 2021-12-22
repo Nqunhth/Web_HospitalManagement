@@ -10,6 +10,7 @@ $result = Patient::fetchAsignedPatientBySpecialist($_SESSION['user_id']);
 
 if (isset($_POST['submit'])) {
     $error = CreateSpecCon::Create();
+    $result = Patient::fetchAsignedPatientBySpecialist($_SESSION['user_id']);
 }
 
 ?>

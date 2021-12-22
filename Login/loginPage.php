@@ -76,21 +76,7 @@ if (isset($_POST['submit'])) {
                 ?>
                     <p class="error-font"><?php echo $error ?></p>
                 <?php } ?>
-                <p class="error-font js-error login-input hide">All fields are required</p>
-                <script type="text/javascript">
-                    function validateForm() {
-                        const errorLog = document.querySelector('.js-error');
-
-                        var username = document.forms["Form"]["username"].value;
-                        var password = document.forms["Form"]["password"].value;
-
-                        if (username == null || username == "" || password == null || password == "") {
-                            errorLog.classList.remove('hide');
-                            return false;
-                        }
-                    }
-                </script>
-                <form name="Form" action="" method="post" class="input_section center" onsubmit="return validateForm()">
+                <form name="Form" action="" method="post" class="input_section center">
                     <div class="input_section center">
                         <div class="input center">
                             <i class="far fa-user login_icon"></i>

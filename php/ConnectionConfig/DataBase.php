@@ -170,14 +170,14 @@ class DataBase
             return false;
         }
     }
-        // function uploadImg($table, $link)
-    // {
-    //     $link = $this->prepareData($link);
-    //     $this->sql = "INSERT INTO " . $table . " (img_link) VALUES ('" . $link . "')";
-    //     if (mysqli_query($this->connect, $this->sql)) {
-    //         return true;
-    //     } else return false;
-    // }
+        function uploadImg($table, $userId, $link)
+    {
+        $link = $this->prepareData($link);
+        $this->sql = "UPDATE " . $table . " SET avatar='" . $link . "' WHERE user_id = '" . $userId . "';";
+        if (mysqli_query($this->connect, $this->sql)) {
+            return true;
+        } else return false;
+    }
 
     
     function changePassword($table, $token, $password){

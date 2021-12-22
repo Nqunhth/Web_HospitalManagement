@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 19, 2021 at 06:07 AM
+-- Generation Time: Dec 22, 2021 at 11:46 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -45,7 +45,7 @@ CREATE TABLE `account` (
 INSERT INTO `account` (`user_id`, `username`, `password`, `position`, `email`, `token`, `status`, `created_date`) VALUES
 (00001, 'CreaMiraelle', '$2y$10$ExU/XRICW880BD/KDxNXTuk31ZwTaiVhnVvoi6fPUQu0ip3O4FBZS', 'manager', 'ngocanhcao7i@gmail.com', 'activated', 'enabled', '2021-11-18 16:23:44'),
 (00002, 'nqunhth', '$2y$10$m0YXc.V0ubshC8gCp5FNMeBIAzx0mZ/veZ0uAzuo4RJObEP4.8en6', 'manager', '123sdf@gmail.com', 'activated', 'enabled', '2021-11-19 03:18:38'),
-(00003, 'aaa', '$2y$10$K5nc9lW2qCgCfIyQFoNKquAqS.86J9xKvO9mJ/y/Bi3Np9kC7Nm6i', 'doctor', 'nqunhth@gmail.com', 'activated', 'enabled', '2021-12-05 05:23:11'),
+(00003, 'aaa', '$2y$10$XHSZXmz5/6qWeM83E8zhI.hDqgYzMp4xg8rFiF0OU5HANzLpm3pP6', 'doctor', 'kurocrea@gmail.com', '0352275d9e20fa64b2d92adca5028893', 'enabled', '2021-12-05 05:23:11'),
 (00004, 'bbb', '$2y$10$Gzzga8kPLLIIzpxciJmOV.W513u2ni7W/l6SaVgXf.DjYWL1RgnXm', 'doctor', 'nqunhth@gmail.com', 'activated', 'enabled', '2021-12-05 05:34:55'),
 (00005, 'ccc', '$2y$10$23plJ5m1YoYaWwiz49T3o.z63/dOsngeTPP/IEB0EgqagV1FG0TQ2', 'doctor', 'nqunhth@gmail.com', 'activated', 'enabled', '2021-12-05 05:35:55'),
 (00006, 'ddd', '$2y$10$gzkiajOxhfQGx3YtCYQRkeqGb7ouT8tCCAkn9YQmFzooZ.ZdyW4Ty', 'doctor', 'nqunhth@gmail.com', 'activated', 'enabled', '2021-12-05 05:37:17'),
@@ -93,7 +93,7 @@ INSERT INTO `doctor` (`doctor_id`) VALUES
 
 CREATE TABLE `invoice` (
   `invo_id` int(5) UNSIGNED ZEROFILL NOT NULL,
-  `pat_id` int(5) UNSIGNED ZEROFILL NOT NULL,
+  `cus_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `creator_id` int(5) UNSIGNED ZEROFILL NOT NULL,
   `created_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `invo_status` varchar(8) COLLATE utf8_unicode_ci NOT NULL,
@@ -107,6 +107,7 @@ CREATE TABLE `invoice` (
 --
 
 CREATE TABLE `invoice_medicine` (
+  `inme_id` int(10) UNSIGNED NOT NULL,
   `medicine_id` int(5) UNSIGNED ZEROFILL NOT NULL,
   `invo_id` int(5) UNSIGNED ZEROFILL NOT NULL,
   `quantity` int(11) NOT NULL,
@@ -137,13 +138,11 @@ CREATE TABLE `medical_register` (
 --
 
 INSERT INTO `medical_register` (`medi_id`, `pat_id`, `creator_id`, `doctor_id`, `doctor_name`, `created_date`, `medi_reason`, `medi_status`, `queue_number`, `specialist_id`) VALUES
-(00001, 00001, 00007, 00004, 'Trần Thị BBB', '2021-12-18 07:42:52', 'Extreme Depression', 'enabled', 1, 5),
-(00002, 00002, 00007, 00003, 'Nguyễn Văn AAA', '2021-12-18 07:43:31', 'Heart Failure', 'enabled', 2, 5),
-(00003, 00003, 00007, 00003, 'Nguyễn Văn AAA', '2021-12-18 08:44:20', 'Crazy', 'enabled', 3, 5),
-(00004, 00004, 00007, 00003, 'Nguyễn Văn AAA', '2021-12-18 09:17:49', 'Test', 'enabled', 4, 5),
-(00005, 00005, 00007, 00003, 'Nguyễn Văn AAA', '2021-12-18 09:18:14', 'Sore throat', 'enabled', 5, 5),
-(00006, 00006, 00007, 00003, 'Nguyễn Văn AAA', '2021-12-18 09:18:47', 'Test', 'enabled', 6, 5),
-(00008, 00008, 00007, 00003, 'Nguyễn Văn AAA', '2021-12-19 02:55:24', 'Test', 'enabled', 1, 5);
+(00001, 00001, 00007, 00004, 'Trần Thị BBB', '2021-12-21 17:00:00', 'Extreme Depression', 'enabled', 1, 0),
+(00002, 00002, 00007, 00003, 'Nguyễn Văn AAA', '2021-12-21 17:00:00', 'Heart Failure', 'enabled', 2, 5),
+(00003, 00003, 00007, 00003, 'Nguyễn Văn AAA', '2021-12-21 17:00:00', 'Crazy', 'enabled', 3, 5),
+(00004, 00004, 00007, 00003, 'Nguyễn Văn AAA', '2021-12-21 17:00:00', 'Test', 'enabled', 4, 0),
+(00005, 00005, 00007, 00003, 'Nguyễn Văn AAA', '2021-12-21 17:00:00', 'Sore throat', 'enabled', 5, 0);
 
 --
 -- Triggers `medical_register`
@@ -203,8 +202,18 @@ CREATE TABLE `news` (
   `news_id` int(5) UNSIGNED ZEROFILL NOT NULL,
   `news_title` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `news_content` text COLLATE utf8_unicode_ci NOT NULL,
-  `news_img` varchar(200) COLLATE utf8_unicode_ci NOT NULL
+  `news_img` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `news_author` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'Anonymous',
+  `news_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `news`
+--
+
+INSERT INTO `news` (`news_id`, `news_title`, `news_content`, `news_img`, `news_author`, `news_date`) VALUES
+(00001, 'Booster shots eligible', 'A vaccination site offering third COVID-19 vaccine doses for frontline workers at Gò Vấp District, HCM City, on December 10, 2021. HCM City was the first in the country to start giving booster shots. — VNA/VNS Photo Thu Hương\r\nHÀ NỘI — The Vietnamese health ministry has reduced the waiting time between the second COVID-19 vaccine dose of the primary course and the booster shot.\r\n\r\nInstead of six months, the latest booster guidelines say the third jab can be administered just three months after people received their second shot.', 'https://image.vietnamnews.vn/uploadvnnews/Article/2021/12/20/192315_4092342884632612_anhai.jpg', 'Anonymous', '2021-12-21 08:45:35'),
+(00002, 'We are stronger together', '\"Through collaboration and an unwavering commitment to patient care, one of Ontario’s hardest-hit health systems managed through the third wave of the pandemic\"\r\nBy Dr. Naveed Mohammad.         \r\n\r\nSince the onset of the COVID-19 pandemic, the communities served by William Osler Health System (Osler) – the City of Brampton, North Etobicoke and the surrounding areas – have been hit particularly hard, consistently recording some of the highest positivity rates in the province. This has had a profound impact on Osler’s staff, physicians and volunteers who have put forth an unprecedented dedicated effort to continue delivering safe, quality care to an influx of patients.\r\n\r\nAt the height of the third wave of the pandemic, Osler operated well over capacity and would have been challenged to meet the health care needs of its communities without the unrelenting support of its hospital partners. While providing care to their own communities during this extraordinary time, close to 40 hospitals and other health care facilities graciously accepted the transfer of more than 800 patients from Osler’s inpatient hospitals – Brampton Civic Hospital and Etobicoke General Hospital. More than 33 health care professionals from the province of Newfoundland and Labrador, the Ontario Home and Community Care sector, Kemptville District Hospital and the Canadian Red Cross also answered the call and volunteered their time and expertise – some even arriving by military aircraft to support Osler in its time of need.\r\n\r\nWith the help of all our health care partners, as well as the support of the Ontario Government, Ontario Health, the Province of Newfoundland and Labrador, and the Royal Canadian Air Force, Osler was able to provide care for an exceptionally high number of patients with COVID-19 when they needed it most.\r\n\r\nOur entire team at Osler and the patients we care for are profoundly grateful to all those who supported us during this difficult time. This support ensured all patients from Osler’s communities, including many who were critically ill at the time of transfer, received quality, compassionate care at other hospital facilities. It has been a challenging time for all hospitals across Ontario, and we appreciate the ongoing partnerships and collaboration that help make us stronger together.\r\n\r\nThe level of collaboration among hospitals across the province and the entire country during this time continues to be a source of inspiration. Collaboration makes us all better.\r\n\r\nDr. Naveed Mohammad is President and CEO of William Osler Health System which includes Brampton Civic Hospital, Peel Memorial Centre for Integrated Health and Wellness and Etobicoke General Hospital, and serves 1.3 million residents of Brampton, Etobicoke and the surrounding communities within Ontario’s Central West region.', 'https://i0.wp.com/hospitalnews.com/wp-content/uploads/2021/10/CEO-e1637328807830.jpg?w=586&ssl=1', 'Anonymous', '2021-12-21 08:54:21');
 
 -- --------------------------------------------------------
 
@@ -219,7 +228,7 @@ CREATE TABLE `patient` (
   `pat_address` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `pat_phone` varchar(12) COLLATE utf8_unicode_ci NOT NULL,
   `pat_job` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `pat_status` varchar(7) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'caring'
+  `pat_status` varchar(9) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'caring'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -227,13 +236,11 @@ CREATE TABLE `patient` (
 --
 
 INSERT INTO `patient` (`pat_id`, `pat_name`, `pat_age`, `pat_address`, `pat_phone`, `pat_job`, `pat_status`) VALUES
-(1, 'Cao Ngoc A', 21, 'adddddd', '009090909', 'jobless', 'asigned'),
-(2, 'Cao Ngoc B', 39, '44 Huhuhu', '444449', 'jobless', 'asigned'),
-(3, 'Hutao', 21, '333 Washington', '444449', 'jobless', 'asigned'),
-(4, 'Ning', 23, 'fwfsdf', '24343', 'President', 'asigned'),
-(5, 'UI', 23, 'fwfsdf', '24343', 'Singer', 'caring'),
-(6, 'asa', 50, 'fwfsdf', '24343', 'fff', 'caring'),
-(8, 'Moe', 12, 'fwfsdf', '24343', 'President', 'asigned');
+(1, 'Cao Ngoc A', 21, 'adddddd', '009090909', 'jobless', 'caring'),
+(2, 'Cao Ngoc B', 39, '44 Huhuhu', '444449', 'jobless', 'done'),
+(3, 'Hutao', 21, '333 Washington', '444449', 'jobless', 'consulted'),
+(4, 'Ning', 23, 'fwfsdf', '24343', 'President', 'caring'),
+(5, 'UI', 23, 'fwfsdf', '24343', 'Singer', 'caring');
 
 -- --------------------------------------------------------
 
@@ -262,9 +269,9 @@ CREATE TABLE `personal_info` (
 INSERT INTO `personal_info` (`user_id`, `full_name`, `age`, `gender`, `birthday`, `specialized_field`, `address`, `phone_number`, `id_card_number`, `id_card_date`, `avatar`) VALUES
 (00001, 'Cao Ngọc Anh', 20, 'female', '2001-03-08', 'Nhân sự', 'xxx XXX yy YY zz ZZZZZ', '123456789', '123456789', '2021-11-10', 'https://i.imgur.com/uKqhZDC.jpg'),
 (00002, 'Nguyễn Hồ Quỳnh Thư', 20, 'female', '2001-02-19', 'Nhân sự', 'xxx XXX yy YY zz ZZZZZ', '123456789', '123456789', '2021-11-10', ''),
-(00003, 'Nguyễn Văn AAA', 0, 'male', '2021-12-05', 'Tổng quát', '', '', '', '2021-12-05', 'https://i.imgur.com/uKqhZDC.jpg'),
+(00003, 'Nguyễn Văn AAA', 0, 'male', '2021-12-05', 'Tổng quát', '', '', '', '2021-12-05', 'https://i.imgur.com/i1CefLT.jpg'),
 (00004, 'Trần Thị BBB', 0, 'male', '2021-12-05', 'Tổng quát', '', '', '', '2021-12-05', ''),
-(00005, 'Lê Thị CCC', 0, 'male', '2021-12-05', 'Tai mũi họng', '', '', '', '2021-12-05', ''),
+(00005, 'Lê Thị CCC', 0, 'male', '2021-12-05', 'Tai mũi họng', '', '', '', '2021-12-05', 'https://i.imgur.com/wkDKNnO.jpg'),
 (00006, 'Nguyễn Minh DDD', 0, 'male', '2021-12-05', 'Thẩm mỹ', '', '', '', '2021-12-05', ''),
 (00007, 'Đinh Thị EEE', 0, 'male', '2021-12-05', 'Tiếp tân', '', '', '', '2021-12-05', 'https://i.imgur.com/uKqhZDC.jpg'),
 (00008, 'Hoàng Lê FFF', 0, 'male', '2021-12-05', 'Tiếp tân', '', '', '', '2021-12-05', ''),
@@ -300,8 +307,9 @@ CREATE TABLE `prescription` (
   `pat_id` int(5) UNSIGNED ZEROFILL NOT NULL,
   `creator_id` int(5) UNSIGNED ZEROFILL NOT NULL,
   `creator_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `pres_status` varchar(8) COLLATE utf8_unicode_ci NOT NULL,
-  `conclusion` text COLLATE utf8_unicode_ci NOT NULL
+  `pres_status` varchar(8) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'enabled',
+  `conclusion` text COLLATE utf8_unicode_ci NOT NULL,
+  `medicines` text COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -352,15 +360,6 @@ CREATE TABLE `specialist_consulting` (
   `result` text COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Dumping data for table `specialist_consulting`
---
-
-INSERT INTO `specialist_consulting` (`spec_id`, `pat_id`, `creator_id`, `creator_name`, `created_date`, `spec_status`, `spec_reason`, `test_area`, `request`, `result`) VALUES
-(1, 1, 00003, 'Nguyễn Văn AAA', '2021-12-08 05:03:22', 'enabled', 'Soi không được', 'Não', 'X Quang VIP', 'Không thấy não'),
-(2, 2, 00003, 'Nguyễn Văn AAA', '2021-12-08 08:34:49', 'enabled', 'ffds', 'dfdf', 'ggggg', 'ggggg'),
-(3, 1, 00003, 'Nguyễn Văn AAA', '2021-12-08 09:41:21', 'enabled', 'dasdsd', 'Não', 'fasfhahiw', 'gsfefeaef');
-
 -- --------------------------------------------------------
 
 --
@@ -409,6 +408,12 @@ ALTER TABLE `doctor`
 --
 ALTER TABLE `invoice`
   ADD PRIMARY KEY (`invo_id`);
+
+--
+-- Indexes for table `invoice_medicine`
+--
+ALTER TABLE `invoice_medicine`
+  ADD PRIMARY KEY (`inme_id`);
 
 --
 -- Indexes for table `medical_register`
@@ -493,10 +498,16 @@ ALTER TABLE `invoice`
   MODIFY `invo_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `invoice_medicine`
+--
+ALTER TABLE `invoice_medicine`
+  MODIFY `inme_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `medical_register`
 --
 ALTER TABLE `medical_register`
-  MODIFY `medi_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `medi_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `medicine`
@@ -508,13 +519,13 @@ ALTER TABLE `medicine`
 -- AUTO_INCREMENT for table `news`
 --
 ALTER TABLE `news`
-  MODIFY `news_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT;
+  MODIFY `news_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `patient`
 --
 ALTER TABLE `patient`
-  MODIFY `pat_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `pat_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `personal_info`
@@ -544,7 +555,7 @@ ALTER TABLE `receptionist`
 -- AUTO_INCREMENT for table `specialist_consulting`
 --
 ALTER TABLE `specialist_consulting`
-  MODIFY `spec_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `spec_id` int(5) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user`

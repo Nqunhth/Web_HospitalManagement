@@ -10,6 +10,7 @@ $result = Patient::fetchConsultedPatientForDoctor($_SESSION['user_id']);
 
 if (isset($_POST['submit'])) {
     $error = CreatePrescription::Create();
+    $result = Patient::fetchConsultedPatientForDoctor($_SESSION['user_id']);
 }
 ?>
 
