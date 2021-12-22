@@ -6,10 +6,28 @@
     box-sizing: border-box;
     position: relative;
 }
+textarea{
+    font-size: 16px;
+}
 /* Hàng xài chung chung  */
+.changpass-error{
+    position: absolute;
+    top: 240px;
+    float: right;
+    right: 50px;
+}
+html{
+    scroll-behavior: smooth;
+}
 .form-error{
     font-size: 14px;
     color: red
+}
+.js-error{
+    position: absolute;
+    top: 15px;
+    width: 500px;
+    background-color: #fff;
 }
 .trans-button{
     background-color: transparent;
@@ -536,6 +554,9 @@
 .button-confirm{
     margin-right: 12%;
 }
+.top25px{
+    top: 25px
+}
     /*DoctorPage - Content Area*/
     /*Card List*/
 .card-list{
@@ -639,8 +660,12 @@
     display: block;
     align-items: center;
 }
+.i-avatar-content{
+    display: flex;
+}
 .i-avatar-user{
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;  
 }
@@ -656,6 +681,24 @@
     object-fit: cover;
     height: 140px;
     width: 140px;
+}
+.i-avatar-form {
+    height: 140px;
+}
+.i-avatar-form button{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+.i-avatar-form .submit-img{
+    position: absolute;
+    top: 100px;
+    left: -30px;
+}
+.i-avatar-form .browse_img{
+    position: absolute;
+    top: 60px;
+    left: -10px;
 }
 .inner-detail .short-text-inwaiting{
     width: 280px;
@@ -970,6 +1013,13 @@ input:checked + .slider:before {
     font-size: 14px;
     padding: 5px 20px;
 }
+.js-create{
+    width: 250px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background-color: #fff;
+}
 .create-success{
     position: absolute;
     background-color: #fff;
@@ -1152,7 +1202,7 @@ select {
 .about-page .mini_nav .mini_card{
     background-color: #fff;
     height: 60px;
-    width: 520px;
+    width: 560px;
     z-index: 999;
     border-radius: 50px 0 20px 20px;
     box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 5px;
@@ -1194,6 +1244,9 @@ select {
 
 .about-page .body .hospital{
     /* none */
+}
+.fc-photo{
+ object-fit: cover;
 }
 .about-page .hospital .photo{
     height: inherit;
@@ -1263,6 +1316,8 @@ select {
     width: 90%;
     margin-top: 5%;
     flex-direction: row;
+    object-fit: cover;
+    object-position: top;
 }
 .about-page .photo_icon{
     font-size: 180px;
@@ -1390,6 +1445,12 @@ select {
 /* About Body End */
 
 /* Start Login */
+.login-input{
+    position:absolute;
+    width: 100%;
+    top: 200px;
+    text-align: center;
+}
 .login-page{
     top: 60px;
     height: 100vh;
@@ -1557,6 +1618,7 @@ select {
 }
 .left_bar .news_item{
     height: 130px;
+    cursor: pointer;
 }
 .left_bar .news_item:hover{
     background-color: #e9edff;
@@ -1570,6 +1632,8 @@ select {
     width: 90px;
     height: 110px;
     margin: 10px;
+    object-position: center;
+    object-fit: cover;
 }
 .thumpnail i{
     color: #fff;
@@ -1647,6 +1711,7 @@ select {
     line-height: 35px;
     float: right;
     box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 5px;
+    cursor: pointer;
 }
 .left_bar .bar_foot:hover{
     background-color: #a0aef3;
@@ -1662,6 +1727,9 @@ select {
     left: 10vw;
     flex-direction: column;
     
+}
+.fn_paragraph{
+    text-align: justify;
 }
 .full_news .fn_header{
     height: 120px;
@@ -1684,6 +1752,8 @@ select {
     width: 460px;
     height: 300px;
     margin-bottom: 50px;
+    object-fit: cover;
+    object-position: center;
 }
 
 .fn_image .icon{

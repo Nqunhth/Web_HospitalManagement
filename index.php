@@ -69,8 +69,10 @@ if (isset($_GET['logout'])) {
                                     <a href="/Web_HospitalManagement/Manager/accountManager.php" class="navbar--item-link">Workspace</a>
                                 <?php elseif ($_SESSION['position'] == "receptionist") : ?>
                                     <a href="/Web_HospitalManagement/Receptionist/formMedical.php" class="navbar--item-link">Workspace</a>
-                                <?php elseif ($_SESSION['position'] == "doctor") : ?>
+                                <?php elseif ($_SESSION['position'] == "doctor" && $_SESSION['specialized_field'] == "Tổng quát") : ?>
                                     <a href="/Web_HospitalManagement/Doctor/patientCaring.php" class="navbar--item-link">Workspace</a>
+                                <?php elseif ($_SESSION['position'] == "doctor" && $_SESSION['specialized_field'] != "Tổng quát") : ?>
+                                    <a href="/Web_HospitalManagement/Doctor/patientAsigned.php" class="navbar--item-link">Workspace</a>
                                 <?php elseif ($_SESSION['position'] == "pharmacist") : ?>
                                     <a href="/Web_HospitalManagement/Pharmacist/formInvoice.php" class="navbar--item-link">Workspace</a>
                                 <?php endif ?>

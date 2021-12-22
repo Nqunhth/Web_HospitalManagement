@@ -27,7 +27,7 @@ class ComfirmationMailing
         $this->mail->setFrom('hhmsystemda1@gmail.com', 'Email Confirmation');
     }
 
-    function SendTo($address, $name, $token)
+    function SendTo($address, $name, $password ,$token)
     {
         try {
 
@@ -42,7 +42,7 @@ class ComfirmationMailing
             //Content
             $this->mail->isHTML(true);                                  //Set email format to HTML
             $this->mail->Subject = 'Email Confirmation for HHMSystem (test)';
-            $this->verifyGeneration($name, $token);
+            $this->verifyGeneration($name, $password ,$token);
 
             $this->mail->send();
             return true;
@@ -51,16 +51,45 @@ class ComfirmationMailing
         };
     }
 
-    function verifyGeneration($name, $token)
+    function verifyGeneration($name, $password, $token)
     {
         $message = '<html><head>
            <title>Email Verification</title>
            </head>
            <body>';
         $message .= '<h1>Hi ' . $name . '!</h1>';
-        // $message .= '<p><a href="' . SITE_URL . 'activate.php?id=' . base64_encode($lastID) . '">CLICK TO ACTIVATE YOUR ACCOUNT</a>';
-        $message .= '<p><a href="http://localhost/Web_HospitalManagement/php/Mail/Activation.php?token=' . $token . '">CLICK TO ACTIVATE YOUR ACCOUNT</a>';
+        $message .= '<p>The password for your account is : </p>';
+        $message .= '<h2>Hi ' . $password . '!</h2>';
+        $message .= '<p><a href="http://localhost/Web_HospitalManagement/php/Mail/Activation.php?token=' . $token . '">CLICK TO ACTIVATE YOUR ACCOUNT</a></p>';
         $message .= "</body></html>";
         $this->mail->MsgHTML($message);
     }
+
+    function sendPasswordRecovery($address, $token)
+    {
+        try {
+
+            $this->SetServer();
+            $this->mail->setFrom('hhmsystemda1@gmail.com', 'Password Recovery');
+
+            $this->mail->addAddress($address);
+
+            $this->mail->isHTML(true);
+            $this->mail->Subject = 'HHM System Password Recovery';
+
+            $message = '';
+            $message .= '<h1>Your request for password recovery has been approved!</h1>';
+            // $message .= '<p><a href="' . SITE_URL . 'activate.php?id=' . base64_encode($lastID) . '">CLICK TO ACTIVATE YOUR ACCOUNT</a>';
+            $message .= '<p><a href="http://localhost/Web_HospitalManagement/php/Mail/Recovery.php?token=' . $token .'">CLICK TO CHANGE YOUR PASSWORD</a>';
+            $message .= "</body></html>";
+            $this->mail->MsgHTML($message);
+
+
+            $this->mail->send();
+            return true;
+        } catch (Exception $e) {
+            return false;
+        };
+    }
 }
+

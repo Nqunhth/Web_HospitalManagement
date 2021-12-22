@@ -1,5 +1,17 @@
 <?php
+require "../php/ConnectionConfig/DataBase.php";
+require "../php/News/News.php";
 session_start();
+
+$list = News::fetchNews();
+
+if(isset($_GET['news_id']))
+{
+    $curr = News::fetchNewsById($_GET['news_id']);
+}
+else
+    $curr = News::fetchLatestNews();
+
 ?>
 
 <!DOCTYPE html>
@@ -33,8 +45,10 @@ session_start();
                             <a href="/Web_HospitalManagement/Manager/accountManager.php" class="navbar--item-link">Workspace</a>
                         <?php elseif ($_SESSION['position'] == "receptionist") : ?>
                             <a href="/Web_HospitalManagement/Receptionist/formMedical.php" class="navbar--item-link">Workspace</a>
-                        <?php elseif ($_SESSION['position'] == "doctor") : ?>
+                        <?php elseif ($_SESSION['position'] == "doctor" && $_SESSION['specialized_field'] == "Tổng quát") : ?>
                             <a href="/Web_HospitalManagement/Doctor/patientCaring.php" class="navbar--item-link">Workspace</a>
+                        <?php elseif ($_SESSION['position'] == "doctor" && $_SESSION['specialized_field'] != "Tổng quát") : ?>
+                            <a href="/Web_HospitalManagement/Doctor/patientAsigned.php" class="navbar--item-link">Workspace</a>
                         <?php elseif ($_SESSION['position'] == "pharmacist") : ?>
                             <a href="/Web_HospitalManagement/Pharmacist/formInvoice.php" class="navbar--item-link">Workspace</a>
                         <?php endif ?>
@@ -89,46 +103,38 @@ session_start();
                 <div class="bar_head">
                     News
                 </div>
-                <ul class="news_list">
-                    <li class="news_item center">
-                        <div class="thumpnail center">
-                            <i class="fas fa-image"></i>
-                        </div>
-                        <div class="news_description">
-                            <div class="news_des_head">
-                                <h2 class="title">The Longer Title</h2>
-                                <p class="author">- My Name Is</p>
-                            </div>
-                            <div class="des_content_container">
-                                <p class="des_content">
-                                    This is a demo running content of a news post description!
-                                </p>
-                            </div>
-                            <p class="update_time">
-                                YYYY-MM-DD : hh:mm:ss
-                            </p>
-                        </div>
-                    </li>
-                    <li class="news_item center">
-                        <div class="thumpnail center">
-                            <i class="fas fa-image"></i>
-                        </div>
-                        <div class="news_description">
-                            <div class="news_des_head">
-                                <h2 class="title">The Longer Title</h2>
-                                <p class="author">- My Name Is</p>
-                            </div>
-                            <div class="des_content_container">
-                                <p class="des_content">
-                                    This is a demo running content of a news post description!
-                                </p>
-                            </div>
-                            <p class="update_time">
-                                YYYY-MM-DD : hh:mm:ss
-                            </p>
-                        </div>
-                    </li>
-                </ul>
+                <?php if ($list->num_rows > 0) { ?>
+                    <ul class="news_list">
+                        <?php while ($listItem = $list->fetch_assoc()) { ?>
+                            <li class="news_item center" onclick="document.getElementById('submit-<?php echo $listItem['news_id'] ?>').click();">
+                                <form class="hide" action="">
+                                    <input id= "submit-<?php echo $listItem['news_id']?>" type="submit" name = "news_id" value = "<?php echo $listItem['news_id'] ?>"/>
+                                </form>
+                                <?php if ($listItem['news_img'] == "") { ?>
+                                    <div class="thumpnail center">
+                                        <i class="fas fa-image"></i>
+                                    </div>
+                                <?php } else { ?>
+                                    <img class="thumpnail center" src="<?php echo $listItem['news_img'] ?>"></img>
+                                <?php } ?>
+                                <div class="news_description">
+                                    <div class="news_des_head">
+                                        <h2 class="title"><?php echo $listItem['news_title'] ?></h2>
+                                        <p class="author">- <?php echo $listItem['news_author'] ?></p>
+                                    </div>
+                                    <div class="des_content_container">
+                                        <p class="des_content">
+                                            <?php echo $listItem['news_content'] ?>
+                                        </p>
+                                    </div>
+                                    <p class="update_time">
+                                        <?php echo $listItem['news_date'] ?>
+                                    </p>
+                                </div>
+                            </li>
+                        <?php } ?>
+                    </ul>
+                <?php } ?>
                 <div class="bar_foot">
                     See more
                 </div>
@@ -136,27 +142,26 @@ session_start();
 
 
             <div class="full_news center">
-                <div class="fn_header">
-                    <div class="fn_title">
-                        <h1>NEWS TITLE</h1>
-                        <h3>News Heading</h3>
+                <?php if ($curr->num_rows > 0) {
+                    $curr = $curr->fetch_assoc() ?>
+                    <div class="fn_header">
+                        <div class="fn_title">
+                            <h1><?php echo $curr['news_title'] ?></h1>
+                        </div>
+                        <div class="author_time">
+                            <p><?php echo $curr['news_author'] ?></p>
+                            <p><?php echo $curr['news_date'] ?></p>
+                        </div>
                     </div>
-                    <div class="author_time">
-                        <p>Author</p>
-                        <p>YYYY-MM-DD : hh:mm:ss</p>
+                    <div class="fn_content center">
+                        <?php if ($curr['news_img'] != "") { ?>
+                            <img class="fn_image center" src="<?php echo $curr['news_img'] ?>"></img>
+                        <?php } ?>
+                        <p class="fn_paragraph">
+                            <?php echo $curr['news_content'] ?>
+                        </p>
                     </div>
-                </div>
-                <div class="fn_content center">
-                    <div class="fn_image center">
-                        <i class="far fa-image icon"></i>
-                    </div>
-                    <p class="fn_paragraph">
-                        This beautiful PV was made by RyuO, the vocals are sang by the amazing Rachie,. The original
-                        Korean vocals and lyrics were done by Ir (이르/ @Gigant_ir). The song is originally from Steven
-                        Universe. We worked in collaboration to provide this version! Please follow RyuO on youtube
-                    </p>
-                </div>
-
+                <?php } ?>
             </div>
         </div>
 

@@ -411,59 +411,79 @@ if (isset($_POST['submit']) && $_POST['submit'] != "cancel") {
                             <button name="submit" value="cancel" class="js-confirm trans-button"><i class="fas fa-times center"></i></button>
                         </form>
                         <div class="inner-box">
-                            <form action="" method="post">
+                            <script type="text/javascript">
+                                function validateForm() {
+                                    const errorLog = document.querySelector('.js-create');
+
+                                    var fullname = document.forms["Form"]["fullname"].value;
+                                    var position = document.forms["Form"]["position"].value;
+                                    if (position == "doctor")
+                                        var field = document.forms["Form"]["field1"].value;
+                                    else
+                                        var field = document.forms["Form"]["field2"].value;
+                                    var username = document.forms["Form"]["username"].value;
+                                    var password = document.forms["Form"]["password"].value;
+                                    var email = document.forms["Form"]["email"].value;
+
+                                    if (fullname == null || fullname == "" || position == null || position == "" || field == null || field == "" || username == null || username == "" || password == null || password == "") {
+                                        errorLog.classList.remove('hide');
+                                        return false;
+                                    }
+                                }
+                            </script>
+                            <form name="Form" action="" method="post" onsubmit="return validateForm()">
                                 <p class="i-title">User Full Name</p>
                                 <input type="text" class="medium-input" name="fullname">
                                 <div class="i-line">
                                     <p class="i-title">Account Type:</p>
-                                    <div class="select" id ="account_doctor_create_pos_select"name ="position">
-                                    <select onchange="validateSelectBox(this)" name ="position" value="doctor">
-                                        <!-- <option selected disabled>Chọn vị trí</option> -->
-                                        <option value="doctor">doctor</option>
-                                        <option value="manager">manager</option>
-                                        <option value="receptionist">receptionist</option>
-                                        <option value="pharmacist">pharmacist</option>
-                                    </select>
+                                    <div class="select" id="account_doctor_create_pos_select" name="position">
+                                        <select onchange="validateSelectBox(this)" name="position" value="doctor">
+                                            <!-- <option selected disabled>Chọn vị trí</option> -->
+                                            <option value="doctor">doctor</option>
+                                            <option value="manager">manager</option>
+                                            <option value="receptionist">receptionist</option>
+                                            <option value="pharmacist">pharmacist</option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="i-line">
-                                <p class="i-title">Specialized Field:</p>
-                                <input type="text" class="short-input" id= "mytext" name="field1" style="display: none" value="Không" readonly/>
-                                <div class="select" id="div_field_select">
-                                    <select name="field2" value="Tổng quát">
-                                        <!-- <option selected disabled>Chọn chuyên ngành</option> -->
-                                        <option value="Tổng quát">Tổng quát</option>
-                                        <option value="Răng hàm mặt">Răng hàm hặt</option>
-                                        <option value="Tai mũi họng">Tai hũi họng</option>
-                                        <option value="Nhãn">Nhãn</option>
-                                        <option value="Thẩm mỹ">Thẩm mỹ</option>
-                                    </select>
-                                </div>
-                                <script language="javascript">
-                                    function validateSelectBox(selectObject){
-                                        var div = document.getElementById('div_field_select');
-                                        var input = document.getElementById("mytext");
-                                        var pos = selectObject.value;  
-                                        if(pos == "doctor") {
-                                            input.style.display = "none";
-                                            div.style.display = "inline-flex";
-                                        } else if (pos == "manager"){
-                                            input.value = "Nhân sự";
-                                            div.style.display = "none";
-                                            input.style.display = "inline-flex";
-        
-                                        } else if (pos == "receptionist"){
-                                            input.value = "Tiếp tân";
-                                            div.style.display = "none";
-                                            input.style.display = "inline-flex";
-            
-                                        } else if (pos == "pharmacist"){
-                                            input.value = "Dược sĩ";
-                                            div.style.display = "none";
-                                            input.style.display = "inline-flex";
+                                <div class="i-line">
+                                    <p class="i-title">Specialized Field:</p>
+                                    <input type="text" class="short-input" id="mytext" name="field1" style="display: none" value="Không" readonly />
+                                    <div class="select" id="div_field_select">
+                                        <select name="field2" value="Tổng quát">
+                                            <!-- <option selected disabled>Chọn chuyên ngành</option> -->
+                                            <option value="Tổng quát">Tổng quát</option>
+                                            <option value="Răng hàm mặt">Răng hàm hặt</option>
+                                            <option value="Tai mũi họng">Tai hũi họng</option>
+                                            <option value="Nhãn">Nhãn</option>
+                                            <option value="Thẩm mỹ">Thẩm mỹ</option>
+                                        </select>
+                                    </div>
+                                    <script language="javascript">
+                                        function validateSelectBox(selectObject) {
+                                            var div = document.getElementById('div_field_select');
+                                            var input = document.getElementById("mytext");
+                                            var pos = selectObject.value;
+                                            if (pos == "doctor") {
+                                                input.style.display = "none";
+                                                div.style.display = "inline-flex";
+                                            } else if (pos == "manager") {
+                                                input.value = "Nhân sự";
+                                                div.style.display = "none";
+                                                input.style.display = "inline-flex";
+
+                                            } else if (pos == "receptionist") {
+                                                input.value = "Tiếp tân";
+                                                div.style.display = "none";
+                                                input.style.display = "inline-flex";
+
+                                            } else if (pos == "pharmacist") {
+                                                input.value = "Dược sĩ";
+                                                div.style.display = "none";
+                                                input.style.display = "inline-flex";
+                                            }
                                         }
-                                    }
-                                </script>
+                                    </script>
                                 </div>
                                 <div class="i-line">
                                     <p class="i-title">Username:</p>
@@ -483,7 +503,8 @@ if (isset($_POST['submit']) && $_POST['submit'] != "cancel") {
                                     ?>
                                         <p class="create-error"><?php echo $error ?></p>
                                     <?php } ?>
-                                    <button type="submit" value="submit" name="submit" class="button button-confirm">
+                                    <p class="create-error js-create hide">All fields are required</p>
+                                    <button type="submit" value="submit" name="submit" class="button button-confirm top25px">
                                         <i class="fas fa-check"></i>
                                         Confirm
                                     </button>
@@ -496,13 +517,16 @@ if (isset($_POST['submit']) && $_POST['submit'] != "cancel") {
 </body>
 
 </html>
-<script>
+<script type="text/javascript">
     const loginBtn = document.querySelector('.js-login')
     const loginBox = document.querySelector('.modal')
     const closeBox = document.querySelector('.js-confirm')
+    const errorLogHide = document.querySelector('.js-create')
+
 
     function showLoginBox() {
-        loginBox.classList.add('open')
+        loginBox.classList.add('open');
+        errorLogHide.classList.add('hide');
     }
 
     function closeLoginBox() {

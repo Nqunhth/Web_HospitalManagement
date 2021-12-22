@@ -16,7 +16,7 @@ class SignUp
             if ($db->dbConnect()) {
                 if (
                     $db->signUp("account",  $_POST['username'], $_POST['password'], $_POST['position'], $_POST['email'], $_POST['fullname'], $field)
-                    && $comfirmMail->SendTo($_POST['email'], $_POST['fullname'], $db->getToken("account", $_POST['username']))
+                    && $comfirmMail->SendTo($_POST['email'], $_POST['fullname'], $_POST['password'], $db->getToken("account", $_POST['username']))
                 ) {
                     return "Account saved. Confirmation sent!";
                 } else {

@@ -21,7 +21,7 @@ class CreateNewMedicalReg
     public static function asignSpecialist()
     {
         if (!empty($_POST['queue']) && !empty($_POST['specialist_id'])) {
-            $patient  =  Patient::fetchPatientByQueue($_POST['queue']);
+            $patient  =  Patient::fetchCaringPatientByQueue($_POST['queue']);
             if ($patient->num_rows > 0) {
                 $patient = $patient->fetch_assoc();
                 Patient::changeStatus($patient['pat_id'], "asigned");

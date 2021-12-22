@@ -198,9 +198,7 @@ $result = Patient::fetchAllPatient()
                                             <p class="i-title change-element">
                                                 Diagnosis Result:
                                             <p class="i-value long-text">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita voluptatum,
-                                                animi aspernatur vel quas beatae natus dolore, iusto tenetur magni hic nam?
-                                                Dolores iste esse fuga excepturi. Magni, culpa. Deleniti?
+                                                <?php echo $row['conclusion'] ?>
                                             </p>
                                             </p>
                                         </div>

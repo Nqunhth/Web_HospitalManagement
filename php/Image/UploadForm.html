@@ -1,4 +1,14 @@
 <form action="Upload.php" enctype="multipart/form-data" method="POST">
- Choose Image : <input name="img" size="35" type="file"/><br/>
+ Choose Image : <input name="img" size="35" type="file" accept="image/*" onchange="loadFile(event)"/><br/>
  <input type="submit" name="submit" value="Upload"/>
 </form>
+<img id="output"/>
+<script>
+  var loadFile = function(event) {
+    var output = document.getElementById('output');
+    output.src = URL.createObjectURL(event.target.files[0]);
+    output.onload = function() {
+      URL.revokeObjectURL(output.src) // free memory
+    }
+  };
+</script>

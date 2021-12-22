@@ -1,5 +1,17 @@
 <?php
+require "../php/ConnectionConfig/DataBase.php";
+require "../php/Patient/Patient.php";
+require "../php/Prescription/Prescription.php";
+require "../php/Prescription/CreatePrescription.php";
+
 session_start();
+
+$result = Patient::fetchConsultedPatientForDoctor($_SESSION['user_id']);
+
+if (isset($_POST['submit'])) {
+    $error = CreatePrescription::Create();
+    $result = Patient::fetchConsultedPatientForDoctor($_SESSION['user_id']);
+}
 ?>
 
 
@@ -129,40 +141,108 @@ session_start();
                     </ul>
                 </div>
             </div>
-            <div class="container__content">
+            <script type="text/javascript">
+                function validateForm() {
+                    const errorLog = document.querySelector('.js-error');
+
+                    var pId = document.forms["Form"]["patient_id"].value;
+                    var pName = document.forms["Form"]["patient_name"].value;
+                    var pAddress = document.forms["Form"]["patient_address"].value;
+                    var pPhone = document.forms["Form"]["patient_phone"].value;
+                    var pAge = document.forms["Form"]["patient_age"].value;
+                    var pJob = document.forms["Form"]["patient_job"].value;
+                    var conclusion = document.forms["Form"]["conclusion"].value;
+                    var medicines = document.forms["Form"]["medicines"].value;
+
+                    if (pId == null || pId == "" || pName == null || pName == "" || pAge == null || pAge == "" || pAddress == null || pAddress == "" ||
+                        pPhone == null || pPhone == "" || pJob == null || pJob == "" || conclusion == null || conclusion == "" || medicines == null || medicines == "") {
+                        errorLog.classList.remove('hide');
+                        // alert("AAAAa")
+                        return false;
+                    }
+                }
+            </script>
+            <form name="Form" class="container__content" action="" method="post" onsubmit="return validateForm();">
                 <div class="box content__box">
                     <div class="inner-box">
-                        <p class="i-title">
-                            Patient Full Name:
-                            <input type="text" class="medium-input" name="prescription">
-                        <p class="i-title">
-                            Age:
-                            <input type="text" class="short-input" name="prescription">
-                        </p>
-                        </p>
-                        <p class="i-title">
-                            Address:
-                            <input type="text" class="medium-input" name="prescription">
-                        </p>
-                        <p class="i-title">
-                            Phone Number:
-                            <input type="text" class="short-input" name="prescription">
-                        </p>
+                        <?php
+                        if (isset($error)) {
+                        ?>
+                            <p class="form-error"><?php echo $error ?></p>
+                        <?php
+                        }
+                        ?>
+                        <p class="form-error hide js-error">All fields are required</p>
+                        <?php
+                        if (isset($_POST["patients"])) {
+                            $currPatient = Patient::fetchConsultedPatientByQueue($_POST["patients"]);
+                            if ($currPatient->num_rows > 0) {
+                                $currPatient = $currPatient->fetch_assoc();
+                        ?>
+                                <p class="i-title hide">
+                                    Patient ID:
+                                    <input type="text" readonly="readonly" onfocus="this.blur()" tabindex="-1" class="medium-input" name="patient_id" value="<?php echo $currPatient["pat_id"] ?>">
+                                </p>
+                                <p class="i-title">
+                                    Patient Full Name:
+                                    <input type="text" readonly="readonly" onfocus="this.blur()" tabindex="-1" class="medium-input" name="patient_name" value="<?php echo $currPatient["pat_name"] ?>">
+                                <p class="i-title">
+                                    Age:
+                                    <input type="text" readonly="readonly" onfocus="this.blur()" tabindex="-1" class="short-input" name="patient_age" value="<?php echo $currPatient["pat_age"] ?>">
+                                </p>
+                                </p>
+                                <p class="i-title">
+                                    Address:
+                                    <input type="text" readonly="readonly" onfocus="this.blur()" tabindex="-1" class="medium-input" name="patient_address" value="<?php echo $currPatient["pat_address"] ?>">
+                                </p>
+                                <p class="i-title">
+                                    Phone Number:
+                                    <input type="text" readonly="readonly" onfocus="this.blur()" tabindex="-1" class="short-input" name="patient_phone" value="<?php echo $currPatient["pat_phone"] ?>">
+                                </p>
 
-                        <p class="i-title">
-                            Job:
-                            <input type="text" class="medium-input" name="prescription">
-                        </p>
+                                <p class="i-title">
+                                    Job:
+                                    <input type="text" readonly="readonly" onfocus="this.blur()" tabindex="-1" class="medium-input" name="patient_job" value="<?php echo $currPatient["pat_job"] ?>">
+                                </p>
+                            <?php }
+                        } else { ?>
+                            <p class="i-title hide">
+                                Patient ID:
+                                <input type="text" readonly="readonly" onfocus="this.blur()" tabindex="-1" class="medium-input" name="patient_id">
+                            </p>
+                            <p class="i-title">
+                                Patient Full Name:
+                                <input type="text" readonly="readonly" onfocus="this.blur()" tabindex="-1" class="medium-input" name="patient_name">
+                            </p>
+                            <p class="i-title">
+                                Age:
+                                <input type="text" readonly="readonly" onfocus="this.blur()" tabindex="-1" class="short-input" name="patient_age">
+                            </p>
+
+                            <p class="i-title">
+                                Address:
+                                <input type="text" readonly="readonly" onfocus="this.blur()" tabindex="-1" class="medium-input" name="patient_address">
+                            </p>
+                            <p class="i-title">
+                                Phone Number:
+                                <input type="text" readonly="readonly" onfocus="this.blur()" tabindex="-1" class="short-input" name="patient_phone">
+                            </p>
+
+                            <p class="i-title">
+                                Job:
+                                <input type="text" readonly="readonly" onfocus="this.blur()" tabindex="-1" class="medium-input" name="patient_job">
+                            </p>
+                        <?php } ?>
                         <div class="i-line">
                             <p class="i-title">
                                 Conclusion:
                             </p>
                         </div>
-                        <textarea class="long-input" name="prescription" rows="5"></textarea>
+                        <textarea class="long-input" name="conclusion" rows="5"></textarea>
                         <p class="i-title">
                             List of Medicine:
                         </p>
-                        <textarea class="long-input" name="prescription" rows="5"></textarea>
+                        <textarea class="long-input" name="medicines" rows="5"></textarea>
                         <div class="datetime-containter">
                             <p class="i-datetime">Day
                             <p class="i-value i-datetime">DD</p>
@@ -179,7 +259,7 @@ session_start();
                     </div>
                 </div>
                 <div class="content__button">
-                    <button class="button button-confirm">
+                    <button name="submit" type="submit" class="button button-confirm">
                         <i class="fas fa-check"></i>
                         Confirm
                     </button>
@@ -192,13 +272,20 @@ session_start();
                         Print
                     </button>
                 </div>
-            </div>
+            </form>
             <div class="container__select">
-                <select class="content__select">
-                    <option value="01" selected>01</option>
-                    <option value="02">02</option>
-                    <option value="03">03</option>
-                </select>
+                <form method="POST" action="">
+                    <select name="patients" class="content__select" onchange="this.form.submit()">
+                        <option value="" disabled selected>--</option>
+                        <?php if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) { ?>
+                                <!-- <option value="01" selected>01</option> -->
+                                <option value=<?php echo $row['queue_number'] ?> <?= isset($_POST["patients"]) && $_POST["patients"] == $row['queue_number'] ? ' selected="selected"' : ''; ?>><?php echo $row['queue_number'] ?></option>
+                                <!-- <option value="03">03</option> -->
+                        <?php }
+                        } ?>
+                    </select>
+                </form>
             </div>
         </div>
 
