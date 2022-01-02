@@ -174,7 +174,16 @@ class Patient{
             WHERE DATE(medical_register.created_date) = CURRENT_DATE && medical_register.medi_status = 'enabled' && pat_status = 'asigned' && specialist_id = '" . $specialistId . "';";
         return $conn->query($query);
     }
-    public static function fetchAllPatient(){
+    public static function fetchCountTotal(){
+        $db = new DataBase();
+        $conn = $db->dbConnect();
+        $query = 
+            "SELECT count(pat_id) 
+            AS total 
+            FROM patient";
+        return $conn->query($query);
+    }
+    public static function fetchAllPatient($start, $limit){
         $db = new DataBase();
         $conn = $db->dbConnect();
         $query = 
@@ -183,7 +192,8 @@ class Patient{
             JOIN `medical_register`
             ON patient.pat_id = medical_register.pat_id
             LEFT JOIN prescription
-            ON patient.pat_id = prescription.pat_id";
+            ON patient.pat_id = prescription.pat_id
+            LIMIT $start, $limit";
         return $conn->query($query);
     }
     public static function fetchCaringPatientByQueue($queue){

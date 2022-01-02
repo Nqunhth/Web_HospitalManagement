@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 22, 2021 at 11:46 AM
+-- Generation Time: Jan 02, 2022 at 01:53 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `ooap_hhm_0612`
+-- Database: `ooap_hhm`
 --
 
 -- --------------------------------------------------------
@@ -94,11 +94,27 @@ INSERT INTO `doctor` (`doctor_id`) VALUES
 CREATE TABLE `invoice` (
   `invo_id` int(5) UNSIGNED ZEROFILL NOT NULL,
   `cus_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `cus_address` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `creator_id` int(5) UNSIGNED ZEROFILL NOT NULL,
   `created_date` timestamp NOT NULL DEFAULT current_timestamp(),
-  `invo_status` varchar(8) COLLATE utf8_unicode_ci NOT NULL,
+  `invo_status` varchar(8) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'enabled',
   `sum_cost` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `invoice`
+--
+
+INSERT INTO `invoice` (`invo_id`, `cus_name`, `cus_address`, `creator_id`, `created_date`, `invo_status`, `sum_cost`) VALUES
+(00023, 'Phương phương', '567 nmb', 00010, '2021-12-24 10:03:28', 'enabled', 60000),
+(00024, 'Hạ Minh', '765 kln', 00010, '2021-12-24 10:04:02', 'disabled', 55000),
+(00025, 'Trần Thủy', '976 khju', 00010, '2021-12-24 10:05:19', 'enabled', 183000),
+(00026, 'Lâm Thịnh', '4234 fgdf', 00010, '2021-12-24 10:08:35', 'enabled', 56000),
+(00027, 'das', 'das', 00010, '2021-12-25 10:36:06', 'enabled', 70000),
+(00028, 'dấđ', 'dsđá', 00010, '2021-12-26 03:36:48', 'enabled', 54000),
+(00029, 'fsdfsdf', 'fsdfsf', 00010, '2022-01-02 09:01:06', 'enabled', 182000),
+(00030, 'fdsfsf', 'fsdfsd', 00010, '2022-01-02 09:03:38', 'enabled', 78000),
+(00031, 'gdf', 'gdfg', 00010, '2022-01-02 09:05:31', 'enabled', 10000);
 
 -- --------------------------------------------------------
 
@@ -109,10 +125,52 @@ CREATE TABLE `invoice` (
 CREATE TABLE `invoice_medicine` (
   `inme_id` int(10) UNSIGNED NOT NULL,
   `medicine_id` int(5) UNSIGNED ZEROFILL NOT NULL,
+  `medicine_name` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `invo_id` int(5) UNSIGNED ZEROFILL NOT NULL,
   `quantity` int(11) NOT NULL,
   `cost` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `invoice_medicine`
+--
+
+INSERT INTO `invoice_medicine` (`inme_id`, `medicine_id`, `medicine_name`, `invo_id`, `quantity`, `cost`) VALUES
+(7, 00004, 'Thuốc giảm đau', 00023, 1, 10000),
+(8, 00009, 'Cồn 70 độ vừa', 00023, 1, 35000),
+(9, 00012, 'Kẹo cam', 00023, 1, 15000),
+(10, 00009, 'Cồn 70 độ vừa', 00024, 1, 35000),
+(11, 00014, 'Vitamin C', 00024, 1, 10000),
+(12, 00016, 'Vitamin E', 00024, 1, 10000),
+(13, 00006, 'Thuốc bôi', 00025, 3, 24000),
+(14, 00015, 'Vitamin D', 00025, 3, 30000),
+(15, 00011, 'Kẹo the', 00025, 1, 3000),
+(16, 00014, 'Vitamin C', 00025, 3, 30000),
+(17, 00010, 'Cồn 70 độ lớn', 00025, 2, 96000),
+(18, 00003, 'Thuốc ngủ', 00026, 4, 4000),
+(19, 00015, 'Vitamin D', 00026, 2, 20000),
+(20, 00011, 'Kẹo the', 00026, 2, 6000),
+(21, 00013, 'Kẹo sữa', 00026, 2, 6000),
+(22, 00014, 'Vitamin C', 00026, 2, 20000),
+(23, 00004, 'Thuốc giảm đau', 00027, 1, 10000),
+(24, 00009, 'Cồn 70 độ vừa', 00027, 1, 35000),
+(25, 00012, 'Kẹo cam', 00027, 1, 15000),
+(26, 00015, 'Vitamin D', 00027, 1, 10000),
+(27, 00002, 'Thuốc ho', 00028, 1, 5000),
+(28, 00003, 'Thuốc ngủ', 00028, 1, 1000),
+(29, 00010, 'Cồn 70 độ lớn', 00028, 1, 48000),
+(30, 00004, 'Thuốc giảm đau', 00029, 3, 30000),
+(31, 00006, 'Thuốc bôi', 00029, 2, 16000),
+(32, 00010, '', 00029, 2, 96000),
+(33, 00012, 'Kẹo cam', 00029, 2, 30000),
+(34, 00016, 'Vitamin E', 00029, 1, 10000),
+(35, 00005, 'Thuốc hạ sốt', 00030, 1, 6000),
+(36, 00005, 'Thuốc hạ sốt', 00030, 1, 6000),
+(37, 00010, 'Cồn 70 độ lớn', 00030, 1, 48000),
+(38, 00012, 'Kẹo cam', 00030, 1, 15000),
+(39, 00013, 'Kẹo sữa', 00030, 1, 3000),
+(40, 00003, 'Thuốc ngủ', 00031, 4, 4000),
+(41, 00001, 'Thuốc cảm', 00031, 2, 6000);
 
 -- --------------------------------------------------------
 
@@ -142,7 +200,8 @@ INSERT INTO `medical_register` (`medi_id`, `pat_id`, `creator_id`, `doctor_id`, 
 (00002, 00002, 00007, 00003, 'Nguyễn Văn AAA', '2021-12-21 17:00:00', 'Heart Failure', 'enabled', 2, 5),
 (00003, 00003, 00007, 00003, 'Nguyễn Văn AAA', '2021-12-21 17:00:00', 'Crazy', 'enabled', 3, 5),
 (00004, 00004, 00007, 00003, 'Nguyễn Văn AAA', '2021-12-21 17:00:00', 'Test', 'enabled', 4, 0),
-(00005, 00005, 00007, 00003, 'Nguyễn Văn AAA', '2021-12-21 17:00:00', 'Sore throat', 'enabled', 5, 0);
+(00005, 00005, 00007, 00003, 'Nguyễn Văn AAA', '2021-12-21 17:00:00', 'Sore throat', 'enabled', 5, 0),
+(00006, 00006, 00007, 00003, 'Nguyễn Văn AAA', '2021-12-25 14:00:56', 'Đau bụng', 'enabled', 1, 5);
 
 --
 -- Triggers `medical_register`
@@ -240,7 +299,8 @@ INSERT INTO `patient` (`pat_id`, `pat_name`, `pat_age`, `pat_address`, `pat_phon
 (2, 'Cao Ngoc B', 39, '44 Huhuhu', '444449', 'jobless', 'done'),
 (3, 'Hutao', 21, '333 Washington', '444449', 'jobless', 'consulted'),
 (4, 'Ning', 23, 'fwfsdf', '24343', 'President', 'caring'),
-(5, 'UI', 23, 'fwfsdf', '24343', 'Singer', 'caring');
+(5, 'UI', 23, 'fwfsdf', '24343', 'Singer', 'caring'),
+(6, 'Hưng Yên', 45, '980 ljnv', '13465', 'Nội trợ', 'done');
 
 -- --------------------------------------------------------
 
@@ -276,7 +336,7 @@ INSERT INTO `personal_info` (`user_id`, `full_name`, `age`, `gender`, `birthday`
 (00007, 'Đinh Thị EEE', 0, 'male', '2021-12-05', 'Tiếp tân', '', '', '', '2021-12-05', 'https://i.imgur.com/uKqhZDC.jpg'),
 (00008, 'Hoàng Lê FFF', 0, 'male', '2021-12-05', 'Tiếp tân', '', '', '', '2021-12-05', ''),
 (00009, 'Nguyễn Ngọc GGG', 0, 'male', '2021-12-05', 'Dược sĩ', '', '', '', '2021-12-05', 'https://i.imgur.com/uKqhZDC.jpg'),
-(00010, 'Nguyễn Tiến HHH', 0, 'male', '2021-12-05', 'Dược sĩ', '', '', '', '2021-12-05', '');
+(00010, 'Nguyễn Tiến HHH', 99, 'female', '2021-12-05', 'Dược sĩ', 'fsdfsdf5435345', '989797', '3123', '2021-12-05', 'https://i.imgur.com/1lzYV7S.png');
 
 -- --------------------------------------------------------
 
@@ -303,14 +363,22 @@ INSERT INTO `pharmacist` (`pharmacist_id`) VALUES
 --
 
 CREATE TABLE `prescription` (
-  `pres` int(5) UNSIGNED ZEROFILL NOT NULL,
+  `pres_id` int(5) UNSIGNED ZEROFILL NOT NULL,
   `pat_id` int(5) UNSIGNED ZEROFILL NOT NULL,
   `creator_id` int(5) UNSIGNED ZEROFILL NOT NULL,
   `creator_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `created_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `pres_status` varchar(8) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'enabled',
   `conclusion` text COLLATE utf8_unicode_ci NOT NULL,
   `medicines` text COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `prescription`
+--
+
+INSERT INTO `prescription` (`pres_id`, `pat_id`, `creator_id`, `creator_name`, `created_date`, `pres_status`, `conclusion`, `medicines`) VALUES
+(00001, 00006, 00003, 'Nguyễn Văn AAA', '2022-01-02 09:53:34', 'enabled', 'Đau bụng do ăn bậy. Nên hạn chế ăn đồ quá hạn dùng', 'thuốc đau bụng, thuốc giảm đau');
 
 -- --------------------------------------------------------
 
@@ -359,6 +427,13 @@ CREATE TABLE `specialist_consulting` (
   `request` text COLLATE utf8_unicode_ci NOT NULL,
   `result` text COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `specialist_consulting`
+--
+
+INSERT INTO `specialist_consulting` (`spec_id`, `pat_id`, `creator_id`, `creator_name`, `created_date`, `spec_status`, `spec_reason`, `test_area`, `request`, `result`) VALUES
+(1, 6, 00005, 'Lê Thị CCC', '2021-12-25 14:02:18', 'enabled', 'Đau bụng', 'Bụng', 'Nội soi phần bụng', 'Ăn bậy quá nhiều');
 
 -- --------------------------------------------------------
 
@@ -455,7 +530,7 @@ ALTER TABLE `pharmacist`
 -- Indexes for table `prescription`
 --
 ALTER TABLE `prescription`
-  ADD PRIMARY KEY (`pres`);
+  ADD PRIMARY KEY (`pres_id`);
 
 --
 -- Indexes for table `receptionist`
@@ -495,19 +570,19 @@ ALTER TABLE `doctor`
 -- AUTO_INCREMENT for table `invoice`
 --
 ALTER TABLE `invoice`
-  MODIFY `invo_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT;
+  MODIFY `invo_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `invoice_medicine`
 --
 ALTER TABLE `invoice_medicine`
-  MODIFY `inme_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `inme_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `medical_register`
 --
 ALTER TABLE `medical_register`
-  MODIFY `medi_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `medi_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `medicine`
@@ -525,7 +600,7 @@ ALTER TABLE `news`
 -- AUTO_INCREMENT for table `patient`
 --
 ALTER TABLE `patient`
-  MODIFY `pat_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `pat_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `personal_info`
@@ -543,7 +618,7 @@ ALTER TABLE `pharmacist`
 -- AUTO_INCREMENT for table `prescription`
 --
 ALTER TABLE `prescription`
-  MODIFY `pres` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT;
+  MODIFY `pres_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `receptionist`
@@ -555,7 +630,7 @@ ALTER TABLE `receptionist`
 -- AUTO_INCREMENT for table `specialist_consulting`
 --
 ALTER TABLE `specialist_consulting`
-  MODIFY `spec_id` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `spec_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `user`

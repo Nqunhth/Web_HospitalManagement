@@ -1,5 +1,28 @@
 <?php
 session_start();
+require "../php/ConnectionConfig/DataBase.php";
+require "../php/SpecialConsulting/SpecCon.php";
+
+
+$count = SpecCon::fetchCountTotal();
+if($count->num_rows > 0){
+    $row = $count->fetch_assoc();
+    $total_records = $row['total'];
+}
+
+$current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+$limit = 4;
+
+$total_page = ceil($total_records / $limit);
+
+if ($current_page > $total_page) {
+    $current_page = $total_page;
+} else if ($current_page < 1) {
+    $current_page = 1;
+}
+
+$start = ($current_page - 1) * $limit;
+$result = SpecCon::fetchSpecConPage($start, $limit);
 ?>
 
 
@@ -121,6 +144,10 @@ session_start();
             </div>
             <div class="container__content">
                 <ul class="card-list">
+                    <?php if ($result->num_rows > 0) {
+                        // Load dữ liệu lên website
+                        while ($row = $result->fetch_assoc()) {
+                    ?>
                     <li class="card-drop">
                         <input type="checkbox" />
                         <div class="short-card">
@@ -128,35 +155,38 @@ session_start();
                                 <div class="inner-detail">
                                     <div class="datetime-containter">
                                         <p class="i-datetime">Date:
-                                        <p class="i-value i-datetime">DD/MM/YYYY</p>
+                                        <p class="i-value i-datetime"><?php echo $row["created_date"]; ?></p>
                                         </p>
                                     </div>
                                     <p class="i-title">
                                         Patient Full Name:
-                                    <p class="i-value short-text">Nguyen Van A</p>
+                                    <p class="i-value short-text"><?php echo $row["pat_name"]; ?></p>
                                     <p class="i-title">
                                         Age:
-                                    <p class="i-value">99</p>
+                                    <p class="i-value"><?php echo $row["pat_age"]; ?></p>
                                     </p>
                                     <p class="i-title">
                                         Text Area:
                                     <p class="i-value medium-text">
-                                        Load data from Database
+                                        <?php echo $row["test_area"]; ?>
                                     </p>
                                     </p>
                                     <p class="i-title change-element">
                                         Reason:
                                     <p class="i-value long-text">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita voluptatum,
-                                        animi aspernatur vel quas beatae natus dolore, iusto tenetur magni hic nam?
-                                        Dolores iste esse fuga excepturi. Magni, culpa. Deleniti?
+                                        <?php echo $row["spec_reason"]; ?>
                                     </p>
                                     </p>
                                 </div>
                                 <div class="switch-container center">
                                     <label class="switch">
-                                        <input type="checkbox">
-                                        <span class="slider round"></span>
+                                        <?php if ($row["spec_status"] == 'enabled') {?>
+                                            <input type="checkbox" checked>
+                                            <span class="slider round"></span>
+                                        <?php } else { ?>
+                                            <input type="checkbox">
+                                            <span class="slider round"></span>
+                                        <?php } ?>
                                     </label>
                                 </div>
                                 <div class="icon-container center">
@@ -170,43 +200,27 @@ session_start();
                                     <p class="i-title">
                                         Phone Number:
                                     <p class="i-value  medium-text">
-                                        Load data from Database
+                                        <?php echo $row["pat_phone"]; ?>
                                     </p>
                                     </p>
                                     <p class="i-title">
                                         Job:
                                     <p class="i-value medium-text">
-                                        Load data from Database
+                                        <?php echo $row["pat_job"]; ?>
                                     </p>
                                     </p>
                                     <p class="i-title change-element ">
                                         Address:
                                     <p class="i-value medium-text">
-                                        Load data from Database
+                                        <?php echo $row["pat_address"]; ?>
                                     </p>
                                     </p>
                                     <p class="i-title">
                                         Doctor's Name:
                                     <p class="i-value medium-text">
-                                        Load data from Database
+                                        <?php echo $row["creator_name"]; ?>
                                     </p>
                                     </p>
-                                    <!-- <p class="i-title">
-                                        Request:
-                                    <p class="i-value long-text">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita voluptatum,
-                                        animi aspernatur vel quas beatae natus dolore, iusto tenetur magni hic nam?
-                                        Dolores iste esse fuga excepturi. Magni, culpa. Deleniti?
-                                    </p>
-                                    </p>
-                                    <p class="i-title">
-                                        Result:
-                                    <p class="i-value long-text">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita voluptatum,
-                                        animi aspernatur vel quas beatae natus dolore, iusto tenetur magni hic nam?
-                                        Dolores iste esse fuga excepturi. Magni, culpa. Deleniti?
-                                    </p>
-                                    </p> -->
                                 </div>
                                 <div class="switch-container center">
                                 </div>
@@ -216,101 +230,29 @@ session_start();
                             </div>
                         </div>
                     </li>
-                    <li class="card-drop">
-                        <input type="checkbox" />
-                        <div class="short-card">
-                            <div class="inner-card">
-                                <div class="inner-detail">
-                                    <div class="datetime-containter">
-                                        <p class="i-datetime">Date:
-                                        <p class="i-value i-datetime">DD/MM/YYYY</p>
-                                        </p>
-                                    </div>
-                                    <p class="i-title">
-                                        Patient Full Name:
-                                    <p class="i-value short-text">Nguyen Van A</p>
-                                    <p class="i-title">
-                                        Age:
-                                    <p class="i-value">99</p>
-                                    </p>
-                                    <p class="i-title">
-                                        Text Area:
-                                    <p class="i-value medium-text">
-                                        Load data from Database
-                                    </p>
-                                    </p>
-                                    <p class="i-title change-element">
-                                        Reason:
-                                    <p class="i-value long-text">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita voluptatum,
-                                        animi aspernatur vel quas beatae natus dolore, iusto tenetur magni hic nam?
-                                        Dolores iste esse fuga excepturi. Magni, culpa. Deleniti?
-                                    </p>
-                                    </p>
-                                </div>
-                                <div class="switch-container center">
-                                    <label class="switch">
-                                        <input type="checkbox">
-                                        <span class="slider round"></span>
-                                    </label>
-                                </div>
-                                <div class="icon-container center">
-                                    <i class="fas fa-chevron-down"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="full-card">
-                            <div class="inner-card">
-                                <div class="inner-detail has-border-top">
-                                    <p class="i-title">
-                                        Phone Number:
-                                    <p class="i-value  medium-text">
-                                        Load data from Database
-                                    </p>
-                                    </p>
-                                    <p class="i-title">
-                                        Job:
-                                    <p class="i-value medium-text">
-                                        Load data from Database
-                                    </p>
-                                    </p>
-                                    <p class="i-title change-element ">
-                                        Address:
-                                    <p class="i-value medium-text">
-                                        Load data from Database
-                                    </p>
-                                    </p>
-                                    <p class="i-title">
-                                        Doctor's Name:
-                                    <p class="i-value medium-text">
-                                        Load data from Database
-                                    </p>
-                                    </p>
-                                    <!-- <p class="i-title">
-                                        Request:
-                                    <p class="i-value long-text">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita voluptatum,
-                                        animi aspernatur vel quas beatae natus dolore, iusto tenetur magni hic nam?
-                                        Dolores iste esse fuga excepturi. Magni, culpa. Deleniti?
-                                    </p>
-                                    </p>
-                                    <p class="i-title">
-                                        Result:
-                                    <p class="i-value long-text">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita voluptatum,
-                                        animi aspernatur vel quas beatae natus dolore, iusto tenetur magni hic nam?
-                                        Dolores iste esse fuga excepturi. Magni, culpa. Deleniti?
-                                    </p>
-                                    </p> -->
-                                </div>
-                                <div class="switch-container center">
-                                </div>
-                                <div class="icon-container center">
-                                    <i class="fas fa-print"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
+                    <?php
+                        }
+                    }
+                    // $conn->close();
+                    ?>
+                    <div class="pagination center">
+                        <?php
+                        if ($current_page > 1 && $total_page > 1) {
+                            echo '<a class="page" href="/Web_HospitalManagement/Manager/listSpecCon.php?page=' . ($current_page - 1) . '">Prev</a> ';
+                        }
+
+                        for ($i = 1; $i <= $total_page; $i++) {
+                            if ($i == $current_page) {
+                                echo '<span class="page active" >' . $i . '</span> ';
+                            } else {
+                                echo '<a class="page" href="/Web_HospitalManagement/Manager/listSpecCon.php?page=' . $i . '">' . $i . '</a> ';
+                            }
+                        }
+                        if ($current_page < $total_page && $total_page > 1) {
+                            echo '<a class="page" href="/Web_HospitalManagement/Manager/listSpecCon.php?page=' . ($current_page + 1) . '">Next</a> ';
+                        }
+                        ?>
+                    </div>
                 </ul>
             </div>
             <div class="container__floatbutton">

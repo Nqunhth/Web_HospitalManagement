@@ -1,5 +1,24 @@
 <?php
+require "../php/ConnectionConfig/DataBase.php";
+require "../php/Medicine/Medicine.php";
+require "../php/Invoice/Invoice.php";
+require "../php/Invoice/CreateInvoice.php";
+require "../php/Invoice/InvoiceMedicine.php";
 session_start();
+$result = Medicine::fetchMedicine();
+if (isset($_POST['submit'])) {
+    $error = CreateInvoice::Create();
+
+    if (isset($error) && $error == "Create Successfull") {
+        $_SESSION['mediCusName'] = '';
+        $_SESSION['mediAddress'] = '';
+
+        CreateInvoice::resetAllSession();
+    }
+}
+if (isset($_POST['reset'])) {
+    CreateInvoice::resetAllSession();
+}
 ?>
 
 <!DOCTYPE html>
@@ -107,19 +126,57 @@ session_start();
                     </ul>
                 </div>
             </div>
+            <script type="text/javascript">
+                function validateForm() {
+                    const errorLog = document.querySelector('.js-error');
+
+                    var cusName = document.getElementsByName("mediCusName")[0].value;
+                    var cusAddress = document.getElementsByName("mediAddress")[0].value;;
+
+                    var mediName_1 = document.getElementsByName("mediName_1")[0].value;
+
+                    if (cusName == null || cusName == "" || cusAddress == null || cusAddress == "" || mediName_1 == null || mediName_1 == "") {
+                        errorLog.classList.remove('hide');
+                        // alert("AAAAa")
+                        return false;
+                    }
+                }
+            </script>
             <div class="container__content">
                 <div class="box content__box">
                     <div class="inner-box">
-                        <p class="i-title">
-                            Customer Full Name:
-                            <input type="text" class="medium-input" name="invoice">
-                        </p>
-                        <p class="i-title">
-                            Address:
-                            <input type="text" class="medium-input" name="invoice">
-                        </p>
+                        <?php
+                        if (isset($error)) {
+                        ?>
+                            <p class="form-error"><?php echo $error ?></p>
+                        <?php } ?>
+                        <p class="form-error hide js-error">All fields are required</p>
+                        <?php
+                        if (empty($_SESSION['mediCusName'])) $_SESSION['mediCusName'] = '';
+                        if (empty($_SESSION['mediAddress'])) $_SESSION['mediAddress'] = '';
+                        ?>
+                        <form action="" method="post">
+                            <p class="i-title">
+                                Customer Full Name:
+                                <input type="text" class="medium-input" name="mediCusName" value="<?php echo isset($_POST["mediCusName"]) ? $_POST["mediCusName"] : $_SESSION['mediCusName'] ?>" onchange="this.form.submit();">
+
+                            </p>
+                            <p class="i-title">
+                                Address:
+                                <input type="text" class="medium-input" name="mediAddress" value="<?php echo isset($_POST["mediAddress"]) ? $_POST["mediAddress"] : $_SESSION['mediAddress'] ?>" onchange="this.form.submit();">
+                            </p>
+                        </form>
+                        <?php
+                        if (isset($_POST["mediAddress"]) && isset($_POST["mediCusName"])) {
+                            $_SESSION['mediAddress'] = $_POST["mediAddress"];
+                            $_SESSION['mediCusName'] = $_POST["mediCusName"];
+                        }
+                        ?>
                         <div class="i-line">
                             <table>
+                                <?php
+                                if (empty($_SESSION['mediTotal'])) $_SESSION['mediTotal'] = 0;
+                                ?>
                                 <tr>
                                     <th>No</th>
                                     <th>Medicine Name</th>
@@ -128,124 +185,428 @@ session_start();
                                     <th>Unit Price</th>
                                     <th>Total Cost</th>
                                 </tr>
+                                <datalist id="medicine">
+                                    <?php if ($result->num_rows > 0) {
+                                        while ($row = $result->fetch_assoc()) { ?>
+                                            <option value="<?php echo $row['medicine_name'] ?>"></option>
+                                    <?php }
+                                    } ?>
+                                </datalist>
                                 <tr>
-                                    <td><input type="text" class="short-table" name="invoice" value="1" readonly></td>
-                                    <td><input type="text" class="long-table" name="invoice"></td>
-                                    <td><input type="text" class="medium-table" name="invoice"></td>
-                                    <td><input type="text" class="medium-table" name="invoice"></td>
-                                    <td><input type="text" class="medium-table" name="invoice"></td>
-                                    <td><input type="text" class="medium-table" name="invoice"></td>
+                                    <td><input type="text" class="short-table" name="mediNo_1" value="1" readonly></td>
+                                    <form action="" method="POST">
+                                        <td>
+                                            <?php
+                                            if (empty($_SESSION['mediId_1'])) $_SESSION['mediId_1'] = '';
+                                            if (empty($_SESSION['mediName_1'])) $_SESSION['mediName_1'] = '';
+                                            if (empty($_SESSION['mediUnit_1'])) $_SESSION['mediUnit_1'] = '';
+                                            if (empty($_SESSION['mediUnitPrice_1'])) $_SESSION['mediUnitPrice_1'] = 0;
+                                            if (empty($_SESSION['mediQuantity_1'])) $_SESSION['mediQuantity_1'] = 1;
+                                            if (empty($_SESSION['mediCost_1'])) $_SESSION['mediCost_1'] = 0;
+                                            ?>
+                                            <input type="text" list="medicine" class="long-table" name="mediName_1" value="<?php echo isset($_POST['mediName_1']) ? $_POST['mediName_1'] : $_SESSION['mediName_1'] ?>" onchange="this.form.submit();">
+                                        </td>
+                                        <?php
+                                        if (isset($_POST["mediName_1"])) {
+                                            $currMedi = Medicine::fetchMedicineSelected($_POST["mediName_1"]);
+                                            $_SESSION['mediName_1'] = $_POST["mediName_1"];
+                                            if ($currMedi->num_rows > 0) {
+                                                $currMedi = $currMedi->fetch_assoc();
+                                                $_SESSION['mediId_1'] = $currMedi["medicine_id"];
+                                                $_SESSION['mediUnit_1'] = $currMedi["medicine_unit"];
+                                                $_SESSION['mediUnitPrice_1'] = $currMedi["medicine_unit_price"];
+                                                $_SESSION['mediCost_1'] = $currMedi["medicine_unit_price"];
+                                                if (isset($_POST["mediQuantity_1"])) {
+                                                    $_SESSION['mediQuantity_1'] = $_POST["mediQuantity_1"];
+                                                    $_SESSION['mediCost_1'] = $_SESSION['mediUnitPrice_1'] * $_SESSION['mediQuantity_1'];
+                                                }
+                                        ?>
+                                                <td><input type="text" class="medium-table" name="mediUnit_1" readonly="readonly" onfocus="this.blur()" tabindex="-1" value="<?php echo $currMedi["medicine_unit"] ?>"></td>
+                                                <td>
+                                                    <input type="number" class="medium-table" name="mediQuantity_1" onkeypress="return event.charCode >= 48" min=1 value="<?php echo $_SESSION['mediQuantity_1'] ?>" onchange="this.form.submit();">
+                                                </td>
+                                    </form>
+                                    <?php
+                                                $_SESSION['mediCost_1'] = (int)$_SESSION['mediUnitPrice_1'] * (int)$_SESSION['mediQuantity_1'];
+                                    ?>
+                                    <td><input type="text" class="medium-table" name="mediUnitPrice_1" readonly="readonly" onfocus="this.blur()" tabindex="-1" value="<?php echo $currMedi["medicine_unit_price"] ?>"></td>
+                                    <td><input type="text" class="medium-table" name="mediCost_1" readonly="readonly" onfocus="this.blur()" tabindex="-1" value="<?php echo $_SESSION['mediCost_1'] ?>"></td>
+                                <?php } else { ?>
+                                            <td><input type="text" class="medium-table" name="mediUnit_1" readonly="readonly" onfocus="this.blur()" tabindex="-1"></td>
+                                            <td><input type="number" class="medium-table" name="mediQuantity_1" readonly="readonly" onkeypress="return event.charCode >= 48" min="1"></td>
+                                            <td><input type="text" class="medium-table" name="mediUnitPrice_1" readonly="readonly" onfocus="this.blur()" tabindex="-1"></td>
+                                            <td><input type="text" class="medium-table" name="mediCost_1" readonly="readonly" onfocus="this.blur()" tabindex="-1" ></td>
+                                           <?php }
+                                        } else { ?>
+                                <?php
+                                            if (isset($_POST["mediQuantity_1"])) {
+                                                $_SESSION['mediQuantity_1'] = $_POST["mediQuantity_1"];
+                                                $_SESSION['mediCost_1'] = $_SESSION['mediUnitPrice_1'] * $_SESSION['mediQuantity_1'];
+                                            }
+                                ?>
+                                <td><input type="text" class="medium-table" name="mediUnit_1" readonly="readonly" onfocus="this.blur()" tabindex="-1" value="<?php echo isset($_SESSION['mediUnit_1']) ? $_SESSION['mediUnit_1'] : '' ?>"></td>
+                                <?php
+                                            if ($_SESSION['mediName_1'] != null || $_SESSION['mediName_1'] != '') {
+                                ?>
+                                    <td>
+                                        <form action="" method="POST">
+                                            <input type="number" class="medium-table" name="mediQuantity_1" onkeypress="return event.charCode >= 48" min="1" value="<?php echo isset($_SESSION['mediQuantity_1']) ? $_SESSION['mediQuantity_1'] : '' ?>" onchange="this.form.submit();">
+                                        </form>
+                                    </td>
+                                <?php
+                                            } else { ?>
+                                    <td>
+                                        <form action="" method="POST">
+                                            <input type="number" class="medium-table" name="mediQuantity_1" readonly="readonly" onkeypress="return event.charCode >= 48" min="1" value="<?php echo isset($_SESSION['mediQuantity_1']) ? $_SESSION['mediQuantity_1'] : '' ?>" onchange="this.form.submit();">
+                                        </form>
+                                    </td>
+                                <?php
+                                            }
+                                ?>
+                                <td><input type="text" class="medium-table" name="mediUnitPrice_1" readonly="readonly" onfocus="this.blur()" tabindex="-1" value="<?php echo isset($_SESSION['mediUnitPrice_1']) ? $_SESSION['mediUnitPrice_1'] : '' ?>"></td>
+                                <td><input type="text" class="medium-table" name="mediCost_1" readonly="readonly" onfocus="this.blur()" tabindex="-1" value="<?php echo isset($_SESSION['mediCost_1']) ? $_SESSION['mediCost_1'] : '' ?>"></td>
+                            <?php } ?>
                                 </tr>
                                 <tr>
-                                    <td><input type="text" class="short-table" name="invoice" value="2" readonly></td>
-                                    <td><input type="text" class="long-table" name="invoice"></td>
-                                    <td><input type="text" class="medium-table" name="invoice"></td>
-                                    <td><input type="text" class="medium-table" name="invoice"></td>
-                                    <td><input type="text" class="medium-table" name="invoice"></td>
-                                    <td><input type="text" class="medium-table" name="invoice"></td>
+                                    <td><input type="text" class="short-table" name="mediNo_2" value="2" readonly></td>
+                                    <form action="" method="POST">
+                                        <td>
+                                            <?php
+                                            if (empty($_SESSION['mediId_2'])) $_SESSION['mediId_2'] = '';
+                                            if (empty($_SESSION['mediName_2'])) $_SESSION['mediName_2'] = '';
+                                            if (empty($_SESSION['mediUnit_2'])) $_SESSION['mediUnit_2'] = '';
+                                            if (empty($_SESSION['mediUnitPrice_2'])) $_SESSION['mediUnitPrice_2'] = 0;
+                                            if (empty($_SESSION['mediQuantity_2'])) $_SESSION['mediQuantity_2'] = 1;
+                                            if (empty($_SESSION['mediCost_2'])) $_SESSION['mediCost_2'] = 0;
+                                            ?>
+                                            <input type="text" list="medicine" class="long-table" name="mediName_2" value="<?php echo isset($_POST['mediName_2']) ? $_POST['mediName_2'] : $_SESSION['mediName_2'] ?>" onchange="this.form.submit();">
+                                        </td>
+                                        <?php
+                                        if (isset($_POST["mediName_2"])) {
+                                            $currMedi = Medicine::fetchMedicineSelected($_POST["mediName_2"]);
+                                            $_SESSION['mediName_2'] = $_POST["mediName_2"];
+                                            if ($currMedi->num_rows > 0) {
+                                                $currMedi = $currMedi->fetch_assoc();
+                                                $_SESSION['mediId_2'] = $currMedi["medicine_id"];
+                                                $_SESSION['mediUnit_2'] = $currMedi["medicine_unit"];
+                                                $_SESSION['mediUnitPrice_2'] = $currMedi["medicine_unit_price"];
+                                                $_SESSION['mediCost_2'] = $currMedi["medicine_unit_price"];
+                                                if (isset($_POST["mediQuantity_2"])) {
+                                                    $_SESSION['mediQuantity_2'] = $_POST["mediQuantity_2"];
+                                                    $_SESSION['mediCost_2'] = $_SESSION['mediUnitPrice_2'] * $_SESSION['mediQuantity_2'];
+                                                }
+                                        ?>
+                                                <td><input type="text" class="medium-table" name="mediUnit_2" readonly="readonly" onfocus="this.blur()" tabindex="-1" value="<?php echo $currMedi["medicine_unit"] ?>"></td>
+                                                <td>
+                                                    <input type="number" class="medium-table" name="mediQuantity_2" onkeypress="return event.charCode >= 48" min=1 value="<?php echo $_SESSION['mediQuantity_2'] ?>" onchange="this.form.submit();">
+                                                </td>
+                                    </form>
+                                    <?php
+                                                $_SESSION['mediCost_2'] = (int)$_SESSION['mediUnitPrice_2'] * (int)$_SESSION['mediQuantity_2'];
+                                    ?>
+                                    <td><input type="text" class="medium-table" name="mediUnitPrice_2" readonly="readonly" onfocus="this.blur()" tabindex="-1" value="<?php echo $currMedi["medicine_unit_price"] ?>"></td>
+                                    <td><input type="text" class="medium-table" name="mediCost_2" readonly="readonly" onfocus="this.blur()" tabindex="-1" value="<?php echo $_SESSION['mediCost_2'] ?>"></td>
+                                <?php } else { ?>
+                                            <td><input type="text" class="medium-table" name="mediUnit_2" readonly="readonly" onfocus="this.blur()" tabindex="-1"></td>
+                                            <td><input type="number" class="medium-table" name="mediQuantity_2" readonly="readonly" onkeypress="return event.charCode >= 48" min="1"></td>
+                                            <td><input type="text" class="medium-table" name="mediUnitPrice_2" readonly="readonly" onfocus="this.blur()" tabindex="-1"></td>
+                                            <td><input type="text" class="medium-table" name="mediCost_2" readonly="readonly" onfocus="this.blur()" tabindex="-1" ></td>
+                                           <?php }
+                                        } else { ?>
+                                <?php
+                                            if (isset($_POST["mediQuantity_2"])) {
+                                                $_SESSION['mediQuantity_2'] = $_POST["mediQuantity_2"];
+                                                $_SESSION['mediCost_2'] = $_SESSION['mediUnitPrice_2'] * $_SESSION['mediQuantity_2'];
+                                            }
+                                ?>
+                                <td><input type="text" class="medium-table" name="mediUnit_2" readonly="readonly" onfocus="this.blur()" tabindex="-1" value="<?php echo isset($_SESSION['mediUnit_2']) ? $_SESSION['mediUnit_2'] : '' ?>"></td>
+                                <?php
+                                            if ($_SESSION['mediName_2'] != null || $_SESSION['mediName_2'] != '') {
+                                ?>
+                                    <td>
+                                        <form action="" method="POST">
+                                            <input type="number" class="medium-table" name="mediQuantity_2" onkeypress="return event.charCode >= 48" min="1" value="<?php echo isset($_SESSION['mediQuantity_2']) ? $_SESSION['mediQuantity_2'] : '' ?>" onchange="this.form.submit();">
+                                        </form>
+                                    </td>
+                                <?php
+                                            } else { ?>
+                                    <td>
+                                        <form action="" method="POST">
+                                            <input type="number" class="medium-table" name="mediQuantity_2" readonly="readonly" onkeypress="return event.charCode >= 48" min="1" value="<?php echo isset($_SESSION['mediQuantity_2']) ? $_SESSION['mediQuantity_2'] : '' ?>" onchange="this.form.submit();">
+                                        </form>
+                                    </td>
+                                <?php
+                                            }
+                                ?>
+                                <td><input type="text" class="medium-table" name="mediUnitPrice_2" readonly="readonly" onfocus="this.blur()" tabindex="-1" value="<?php echo isset($_SESSION['mediUnitPrice_2']) ? $_SESSION['mediUnitPrice_2'] : '' ?>"></td>
+                                <td><input type="text" class="medium-table" name="mediCost_2" readonly="readonly" onfocus="this.blur()" tabindex="-1" value="<?php echo isset($_SESSION['mediCost_2']) ? $_SESSION['mediCost_2'] : '' ?>"></td>
+                            <?php } ?>
                                 </tr>
                                 <tr>
-                                    <td><input type="text" class="short-table" name="invoice" value="3" readonly></td>
-                                    <td><input type="text" class="long-table" name="invoice"></td>
-                                    <td><input type="text" class="medium-table" name="invoice"></td>
-                                    <td><input type="text" class="medium-table" name="invoice"></td>
-                                    <td><input type="text" class="medium-table" name="invoice"></td>
-                                    <td><input type="text" class="medium-table" name="invoice"></td>
+                                    <td><input type="text" class="short-table" name="mediNo_3" value="3" readonly></td>
+                                    <form action="" method="POST">
+                                        <td>
+                                            <?php
+                                            if (empty($_SESSION['mediId_3'])) $_SESSION['mediId_3'] = '';
+                                            if (empty($_SESSION['mediName_3'])) $_SESSION['mediName_3'] = '';
+                                            if (empty($_SESSION['mediUnit_3'])) $_SESSION['mediUnit_3'] = '';
+                                            if (empty($_SESSION['mediUnitPrice_3'])) $_SESSION['mediUnitPrice_3'] = 0;
+                                            if (empty($_SESSION['mediQuantity_3'])) $_SESSION['mediQuantity_3'] = 1;
+                                            if (empty($_SESSION['mediCost_3'])) $_SESSION['mediCost_3'] = 0;
+                                            ?>
+                                            <input type="text" list="medicine" class="long-table" name="mediName_3" value="<?php echo isset($_POST['mediName_3']) ? $_POST['mediName_3'] : $_SESSION['mediName_3'] ?>" onchange="this.form.submit();">
+                                        </td>
+                                        <?php
+                                        if (isset($_POST["mediName_3"])) {
+                                            $currMedi = Medicine::fetchMedicineSelected($_POST["mediName_3"]);
+                                            $_SESSION['mediName_3'] = $_POST["mediName_3"];
+                                            if ($currMedi->num_rows > 0) {
+                                                $currMedi = $currMedi->fetch_assoc();
+                                                $_SESSION['mediId_3'] = $currMedi["medicine_id"];
+                                                $_SESSION['mediUnit_3'] = $currMedi["medicine_unit"];
+                                                $_SESSION['mediUnitPrice_3'] = $currMedi["medicine_unit_price"];
+                                                $_SESSION['mediCost_3'] = $currMedi["medicine_unit_price"];
+                                                if (isset($_POST["mediQuantity_3"])) {
+                                                    $_SESSION['mediQuantity_3'] = $_POST["mediQuantity_3"];
+                                                    $_SESSION['mediCost_3'] = $_SESSION['mediUnitPrice_3'] * $_SESSION['mediQuantity_3'];
+                                                }
+                                        ?>
+                                                <td><input type="text" class="medium-table" name="mediUnit_3" readonly="readonly" onfocus="this.blur()" tabindex="-1" value="<?php echo $currMedi["medicine_unit"] ?>"></td>
+                                                <td>
+                                                    <input type="number" class="medium-table" name="mediQuantity_3" onkeypress="return event.charCode >= 48" min=1 value="<?php echo $_SESSION['mediQuantity_3'] ?>" onchange="this.form.submit();">
+                                                </td>
+                                    </form>
+                                    <?php
+                                                $_SESSION['mediCost_3'] = (int)$_SESSION['mediUnitPrice_3'] * (int)$_SESSION['mediQuantity_3'];
+                                    ?>
+                                    <td><input type="text" class="medium-table" name="mediUnitPrice_3" readonly="readonly" onfocus="this.blur()" tabindex="-1" value="<?php echo $currMedi["medicine_unit_price"] ?>"></td>
+                                    <td><input type="text" class="medium-table" name="mediCost_3" readonly="readonly" onfocus="this.blur()" tabindex="-1" value="<?php echo $_SESSION['mediCost_3'] ?>"></td>
+                                <?php } else { ?>
+                                            <td><input type="text" class="medium-table" name="mediUnit_3" readonly="readonly" onfocus="this.blur()" tabindex="-1"></td>
+                                            <td><input type="number" class="medium-table" name="mediQuantity_3" readonly="readonly" onkeypress="return event.charCode >= 48" min="1"></td>
+                                            <td><input type="text" class="medium-table" name="mediUnitPrice_3" readonly="readonly" onfocus="this.blur()" tabindex="-1"></td>
+                                            <td><input type="text" class="medium-table" name="mediCost_3" readonly="readonly" onfocus="this.blur()" tabindex="-1" ></td>
+                                           <?php }
+                                        } else { ?>
+                                <?php
+                                            if (isset($_POST["mediQuantity_3"])) {
+                                                $_SESSION['mediQuantity_3'] = $_POST["mediQuantity_3"];
+                                                $_SESSION['mediCost_3'] = $_SESSION['mediUnitPrice_3'] * $_SESSION['mediQuantity_3'];
+                                            }
+                                ?>
+                                <td><input type="text" class="medium-table" name="mediUnit_3" readonly="readonly" onfocus="this.blur()" tabindex="-1" value="<?php echo isset($_SESSION['mediUnit_3']) ? $_SESSION['mediUnit_3'] : '' ?>"></td>
+                                <?php
+                                            if ($_SESSION['mediName_3'] != null || $_SESSION['mediName_3'] != '') {
+                                ?>
+                                    <td>
+                                        <form action="" method="POST">
+                                            <input type="number" class="medium-table" name="mediQuantity_3" onkeypress="return event.charCode >= 48" min="1" value="<?php echo isset($_SESSION['mediQuantity_3']) ? $_SESSION['mediQuantity_3'] : '' ?>" onchange="this.form.submit();">
+                                        </form>
+                                    </td>
+                                <?php
+                                            } else { ?>
+                                    <td>
+                                        <form action="" method="POST">
+                                            <input type="number" class="medium-table" name="mediQuantity_3" readonly="readonly" onkeypress="return event.charCode >= 48" min="1" value="<?php echo isset($_SESSION['mediQuantity_3']) ? $_SESSION['mediQuantity_3'] : '' ?>" onchange="this.form.submit();">
+                                        </form>
+                                    </td>
+                                <?php
+                                            }
+                                ?>
+                                <td><input type="text" class="medium-table" name="mediUnitPrice_3" readonly="readonly" onfocus="this.blur()" tabindex="-1" value="<?php echo isset($_SESSION['mediUnitPrice_3']) ? $_SESSION['mediUnitPrice_3'] : '' ?>"></td>
+                                <td><input type="text" class="medium-table" name="mediCost_3" readonly="readonly" onfocus="this.blur()" tabindex="-1" value="<?php echo isset($_SESSION['mediCost_3']) ? $_SESSION['mediCost_3'] : '' ?>"></td>
+                            <?php } ?>
                                 </tr>
                                 <tr>
-                                    <td><input type="text" class="short-table" name="invoice" value="4" readonly></td>
-                                    <td><input type="text" class="long-table" name="invoice"></td>
-                                    <td><input type="text" class="medium-table" name="invoice"></td>
-                                    <td><input type="text" class="medium-table" name="invoice"></td>
-                                    <td><input type="text" class="medium-table" name="invoice"></td>
-                                    <td><input type="text" class="medium-table" name="invoice"></td>
+                                    <td><input type="text" class="short-table" name="mediNo_4" value="4" readonly></td>
+                                    <form action="" method="POST">
+                                        <td>
+                                            <?php
+                                            if (empty($_SESSION['mediId_4'])) $_SESSION['mediId_4'] = '';
+                                            if (empty($_SESSION['mediName_4'])) $_SESSION['mediName_4'] = '';
+                                            if (empty($_SESSION['mediUnit_4'])) $_SESSION['mediUnit_4'] = '';
+                                            if (empty($_SESSION['mediUnitPrice_4'])) $_SESSION['mediUnitPrice_4'] = 0;
+                                            if (empty($_SESSION['mediQuantity_4'])) $_SESSION['mediQuantity_4'] = 1;
+                                            if (empty($_SESSION['mediCost_4'])) $_SESSION['mediCost_4'] = 0;
+                                            ?>
+                                            <input type="text" list="medicine" class="long-table" name="mediName_4" value="<?php echo isset($_POST['mediName_4']) ? $_POST['mediName_4'] : $_SESSION['mediName_4'] ?>" onchange="this.form.submit();">
+                                        </td>
+                                        <?php
+                                        if (isset($_POST["mediName_4"])) {
+                                            $currMedi = Medicine::fetchMedicineSelected($_POST["mediName_4"]);
+                                            $_SESSION['mediName_4'] = $_POST["mediName_4"];
+                                            if ($currMedi->num_rows > 0) {
+                                                $currMedi = $currMedi->fetch_assoc();
+                                                $_SESSION['mediId_4'] = $currMedi["medicine_id"];
+                                                $_SESSION['mediUnit_4'] = $currMedi["medicine_unit"];
+                                                $_SESSION['mediUnitPrice_4'] = $currMedi["medicine_unit_price"];
+                                                $_SESSION['mediCost_4'] = $currMedi["medicine_unit_price"];
+                                                if (isset($_POST["mediQuantity_4"])) {
+                                                    $_SESSION['mediQuantity_4'] = $_POST["mediQuantity_4"];
+                                                    $_SESSION['mediCost_4'] = $_SESSION['mediUnitPrice_4'] * $_SESSION['mediQuantity_4'];
+                                                }
+                                        ?>
+                                                <td><input type="text" class="medium-table" name="mediUnit_4" readonly="readonly" onfocus="this.blur()" tabindex="-1" value="<?php echo $currMedi["medicine_unit"] ?>"></td>
+                                                <td>
+                                                    <input type="number" class="medium-table" name="mediQuantity_4" onkeypress="return event.charCode >= 48" min=1 value="<?php echo $_SESSION['mediQuantity_4'] ?>" onchange="this.form.submit();">
+                                                </td>
+                                    </form>
+                                    <?php
+                                                $_SESSION['mediCost_4'] = (int)$_SESSION['mediUnitPrice_4'] * (int)$_SESSION['mediQuantity_4'];
+                                    ?>
+                                    <td><input type="text" class="medium-table" name="mediUnitPrice_4" readonly="readonly" onfocus="this.blur()" tabindex="-1" value="<?php echo $currMedi["medicine_unit_price"] ?>"></td>
+                                    <td><input type="text" class="medium-table" name="mediCost_4" readonly="readonly" onfocus="this.blur()" tabindex="-1" value="<?php echo $_SESSION['mediCost_4'] ?>"></td>
+                                <?php } else { ?>
+                                            <td><input type="text" class="medium-table" name="mediUnit_4" readonly="readonly" onfocus="this.blur()" tabindex="-1"></td>
+                                            <td><input type="number" class="medium-table" name="mediQuantity_4" readonly="readonly" onkeypress="return event.charCode >= 48" min="1"></td>
+                                            <td><input type="text" class="medium-table" name="mediUnitPrice_4" readonly="readonly" onfocus="this.blur()" tabindex="-1"></td>
+                                            <td><input type="text" class="medium-table" name="mediCost_4" readonly="readonly" onfocus="this.blur()" tabindex="-1" ></td>
+                                           <?php }
+                                        } else { ?>
+                                <?php
+                                            if (isset($_POST["mediQuantity_4"])) {
+                                                $_SESSION['mediQuantity_4'] = $_POST["mediQuantity_4"];
+                                                $_SESSION['mediCost_4'] = $_SESSION['mediUnitPrice_4'] * $_SESSION['mediQuantity_4'];
+                                            }
+                                ?>
+                                <td><input type="text" class="medium-table" name="mediUnit_4" readonly="readonly" onfocus="this.blur()" tabindex="-1" value="<?php echo isset($_SESSION['mediUnit_4']) ? $_SESSION['mediUnit_4'] : '' ?>"></td>
+                                <?php
+                                            if ($_SESSION['mediName_4'] != null || $_SESSION['mediName_4'] != '') {
+                                ?>
+                                    <td>
+                                        <form action="" method="POST">
+                                            <input type="number" class="medium-table" name="mediQuantity_4" onkeypress="return event.charCode >= 48" min="1" value="<?php echo isset($_SESSION['mediQuantity_4']) ? $_SESSION['mediQuantity_4'] : '' ?>" onchange="this.form.submit();">
+                                        </form>
+                                    </td>
+                                <?php
+                                            } else { ?>
+                                    <td>
+                                        <form action="" method="POST">
+                                            <input type="number" class="medium-table" name="mediQuantity_4" readonly="readonly" onkeypress="return event.charCode >= 48" min="1" value="<?php echo isset($_SESSION['mediQuantity_4']) ? $_SESSION['mediQuantity_4'] : '' ?>" onchange="this.form.submit();">
+                                        </form>
+                                    </td>
+                                <?php
+                                            }
+                                ?>
+                                <td><input type="text" class="medium-table" name="mediUnitPrice_4" readonly="readonly" onfocus="this.blur()" tabindex="-1" value="<?php echo isset($_SESSION['mediUnitPrice_4']) ? $_SESSION['mediUnitPrice_4'] : '' ?>"></td>
+                                <td><input type="text" class="medium-table" name="mediCost_4" readonly="readonly" onfocus="this.blur()" tabindex="-1" value="<?php echo isset($_SESSION['mediCost_4']) ? $_SESSION['mediCost_4'] : '' ?>"></td>
+                            <?php } ?>
                                 </tr>
                                 <tr>
-                                    <td><input type="text" class="short-table" name="invoice" value="5" readonly></td>
-                                    <td><input type="text" class="long-table" name="invoice"></td>
-                                    <td><input type="text" class="medium-table" name="invoice"></td>
-                                    <td><input type="text" class="medium-table" name="invoice"></td>
-                                    <td><input type="text" class="medium-table" name="invoice"></td>
-                                    <td><input type="text" class="medium-table" name="invoice"></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="text" class="short-table" name="invoice" value="6" readonly></td>
-                                    <td><input type="text" class="long-table" name="invoice"></td>
-                                    <td><input type="text" class="medium-table" name="invoice"></td>
-                                    <td><input type="text" class="medium-table" name="invoice"></td>
-                                    <td><input type="text" class="medium-table" name="invoice"></td>
-                                    <td><input type="text" class="medium-table" name="invoice"></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="text" class="short-table" name="invoice" value="7" readonly></td>
-                                    <td><input type="text" class="long-table" name="invoice"></td>
-                                    <td><input type="text" class="medium-table" name="invoice"></td>
-                                    <td><input type="text" class="medium-table" name="invoice"></td>
-                                    <td><input type="text" class="medium-table" name="invoice"></td>
-                                    <td><input type="text" class="medium-table" name="invoice"></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="text" class="short-table" name="invoice" value="8" readonly></td>
-                                    <td><input type="text" class="long-table" name="invoice"></td>
-                                    <td><input type="text" class="medium-table" name="invoice"></td>
-                                    <td><input type="text" class="medium-table" name="invoice"></td>
-                                    <td><input type="text" class="medium-table" name="invoice"></td>
-                                    <td><input type="text" class="medium-table" name="invoice"></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="text" class="short-table" name="invoice" value="9" readonly></td>
-                                    <td><input type="text" class="long-table" name="invoice"></td>
-                                    <td><input type="text" class="medium-table" name="invoice"></td>
-                                    <td><input type="text" class="medium-table" name="invoice"></td>
-                                    <td><input type="text" class="medium-table" name="invoice"></td>
-                                    <td><input type="text" class="medium-table" name="invoice"></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="text" class="short-table" name="invoice" value="10" readonly></td>
-                                    <td><input type="text" class="long-table" name="invoice"></td>
-                                    <td><input type="text" class="medium-table" name="invoice"></td>
-                                    <td><input type="text" class="medium-table" name="invoice"></td>
-                                    <td><input type="text" class="medium-table" name="invoice"></td>
-                                    <td><input type="text" class="medium-table" name="invoice"></td>
+                                    <td><input type="text" class="short-table" name="mediNo_5" value="5" readonly></td>
+                                    <form action="" method="POST">
+                                        <td>
+                                            <?php
+                                            if (empty($_SESSION['mediId_5'])) $_SESSION['mediId_5'] = '';
+                                            if (empty($_SESSION['mediName_5'])) $_SESSION['mediName_5'] = '';
+                                            if (empty($_SESSION['mediUnit_5'])) $_SESSION['mediUnit_5'] = '';
+                                            if (empty($_SESSION['mediUnitPrice_5'])) $_SESSION['mediUnitPrice_5'] = 0;
+                                            if (empty($_SESSION['mediQuantity_5'])) $_SESSION['mediQuantity_5'] = 1;
+                                            if (empty($_SESSION['mediCost_5'])) $_SESSION['mediCost_5'] = 0;
+                                            ?>
+                                            <input type="text" list="medicine" class="long-table" name="mediName_5" value="<?php echo isset($_POST['mediName_5']) ? $_POST['mediName_5'] : $_SESSION['mediName_5'] ?>" onchange="this.form.submit();">
+                                        </td>
+                                        <?php
+                                        if (isset($_POST["mediName_5"])) {
+                                            $currMedi = Medicine::fetchMedicineSelected($_POST["mediName_5"]);
+                                            $_SESSION['mediName_5'] = $_POST["mediName_5"];
+                                            if ($currMedi->num_rows > 0) {
+                                                $currMedi = $currMedi->fetch_assoc();
+                                                $_SESSION['mediId_5'] = $currMedi["medicine_id"];
+                                                $_SESSION['mediUnit_5'] = $currMedi["medicine_unit"];
+                                                $_SESSION['mediUnitPrice_5'] = $currMedi["medicine_unit_price"];
+                                                $_SESSION['mediCost_5'] = $currMedi["medicine_unit_price"];
+                                                if (isset($_POST["mediQuantity_5"])) {
+                                                    $_SESSION['mediQuantity_5'] = $_POST["mediQuantity_5"];
+                                                    $_SESSION['mediCost_5'] = $_SESSION['mediUnitPrice_5'] * $_SESSION['mediQuantity_5'];
+                                                }
+                                        ?>
+                                                <td><input type="text" class="medium-table" name="mediUnit_5" readonly="readonly" onfocus="this.blur()" tabindex="-1" value="<?php echo $currMedi["medicine_unit"] ?>"></td>
+                                                <td>
+                                                    <input type="number" class="medium-table" name="mediQuantity_5" onkeypress="return event.charCode >= 48" min=1 value="<?php echo $_SESSION['mediQuantity_5'] ?>" onchange="this.form.submit();">
+                                                </td>
+                                    </form>
+                                    <?php
+                                                $_SESSION['mediCost_5'] = (int)$_SESSION['mediUnitPrice_5'] * (int)$_SESSION['mediQuantity_5'];
+                                    ?>
+                                    <td><input type="text" class="medium-table" name="mediUnitPrice_5" readonly="readonly" onfocus="this.blur()" tabindex="-1" value="<?php echo $currMedi["medicine_unit_price"] ?>"></td>
+                                    <td><input type="text" class="medium-table" name="mediCost_5" readonly="readonly" onfocus="this.blur()" tabindex="-1" value="<?php echo $_SESSION['mediCost_5'] ?>"></td>
+                                <?php } else { ?>
+                                            <td><input type="text" class="medium-table" name="mediUnit_5" readonly="readonly" onfocus="this.blur()" tabindex="-1"></td>
+                                            <td><input type="number" class="medium-table" name="mediQuantity_5" readonly="readonly" onkeypress="return event.charCode >= 48" min="1"></td>
+                                            <td><input type="text" class="medium-table" name="mediUnitPrice_5" readonly="readonly" onfocus="this.blur()" tabindex="-1"></td>
+                                            <td><input type="text" class="medium-table" name="mediCost_5" readonly="readonly" onfocus="this.blur()" tabindex="-1" ></td>
+                                           <?php }
+                                        } else { ?>
+                                <?php
+                                            if (isset($_POST["mediQuantity_5"])) {
+                                                $_SESSION['mediQuantity_5'] = $_POST["mediQuantity_5"];
+                                                $_SESSION['mediCost_5'] = $_SESSION['mediUnitPrice_5'] * $_SESSION['mediQuantity_5'];
+                                            }
+                                ?>
+                                <td><input type="text" class="medium-table" name="mediUnit_5" readonly="readonly" onfocus="this.blur()" tabindex="-1" value="<?php echo isset($_SESSION['mediUnit_5']) ? $_SESSION['mediUnit_5'] : '' ?>"></td>
+                                <?php
+                                            if ($_SESSION['mediName_5'] != null || $_SESSION['mediName_5'] != '') {
+                                ?>
+                                    <td>
+                                        <form action="" method="POST">
+                                            <input type="number" class="medium-table" name="mediQuantity_5" onkeypress="return event.charCode >= 48" min="1" value="<?php echo isset($_SESSION['mediQuantity_5']) ? $_SESSION['mediQuantity_5'] : '' ?>" onchange="this.form.submit();">
+                                        </form>
+                                    </td>
+                                <?php
+                                            } else { ?>
+                                    <td>
+                                        <form action="" method="POST">
+                                            <input type="number" class="medium-table" name="mediQuantity_5" readonly="readonly" onkeypress="return event.charCode >= 48" min="1" value="<?php echo isset($_SESSION['mediQuantity_5']) ? $_SESSION['mediQuantity_5'] : '' ?>" onchange="this.form.submit();">
+                                        </form>
+                                    </td>
+                                <?php
+                                            }
+                                ?>
+                                <td><input type="text" class="medium-table" name="mediUnitPrice_5" readonly="readonly" onfocus="this.blur()" tabindex="-1" value="<?php echo isset($_SESSION['mediUnitPrice_5']) ? $_SESSION['mediUnitPrice_5'] : '' ?>"></td>
+                                <td><input type="text" class="medium-table" name="mediCost_5" readonly="readonly" onfocus="this.blur()" tabindex="-1" value="<?php echo isset($_SESSION['mediCost_5']) ? $_SESSION['mediCost_5'] : '' ?>"></td>
+                            <?php } ?>
                                 </tr>
                             </table>
                         </div>
+                        <?php
+                        $_SESSION['mediTotal'] = $_SESSION['mediCost_1'] + $_SESSION['mediCost_2'] + $_SESSION['mediCost_3'] + $_SESSION['mediCost_4'] + $_SESSION['mediCost_5'];
+                        ?>
                         <p class="i-title">
                             Sum:
-                            <input type="text" class="medium-input" name="invoice" readonly>
+                            <input type="text" class="medium-input" name="mediTotal" onfocus="this.blur()" tabindex="-1" value="<?php echo isset($_SESSION['mediTotal']) ? $_SESSION['mediTotal'] : '' ?>">
                         </p>
                         <div class="datetime-containter">
                             <p class="i-datetime">Day
-                            <p class="i-value i-datetime">DD</p>
+                            <p class="i-value i-datetime"><?php echo Date("d") ?></p>
                             <p class="i-datetime">Month
-                            <p class="i-value i-datetime">MM</p>
+                            <p class="i-value i-datetime"><?php echo Date("m") ?></p>
                             <p class="i-datetime">Year
-                            <p class="i-value i-datetime">YYYY</p>
+                            <p class="i-value i-datetime"><?php echo Date("Y") ?></p>
                             </p>
                             </p>
                             </p>
                         </div>
-                        <p class="i-sign">Customer
-                        <p class="i-sign right">Pharmacist</p>
+                        <p class="i-sign">Customer's Sign
+                        <p class="i-sign right">Pharmacist's Sign</p>
                         </p>
                     </div>
                 </div>
-                <div class="content__button">
-
-                    <button class="button button-confirm">
+                <form class="content__button" action="" method="POST">
+                    <button name="submit" type="submit" class="button button-confirm" onclick="return validateForm();">
                         <i class="fas fa-check"></i>
                         Confirm
                     </button>
-                    <button class="button button-reset">
+                    <button name="reset" type="submit" class="button button-reset">
                         <i class="fas fa-eraser"></i>
                         Reset
                     </button>
+
                     <button class="button button-print">
                         <i class="fas fa-print"></i>
                         Print
                     </button>
-                </div>
-
+                </form>
             </div>
         </div>
 

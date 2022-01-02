@@ -4,7 +4,25 @@ require "../php/Patient/Patient.php";
 
 session_start();
 
-$result = Patient::fetchAllPatient()
+$count = Patient::fetchCountTotal();
+if($count->num_rows > 0){
+    $row = $count->fetch_assoc();
+    $total_records = $row['total'];
+}
+
+$current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+$limit = 4;
+
+$total_page = ceil($total_records / $limit);
+
+if ($current_page > $total_page) {
+    $current_page = $total_page;
+} else if ($current_page < 1) {
+    $current_page = 1;
+}
+
+$start = ($current_page - 1) * $limit;
+$result = Patient::fetchAllPatient($start, $limit);
 ?>
 
 
@@ -209,8 +227,25 @@ $result = Patient::fetchAllPatient()
                             </li>
                     <?php }
                     } ?>
+                    <div class="pagination center">
+                        <?php
+                        if ($current_page > 1 && $total_page > 1) {
+                            echo '<a class="page" href="/Web_HospitalManagement/Doctor/patientList.php?page=' . ($current_page - 1) . '">Prev</a> ';
+                        }
 
-                    </ul>
+                        for ($i = 1; $i <= $total_page; $i++) {
+                            if ($i == $current_page) {
+                                echo '<span class="page active" >' . $i . '</span> ';
+                            } else {
+                                echo '<a class="page" href="/Web_HospitalManagement/Doctor/patientList.php?page=' . $i . '">' . $i . '</a> ';
+                            }
+                        }
+                        if ($current_page < $total_page && $total_page > 1) {
+                            echo '<a class="page" href="/Web_HospitalManagement/Doctor/patientList.php?page=' . ($current_page + 1) . '">Next</a> ';
+                        }
+                        ?>
+                    </div>
+                </ul>
             </div>
             <div class="container__floatbutton">
                 <a href="" class="float" id="button-up">

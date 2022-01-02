@@ -1,5 +1,31 @@
 <?php
 session_start();
+require "../php/ConnectionConfig/DataBase.php";
+require "../php/Invoice/Invoice.php";
+require "../php/Invoice/InvoiceMedicine.php";
+
+$db = new Database();
+$conn = $db->dbConnect();
+
+$count = Invoice::fetchCountTotal();
+if($count->num_rows > 0){
+    $row = $count->fetch_assoc();
+    $total_records = $row['total'];
+}
+
+$current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+$limit = 4;
+
+$total_page = ceil($total_records / $limit);
+
+if ($current_page > $total_page) {
+    $current_page = $total_page;
+} else if ($current_page < 1) {
+    $current_page = 1;
+}
+
+$start = ($current_page - 1) * $limit;
+$result = Invoice::fetchInvoicePage($start, $limit);
 ?>
 
 <!DOCTYPE html>
@@ -109,6 +135,21 @@ session_start();
             </div>
             <div class="container__content">
                 <ul class="card-list">
+                <?php if ($result->num_rows > 0) {
+                        // Load dữ liệu lên website
+                        while ($row = $result->fetch_assoc()) {
+                            $onShow = '';
+                            $list_medi = InvoiceMedicine::fetchInMe($row["invo_id"]);
+                            if ($list_medi->num_rows > 0) {
+                                // Load dữ liệu lên website
+                                while ($medi = $list_medi->fetch_assoc()) {
+                                    if($onShow == '')
+                                        $onShow = $medi['medicine_id'] . '-' . $medi['medicine_name'] . ' ' . $medi['quantity'] . ' ' . $medi['cost'] . ' ' . "VND";
+                                    else
+                                        $onShow = $onShow . '; ' . $medi['medicine_id'] . '-' . $medi['medicine_name'] . ' ' . $medi['quantity'] . ' ' . $medi['cost'] . ' ' . "VND";
+                                }
+                            }
+                ?>
                     <li class="card-drop">
                         <input type="checkbox" />
                         <div class="short-card">
@@ -116,26 +157,31 @@ session_start();
                                 <div class="inner-detail">
                                     <div class="datetime-containter">
                                         <p class="i-datetime">Date:
-                                        <p class="i-value i-datetime">DD/MM/YYYY</p>
+                                        <p class="i-value i-datetime"><?php echo $row["created_date"]; ?></p>
                                         </p>
                                     </div>
                                     <p class="i-title">
                                         Customer Full Name:
-                                    <p class="i-value short-text">Nguyen Van A</p>
+                                    <p class="i-value short-text"><?php echo $row["cus_name"]; ?></p>
                                     </p>
                                     <p class="i-title">
                                         Address:
-                                    <p class="i-value short-text">XXX YYY ZZZ</p>
+                                    <p class="i-value short-text"><?php echo $row["cus_address"]; ?></p>
                                     </p>
                                     <p class="i-title">
                                         Total Bill:
-                                    <p class="i-value short-text">xxxxxx 000 VND</p>
+                                    <p class="i-value short-text"><?php echo $row["sum_cost"]; ?> VND</p>
                                     </p>
                                 </div>
                                 <div class="switch-container center">
                                     <label class="switch">
-                                        <input type="checkbox">
-                                        <span class="slider round"></span>
+                                        <?php if ($row["invo_status"] == 'enabled') {?>
+                                            <input type="checkbox" checked>
+                                            <span class="slider round"></span>
+                                        <?php } else { ?>
+                                            <input type="checkbox">
+                                            <span class="slider round"></span>
+                                        <?php } ?>
                                     </label>
                                 </div>
                                 <div class="icon-container center">
@@ -149,9 +195,7 @@ session_start();
                                     <p class="i-title">
                                         List of Medicines:
                                     <p class="i-value long-text">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita voluptatum,
-                                        animi aspernatur vel quas beatae natus dolore, iusto tenetur magni hic nam?
-                                        Dolores iste esse fuga excepturi. Magni, culpa. Deleniti?
+                                        <?php echo $onShow; ?>
                                     </p>
                                     </p>
                                 </div>
@@ -163,60 +207,30 @@ session_start();
                             </div>
                         </div>
                     </li>
-                    <li class="card-drop">
-                        <input type="checkbox" />
-                        <div class="short-card">
-                            <div class="inner-card">
-                                <div class="inner-detail">
-                                    <div class="datetime-containter">
-                                        <p class="i-datetime">Date:
-                                        <p class="i-value i-datetime">DD/MM/YYYY</p>
-                                        </p>
-                                    </div>
-                                    <p class="i-title">
-                                        Customer Full Name:
-                                    <p class="i-value short-text">Nguyen Van A</p>
-                                    </p>
-                                    <p class="i-title">
-                                        Address:
-                                    <p class="i-value short-text">XXX YYY ZZZ</p>
-                                    </p>
-                                    <p class="i-title">
-                                        Total Bill:
-                                    <p class="i-value short-text">xxxxxx 000 VND</p>
-                                    </p>
-                                </div>
-                                <div class="switch-container center">
-                                    <label class="switch">
-                                        <input type="checkbox">
-                                        <span class="slider round"></span>
-                                    </label>
-                                </div>
-                                <div class="icon-container center">
-                                    <i class="fas fa-chevron-down"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="full-card">
-                            <div class="inner-card">
-                                <div class="inner-detail has-border-top">
-                                    <p class="i-title">
-                                        List of Medicines:
-                                    <p class="i-value long-text">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita voluptatum,
-                                        animi aspernatur vel quas beatae natus dolore, iusto tenetur magni hic nam?
-                                        Dolores iste esse fuga excepturi. Magni, culpa. Deleniti?
-                                    </p>
-                                    </p>
-                                </div>
-                                <div class="switch-container center">
-                                </div>
-                                <div class="icon-container center">
-                                    <i class="fas fa-print"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
+                    <?php
+                        }
+                    }
+                    // $conn->close();
+                    ?>
+                    <div class="pagination center">
+                        <?php
+                        if ($current_page > 1 && $total_page > 1) {
+                            echo '<a class="page" href="/Web_HospitalManagement/Pharmacist/listInvoice.php?page=' . ($current_page - 1) . '">Prev</a> ';
+                        }
+
+                        for ($i = 1; $i <= $total_page; $i++) {
+                            if ($i == $current_page) {
+                                echo '<span class="page active" >' . $i . '</span> ';
+                            } else {
+                                echo '<a class="page" href="/Web_HospitalManagement/Pharmacist/listInvoice.php?page=' . $i . '">' . $i . '</a> ';
+                            }
+                        }
+                        if ($current_page < $total_page && $total_page > 1) {
+                            echo '<a class="page" href="/Web_HospitalManagement/Pharmacist/listInvoice.php?page=' . ($current_page + 1) . '">Next</a> ';
+                        }
+                        $conn->close();
+                        ?>
+                    </div>
                 </ul>
             </div>
             <div class="container__floatbutton">

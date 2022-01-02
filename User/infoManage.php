@@ -2,6 +2,7 @@
 require "../php/ConnectionConfig/DataBase.php";
 require "../php/UserClass/User.php";
 require "../php/Image/Upload.php";
+require "../php/UserClass/UpdateUser.php";
 
 session_start();
 
@@ -10,8 +11,12 @@ $owner = User::fetchUserById($_SESSION['user_id']);
 if (isset($_POST['submit'])) {
     $error = ImageUploader::upload();
 }
+if(isset($_POST['update'])) {
+    $error_1 = UpdateUser::Update();
+    $owner = User::fetchUserById($_SESSION['user_id']);       
+} ?>
 
-?>
+
 <!DOCTYPE html>
 
 <html>
@@ -109,111 +114,152 @@ if (isset($_POST['submit'])) {
                     </ul>
                 </div>
             </div>
-            <div class="container__content">
-                <?php
-                if ($owner->num_rows > 0) {
-                    $owner = $owner->fetch_assoc();
-                ?>
-                    <div class="box content__box">
-                        <div class="inner-box">
-                            <p class="i-title">
-                                User Full Name:
-                                <input type="text" readonly="readonly" onfocus="this.blur()" tabindex="-1" class="medium-input" name="full_name" value="<?php echo $_SESSION["fullname"] ?>">
-                            <p class="i-title">
-                                Age:
-                                <input type="text" readonly="readonly" onfocus="this.blur()" tabindex="-1" class="short-input" name="age" value="<?php echo $owner["age"] ?>">
-                            </p>
-                            </p>
-                            <p class="i-title-user">
-                                Specialized_field:
-                                <input type="text" readonly="readonly" onfocus="this.blur()" tabindex="-1" class="medium-input" name="field" value="<?php echo $owner["specialized_field"] ?>">
-                            </p>
-                            <p class="i-title-user">
-                                Birthday
-                                <input type="text" readonly="readonly" onfocus="this.blur()" tabindex="-1" class="medium-input" name="birthday" value="<?php echo $owner["birthday"] ?>">
-                            </p>
-                            <p class="i-title-user">
-                                Gender:
-                                <input type="text" readonly="readonly" onfocus="this.blur()" tabindex="-1" class="short-input" name="gender" value="<?php echo $owner["gender"] ?>">
-                            </p>
-                            <p class="i-title-user">
-                                Address:
-                                <input type="text" readonly="readonly" onfocus="this.blur()" tabindex="-1" class="medium-input" name="address" value="<?php echo $owner["address"] ?>">
-                            </p>
-                            <p class="i-title-user">
-                                Phone Number:
-                                <input type="text" readonly="readonly" onfocus="this.blur()" tabindex="-1" class="short-input" name="phone" value="<?php echo $owner["phone_number"] ?>">
-                            </p>
-                            <p class="i-title-user">
-                                ID Card Number:
-                                <input type="text" readonly="readonly" onfocus="this.blur()" tabindex="-1" class="medium-input" name="id_number" value="<?php echo $owner["id_card_number"] ?>">
-                            </p>
-                            <p class="i-title-user">
-                                ID Card Date:
-                                <input type="text" readonly="readonly" onfocus="this.blur()" tabindex="-1" class="short-input" name="id_date" value="<?php echo $owner["id_card_date"] ?>">
-                            </p>
-                            <p class="i-title-user-avatar">
-                                Avatar:
-                            </p>
 
-                            <div class="i-avatar-user">
+            <form action="" method="POST"  class="container__content">  
+                <div class="container__content">
+        
+                    <?php
+                    if ($owner->num_rows > 0) {
+                        $owner = $owner->fetch_assoc();
+                    ?>
+                        <div class="box content__box">
+                            <div class="inner-box">
                                 <?php
-                                if (isset($error)) {
-                                ?>
-                                    <p class="form-error"><?php echo $error ?></p>
-                                <?php
-                                }
-                                ?>
-                                <div class="i-avatar-content">
-                                    <?php
-                                    if (empty($_SESSION['avatar'])) {
+                                    if (isset($error_1)) {
                                     ?>
-                                        <i id="placeholder" class="fas fa-user-circle"></i>
-                                        <img id="output" class="avatar hide" src="<?php echo $_SESSION['avatar'] ?>"></img>
+                                        <p class="form-error"><?php echo $error_1 ?></p>
                                     <?php
-                                    } else {
+                                    }
+                                ?>
+                                <p class="i-title">
+                                    User Full Name:
+                                    <input type="text"  tabindex="-1" class="medium-input" name="full_name" value="<?php echo $_SESSION["fullname"] ?>">
+                                <p class="i-title">
+                                    Age:
+                                    <input type="text"  tabindex="-1" class="short-input" name="age" value="<?php echo $owner["age"] ?>">
+                                </p>
+                                </p>
+                                <p class="i-title-user">
+                                    Specialized_field:
+                                    <input type="text"  tabindex="-1" class="medium-input" name="field" value="<?php echo $owner["specialized_field"] ?>">
+                                </p>
+                                <p class="i-title-user">
+                                    Birthday
+                                    <input type="text"  tabindex="-1" class="medium-input" name="birthday" value="<?php echo $owner["birthday"] ?>">
+                                </p>
+                                <p class="i-title-user">
+                                    Gender:
+                                    <input type="text"  tabindex="-1" class="short-input" name="gender" value="<?php echo $owner["gender"] ?>">
+                                </p>
+                                <p class="i-title-user">
+                                    Address:
+                                    <input type="text"  tabindex="-1" class="medium-input" name="address" value="<?php echo $owner["address"] ?>">
+                                </p>
+                                <p class="i-title-user">
+                                    Phone Number:
+                                    <input type="text"  tabindex="-1" class="short-input" name="phone" value="<?php echo $owner["phone_number"] ?>">
+                                </p>
+                                <p class="i-title-user">
+                                    ID Card Number:
+                                    <input type="text"  tabindex="-1" class="medium-input" name="id_number" value="<?php echo $owner["id_card_number"] ?>">
+                                </p>
+                                <p class="i-title-user">
+                                    ID Card Date:
+                                    <input type="text"  tabindex="-1" class="short-input" name="id_date" value="<?php echo $owner["id_card_date"] ?>">
+                                </p>
+                                <p class="i-title-user-avatar">
+                                    Avatar:
+                                </p>
+
+                                <div class="i-avatar-user">
+                                    <?php
+                                    if (isset($error)) {
                                     ?>
-                                        <i id="placeholder" class="fas fa-user-circle hide"></i>
-                                        <img id="output" class="avatar" src="<?php echo $_SESSION['avatar'] ?>"></img>
+                                        <p class="form-error"><?php echo $error ?></p>
                                     <?php
                                     }
                                     ?>
-                                    <form class="i-avatar-form " action="" enctype="multipart/form-data" method="POST">
-                                        <input id="selectedFile" class="hide" name="img" size="35" type="file" accept="image/*" onchange="loadFile(event)" /><br />
-                                        <button type="button" class="browse_img" onclick="document.getElementById('selectedFile').click();"><i class="fas fa-camera"></i></button>
-
-                                        <button class="submit-img" type="submit" name="submit"><i class="fas fa-check"></i></button>
-                                    </form>
-                                </div>
-                                <script>
-                                    var loadFile = function(event) {
-                                        var output = document.getElementById('output');
-                                        var placeholder = document.getElementById('placeholder');
-                                        output.classList.remove('hide');
-                                        placeholder.classList.add('hide');
-                                        output.src = URL.createObjectURL(event.target.files[0]);
-                                        output.onload = function() {
-                                            URL.revokeObjectURL(output.src)
+                                    <div class="i-avatar-content">
+                                        <?php
+                                        if (empty($_SESSION['avatar'])) {
+                                        ?>
+                                            <i id="placeholder" class="fas fa-user-circle"></i>
+                                            <img id="output" class="avatar hide" src="<?php echo $_SESSION['avatar'] ?>"></img>
+                                        <?php
+                                        } else {
+                                        ?>
+                                            <i id="placeholder" class="fas fa-user-circle hide"></i>
+                                            <img id="output" class="avatar" src="<?php echo $_SESSION['avatar'] ?>"></img>
+                                        <?php
                                         }
-                                    };
-                                </script>
+                                        ?>
+                                        <form class="i-avatar-form " action="" enctype="multipart/form-data" method="POST">
+                                            <input id="selectedFile" class="hide" name="img" size="35" type="file" accept="image/*" onchange="loadFile(event)" /><br />
+                                            <button type="button" class="browse_img" onclick="document.getElementById('selectedFile').click();"><i class="fas fa-camera"></i></button>
+
+                                            <button class="submit-img" type="submit" name="submit"><i class="fas fa-check"></i></button>
+                                        </form>
+                                    </div>
+                                    <script>
+                                        var loadFile = function(event) {
+                                            var output = document.getElementById('output');
+                                            var placeholder = document.getElementById('placeholder');
+                                            output.classList.remove('hide');
+                                            placeholder.classList.add('hide');
+                                            output.src = URL.createObjectURL(event.target.files[0]);
+                                            output.onload = function() {
+                                                URL.revokeObjectURL(output.src)
+                                            }
+                                        };
+                                    </script>
+                                </div>
                             </div>
                         </div>
+                    <?php
+                    }
+                    ?>
+                    <div class="content__button">
+                        <button name="update" type="submit" class="button button-confirm">
+                            <i class="fas fa-check"></i>
+                            Confirm
+                        </button>
+                        <!-- <button class="button button-reset" onClick="startUpdate();">
+                            <i class="fas fa-eraser"></i>
+                            Update
+                        </button> -->
                     </div>
-                <?php
-                }
-                ?>
-                <div class="content__button">
-                    <button class="button button-confirm">
-                        <i class="fas fa-check"></i>
-                        Confirm
-                    </button>
-                    <button class="button button-reset">
-                        <i class="fas fa-eraser"></i>
-                        Update
-                    </button>
-                </div>
+                    <!-- <script language="javascript">
+                        function startUpdate() {
+                            var input_name = document.getElementsByName('full_name')[0];
+                            var input_age = document.getElementsByName('age')[0];
+                            var input_field = document.getElementsByName('field')[0];
+                            var input_birthday = document.getElementsByName('birthday')[0];
+                            var input_gender = document.getElementsByName('gender')[0];
+                            var input_address = document.getElementsByName('address')[0];
+                            var input_phone = document.getElementsByName('phone')[0];
+                            var input_id_number = document.getElementsByName('id_number')[0];
+                            var input_id_date = document.getElementsByName('id_date')[0];
+
+                            RemoveAttribute(input_name);
+                            RemoveAttribute(input_age);
+                            RemoveAttribute(input_field);
+                            RemoveAttribute(input_birthday);
+                            RemoveAttribute(input_gender);
+                            RemoveAttribute(input_address);
+                            RemoveAttribute(input_phone);
+                            RemoveAttribute(input_id_number);
+                            RemoveAttribute(input_id_date);
+
+                        }
+
+                        function RemoveAttribute(Object) {
+                            Object.removeAttribute('readonly');
+                            Object.removeAttribute('onfocus');
+                        }
+                    </script> -->
+                
             </div>
+        </form>
         </div>
     </div>
 
