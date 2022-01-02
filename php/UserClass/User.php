@@ -3,32 +3,45 @@ class User{
     private $userId;
     private $userName;
     private $userAge;
+    private $userGender;
+    private $userBirthDay; 
+    private $userField;
     private $userAddress;
     private $userPhone;
-    private $userField;
+    private $userCardNum;
+    private $userCardDate;
+   
 
     public function __construct(){
         $this->userId = "";
         $this->userName = "";
         $this->userAge = "";
+        $this->userGender = "";
+        $this->userBirthDay = "";
+        $this->userField = "";
         $this->userAddress = "";
         $this->userPhone = "";
-        $this->userField = "";
+        $this->userCardNum = "";
+        $this->userCardDate = "";
     }
 
-    public static function withFullInfo( $uName, $uAge, $uAddress, $uPhone, $uField) {
+    public static function withFullInfo( $uName, $uAge, $uGender, $uBirthday, $uField, $uAddress, $uPhone, $uCardNum, $uCardDate) {
         $instance = new self();
-        $instance->fillInfo( $uName, $uAge, $uAddress, $uPhone, $uField);
+        $instance->fillInfo( $uName, $uAge, $uGender, $uBirthday, $uField, $uAddress, $uPhone, $uCardNum, $uCardDate);
         return $instance;
     }
-    protected function fillInfo($uName, $uAge, $uAddress, $uPhone, $uField){
+    protected function fillInfo($uName, $uAge, $uGender, $uBirthday, $uField, $uAddress, $uPhone, $uCardNum, $uCardDate){
         $db = new DataBase();
         $db->dbConnect();
         $this->userName = $db->prepareData($uName);
         $this->userAge = $db->prepareData($uAge);
+        $this->userGender = $db->prepareData($uGender);
+        $this->userBirthDay = $db->prepareData($uBirthday);
+        $this->userField = $db->prepareData($uField);
         $this->userAddress = $db->prepareData($uAddress);
         $this->userPhone = $db->prepareData($uPhone);
-        $this->userField = $db->prepareData($uField);
+        $this->userCardNum = $db->prepareData($uCardNum);
+        $this->userCardDate = $db->prepareData($uCardDate);
     }
 
     function __set($key, $value){
@@ -41,14 +54,26 @@ class User{
         if ($key = 'userAge'){
             $this->userAge = $value;
         };
+        if ($key = 'userGender'){
+            $this->userGender = $value;
+        };
+        if ($key = 'userBirthDay'){
+            $this->userBirthDay = $value;
+        };
+        if ($key = 'userField'){
+            $this->userField = $value;
+        };
         if ($key = 'userAddress'){
             $this->userAddress = $value;
         };
         if ($key = 'userPhone'){
             $this->userPhone = $value;
         };
-        if ($key = 'userField'){
-            $this->userField = $value;
+        if ($key = 'userCardNum'){
+            $this->userCardNum = $value;
+        };
+        if ($key = 'userCardDate'){
+            $this->userCardDate = $value;
         };
     }
     function __get($key){
@@ -61,14 +86,26 @@ class User{
         if ($key = 'userAge'){
             return $this->userAge;
         };
+        if ($key = 'userGender'){
+            return $this->userGender;
+        };
+        if ($key = 'userBirthDay'){
+            return $this->userBirthDay;
+        };
+        if ($key = 'userField'){
+            return $this->userField;
+        };
         if ($key = 'userAddress'){
             return $this->userAddress;
         };
         if ($key = 'userPhone'){
             return $this->userPhone;
         };
-        if ($key = 'userField'){
-            return $this->userField;
+        if ($key = 'userCardNum'){
+            return $this->userCardNum;
+        };
+        if ($key = 'userCardDate'){
+            return $this->userCardDate;
         };
     }
 
@@ -126,6 +163,25 @@ class User{
         WHERE account.status = 'enabled' && personal_info.specialized_field <> 'Tổng quát'";
 
         return $conn->query($query);
+    }
+    public static function updateInfo($userName,$userAge,$userGender,$userBirthDay,$userField,$userAddress,$userPhone,$userCardNum,$userCardDate,$userId)
+    {
+        $db = new DataBase();
+        $conn = $db->dbConnect();
+        $query = "UPDATE `personal_info`
+        SET
+        `full_name`='" . $userName . "',
+        `age`='" . $userAge . "',
+        `gender`='" . $userGender . "',
+        `birthday`='" . $userBirthDay . "',
+        `specialized_field`='" . $userField . "',
+        `address`='" . $userAddress . "',
+        `phone_number`='" . $userPhone . "',
+        `id_card_number`='" . $userCardNum . "',
+        `id_card_date`='" . $userCardDate . "'
+        WHERE `user_id` = '" . $userId . "'";
+
+        $db->execute($query);
     }
     function postToDataBase(){
         // $new = $this->prepareSpecCon();

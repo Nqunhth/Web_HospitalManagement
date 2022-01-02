@@ -5,16 +5,17 @@ require '../php/lib/PHPMailer/src/Exception.php';
 require '../php/lib/PHPMailer/src/PHPMailer.php';
 require '../php/lib/PHPMailer/src/SMTP.php';
 require "../php/LogIn-SignUp/signup.php";
+require "../php/Doctor/Doctor.php";
 
 session_start();
 $db = new Database();
 $conn = $db->dbConnect();
-// $sql = "SELECT * FROM doctor JOIN personal_info ON doctor.doctor_id = personal_info.user_id 
-//                             JOIN account ON doctor.doctor_id = account.user_id";
-// $result = $conn->query($sql);
-$result = mysqli_query($conn, 'SELECT count(doctor_id) AS total FROM doctor');
-$row = mysqli_fetch_assoc($result);
-$total_records = $row['total'];
+
+$count = Doctor::fetchCountTotal();
+if($count->num_rows > 0){
+    $row = $count->fetch_assoc();
+    $total_records = $row['total'];
+}
 
 $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
 $limit = 4;
@@ -28,9 +29,7 @@ if ($current_page > $total_page) {
 }
 
 $start = ($current_page - 1) * $limit;
-$result = mysqli_query($conn, "SELECT * FROM doctor JOIN personal_info ON doctor.doctor_id = personal_info.user_id 
-                                                    JOIN account ON doctor.doctor_id = account.user_id
-                                                    LIMIT $start, $limit");
+$result = Doctor::fetchDoctorPage($start, $limit);
 
 //error show
 if (isset($_POST['submit']) && $_POST['submit'] != "cancel") {
@@ -186,8 +185,13 @@ if (isset($_POST['submit']) && $_POST['submit'] != "cancel") {
                                         </div>
                                         <div class="switch-container center">
                                             <label class="switch">
+                                            <?php if ($row["status"] == 'enabled') {?>
+                                                <input type="checkbox" checked>
+                                                <span class="slider round"></span>
+                                            <?php } else { ?>
                                                 <input type="checkbox">
                                                 <span class="slider round"></span>
+                                            <?php } ?>
                                             </label>
                                         </div>
                                         <div class="icon-container center">
@@ -233,7 +237,11 @@ if (isset($_POST['submit']) && $_POST['submit'] != "cancel") {
                                                 Avatar:
                                             </p>
                                             <div class="i-avatar">
+                                            <?php if (empty($row['avatar'])) { ?>
                                                 <i class="fas fa-user-circle"></i>
+                                            <?php } else { ?>
+                                                <img class="card-avatar" src="<?php echo $row['avatar']; ?>"></img>
+                                            <?php } ?>
                                             </div>
                                         </div>
                                     </div>
@@ -263,84 +271,6 @@ if (isset($_POST['submit']) && $_POST['submit'] != "cancel") {
                         $conn->close();
                         ?>
                     </div>
-                    <!-- <li class="card-drop"> 
-                        <input type="checkbox"/>       
-                        <div class="short-card">
-                            <div class="inner-card">
-                                <div class="inner-detail">
-                                    <p class="i-title">
-                                        Person Full Name:
-                                    <p class="i-value medium-text">
-                                        Nguyen Van A
-                                    </p>                                 
-                                    </p>
-                                    <p class="i-title">
-                                        Username:
-                                    <p class="i-value medium-text">
-                                        This is Email
-                                    </p>                                 
-                                    </p>
-                                    <p class="i-title">
-                                        Specialized Field:
-                                    <p class="i-value short-text">
-                                        Chat and chat only
-                                    </p>
-                                </div>
-                                <div class="switch-container center">
-                                    <label class="switch">
-                                        <input type="checkbox">
-                                        <span class="slider round"></span>
-                                    </label>
-                                </div>
-                                <div class="icon-container center">
-                                    <i class="fas fa-chevron-down"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="full-card">
-                            <div class="inner-card">
-                                <div class="inner-detail account-card has-border-top">
-                                    <p class="i-title">
-                                        BirthDay:
-                                    <p class="i-value  medium-text">
-                                        Load data from Database
-                                    </p>
-                                    </p>
-                                    <p class="i-title">
-                                        Phone Number:
-                                    <p class="i-value  medium-text">
-                                        Load data from Database
-                                    </p>
-                                    </p>
-                                    <p class="i-title">
-                                        IDCard Number:
-                                    <p class="i-value medium-text">
-                                        Load data from Database
-                                    </p>
-                                    </p>
-                                    <p class="i-title">
-                                        IDCard Date:
-                                    <p class="i-value medium-text">
-                                        Load data from Database
-                                    </p>
-                                    </p>
-                                    <p class="i-title change-element ">
-                                        Address:
-                                    <p class="i-value medium-text">
-                                        Load data from Database
-                                    </p>
-                                    </p>
-                                    </p>
-                                    <p class="i-title">
-                                        Avatar:
-                                    </p>
-                                    <div class="i-avatar">
-                                        <i class="fas fa-user-circle"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li> -->
                 </ul>
             </div>
             <div class="container__floatbutton">

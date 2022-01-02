@@ -83,6 +83,25 @@ class SpecCon{
         };
     }
 
+    public static function fetchCountTotal(){
+        $db = new DataBase();
+        $conn = $db->dbConnect();
+        $query = 
+            "SELECT count(spec_id) 
+            AS total 
+            FROM specialist_consulting";
+        return $conn->query($query);
+    }
+    public static function fetchSpecConPage($start, $limit){
+        $db = new DataBase();
+        $conn = $db->dbConnect();
+        $query = 
+            "SELECT * 
+            FROM `specialist_consulting` 
+            JOIN `patient` ON `specialist_consulting`.`pat_id`= `patient`.`pat_id`
+            LIMIT $start, $limit";
+        return $conn->query($query);
+    }
     function postToDataBase(){
         $db = new DataBase();
         $db->dbConnect();

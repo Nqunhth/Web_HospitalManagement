@@ -1,14 +1,16 @@
 <?php
 session_start();
 require "../php/ConnectionConfig/DataBase.php";
+require "../php/Medicine/Medicine.php";
 
 $db = new Database();
 $conn = $db->dbConnect();
-// $sql = "SELECT * FROM medicine";
-// $result = $conn->query($sql);
-$result = mysqli_query($conn, 'select count(medicine_id) as total from medicine');
-$row = mysqli_fetch_assoc($result);
-$total_records = $row['total'];
+
+$count = Medicine::fetchCountTotal();
+if($count->num_rows > 0){
+    $row = $count->fetch_assoc();
+    $total_records = $row['total'];
+}
 
 $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
 $limit = 6;
@@ -22,7 +24,7 @@ if ($current_page > $total_page) {
 }
 
 $start = ($current_page - 1) * $limit;
-$result = mysqli_query($conn, "SELECT * FROM medicine LIMIT $start, $limit");
+$result = Medicine::fetchMedicinePage($start, $limit);
 ?>
 
 
@@ -202,53 +204,8 @@ $result = mysqli_query($conn, "SELECT * FROM medicine LIMIT $start, $limit");
                         if ($current_page < $total_page && $total_page > 1) {
                             echo '<a class="page" href="/Web_HospitalManagement/Pharmacist/checkStock.php?page=' . ($current_page + 1) . '">Next</a> ';
                         }
-                        $conn->close();
                         ?>
                     </div>
-                    <!-- <li class="card-drop">
-                        <input type="checkbox" />
-                        <div class="short-card">
-                            <div class="inner-card">
-                                <div class="inner-detail">
-                                    <p class="i-title">
-                                        Medicine Name:
-                                    <p class="i-value short-text"> someName</p>
-                                    </p>
-                                    <p class="i-title">
-                                        Unit Price:
-                                    <p class="i-value short-text">xxxxxx 000 VND</p>
-                                    </p>
-                                </div>
-                                <div class="switch-container center">
-                                </div>
-                                <div class="icon-container center">
-                                    <i class="fas fa-chevron-down"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="full-card">
-                            <div class="inner-card">
-                                <div class="inner-detail has-border-top">
-                                    <p class="i-title">
-                                        Unit:
-                                    <p class="i-value short-text">1000</p>
-                                    </p>
-                                    <p class="i-title">
-                                        Quantity:
-                                    <p class="i-value short-text">Bar</p>
-                                    </p>
-                                    <p class="i-title">
-                                        Producer:
-                                    <p class="i-value short-text">myProducer</p>
-                                    </p>
-                                </div>
-                                <div class="switch-container center">
-                                </div>
-                                <div class="icon-container center">
-                                </div>
-                            </div>
-                        </div>
-                    </li> -->
                 </ul>
             </div>
             <div class="container__floatbutton">

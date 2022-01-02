@@ -245,17 +245,18 @@ if (isset($_POST['submit'])) {
                         <textarea class="long-input" name="medicines" rows="5"></textarea>
                         <div class="datetime-containter">
                             <p class="i-datetime">Day
-                            <p class="i-value i-datetime">DD</p>
+                            <p class="i-value i-datetime"><?php echo Date("d") ?></p>
                             <p class="i-datetime">Month
-                            <p class="i-value i-datetime">MM</p>
+                            <p class="i-value i-datetime"><?php echo Date("m") ?></p>
                             <p class="i-datetime">Year
-                            <p class="i-value i-datetime">YYYY</p>
+                            <p class="i-value i-datetime"><?php echo Date("Y") ?></p>
                             </p>
                             </p>
                             </p>
-                            <p class="i-sign">Doctor
-                            </p>
-                        </div>
+                        </div>                        
+                        <p class="i-sign">
+                        <p class="i-sign right">Doctor's Sign</p>
+                        </p>
                     </div>
                 </div>
                 <div class="content__button">
@@ -275,7 +276,7 @@ if (isset($_POST['submit'])) {
             </form>
             <div class="container__select">
                 <form method="POST" action="">
-                    <select name="patients" class="content__select" onchange="this.form.submit()">
+                    <select name="patients" class="content__select" onfocus='this.size=5;' onchange='this.form.submit();'>
                         <option value="" disabled selected>--</option>
                         <?php if ($result->num_rows > 0) {
                             while ($row = $result->fetch_assoc()) { ?>

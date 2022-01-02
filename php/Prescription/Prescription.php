@@ -66,7 +66,25 @@ class Prescription{
         };
 
     }
-
+    public static function fetchCountTotal(){
+        $db = new DataBase();
+        $conn = $db->dbConnect();
+        $query = 
+            "SELECT count(pres_id) 
+            AS total 
+            FROM prescription";
+        return $conn->query($query);
+    }
+    public static function fetchPresPage($start, $limit){
+        $db = new DataBase();
+        $conn = $db->dbConnect();
+        $query = 
+            "SELECT * 
+            FROM `prescription` 
+            JOIN `patient` ON `prescription`.`pat_id`= `patient`.`pat_id`
+            LIMIT $start, $limit";
+        return $conn->query($query);
+    }
     function postToDataBase(){
         $db = new DataBase();
         $db->dbConnect();

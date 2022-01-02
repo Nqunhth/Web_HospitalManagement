@@ -5,16 +5,17 @@ require '../php/lib/PHPMailer/src/Exception.php';
 require '../php/lib/PHPMailer/src/PHPMailer.php';
 require '../php/lib/PHPMailer/src/SMTP.php';
 require "../php/LogIn-SignUp/signup.php";
+require "../php/Receptionist/Receptionist.php";
 
 session_start();
 $db = new Database();
 $conn = $db->dbConnect();
-// $sql = "SELECT * FROM receptionist JOIN personal_info ON receptionist.receptionist_id = personal_info.user_id 
-//                             JOIN account ON receptionist.receptionist_id = account.user_id";
-// $result = $conn->query($sql);
-$result = mysqli_query($conn, 'SELECT count(receptionist_id) AS total FROM receptionist');
-$row = mysqli_fetch_assoc($result);
-$total_records = $row['total'];
+
+$count = Receptionist::fetchCountTotal();
+if($count->num_rows > 0){
+    $row = $count->fetch_assoc();
+    $total_records = $row['total'];
+}
 
 $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
 $limit = 4;
@@ -28,9 +29,8 @@ if ($current_page > $total_page) {
 }
 
 $start = ($current_page - 1) * $limit;
-$result = mysqli_query($conn, "SELECT * FROM receptionist JOIN personal_info ON receptionist.receptionist_id = personal_info.user_id 
-                                                        JOIN account ON receptionist.receptionist_id = account.user_id
-                                                        LIMIT $start, $limit");
+$result = Receptionist::fetchReceptionistPage($start, $limit);
+
 //error show
 if (isset($_POST['submit']) && $_POST['submit'] != "cancel") {
     $error = SignUp::SignUp();
@@ -185,8 +185,13 @@ if (isset($_POST['submit']) && $_POST['submit'] != "cancel") {
                                         </div>
                                         <div class="switch-container center">
                                             <label class="switch">
-                                                <input type="checkbox">
-                                                <span class="slider round"></span>
+                                                <?php if ($row["status"] == 'enabled') {?>
+                                                    <input type="checkbox" checked>
+                                                    <span class="slider round"></span>
+                                                <?php } else { ?>
+                                                    <input type="checkbox">
+                                                    <span class="slider round"></span>
+                                                <?php } ?>
                                             </label>
                                         </div>
                                         <div class="icon-container center">
@@ -232,7 +237,11 @@ if (isset($_POST['submit']) && $_POST['submit'] != "cancel") {
                                                 Avatar:
                                             </p>
                                             <div class="i-avatar">
+                                            <?php if (empty($row['avatar'])) { ?>
                                                 <i class="fas fa-user-circle"></i>
+                                            <?php } else { ?>
+                                                <img class="card-avatar" src="<?php echo $row['avatar']; ?>"></img>
+                                            <?php } ?>
                                             </div>
                                         </div>
                                     </div>

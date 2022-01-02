@@ -291,7 +291,7 @@ if (isset($_POST['submit'])) {
             </form>
             <div class="container__select">
                 <form method="POST" action="">
-                    <select name="patients" class="content__select" onchange="this.form.submit()">
+                    <select name="patients" class="content__select" onfocus='this.size=5;' onchange='this.form.submit();'>
                         <option value="" disabled selected>--</option>
                         <?php if ($result->num_rows > 0) {
                             while ($row = $result->fetch_assoc()) { ?>

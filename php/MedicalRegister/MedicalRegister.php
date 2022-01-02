@@ -78,6 +78,26 @@ class MedicalRegister{
         };
     }
 
+    public static function fetchCountTotal(){
+        $db = new DataBase();
+        $conn = $db->dbConnect();
+        $query = 
+            "SELECT count(medi_id) 
+            AS total 
+            FROM medical_register";
+        return $conn->query($query);
+    }
+    public static function fetchMediPage($start, $limit){
+        $db = new DataBase();
+        $conn = $db->dbConnect();
+        $query = 
+            "SELECT * 
+            FROM `medical_register` 
+            JOIN `patient` ON `medical_register`.`pat_id`= `patient`.`pat_id`
+            LIMIT $start, $limit";
+        return $conn->query($query);
+    }
+
     function createEmptyDoc($patientId){
         $db = new DataBase();
         $db->dbConnect();
