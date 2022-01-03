@@ -163,7 +163,7 @@ $result = Patient::fetchAllPatient($start, $limit);
                                         <div class="inner-detail">
                                             <div class="datetime-containter">
                                                 <p class="i-datetime">Date:
-                                                <p class="i-value i-datetime"><?php echo $row['created_date'] ?></p>
+                                                <p class="i-value i-datetime"><?php echo $row['date'] ?></p>
                                                 </p>
                                             </div>
                                             <p class="i-title">

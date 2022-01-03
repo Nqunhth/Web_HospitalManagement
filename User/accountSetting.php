@@ -127,7 +127,7 @@ if (isset($_POST['submit'])) {
                         ?>
                     </div>
                 </div>
-                <div class="content__button">
+                <div >
                     <button type="submit" name="submit" class="button button-confirm">
                         <i class="fas fa-check"></i>
                         Confirm

@@ -184,6 +184,7 @@ $result = Prescription::fetchPresPage($start, $limit);
                                     </p>
                                 </div>
                                 <div class="switch-container center">
+                                    <p class="switch-lable">Status</p>
                                     <label class="switch">
                                         <?php if ($row["pres_status"] == 'enabled') {?>
                                             <input type="checkbox" checked>
@@ -264,9 +265,6 @@ $result = Prescription::fetchPresPage($start, $limit);
             <div class="container__floatbutton">
                 <a href="" class="float" id="button-up">
                     <i class="fas fa-arrow-up"></i>
-                </a>
-                <a href="" class="float" id="button-search">
-                    <i class="fas fa-search"></i>
                 </a>
             </div>
         </div>

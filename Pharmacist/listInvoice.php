@@ -174,6 +174,7 @@ $result = Invoice::fetchInvoicePage($start, $limit);
                                     </p>
                                 </div>
                                 <div class="switch-container center">
+                                    <p class="switch-lable">Status</p>
                                     <label class="switch">
                                         <?php if ($row["invo_status"] == 'enabled') {?>
                                             <input type="checkbox" checked>

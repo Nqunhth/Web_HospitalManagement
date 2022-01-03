@@ -192,12 +192,12 @@ if (isset($_POST['submit'])) {
                             <textarea class="long-input" name="mediregist" rows="5"></textarea>
                         <?php endif ?>
                         <div class="datetime-containter">
-                            <p class="i-datetime">Day
-                            <p class="i-value i-datetime"><?php echo Date("d") ?></p>
-                            <p class="i-datetime">Month
-                            <p class="i-value i-datetime"><?php echo Date("m") ?></p>
                             <p class="i-datetime">Year
                             <p class="i-value i-datetime"><?php echo Date("Y") ?></p>
+                            <p class="i-datetime">Month
+                            <p class="i-value i-datetime"><?php echo Date("m") ?></p>
+                            <p class="i-datetime">Day
+                            <p class="i-value i-datetime"><?php echo Date("d") ?></p>
                             </p>
                             </p>
                             </p>
@@ -206,7 +206,7 @@ if (isset($_POST['submit'])) {
                         </div>
                     </div>
                 </div>
-                <div class="content__button">
+                <div>
                     <button type="submit" name="submit" class="button button-confirm">
                         <i class="fas fa-check"></i>
                         Confirm
@@ -214,10 +214,6 @@ if (isset($_POST['submit'])) {
                     <button class="button button-reset">
                         <i class="fas fa-eraser"></i>
                         Reset
-                    </button>
-                    <button class="button button-print">
-                        <i class="fas fa-print"></i>
-                        Print
                     </button>
                 </div>
             </form>

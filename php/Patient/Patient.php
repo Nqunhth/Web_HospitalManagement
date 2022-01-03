@@ -187,7 +187,7 @@ class Patient{
         $db = new DataBase();
         $conn = $db->dbConnect();
         $query = 
-            "SELECT * 
+            "SELECT * , medical_register.created_date as date
             FROM `patient`
             JOIN `medical_register`
             ON patient.pat_id = medical_register.pat_id
