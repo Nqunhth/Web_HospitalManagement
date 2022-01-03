@@ -530,6 +530,16 @@ html{
     font-family: 'M PLUS Rounded 1c', sans-serif;
     padding: 20px;
 }
+.info-container{
+    padding-bottom: 60px;
+    background-color: #f2f2ff;
+}
+.content__button{
+    position: absolute;
+    float: right;
+    bottom: -280px;
+    right: 0;
+}
 .button{
     width: 160px;
     height: 75px;
@@ -683,7 +693,7 @@ html{
     font-size: 200px !important;
 }
 .i-avatar-user .fa-user-circle{
-    font-size: 200px !important;
+    font-size: 140px !important;
 }
 .i-avatar-user .avatar{
     border-radius: 50%!important;
@@ -697,7 +707,7 @@ html{
     border-radius: 50%;
     position: absolute;
     top: 100px;
-    left: 100px;
+    left: -40px;
 }
  .browse_img{
     height: 40px;
@@ -705,7 +715,7 @@ html{
     border-radius: 50%;
     position: absolute;
     top: 60px;
-    left: 120px;
+    left: -20px;
 }
 .inner-detail .short-text-inwaiting{
     width: 280px;
@@ -918,12 +928,18 @@ input:checked + .slider:before {
     border-radius: 50%;
 } */
 .switch-container{
+    flex-direction: column;
     width: 7%;
+}
+.switch-lable {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
 }
 .switch {
     position: relative;
     display: inline-block;
-    width: 90px;
+    width: 60px;
     height: 34px;
   }
   
@@ -966,11 +982,11 @@ input:checked + .slider:before {
   input:checked + .slider:before {
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
-    transform: translateX(44px);
+    transform: translateX(26px);
   }
   .slider:after
   {
-   content:'DIS';
+   content:'';
    color: white;
    display: block;
    position: absolute;
@@ -983,7 +999,7 @@ input:checked + .slider:before {
   
   input:checked + .slider:after
   {  
-    content:'EN';
+    content:'';
   }
     /*DoctorPage - Content Area*/
     /*Card List - Transfer from short to full card*/

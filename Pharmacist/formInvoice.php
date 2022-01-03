@@ -577,12 +577,12 @@ if (isset($_POST['reset'])) {
                             <input type="text" class="medium-input" name="mediTotal" onfocus="this.blur()" tabindex="-1" value="<?php echo isset($_SESSION['mediTotal']) ? $_SESSION['mediTotal'] : '' ?>">
                         </p>
                         <div class="datetime-containter">
-                            <p class="i-datetime">Day
-                            <p class="i-value i-datetime"><?php echo Date("d") ?></p>
-                            <p class="i-datetime">Month
-                            <p class="i-value i-datetime"><?php echo Date("m") ?></p>
                             <p class="i-datetime">Year
                             <p class="i-value i-datetime"><?php echo Date("Y") ?></p>
+                            <p class="i-datetime">Month
+                            <p class="i-value i-datetime"><?php echo Date("m") ?></p>
+                            <p class="i-datetime">Day
+                            <p class="i-value i-datetime"><?php echo Date("d") ?></p>
                             </p>
                             </p>
                             </p>
@@ -592,7 +592,7 @@ if (isset($_POST['reset'])) {
                         </p>
                     </div>
                 </div>
-                <form class="content__button" action="" method="POST">
+                <form action="" method="POST">
                     <button name="submit" type="submit" class="button button-confirm" onclick="return validateForm();">
                         <i class="fas fa-check"></i>
                         Confirm
@@ -602,10 +602,6 @@ if (isset($_POST['reset'])) {
                         Reset
                     </button>
 
-                    <button class="button button-print">
-                        <i class="fas fa-print"></i>
-                        Print
-                    </button>
                 </form>
             </div>
         </div>

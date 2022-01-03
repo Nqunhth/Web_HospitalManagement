@@ -181,6 +181,7 @@ if (isset($_POST['submit']) && $_POST['submit'] != "cancel") {
                                             </p>
                                         </div>
                                         <div class="switch-container center">
+                                            <p class="switch-lable">Status</p>
                                             <label class="switch">
                                             <?php if ($row["status"] == 'enabled') {?>
                                                 <input type="checkbox" checked>
@@ -276,9 +277,6 @@ if (isset($_POST['submit']) && $_POST['submit'] != "cancel") {
                 </div>
                 <a href="" class="float" id="button-up">
                     <i class="fas fa-arrow-up"></i>
-                </a>
-                <a href="" class="float" id="button-search">
-                    <i class="fas fa-search"></i>
                 </a>
             </div>
         </div>

@@ -184,6 +184,7 @@ if (isset($_POST['submit']) && $_POST['submit'] != "cancel") {
                                             </p>
                                         </div>
                                         <div class="switch-container center">
+                                        <p class="switch-lable">Status</p>
                                             <label class="switch">
                                                 <?php if ($row["status"] == 'enabled') {?>
                                                     <input type="checkbox" checked>
@@ -271,84 +272,6 @@ if (isset($_POST['submit']) && $_POST['submit'] != "cancel") {
                         $conn->close();
                         ?>
                     </div>
-                    <!-- <li class="card-drop"> 
-                        <input type="checkbox"/>       
-                        <div class="short-card">
-                            <div class="inner-card">
-                                <div class="inner-detail">
-                                    <p class="i-title">
-                                        Person Full Name:
-                                    <p class="i-value medium-text">
-                                        Nguyen Van A
-                                    </p>                                 
-                                    </p>
-                                    <p class="i-title">
-                                        Username:
-                                    <p class="i-value medium-text">
-                                        This is Email
-                                    </p>                                 
-                                    </p>
-                                    <p class="i-title">
-                                        Specialized Field:
-                                    <p class="i-value short-text">
-                                        Chat and chat only
-                                    </p>
-                                </div>
-                                <div class="switch-container center">
-                                    <label class="switch">
-                                        <input type="checkbox">
-                                        <span class="slider round"></span>
-                                    </label>
-                                </div>
-                                <div class="icon-container center">
-                                    <i class="fas fa-chevron-down"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="full-card">
-                            <div class="inner-card">
-                                <div class="inner-detail account-card has-border-top">
-                                    <p class="i-title">
-                                        BirthDay:
-                                    <p class="i-value  medium-text">
-                                        Load data from Database
-                                    </p>
-                                    </p>
-                                    <p class="i-title">
-                                        Phone Number:
-                                    <p class="i-value  medium-text">
-                                        Load data from Database
-                                    </p>
-                                    </p>
-                                    <p class="i-title">
-                                        IDCard Number:
-                                    <p class="i-value medium-text">
-                                        Load data from Database
-                                    </p>
-                                    </p>
-                                    <p class="i-title">
-                                        IDCard Date:
-                                    <p class="i-value medium-text">
-                                        Load data from Database
-                                    </p>
-                                    </p>
-                                    <p class="i-title change-element ">
-                                        Address:
-                                    <p class="i-value medium-text">
-                                        Load data from Database
-                                    </p>
-                                    </p>
-                                    </p>
-                                    <p class="i-title">
-                                        Avatar:
-                                    </p>
-                                    <div class="i-avatar">
-                                        <i class="fas fa-user-circle"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li> -->
                 </ul>
             </div>
             <div class="container__floatbutton">
@@ -357,9 +280,6 @@ if (isset($_POST['submit']) && $_POST['submit'] != "cancel") {
                 </div>
                 <a href="" class="float" id="button-up">
                     <i class="fas fa-arrow-up"></i>
-                </a>
-                <a href="" class="float" id="button-search">
-                    <i class="fas fa-search"></i>
                 </a>
             </div>
         </div>
