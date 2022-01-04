@@ -31,5 +31,16 @@ class News{
             LIMIT 1";
         return $conn->query($query);
     }
+
+    public static function fetchFourLatestNews(){
+        $db = new DataBase();
+        $conn = $db->dbConnect();
+        $query = 
+            "SELECT * 
+            FROM `news`
+            ORDER BY news_date desc
+            LIMIT 4";
+        return $conn->query($query);
+    }
 }
 ?>
