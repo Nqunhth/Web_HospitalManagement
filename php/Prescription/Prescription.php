@@ -94,7 +94,26 @@ class Prescription{
         
         return $db->execute($query);
     }
+    public static function disableForm($formId){
+        $db = new DataBase();
+        $conn = $db->dbConnect();
+        $query = 
+        "UPDATE `prescription`
+        SET pres_status = 'disabled'
+        WHERE pres_id = '" . $formId . "' ";
 
+        return $conn->query($query);
+    }
+    public static function enableForm($formId){
+        $db = new DataBase();
+        $conn = $db->dbConnect();
+        $query = 
+        "UPDATE `prescription`
+        SET pres_status = 'enabled'
+        WHERE pres_id = '" . $formId . "' ";
+
+        return $conn->query($query);
+    }
 }
 
 ?>

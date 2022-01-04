@@ -2,6 +2,9 @@
 
 class Login
 {
+    public function __construct()
+    {
+    }
     public static function Login()
     {
         session_start();

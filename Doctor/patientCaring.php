@@ -13,7 +13,7 @@ $assignable = User::fetchSpecialist();
 if (isset($_POST['queue'])) {
     $error = CreateNewMedicalReg::asignSpecialist($_POST['queue'], $_POST['specialist_id']);
     if (!isset($error))
-        header('location: /Web_HospitalManagement/Doctor/patientCaring.php');
+        header("Refresh:0");
 }
 ?>
 

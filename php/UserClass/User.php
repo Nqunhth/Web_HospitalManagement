@@ -201,7 +201,26 @@ class User{
         // }
         // return "none";
     }
+    public static function disableAccount($accountId){
+        $db = new DataBase();
+        $conn = $db->dbConnect();
+        $query = 
+        "UPDATE `account`
+        SET status = 'disabled'
+        WHERE user_id = '" . $accountId . "' ";
 
+        return $conn->query($query);
+    }
+    public static function enableAccount($accountId){
+        $db = new DataBase();
+        $conn = $db->dbConnect();
+        $query = 
+        "UPDATE `account`
+        SET status = 'enabled'
+        WHERE user_id = '" . $accountId . "' ";
+
+        return $conn->query($query);
+    }
 }
 
 ?>
