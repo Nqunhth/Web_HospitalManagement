@@ -6,13 +6,14 @@ require '../php/lib/PHPMailer/src/PHPMailer.php';
 require '../php/lib/PHPMailer/src/SMTP.php';
 require "../php/LogIn-SignUp/signup.php";
 require "../php/Receptionist/Receptionist.php";
+require "../php/UserClass/User.php";
 
 session_start();
 $db = new Database();
 $conn = $db->dbConnect();
 
 $count = Receptionist::fetchCountTotal();
-if($count->num_rows > 0){
+if ($count->num_rows > 0) {
     $row = $count->fetch_assoc();
     $total_records = $row['total'];
 }
@@ -34,6 +35,17 @@ $result = Receptionist::fetchReceptionistPage($start, $limit);
 //error show
 if (isset($_POST['submit']) && $_POST['submit'] != "cancel") {
     $error = SignUp::SignUp();
+}
+
+if (isset($_POST['switch-change'])) {
+    if (isset($_POST['user-id'])) {
+        if ($_POST['switch-change'] == "enable") {
+            User::disableAccount($_POST['user-id']);
+        }
+        if ($_POST['switch-change'] == "disable") {
+            User::enableAccount($_POST['user-id']);
+        }
+    }
 }
 ?>
 
@@ -183,18 +195,30 @@ if (isset($_POST['submit']) && $_POST['submit'] != "cancel") {
                                                 <?php echo $row["specialized_field"]; ?>
                                             </p>
                                         </div>
-                                        <div class="switch-container center">
-                                        <p class="switch-lable">Status</p>
+                                        <form class="switch-container center" method="post" action="">
+                                            <p class="switch-lable">Status</p>
                                             <label class="switch">
-                                                <?php if ($row["status"] == 'enabled') {?>
-                                                    <input type="checkbox" checked>
-                                                    <span class="slider round"></span>
-                                                <?php } else { ?>
-                                                    <input type="checkbox">
-                                                    <span class="slider round"></span>
-                                                <?php } ?>
+                                                <?php
+                                                if (isset($_POST['switch-change']) && $_POST['user-id'] == $row["user_id"]) {
+                                                    if ($_POST['switch-change'] == "disable") {
+                                                ?>
+                                                        <input class="" name="enable" value="<?php echo $row["user_id"] ?>" type="checkbox" checked onclick="return showAlertBox(event);">
+                                                        <span class="slider round"></span>
+                                                    <?php } else { ?>
+                                                        <input class="" name="disable" value="<?php echo $row["user_id"] ?>" type="checkbox" onclick="return showAlertBox(event);">
+                                                        <span class="slider round"></span>
+                                                    <?php }
+                                                } else {
+                                                    if ($row["status"] == 'enabled') { ?>
+                                                        <input class="" name="enable" value="<?php echo $row["user_id"] ?>" type="checkbox" checked onclick="return showAlertBox(event);">
+                                                        <span class="slider round"></span>
+                                                    <?php } else { ?>
+                                                        <input class="" name="disable" value="<?php echo $row["user_id"] ?>" type="checkbox" onclick="return showAlertBox(event);">
+                                                        <span class="slider round"></span>
+                                                <?php }
+                                                } ?>
                                             </label>
-                                        </div>
+                                        </form>
                                         <div class="icon-container center">
                                             <i class="fas fa-chevron-down"></i>
                                         </div>
@@ -238,11 +262,11 @@ if (isset($_POST['submit']) && $_POST['submit'] != "cancel") {
                                                 Avatar:
                                             </p>
                                             <div class="i-avatar">
-                                            <?php if (empty($row['avatar'])) { ?>
-                                                <i class="fas fa-user-circle"></i>
-                                            <?php } else { ?>
-                                                <img class="card-avatar" src="<?php echo $row['avatar']; ?>"></img>
-                                            <?php } ?>
+                                                <?php if (empty($row['avatar'])) { ?>
+                                                    <i class="fas fa-user-circle"></i>
+                                                <?php } else { ?>
+                                                    <img class="card-avatar" src="<?php echo $row['avatar']; ?>"></img>
+                                                <?php } ?>
                                             </div>
                                         </div>
                                     </div>
@@ -325,9 +349,9 @@ if (isset($_POST['submit']) && $_POST['submit'] != "cancel") {
         <?php
         if (isset($error)) {
         ?>
-            <div class="modal center_hide open">
+            <div class="modal center_hide open create-modal">
             <?php } else { ?>
-                <div class="modal center_hide">
+                <div class="modal center_hide create-modal">
                 <?php } ?>
                 <div class="modal__overlay">
                 </div>
@@ -444,25 +468,73 @@ if (isset($_POST['submit']) && $_POST['submit'] != "cancel") {
                     </div>
                 </div>
                 </div>
+                <div class="modal center_hide alert-modal">
+                    <div class="modal__overlay center">
+                        <div class="confirm-alert flex-column">
+                            <div class="alert-header center">
+                                <i class="far fa-question-circle alert-icon"></i>
+                            </div>
+                            <p class="alert-title roboto">Confirm Enable</p>
+                            <p class="alert-message roboto">Do you want to perform this action?</p>
+                            <form class="alert-opts center" method="post" action="">
+                                <input name="user-id" class="hide user-id" type="text">
+                                <button class="status alert-btn" type="submit" name="switch-change">OK</button>
+                                <button class="cancel alert-btn" name="no" value="no" onclick="return closeBox();">No</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <script type="text/javascript">
+                    const box = document.querySelector('.alert-modal');
+                    const id = document.querySelector('.user-id');
+                    const status = document.querySelector('.status');
+                    const title = document.querySelector('.alert-title');
+                    const message = document.querySelector('.alert-message');
+
+                    const loginBtn = document.querySelector('.js-login')
+                    const loginBox = document.querySelector('.create-modal')
+                    const closeBox = document.querySelector('.js-confirm')
+                    const errorLogHide = document.querySelector('.js-create')
+
+
+                    function showLoginBox() {
+                        loginBox.classList.add('open');
+                        errorLogHide.classList.add('hide');
+                    }
+
+                    function closeLoginBox() {
+                        loginBox.classList.remove('open')
+                    }
+
+                    loginBtn.addEventListener('click', showLoginBox)
+                    closeBox.addEventListener('click', closeLoginBox)
+
+                    function showAlertBox(e) {
+                        // box.classList.add('open');
+                        e = e || window.event;
+                        var target = e.target || e.srcElement,
+                            val = target.value,
+                            sta = target.name;
+
+                        box.classList.add('open');
+                        id.value = val;
+                        status.value = sta;
+                        if (sta == "enable") {
+                            title.textContent = "Confirm Disable";
+                            message.textContent = "Do you want to disable this account?";
+                        } else {
+                            title.textContent = "Confirm Enable";
+                            message.textContent = "Do you want to enable this account?";
+                        }
+                        // alert(text);
+                    }
+
+                    function closeAlertBox() {
+                        // alert(id.value + status.value);
+                        box.classList.remove('open')
+                    }
+                </script>
 </body>
 
 </html>
-<script type="text/javascript">
-    const loginBtn = document.querySelector('.js-login')
-    const loginBox = document.querySelector('.modal')
-    const closeBox = document.querySelector('.js-confirm')
-    const errorLogHide = document.querySelector('.js-create')
-
-
-    function showLoginBox() {
-        loginBox.classList.add('open');
-        errorLogHide.classList.add('hide');
-    }
-
-    function closeLoginBox() {
-        loginBox.classList.remove('open')
-    }
-
-    loginBtn.addEventListener('click', showLoginBox)
-    closeBox.addEventListener('click', closeLoginBox)
-</script>

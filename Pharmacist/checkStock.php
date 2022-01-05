@@ -115,7 +115,7 @@ $result = Medicine::fetchMedicinePage($start, $limit);
                     </ul>
                 </div>
                 <div class="box menu__box middle__box">
-                    <p>Ceate New Form</p>
+                    <p>Create New Form</p>
                     <ul>
                         <li>
                             <i class="fas fa-receipt"></i>

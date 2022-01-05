@@ -26,6 +26,17 @@ if ($current_page > $total_page) {
 
 $start = ($current_page - 1) * $limit;
 $result = Invoice::fetchInvoicePage($start, $limit);
+
+if (isset($_POST['switch-change'])) {
+    if (isset($_POST['invo-id'])) {
+        if ($_POST['switch-change'] == "enable") {
+            Invoice::disableForm($_POST['invo-id']);
+        }
+        if ($_POST['switch-change'] == "disable") {
+            Invoice::enableForm($_POST['invo-id']);
+        }
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -115,7 +126,7 @@ $result = Invoice::fetchInvoicePage($start, $limit);
                     </ul>
                 </div>
                 <div class="box menu__box middle__box">
-                    <p>Ceate New Form</p>
+                    <p>Create New Form</p>
                     <ul>
                         <li>
                             <i class="fas fa-receipt"></i>
@@ -173,18 +184,30 @@ $result = Invoice::fetchInvoicePage($start, $limit);
                                     <p class="i-value short-text"><?php echo $row["sum_cost"]; ?> VND</p>
                                     </p>
                                 </div>
-                                <div class="switch-container center">
-                                    <p class="switch-lable">Status</p>
-                                    <label class="switch">
-                                        <?php if ($row["invo_status"] == 'enabled') {?>
-                                            <input type="checkbox" checked>
-                                            <span class="slider round"></span>
-                                        <?php } else { ?>
-                                            <input type="checkbox">
-                                            <span class="slider round"></span>
-                                        <?php } ?>
-                                    </label>
-                                </div>
+                                <form class="switch-container center" method="post" action="">
+                                            <p class="switch-lable">Status</p>
+                                            <label class="switch">
+                                                <?php
+                                                if (isset($_POST['switch-change']) && isset($_POST['invo-id']) && $_POST['invo-id'] == $row["invo_id"]) {
+                                                    if ($_POST['switch-change'] == "disable") {
+                                                ?>
+                                                        <input class="" name="enable" value="<?php echo $row["invo_id"] ?>" type="checkbox" checked onclick="return showBox(event);">
+                                                        <span class="slider round"></span>
+                                                    <?php } else { ?>
+                                                        <input class="" name="disable" value="<?php echo $row["invo_id"] ?>" type="checkbox" onclick="return showBox(event);">
+                                                        <span class="slider round"></span>
+                                                    <?php }
+                                                } else {
+                                                    if ($row["invo_status"] == 'enabled') { ?>
+                                                        <input class="" name="enable" value="<?php echo $row["invo_id"] ?>" type="checkbox" checked onclick="return showBox(event);">
+                                                        <span class="slider round"></span>
+                                                    <?php } else { ?>
+                                                        <input class="" name="disable" value="<?php echo $row["invo_id"] ?>" type="checkbox" onclick="return showBox(event);">
+                                                        <span class="slider round"></span>
+                                                <?php }
+                                                } ?>
+                                            </label>
+                                        </form>
                                 <div class="icon-container center">
                                     <i class="fas fa-chevron-down"></i>
                                 </div>
@@ -284,6 +307,57 @@ $result = Invoice::fetchInvoicePage($start, $limit);
             <p>More Thing Is Needed</p>
         </div>
     </div>
+    <div class="modal center_hide">
+        <div class="modal__overlay center">
+            <div class="confirm-alert flex-column">
+                <div class="alert-header center">
+                    <i class="far fa-question-circle alert-icon"></i>
+                </div>
+                <p class="alert-title roboto"></p>
+                <p class="alert-message roboto"></p>
+                <form class="alert-opts center" method="post" action="">
+                    <input name="invo-id" class="hide invo-id" type="text">
+                    <button class="status alert-btn" type="submit" name="switch-change">OK</button>
+                    <button class="cancel alert-btn" name="no" value="no" onclick="return closeBox();">No</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        const box = document.querySelector('.modal');
+        const id = document.querySelector('.invo-id');
+        const status = document.querySelector('.status');
+        const title = document.querySelector('.alert-title');
+        const message = document.querySelector('.alert-message');
+
+        function showBox(e) {
+            // box.classList.add('open');
+            e = e || window.event;
+            var target = e.target || e.srcElement,
+                val = target.value,
+                sta = target.name;
+
+            box.classList.add('open');
+            // alert(val + sta);
+            id.value = val;
+            status.value = sta;
+            if (sta == "enable"){
+                title.textContent = "Confirm Disable";
+                message.textContent = "Do you want to disable this form?";
+            }
+            else{
+                title.textContent = "Confirm Enable";
+                message.textContent = "Do you want to enable this form?";
+            }
+            // alert(text);
+        }
+
+        function closeBox() {
+            // alert(id.value + status.value);
+            box.classList.remove('open')
+        }
+    </script>
 </body>
 
 </html>

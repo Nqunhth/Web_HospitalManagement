@@ -180,18 +180,7 @@ if (isset($_POST['submit']) && $_POST['submit'] != "cancel") {
                                                 <?php echo $row["specialized_field"]; ?>
                                             </p>
                                         </div>
-                                        <div class="switch-container center">
-                                            <p class="switch-lable">Status</p>
-                                            <label class="switch">
-                                            <?php if ($row["status"] == 'enabled') {?>
-                                                <input type="checkbox" checked>
-                                                <span class="slider round"></span>
-                                            <?php } else { ?>
-                                                <input type="checkbox">
-                                                <span class="slider round"></span>
-                                            <?php } ?>
-                                            </label>
-                                        </div>
+                                    
                                         <div class="icon-container center">
                                             <i class="fas fa-chevron-down"></i>
                                         </div>

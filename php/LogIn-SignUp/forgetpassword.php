@@ -1,6 +1,9 @@
 <?php
 class ForgerPassword
 {
+    public function __construct()
+    {
+    }
     public static function forgetPassword()
     {
         $db = new DataBase();

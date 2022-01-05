@@ -102,6 +102,26 @@ class SpecCon{
             LIMIT $start, $limit";
         return $conn->query($query);
     }
+    public static function disableForm($formId){
+        $db = new DataBase();
+        $conn = $db->dbConnect();
+        $query = 
+        "UPDATE `specialist_consulting`
+        SET spec_status = 'disabled'
+        WHERE spec_id = '" . $formId . "' ";
+
+        return $conn->query($query);
+    }
+    public static function enableForm($formId){
+        $db = new DataBase();
+        $conn = $db->dbConnect();
+        $query = 
+        "UPDATE `specialist_consulting`
+        SET spec_status = 'enabled'
+        WHERE spec_id = '" . $formId . "' ";
+
+        return $conn->query($query);
+    }
     function postToDataBase(){
         $db = new DataBase();
         $db->dbConnect();

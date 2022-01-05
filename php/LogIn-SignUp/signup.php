@@ -1,6 +1,9 @@
 <?php
 class SignUp
 {
+    public function __construct()
+    {
+    }
     public static function SignUp()
     {
         $comfirmMail = new ComfirmationMailing();

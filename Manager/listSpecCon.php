@@ -5,7 +5,7 @@ require "../php/SpecialConsulting/SpecCon.php";
 
 
 $count = SpecCon::fetchCountTotal();
-if($count->num_rows > 0){
+if ($count->num_rows > 0) {
     $row = $count->fetch_assoc();
     $total_records = $row['total'];
 }
@@ -23,6 +23,17 @@ if ($current_page > $total_page) {
 
 $start = ($current_page - 1) * $limit;
 $result = SpecCon::fetchSpecConPage($start, $limit);
+
+if (isset($_POST['switch-change'])) {
+    if (isset($_POST['spec-id'])) {
+        if ($_POST['switch-change'] == "enable") {
+            SpecCon::disableForm($_POST['spec-id']);
+        }
+        if ($_POST['switch-change'] == "disable") {
+            SpecCon::enableForm($_POST['spec-id']);
+        }
+    }
+}
 ?>
 
 
@@ -148,89 +159,101 @@ $result = SpecCon::fetchSpecConPage($start, $limit);
                         // Load dữ liệu lên website
                         while ($row = $result->fetch_assoc()) {
                     ?>
-                    <li class="card-drop">
-                        <input type="checkbox" />
-                        <div class="short-card">
-                            <div class="inner-card">
-                                <div class="inner-detail">
-                                    <div class="datetime-containter">
-                                        <p class="i-datetime">Date:
-                                        <p class="i-value i-datetime"><?php echo $row["created_date"]; ?></p>
-                                        </p>
+                            <li class="card-drop">
+                                <input type="checkbox" />
+                                <div class="short-card">
+                                    <div class="inner-card">
+                                        <div class="inner-detail">
+                                            <div class="datetime-containter">
+                                                <p class="i-datetime">Date:
+                                                <p class="i-value i-datetime"><?php echo $row["created_date"]; ?></p>
+                                                </p>
+                                            </div>
+                                            <p class="i-title">
+                                                Patient Full Name:
+                                            <p class="i-value short-text"><?php echo $row["pat_name"]; ?></p>
+                                            <p class="i-title">
+                                                Age:
+                                            <p class="i-value"><?php echo $row["pat_age"]; ?></p>
+                                            </p>
+                                            <p class="i-title">
+                                                Text Area:
+                                            <p class="i-value medium-text">
+                                                <?php echo $row["test_area"]; ?>
+                                            </p>
+                                            </p>
+                                            <p class="i-title change-element">
+                                                Reason:
+                                            <p class="i-value long-text">
+                                                <?php echo $row["spec_reason"]; ?>
+                                            </p>
+                                            </p>
+                                        </div>
+                                        <form class="switch-container center" method="post" action="">
+                                            <p class="switch-lable">Status</p>
+                                            <label class="switch">
+                                                <?php
+                                                if (isset($_POST['switch-change']) && $_POST['spec-id'] == $row["spec_id"]) {
+                                                    if ($_POST['switch-change'] == "disable") {
+                                                ?>
+                                                        <input class="" name="enable" value="<?php echo $row["spec_id"] ?>" type="checkbox" checked onclick="return showBox(event);">
+                                                        <span class="slider round"></span>
+                                                    <?php } else { ?>
+                                                        <input class="" name="disable" value="<?php echo $row["spec_id"] ?>" type="checkbox" onclick="return showBox(event);">
+                                                        <span class="slider round"></span>
+                                                    <?php }
+                                                } else {
+                                                    if ($row["spec_status"] == 'enabled') { ?>
+                                                        <input class="" name="enable" value="<?php echo $row["spec_id"] ?>" type="checkbox" checked onclick="return showBox(event);">
+                                                        <span class="slider round"></span>
+                                                    <?php } else { ?>
+                                                        <input class="" name="disable" value="<?php echo $row["spec_id"] ?>" type="checkbox" onclick="return showBox(event);">
+                                                        <span class="slider round"></span>
+                                                <?php }
+                                                } ?>
+                                            </label>
+                                        </form>
+                                        <div class="icon-container center">
+                                            <i class="fas fa-chevron-down"></i>
+                                        </div>
                                     </div>
-                                    <p class="i-title">
-                                        Patient Full Name:
-                                    <p class="i-value short-text"><?php echo $row["pat_name"]; ?></p>
-                                    <p class="i-title">
-                                        Age:
-                                    <p class="i-value"><?php echo $row["pat_age"]; ?></p>
-                                    </p>
-                                    <p class="i-title">
-                                        Text Area:
-                                    <p class="i-value medium-text">
-                                        <?php echo $row["test_area"]; ?>
-                                    </p>
-                                    </p>
-                                    <p class="i-title change-element">
-                                        Reason:
-                                    <p class="i-value long-text">
-                                        <?php echo $row["spec_reason"]; ?>
-                                    </p>
-                                    </p>
                                 </div>
-                                <div class="switch-container center">
-                                    <p class="switch-lable">Status</p>
-                                    <label class="switch">
-                                        <?php if ($row["spec_status"] == 'enabled') {?>
-                                            <input type="checkbox" checked>
-                                            <span class="slider round"></span>
-                                        <?php } else { ?>
-                                            <input type="checkbox">
-                                            <span class="slider round"></span>
-                                        <?php } ?>
-                                    </label>
+                                <div class="full-card">
+                                    <div class="inner-card">
+                                        <div class="inner-detail has-border-top">
+                                            <p class="i-title">
+                                                Phone Number:
+                                            <p class="i-value  medium-text">
+                                                <?php echo $row["pat_phone"]; ?>
+                                            </p>
+                                            </p>
+                                            <p class="i-title">
+                                                Job:
+                                            <p class="i-value medium-text">
+                                                <?php echo $row["pat_job"]; ?>
+                                            </p>
+                                            </p>
+                                            <p class="i-title change-element ">
+                                                Address:
+                                            <p class="i-value medium-text">
+                                                <?php echo $row["pat_address"]; ?>
+                                            </p>
+                                            </p>
+                                            <p class="i-title">
+                                                Doctor's Name:
+                                            <p class="i-value medium-text">
+                                                <?php echo $row["creator_name"]; ?>
+                                            </p>
+                                            </p>
+                                        </div>
+                                        <div class="switch-container center">
+                                        </div>
+                                        <div class="icon-container center">
+                                            <i class="fas fa-print"></i>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="icon-container center">
-                                    <i class="fas fa-chevron-down"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="full-card">
-                            <div class="inner-card">
-                                <div class="inner-detail has-border-top">
-                                    <p class="i-title">
-                                        Phone Number:
-                                    <p class="i-value  medium-text">
-                                        <?php echo $row["pat_phone"]; ?>
-                                    </p>
-                                    </p>
-                                    <p class="i-title">
-                                        Job:
-                                    <p class="i-value medium-text">
-                                        <?php echo $row["pat_job"]; ?>
-                                    </p>
-                                    </p>
-                                    <p class="i-title change-element ">
-                                        Address:
-                                    <p class="i-value medium-text">
-                                        <?php echo $row["pat_address"]; ?>
-                                    </p>
-                                    </p>
-                                    <p class="i-title">
-                                        Doctor's Name:
-                                    <p class="i-value medium-text">
-                                        <?php echo $row["creator_name"]; ?>
-                                    </p>
-                                    </p>
-                                </div>
-                                <div class="switch-container center">
-                                </div>
-                                <div class="icon-container center">
-                                    <i class="fas fa-print"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
+                            </li>
                     <?php
                         }
                     }
@@ -302,6 +325,57 @@ $result = SpecCon::fetchSpecConPage($start, $limit);
             <p>More Thing Is Needed</p>
         </div>
     </div>
+
+    <div class="modal center_hide">
+        <div class="modal__overlay center">
+            <div class="confirm-alert flex-column">
+                <div class="alert-header center">
+                    <i class="far fa-question-circle alert-icon"></i>
+                </div>
+                <p class="alert-title roboto">Confirm Enable</p>
+                <p class="alert-message roboto">Do you want to perform this action?</p>
+                <form class="alert-opts center" method="post" action="">
+                    <input name="spec-id" class="hide spec-id" type="text">
+                    <button class="status alert-btn" type="submit" name="switch-change">OK</button>
+                    <button class="cancel alert-btn" name="no" value="no" onclick="return closeBox();">No</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        const box = document.querySelector('.modal');
+        const id = document.querySelector('.spec-id');
+        const status = document.querySelector('.status');
+        const title = document.querySelector('.alert-title');
+        const message = document.querySelector('.alert-message');
+
+        function showBox(e) {
+            // box.classList.add('open');
+            e = e || window.event;
+            var target = e.target || e.srcElement,
+                val = target.value,
+                sta = target.name;
+
+            box.classList.add('open');
+            id.value = val;
+            status.value = sta;
+            if (sta == "enable"){
+                title.textContent = "Confirm Disable";
+                message.textContent = "Do you want to disable this form?";
+            }
+            else{
+                title.textContent = "Confirm Enable";
+                message.textContent = "Do you want to enable this form?";
+            }
+            // alert(text);
+        }
+
+        function closeBox() {
+            // alert(id.value + status.value);
+            box.classList.remove('open')
+        }
+    </script>
 </body>
 
 </html>

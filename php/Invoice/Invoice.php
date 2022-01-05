@@ -92,19 +92,6 @@ class Invoice{
             LIMIT  1";
         return $conn->query($query);
     }
-    // public static function changeStatus($patientId, $status)
-    // {
-    //     $db = new DataBase();
-    //     $db->dbConnect();
-    //     $query = 
-    //     "UPDATE patient
-    //     SET pat_status = '" . $status . "'
-    //     WHERE pat_id = '" . $patientId . "' ";
-        
-    //     if($db->execute($query)){
-    //         echo "Change patient status Successfull";
-    //     }
-    // }
     
     function postToDataBase(){
         $db = new DataBase();
@@ -114,6 +101,27 @@ class Invoice{
         VALUES ('" . $this->cusName . "','" . $this->cusAddress . "','" . $this->creatorId . "', '" . $this->sumCost . "')";
         
         return $db->execute($query);
+    }
+
+    public static function disableForm($formId){
+        $db = new DataBase();
+        $conn = $db->dbConnect();
+        $query = 
+        "UPDATE `invoice`
+        SET invo_status = 'disabled'
+        WHERE invo_id = '" . $formId . "' ";
+
+        return $conn->query($query);
+    }
+    public static function enableForm($formId){
+        $db = new DataBase();
+        $conn = $db->dbConnect();
+        $query = 
+        "UPDATE `invoice`
+        SET invo_status = 'enabled'
+        WHERE invo_id = '" . $formId . "' ";
+
+        return $conn->query($query);
     }
 }
 
