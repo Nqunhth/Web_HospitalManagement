@@ -754,6 +754,10 @@ html {
     padding: 15px 30px 150px !important;
 }
 
+.inner-box-user-30 {
+    padding: 30px 30px 60px 30px!important;
+}
+
 .inner-detail {
     width: 85%;
     padding: 15px 30px 10px;
@@ -1831,6 +1835,22 @@ select {
     text-align: center;
 }
 
+.eye-icon {
+    height: 40px;
+    line-height: 40px!important;
+    width: 40px;
+    margin-right: 10px;
+    border-radius: 20px;
+    font-size: 24px;
+    text-align: center;
+    color: #B6B6B6;
+}
+
+.eye-icon:hover {
+    cursor: pointer;
+    background-color: rgb(204 204 204 / 30%);
+}
+
 .login-page {
     top: 60px;
     height: 100vh;
@@ -2471,4 +2491,24 @@ select {
 
 .placeholder {
     min-height: 535px;
+}
+
+.pass-change {
+    display: flex;
+    width: 90%;
+    justify-content: space-between;
+    padding-left: 30px;
+}
+
+.width440 {
+    width: 440px!important;
+    padding: 0!important;
+    margin: 0 20px 0 0!important;
+}
+
+.passchange-header {
+    padding-bottom: 20px;
+    border-bottom: solid 1px rgba(0, 0, 0, 0.3);
+    margin-bottom: 30px;
+    padding-left: 30px;
 }
