@@ -84,9 +84,11 @@ if (isset($_POST['submit'])) {
                         </div>
                         <div class="input center">
                             <i class="fas fa-key login_icon"></i>
-                            <input type="text" name="password" id="" placeholder="Password" value="<?php echo (isset($_POST['username']) ? $_POST['password'] : "") ?>">
+                            <input type="password" name="password" id="password" placeholder="Password" value="<?php echo (isset($_POST['username']) ? $_POST['password'] : "") ?>">
+                            <i id="eye" class="far fa-eye-slash eye-icon" onclick="return myFunction();"></i>
                         </div>
                     </div>
+
                     <div class="forget_section center">
                         <p class="">Forget your password?</p>
                         <a href="/Web_HospitalManagement/Login/forgetpassPage.php" class="Recovery">Get help here!</a>
@@ -95,6 +97,22 @@ if (isset($_POST['submit'])) {
                         LOG IN
                     </button>
                 </form>
+
+                <script>
+                    function myFunction() {
+                        var x1 = document.getElementById("password");
+                        const eye = document.getElementById("eye");
+                        if (x1.type === "password") {
+                            x1.type = "text";
+                            eye.classList.toggle("fa-eye"); 
+                            eye.classList.toggle("fa-eye-slash"); 
+                        } else {
+                            x1.type = "password";
+                            eye.classList.toggle("fa-eye"); 
+                            eye.classList.toggle("fa-eye-slash"); 
+                        }
+                    }
+                </script>
 
             </div>
             <div class="card blue rounded_right_border center">
