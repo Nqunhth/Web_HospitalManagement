@@ -126,8 +126,8 @@ $slideCurr = 0;
                     <div class="logo--background">
                         <div class="logo--content">
                             <i class="icon fas fa-hospital"></i>
-                            <h1 class="logo-title">HOSPITAL NAME</h1>
-                            <h1 class="logo-slogan">Hospital Slogan</h1>
+                            <h1 class="logo-title">GENERAL CLINIC</h1>
+                            <h1 class="logo-slogan">Where Care Come First</h1>
                             <a class="learn-more" href="/Web_HospitalManagement/About/aboutPage.php">Learn More</a>
                         </div>
                     </div>
