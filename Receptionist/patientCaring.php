@@ -84,7 +84,7 @@ $result = Patient::fetchCaringPatient()
     </div>
 
     <div class="container">
-        <div class="container__background_color">
+        <div class="container__background_color placeholder">
             <div class="container__menu">
                 <div class="box menu__box first__box">
                     <p>Patient List</p>
