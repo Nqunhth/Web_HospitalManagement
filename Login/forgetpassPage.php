@@ -70,7 +70,7 @@ if (isset($_POST['submit']))
             <form action="" method="post" class="card rounded_left_border center">
                 <div class="card_heading center">
                     <h2 class="head_prefix">WELCOME TO</h2>
-                    <h1 class="head_title">HOSPITAL NAME</h1>
+                    <h1 class="head_title">GENERAL CLINIC</h1>
                     <p class="head_subtitle">Remember your validated Email?</p>
                     <p class="head_subtitle">Enter it here and we will send you a recovery link</p>
                 </div>
@@ -93,9 +93,8 @@ if (isset($_POST['submit']))
             <div class="card blue rounded_right_border center">
                 <div class="logo--content roboto">
                     <i class="fas fa-hospital logo_in_login"></i>
-                    <h1 class="logo-title">HOSPITAL NAME</h1>
-                    <h1 class="logo-slogan">Hospital Slogan</h1>
-                    <h3>Short Description.....</h3>
+                    <h1 class="logo-title">GENERAL CLINIC</h1>
+                    <h1 class="logo-slogan">Where Care Come First</h1>
                 </div>
             </div>
         </div>

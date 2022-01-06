@@ -184,7 +184,7 @@ if (isset($_POST['switch-change'])) {
                                             </p>
                                             </p>
                                             <p class="i-title">
-                                                Username:
+                                                Email:
                                             <p class="i-value medium-text">
                                                 <?php echo $row["email"]; ?>
                                             </p>

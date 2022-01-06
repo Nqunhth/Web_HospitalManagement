@@ -46,7 +46,7 @@ $slideCurr = 0;
             <i class="fas fa-envelope icon"></i>
             <p class="info">healthcare@gmail.com</p>
             <i class="fas fa-map-marker-alt icon"></i>
-            <p class="info">XX AAAA Street, Dien Bien Phu</p>
+            <p class="info">73 Dien Bien Phu, Hai Phong</p>
             <i class="fas fa-phone right-icon"></i>
             <p class="right-info">823 4565 13456</p>
 
@@ -173,7 +173,7 @@ $slideCurr = 0;
                         $index = 1;
                         while ($listItem = $list->fetch_assoc()) {
                         ?>
-                            <div class="slide-item fade center">
+                            <a href="/Web_HospitalManagement/News/newsPage.php?news_id=<?php echo $listItem['news_id']?>" class="slide-item fade center">
                                 <div class="news-para roboto">
                                     <p class="title"><?php echo $listItem['news_title'] ?></p>
                                     <p class="content">
@@ -181,7 +181,7 @@ $slideCurr = 0;
                                     </p>
                                 </div>
                                 <img class="news-thumpnail" src="<?php echo $listItem['news_img'] ?>"></img>
-                            </div>
+                            </a>
                         <?php } ?>
                         <div class="news--btn sh-btn-back center" onclick="return plusSlides(-1);">
                             <i class="fas fa-angle-left sh-btn-icon"></i>

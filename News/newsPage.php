@@ -166,6 +166,48 @@ else
         </div>
 
     </div>
+
+    <div class="footer__content">
+            <div class="content-title">
+                <p>Contact:</p>
+            </div>
+            <div class="content-main">
+                <div class="main-column">
+                    <div class="column-content">
+                        <ul class="column-link-list">
+                            <li class="column-link-list-item">
+                                <p>Address : XX AAA....</p>
+                            </li>
+                            <li class="column-link-list-item">
+                                <p>Hotline : XX AAA....</p>
+                            </li>
+                            <li class="column-link-list-item">
+                                <p>Email : XX AAA@Mail.com</p>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+                <div class="main-column">
+                    <ul class="column-link-list">
+                        <li class="column-link-list-item">
+                            <p>Address : XX AAA....</p>
+                        </li>
+                        <li class="column-link-list-item">
+                            <p>Hotline : XX AAA....</p>
+                        </li>
+                        <li class="column-link-list-item">
+                            <p>Email : XX AAA@Mail.com</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="content-conclude">
+                <p>Copyright Copyright Pisces/Thu/Anh blah blah blah.....</p>
+                <p>More Thing Is Needed</p>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

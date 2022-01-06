@@ -16,7 +16,7 @@ textarea {
 
 .changpass-error {
     position: absolute;
-    top: 240px;
+    top: 50px;
     float: right;
     right: 50px;
 }
@@ -2261,6 +2261,7 @@ select {
     outline: none;
     border: none;
     color: #fff;
+    cursor: pointer;
 }
 
 .cancel {
@@ -2395,10 +2396,16 @@ select {
 }
 
 .slide-item {
-    padding: 80px;
-    width: 100%;
+    padding: 80px 0;
+    width: 86%;
     height: 84%;
     padding-bottom: 30px;
+    text-decoration: none;
+    background-clip: content-box;
+}
+
+.slide-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 .slide-item .news-para {
@@ -2502,7 +2509,7 @@ select {
 
 .width440 {
     width: 440px!important;
-    padding: 0!important;
+    padding: 5px 20px!important;
     margin: 0 20px 0 0!important;
 }
 

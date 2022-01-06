@@ -105,6 +105,18 @@ class Patient{
             ORDER BY medical_register.queue_number;";
         return $conn->query($query);
     }
+    public static function fetchCaringPatientForReceptionist(){
+        $db = new DataBase();
+        $conn = $db->dbConnect();
+        $query = 
+            "SELECT * 
+            FROM `patient`
+            JOIN `medical_register`
+            ON patient.pat_id = medical_register.pat_id
+            WHERE DATE(medical_register.created_date) = CURRENT_DATE && medical_register.medi_status = 'enabled' && (pat_status  = 'caring' || pat_status  = 'asigned' || pat_status  = 'consulted')
+            ORDER BY medical_register.queue_number;";
+        return $conn->query($query);
+    }
     public static function fetchCaringPatientForDoctor($doctorId){
         $db = new DataBase();
         $conn = $db->dbConnect();

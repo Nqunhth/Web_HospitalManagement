@@ -17,7 +17,7 @@ class ForgerPassword
                 ) 
                 {
                     return "Password recovery link sent! Please check your email";
-                } else return "Error: Request Denied";
+                } else return "Your email must be in format of mail@gmail.com";
             } else return "Error: Database connection";
         } else return "All fields are required";
     }

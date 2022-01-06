@@ -4,7 +4,7 @@ require "../php/Patient/Patient.php";
 
 session_start();
 
-$result = Patient::fetchCaringPatient()
+$result = Patient::fetchCaringPatientForReceptionist()
 
 ?>
 

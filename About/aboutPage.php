@@ -124,7 +124,7 @@ session_start();
                         <li class="index center">
                             <a href="#contact">
                                 <button>
-                                    <i class="fas fa-gem mini-icon"></i>
+                                    <i class="fas fa-phone mini-icon"></i>
                                     Contact
                                     <div class="current hide"></div>
                                 </button>
@@ -146,7 +146,7 @@ session_start();
                         We represent all medical specialties and offer a wide range of medical, surgical, diagnostic and wellness programs. High quality care, coupled with General Clinic Hospital’s convenient location, are reasons many patients choose to be treated here.
                     </p>
                     <p class="content-contact">Address : 73 Dien Bien Phu, Hai Phong</p>
-                    <p class="content-contact">Hotline : XX AAA....</p>
+                    <p class="content-contact">Hotline : 823 4565 13456</p>
                     <p>Email : XX AAA@Mail.com</p>
                 </div>
             </div>

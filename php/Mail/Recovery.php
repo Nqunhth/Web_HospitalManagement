@@ -102,7 +102,7 @@
 
 <body class="column-flex">
     <form action="" method="post" class="my_form column-flex">
-        <h5>Course Adviser</h5>
+        <h5>Hospital Healthcare Management</h5>
         <h1>Password Recovery</h1>
         <div class="content">
             <div class="section column-flex">

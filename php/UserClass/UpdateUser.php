@@ -10,23 +10,23 @@ class UpdateUser
         ) {
             if($_POST['gender'] == "female" || $_POST['gender'] == "male"){}
             else{                    
-                return "Invalid data Gender";
+                return "Gender must be either male of female";
             };
             if(preg_match('/^[1-9][0-9]*$/', $_POST['age'])){}
             else{                    
-                return "Invalid data Age";
+                return "Age must be greater than 0";
             };
-            if(preg_match('/^[1-9][0-9]*$/', $_POST['phone'])){}
+            if(preg_match('/^[0-9][0-9]*$/', $_POST['phone'])){}
             else{                    
                 return "Invalid data Phone Number";
             };
             if(preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $_POST['birthday'])) {}
             else{
-                return "Invalid data Birthday";
+                return "Your birthday must be in format of yyyy-mm-dd";
             }
             if(preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $_POST['id_date'])) {}
             else{
-                return "Invalid data Card Date";
+                return "Your ID card date must be in format of yyyy-mm-dd";
             }
             User::updateInfo(                    
             $_POST['full_name'],

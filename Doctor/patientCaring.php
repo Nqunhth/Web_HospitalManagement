@@ -251,9 +251,6 @@ if (isset($_POST['queue'])) {
                 <a href="" class="float" id="button-up">
                     <i class="fas fa-arrow-up"></i>
                 </a>
-                <a href="" class="float" id="button-search">
-                    <i class="fas fa-search"></i>
-                </a>
             </div>
         </div>
     </div>
