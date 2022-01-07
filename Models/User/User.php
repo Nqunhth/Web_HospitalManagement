@@ -183,24 +183,6 @@ class User{
 
         $db->execute($query);
     }
-    function postToDataBase(){
-        // $new = $this->prepareSpecCon();
-        // $db = new DataBase();
-        // $db->dbConnect();
-        // $query = 
-        // "INSERT INTO patient (pat_name, pat_age, pat_address, pat_phone, pat_job) 
-        // VALUES ('" . $this->patientName . "','" . $this->patientAge . "', '" . $this->patientAddress . "', '" . $this->patientPhone . "', '" . $this->patientJob . "')";
-        
-        // if($db->execute($query)){
-        //     $newMediReg = new MedicalRegister();
-        //     $this->patientId = $db->insert_id();
-        //     $this->patientId = $db->prepareData($this->patientId);
-        //     if($newMediReg->createEmptyDoc($this->patientId)){
-        //         return $this->patientId;
-        //     };
-        // }
-        // return "none";
-    }
     public static function disableAccount($accountId){
         $db = new DataBase();
         $conn = $db->dbConnect();

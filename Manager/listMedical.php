@@ -1,11 +1,11 @@
 <?php
 session_start();
-require "../php/ConnectionConfig/DataBase.php";
-require "../php/MedicalRegister/MedicalRegister.php";
+require "../Models/ConnectionConfig/DataBase.php";
+require "../Models/MedicalRegister/MedicalRegister.php";
 
 
 $count = MedicalRegister::fetchCountTotal();
-if($count->num_rows > 0){
+if ($count->num_rows > 0) {
     $row = $count->fetch_assoc();
     $total_records = $row['total'];
 }
@@ -32,14 +32,14 @@ $result = MedicalRegister::fetchMediPage($start, $limit);
 <head>
     <meta charset="UTF-8">
     <title>HealthCareManagement</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../lib/fontawesome-free-5.15.4-web/css/all.min.css">
 
     <!--"Roboto" & "M PLUS Rounded 1c font" -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap">
 
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../icon/fontawesome-free-5.15.4-web/css/all.min.css">
 </head>
 
 <body>
@@ -108,7 +108,7 @@ $result = MedicalRegister::fetchMediPage($start, $limit);
                     <ul>
                         <li class="has-border-bottom">
                             <i class="fas fa-users-cog"></i>
-                            <a href="/Web_HospitalManagement/Manager/accountManager.php">Manager Account</a>
+                            <a href="/Web_HospitalManagement/Manager/accountManager.php">Manager Accounts</a>
                         </li>
                         <li class="has-border-bottom">
                             <i class="fas fa-concierge-bell"></i>
@@ -116,11 +116,11 @@ $result = MedicalRegister::fetchMediPage($start, $limit);
                         </li>
                         <li class="has-border-bottom">
                             <i class="fas fa-stethoscope"></i>
-                            <a href="/Web_HospitalManagement/Manager/accountDoctor.php">Doctor Account</a>
+                            <a href="/Web_HospitalManagement/Manager/accountDoctor.php">Doctor Accounts</a>
                         </li>
                         <li>
                             <i class="fas fa-pills"></i>
-                            <a href="/Web_HospitalManagement/Manager/accountPharma.php">Pharmacist Account</a>
+                            <a href="/Web_HospitalManagement/Manager/accountPharma.php">Pharmacist Accounts</a>
                         </li>
                     </ul>
                 </div>
@@ -148,69 +148,69 @@ $result = MedicalRegister::fetchMediPage($start, $limit);
                         // Load dữ liệu lên website
                         while ($row = $result->fetch_assoc()) {
                     ?>
-                    <li class="card-drop">
-                        <input type="checkbox" />
-                        <div class="short-card">
-                            <div class="inner-card">
-                                <div class="inner-detail">
-                                    <div class="datetime-containter">
-                                        <p class="i-datetime">Date:
-                                        <p class="i-value i-datetime"><?php echo $row["created_date"]; ?></p>
-                                        </p>
+                            <li class="card-drop">
+                                <input type="checkbox" />
+                                <div class="short-card">
+                                    <div class="inner-card">
+                                        <div class="inner-detail">
+                                            <div class="datetime-containter">
+                                                <p class="i-datetime">Date:
+                                                <p class="i-value i-datetime"><?php echo $row["created_date"]; ?></p>
+                                                </p>
+                                            </div>
+                                            <p class="i-title">
+                                                Patient Full Name:
+                                            <p class="i-value short-text"><?php echo $row["pat_name"]; ?></p>
+                                            <p class="i-title">
+                                                Age:
+                                            <p class="i-value"><?php echo $row["pat_age"]; ?></p>
+                                            </p>
+                                            </p>
+                                            <p class="i-title change-element">
+                                                Reason:
+                                            <p class="i-value long-text">
+                                                <?php echo $row["medi_reason"]; ?>
+                                            </p>
+                                            </p>
+                                        </div>
+                                        <div class="icon-container center">
+                                            <i class="fas fa-chevron-down"></i>
+                                        </div>
                                     </div>
-                                    <p class="i-title">
-                                        Patient Full Name:
-                                    <p class="i-value short-text"><?php echo $row["pat_name"]; ?></p>
-                                    <p class="i-title">
-                                        Age:
-                                    <p class="i-value"><?php echo $row["pat_age"]; ?></p>
-                                    </p>
-                                    </p>
-                                    <p class="i-title change-element">
-                                        Reason:
-                                    <p class="i-value long-text">
-                                        <?php echo $row["medi_reason"]; ?>
-                                    </p>
-                                    </p>
                                 </div>
-                                <div class="icon-container center">
-                                    <i class="fas fa-chevron-down"></i>
+                                <div class="full-card">
+                                    <div class="inner-card">
+                                        <div class="inner-detail has-border-top">
+                                            <p class="i-title">
+                                                Phone Number:
+                                            <p class="i-value  medium-text">
+                                                <?php echo $row["pat_phone"]; ?>
+                                            </p>
+                                            </p>
+                                            <p class="i-title">
+                                                Job:
+                                            <p class="i-value medium-text">
+                                                <?php echo $row["pat_job"]; ?>
+                                            </p>
+                                            </p>
+                                            <p class="i-title change-element ">
+                                                Address:
+                                            <p class="i-value medium-text">
+                                                <?php echo $row["pat_address"]; ?>
+                                            </p>
+                                            </p>
+                                            <p class="i-title">
+                                                Doctor's Name:
+                                            <p class="i-value medium-text">
+                                                <?php echo $row["doctor_name"]; ?>
+                                            </p>
+                                            </p>
+                                        </div>
+                                        <div class="icon-container center">
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="full-card">
-                            <div class="inner-card">
-                                <div class="inner-detail has-border-top">
-                                    <p class="i-title">
-                                        Phone Number:
-                                    <p class="i-value  medium-text">
-                                        <?php echo $row["pat_phone"]; ?>
-                                    </p>
-                                    </p>
-                                    <p class="i-title">
-                                        Job:
-                                    <p class="i-value medium-text">
-                                        <?php echo $row["pat_job"]; ?>
-                                    </p>
-                                    </p>
-                                    <p class="i-title change-element ">
-                                        Address:
-                                    <p class="i-value medium-text">
-                                        <?php echo $row["pat_address"]; ?>
-                                    </p>
-                                    </p>
-                                    <p class="i-title">
-                                        Doctor's Name:
-                                    <p class="i-value medium-text">
-                                        <?php echo $row["doctor_name"]; ?>
-                                    </p>
-                                    </p>
-                                </div>
-                                <div class="icon-container center">
-                                </div>
-                            </div>
-                        </div>
-                    </li>
+                            </li>
                     <?php
                         }
                     }

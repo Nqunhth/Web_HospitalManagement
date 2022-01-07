@@ -60,7 +60,7 @@ class ComfirmationMailing
         $message .= '<h1>Hi ' . $name . '!</h1>';
         $message .= '<p>The password for your account is : </p>';
         $message .= '<h2>Hi ' . $password . '!</h2>';
-        $message .= '<p><a href="http://localhost/Web_HospitalManagement/php/Mail/Activation.php?token=' . $token . '">CLICK TO ACTIVATE YOUR ACCOUNT</a></p>';
+        $message .= '<p><a href="http://localhost/Web_HospitalManagement/Controllers/Mail/Activation.php?token=' . $token . '">CLICK TO ACTIVATE YOUR ACCOUNT</a></p>';
         $message .= "</body></html>";
         $this->mail->MsgHTML($message);
     }
@@ -80,7 +80,7 @@ class ComfirmationMailing
             $message = '';
             $message .= '<h1>Your request for password recovery has been approved!</h1>';
             // $message .= '<p><a href="' . SITE_URL . 'activate.php?id=' . base64_encode($lastID) . '">CLICK TO ACTIVATE YOUR ACCOUNT</a>';
-            $message .= '<p><a href="http://localhost/Web_HospitalManagement/php/Mail/Recovery.php?token=' . $token .'">CLICK TO CHANGE YOUR PASSWORD</a>';
+            $message .= '<p><a href="http://localhost/Web_HospitalManagement/Controllers/Mail/Recovery.php?token=' . $token .'">CLICK TO CHANGE YOUR PASSWORD</a>';
             $message .= "</body></html>";
             $this->mail->MsgHTML($message);
 

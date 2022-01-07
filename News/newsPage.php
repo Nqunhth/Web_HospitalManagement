@@ -1,15 +1,13 @@
 <?php
-require "../php/ConnectionConfig/DataBase.php";
-require "../php/News/News.php";
+require "../Models/ConnectionConfig/DataBase.php";
+require "../Models/News/News.php";
 session_start();
 
 $list = News::fetchNews();
 
-if(isset($_GET['news_id']))
-{
+if (isset($_GET['news_id'])) {
     $curr = News::fetchNewsById($_GET['news_id']);
-}
-else
+} else
     $curr = News::fetchLatestNews();
 
 ?>
@@ -21,7 +19,7 @@ else
     <meta charset="UTF-8">
     <title>HealthCareManagement</title>
     <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../icon/fontawesome-free-5.15.4-web/css/all.min.css">
+    <link rel="stylesheet" href="../lib/fontawesome-free-5.15.4-web/css/all.min.css">
 
     <!--"Roboto" & "M PLUS Rounded 1c font" -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -108,7 +106,7 @@ else
                         <?php while ($listItem = $list->fetch_assoc()) { ?>
                             <li class="news_item center" onclick="document.getElementById('submit-<?php echo $listItem['news_id'] ?>').click();">
                                 <form class="hide" action="">
-                                    <input id= "submit-<?php echo $listItem['news_id']?>" type="submit" name = "news_id" value = "<?php echo $listItem['news_id'] ?>"/>
+                                    <input id="submit-<?php echo $listItem['news_id'] ?>" type="submit" name="news_id" value="<?php echo $listItem['news_id'] ?>" />
                                 </form>
                                 <?php if ($listItem['news_img'] == "") { ?>
                                     <div class="thumpnail center">
@@ -168,27 +166,12 @@ else
     </div>
 
     <div class="footer__content">
-            <div class="content-title">
-                <p>Contact:</p>
-            </div>
-            <div class="content-main">
-                <div class="main-column">
-                    <div class="column-content">
-                        <ul class="column-link-list">
-                            <li class="column-link-list-item">
-                                <p>Address : XX AAA....</p>
-                            </li>
-                            <li class="column-link-list-item">
-                                <p>Hotline : XX AAA....</p>
-                            </li>
-                            <li class="column-link-list-item">
-                                <p>Email : XX AAA@Mail.com</p>
-                            </li>
-                        </ul>
-                    </div>
-
-                </div>
-                <div class="main-column">
+        <div class="content-title">
+            <p>Contact:</p>
+        </div>
+        <div class="content-main">
+            <div class="main-column">
+                <div class="column-content">
                     <ul class="column-link-list">
                         <li class="column-link-list-item">
                             <p>Address : XX AAA....</p>
@@ -201,12 +184,27 @@ else
                         </li>
                     </ul>
                 </div>
+
             </div>
-            <div class="content-conclude">
-                <p>Copyright Copyright Pisces/Thu/Anh blah blah blah.....</p>
-                <p>More Thing Is Needed</p>
+            <div class="main-column">
+                <ul class="column-link-list">
+                    <li class="column-link-list-item">
+                        <p>Address : XX AAA....</p>
+                    </li>
+                    <li class="column-link-list-item">
+                        <p>Hotline : XX AAA....</p>
+                    </li>
+                    <li class="column-link-list-item">
+                        <p>Email : XX AAA@Mail.com</p>
+                    </li>
+                </ul>
             </div>
         </div>
+        <div class="content-conclude">
+            <p>Copyright Copyright Pisces/Thu/Anh blah blah blah.....</p>
+            <p>More Thing Is Needed</p>
+        </div>
+    </div>
     </div>
 </body>
 

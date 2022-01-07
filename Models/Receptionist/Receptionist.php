@@ -39,19 +39,6 @@ class Receptionist{
             LIMIT $start, $limit";
         return $conn->query($query);
     }
-    // public static function changeStatus($patientId, $status)
-    // {
-    //     $db = new DataBase();
-    //     $db->dbConnect();
-    //     $query = 
-    //     "UPDATE patient
-    //     SET pat_status = '" . $status . "'
-    //     WHERE pat_id = '" . $patientId . "' ";
-        
-    //     if($db->execute($query)){
-    //         echo "Change patient status Successfull";
-    //     }
-    // }
     
 }
 

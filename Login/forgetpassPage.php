@@ -1,10 +1,10 @@
 <?php
-require "../php/ConnectionConfig/DataBase.php";
-require "../php/Mail/SendMail.php";
-require '../php/lib/PHPMailer/src/Exception.php';
-require '../php/lib/PHPMailer/src/PHPMailer.php';
-require '../php/lib/PHPMailer/src/SMTP.php';
-require '../php/LogIn-SignUp/forgetpassword.php';
+require "../Models/ConnectionConfig/DataBase.php";
+require "../Controllers/Mail/SendMail.php";
+require '../lib/PHPMailer/src/Exception.php';
+require '../lib/PHPMailer/src/PHPMailer.php';
+require '../lib/PHPMailer/src/SMTP.php';
+require '../Controllers/LogIn-SignUp/forgetpassword.php';
 
 if (isset($_POST['submit']))
     $error = ForgerPassword::forgetPassword();
@@ -17,7 +17,7 @@ if (isset($_POST['submit']))
     <meta charset="UTF-8">
     <title>HealthCareManagement</title>
     <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../icon/fontawesome-free-5.15.4-web/css/all.min.css">
+    <link rel="stylesheet" href="../lib/fontawesome-free-5.15.4-web/css/all.min.css">
 
     <!--"Roboto" & "M PLUS Rounded 1c font" -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

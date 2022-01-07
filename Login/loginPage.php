@@ -1,7 +1,7 @@
 <?php
-require "../php/ConnectionConfig/DataBase.php";
-require "../php/UserClass/User.php";
-require "../php/LogIn-SignUp/login.php";
+require "../Models/ConnectionConfig/DataBase.php";
+require "../Models/User/User.php";
+require "../Controllers/LogIn-SignUp/login.php";
 
 if (isset($_POST['submit'])) {
     $error = Login::Login();
@@ -15,7 +15,7 @@ if (isset($_POST['submit'])) {
     <meta charset="UTF-8">
     <title>HealthCareManagement</title>
     <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../icon/fontawesome-free-5.15.4-web/css/all.min.css">
+    <link rel="stylesheet" href="../lib/fontawesome-free-5.15.4-web/css/all.min.css">
 
     <!--"Roboto" & "M PLUS Rounded 1c font" -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -104,12 +104,12 @@ if (isset($_POST['submit'])) {
                         const eye = document.getElementById("eye");
                         if (x1.type === "password") {
                             x1.type = "text";
-                            eye.classList.toggle("fa-eye"); 
-                            eye.classList.toggle("fa-eye-slash"); 
+                            eye.classList.toggle("fa-eye");
+                            eye.classList.toggle("fa-eye-slash");
                         } else {
                             x1.type = "password";
-                            eye.classList.toggle("fa-eye"); 
-                            eye.classList.toggle("fa-eye-slash"); 
+                            eye.classList.toggle("fa-eye");
+                            eye.classList.toggle("fa-eye-slash");
                         }
                     }
                 </script>

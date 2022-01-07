@@ -1,9 +1,9 @@
 <?php
-require "../php/ConnectionConfig/DataBase.php";
-require "../php/Medicine/Medicine.php";
-require "../php/Invoice/Invoice.php";
-require "../php/Invoice/CreateInvoice.php";
-require "../php/Invoice/InvoiceMedicine.php";
+require "../Models/ConnectionConfig/DataBase.php";
+require "../Models/Medicine/Medicine.php";
+require "../Models/Invoice/Invoice.php";
+require "../Controllers/Invoice/CreateInvoice.php";
+require "../Models/Invoice/InvoiceMedicine.php";
 session_start();
 $result = Medicine::fetchMedicine();
 if (isset($_POST['submit'])) {
@@ -27,14 +27,14 @@ if (isset($_POST['reset'])) {
 <head>
     <meta charset="UTF-8">
     <title>HealthCareManagement</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../lib/fontawesome-free-5.15.4-web/css/all.min.css">
 
     <!--"Roboto" & "M PLUS Rounded 1c font" -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap">
 
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../icon/fontawesome-free-5.15.4-web/css/all.min.css">
 </head>
 
 <body>
@@ -232,11 +232,11 @@ if (isset($_POST['reset'])) {
                                     <td><input type="text" class="medium-table" name="mediUnitPrice_1" readonly="readonly" onfocus="this.blur()" tabindex="-1" value="<?php echo $currMedi["medicine_unit_price"] ?>"></td>
                                     <td><input type="text" class="medium-table" name="mediCost_1" readonly="readonly" onfocus="this.blur()" tabindex="-1" value="<?php echo $_SESSION['mediCost_1'] ?>"></td>
                                 <?php } else { ?>
-                                            <td><input type="text" class="medium-table" name="mediUnit_1" readonly="readonly" onfocus="this.blur()" tabindex="-1"></td>
-                                            <td><input type="number" class="medium-table" name="mediQuantity_1" readonly="readonly" onkeypress="return event.charCode >= 48" min="1"></td>
-                                            <td><input type="text" class="medium-table" name="mediUnitPrice_1" readonly="readonly" onfocus="this.blur()" tabindex="-1"></td>
-                                            <td><input type="text" class="medium-table" name="mediCost_1" readonly="readonly" onfocus="this.blur()" tabindex="-1" ></td>
-                                           <?php }
+                                    <td><input type="text" class="medium-table" name="mediUnit_1" readonly="readonly" onfocus="this.blur()" tabindex="-1"></td>
+                                    <td><input type="number" class="medium-table" name="mediQuantity_1" readonly="readonly" onkeypress="return event.charCode >= 48" min="1"></td>
+                                    <td><input type="text" class="medium-table" name="mediUnitPrice_1" readonly="readonly" onfocus="this.blur()" tabindex="-1"></td>
+                                    <td><input type="text" class="medium-table" name="mediCost_1" readonly="readonly" onfocus="this.blur()" tabindex="-1"></td>
+                                <?php }
                                         } else { ?>
                                 <?php
                                             if (isset($_POST["mediQuantity_1"])) {
@@ -307,11 +307,11 @@ if (isset($_POST['reset'])) {
                                     <td><input type="text" class="medium-table" name="mediUnitPrice_2" readonly="readonly" onfocus="this.blur()" tabindex="-1" value="<?php echo $currMedi["medicine_unit_price"] ?>"></td>
                                     <td><input type="text" class="medium-table" name="mediCost_2" readonly="readonly" onfocus="this.blur()" tabindex="-1" value="<?php echo $_SESSION['mediCost_2'] ?>"></td>
                                 <?php } else { ?>
-                                            <td><input type="text" class="medium-table" name="mediUnit_2" readonly="readonly" onfocus="this.blur()" tabindex="-1"></td>
-                                            <td><input type="number" class="medium-table" name="mediQuantity_2" readonly="readonly" onkeypress="return event.charCode >= 48" min="1"></td>
-                                            <td><input type="text" class="medium-table" name="mediUnitPrice_2" readonly="readonly" onfocus="this.blur()" tabindex="-1"></td>
-                                            <td><input type="text" class="medium-table" name="mediCost_2" readonly="readonly" onfocus="this.blur()" tabindex="-1" ></td>
-                                           <?php }
+                                    <td><input type="text" class="medium-table" name="mediUnit_2" readonly="readonly" onfocus="this.blur()" tabindex="-1"></td>
+                                    <td><input type="number" class="medium-table" name="mediQuantity_2" readonly="readonly" onkeypress="return event.charCode >= 48" min="1"></td>
+                                    <td><input type="text" class="medium-table" name="mediUnitPrice_2" readonly="readonly" onfocus="this.blur()" tabindex="-1"></td>
+                                    <td><input type="text" class="medium-table" name="mediCost_2" readonly="readonly" onfocus="this.blur()" tabindex="-1"></td>
+                                <?php }
                                         } else { ?>
                                 <?php
                                             if (isset($_POST["mediQuantity_2"])) {
@@ -382,11 +382,11 @@ if (isset($_POST['reset'])) {
                                     <td><input type="text" class="medium-table" name="mediUnitPrice_3" readonly="readonly" onfocus="this.blur()" tabindex="-1" value="<?php echo $currMedi["medicine_unit_price"] ?>"></td>
                                     <td><input type="text" class="medium-table" name="mediCost_3" readonly="readonly" onfocus="this.blur()" tabindex="-1" value="<?php echo $_SESSION['mediCost_3'] ?>"></td>
                                 <?php } else { ?>
-                                            <td><input type="text" class="medium-table" name="mediUnit_3" readonly="readonly" onfocus="this.blur()" tabindex="-1"></td>
-                                            <td><input type="number" class="medium-table" name="mediQuantity_3" readonly="readonly" onkeypress="return event.charCode >= 48" min="1"></td>
-                                            <td><input type="text" class="medium-table" name="mediUnitPrice_3" readonly="readonly" onfocus="this.blur()" tabindex="-1"></td>
-                                            <td><input type="text" class="medium-table" name="mediCost_3" readonly="readonly" onfocus="this.blur()" tabindex="-1" ></td>
-                                           <?php }
+                                    <td><input type="text" class="medium-table" name="mediUnit_3" readonly="readonly" onfocus="this.blur()" tabindex="-1"></td>
+                                    <td><input type="number" class="medium-table" name="mediQuantity_3" readonly="readonly" onkeypress="return event.charCode >= 48" min="1"></td>
+                                    <td><input type="text" class="medium-table" name="mediUnitPrice_3" readonly="readonly" onfocus="this.blur()" tabindex="-1"></td>
+                                    <td><input type="text" class="medium-table" name="mediCost_3" readonly="readonly" onfocus="this.blur()" tabindex="-1"></td>
+                                <?php }
                                         } else { ?>
                                 <?php
                                             if (isset($_POST["mediQuantity_3"])) {
@@ -457,11 +457,11 @@ if (isset($_POST['reset'])) {
                                     <td><input type="text" class="medium-table" name="mediUnitPrice_4" readonly="readonly" onfocus="this.blur()" tabindex="-1" value="<?php echo $currMedi["medicine_unit_price"] ?>"></td>
                                     <td><input type="text" class="medium-table" name="mediCost_4" readonly="readonly" onfocus="this.blur()" tabindex="-1" value="<?php echo $_SESSION['mediCost_4'] ?>"></td>
                                 <?php } else { ?>
-                                            <td><input type="text" class="medium-table" name="mediUnit_4" readonly="readonly" onfocus="this.blur()" tabindex="-1"></td>
-                                            <td><input type="number" class="medium-table" name="mediQuantity_4" readonly="readonly" onkeypress="return event.charCode >= 48" min="1"></td>
-                                            <td><input type="text" class="medium-table" name="mediUnitPrice_4" readonly="readonly" onfocus="this.blur()" tabindex="-1"></td>
-                                            <td><input type="text" class="medium-table" name="mediCost_4" readonly="readonly" onfocus="this.blur()" tabindex="-1" ></td>
-                                           <?php }
+                                    <td><input type="text" class="medium-table" name="mediUnit_4" readonly="readonly" onfocus="this.blur()" tabindex="-1"></td>
+                                    <td><input type="number" class="medium-table" name="mediQuantity_4" readonly="readonly" onkeypress="return event.charCode >= 48" min="1"></td>
+                                    <td><input type="text" class="medium-table" name="mediUnitPrice_4" readonly="readonly" onfocus="this.blur()" tabindex="-1"></td>
+                                    <td><input type="text" class="medium-table" name="mediCost_4" readonly="readonly" onfocus="this.blur()" tabindex="-1"></td>
+                                <?php }
                                         } else { ?>
                                 <?php
                                             if (isset($_POST["mediQuantity_4"])) {
@@ -532,11 +532,11 @@ if (isset($_POST['reset'])) {
                                     <td><input type="text" class="medium-table" name="mediUnitPrice_5" readonly="readonly" onfocus="this.blur()" tabindex="-1" value="<?php echo $currMedi["medicine_unit_price"] ?>"></td>
                                     <td><input type="text" class="medium-table" name="mediCost_5" readonly="readonly" onfocus="this.blur()" tabindex="-1" value="<?php echo $_SESSION['mediCost_5'] ?>"></td>
                                 <?php } else { ?>
-                                            <td><input type="text" class="medium-table" name="mediUnit_5" readonly="readonly" onfocus="this.blur()" tabindex="-1"></td>
-                                            <td><input type="number" class="medium-table" name="mediQuantity_5" readonly="readonly" onkeypress="return event.charCode >= 48" min="1"></td>
-                                            <td><input type="text" class="medium-table" name="mediUnitPrice_5" readonly="readonly" onfocus="this.blur()" tabindex="-1"></td>
-                                            <td><input type="text" class="medium-table" name="mediCost_5" readonly="readonly" onfocus="this.blur()" tabindex="-1" ></td>
-                                           <?php }
+                                    <td><input type="text" class="medium-table" name="mediUnit_5" readonly="readonly" onfocus="this.blur()" tabindex="-1"></td>
+                                    <td><input type="number" class="medium-table" name="mediQuantity_5" readonly="readonly" onkeypress="return event.charCode >= 48" min="1"></td>
+                                    <td><input type="text" class="medium-table" name="mediUnitPrice_5" readonly="readonly" onfocus="this.blur()" tabindex="-1"></td>
+                                    <td><input type="text" class="medium-table" name="mediCost_5" readonly="readonly" onfocus="this.blur()" tabindex="-1"></td>
+                                <?php }
                                         } else { ?>
                                 <?php
                                             if (isset($_POST["mediQuantity_5"])) {
