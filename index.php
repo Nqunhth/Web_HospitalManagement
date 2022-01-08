@@ -30,7 +30,7 @@ $slideCurr = 0;
 <head>
     <meta charset="UTF-8">
     <title>HealthCareManagement</title>
-    <link rel="stylesheet" href="./Views/css/main.css">
+    <link rel="stylesheet" href="./css/main.css">
     <link rel="stylesheet" href="./lib/fontawesome-free-5.15.4-web/css/all.min.css">
 
     <!--"Roboto" & "M PLUS Rounded 1c font" -->

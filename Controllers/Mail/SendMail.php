@@ -59,7 +59,7 @@ class ComfirmationMailing
            <body>';
         $message .= '<h1>Hi ' . $name . '!</h1>';
         $message .= '<p>The password for your account is : </p>';
-        $message .= '<h2>Hi ' . $password . '!</h2>';
+        $message .= '<h2>' . $password . '</h2>';
         $message .= '<p><a href="http://localhost/Web_HospitalManagement/Controllers/Mail/Activation.php?token=' . $token . '">CLICK TO ACTIVATE YOUR ACCOUNT</a></p>';
         $message .= "</body></html>";
         $this->mail->MsgHTML($message);
