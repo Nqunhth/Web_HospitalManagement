@@ -1,8 +1,8 @@
 <?php
-require "../php/ConnectionConfig/DataBase.php";
-require "../php/Patient/Patient.php";
-require "../php/SpecialConsulting/SpecCon.php";
-require "../php/SpecialConsulting/CreateNewSpecCon.php";
+require "../Models/ConnectionConfig/DataBase.php";
+require "../Models/Patient/Patient.php";
+require "../Models/SpecialistConsulting/SpecCon.php";
+require "../Controllers/SpecialConsulting/CreateNewSpecCon.php";
 
 session_start();
 
@@ -22,14 +22,13 @@ if (isset($_POST['submit'])) {
 <head>
     <meta charset="UTF-8">
     <title>HealthCareManagement</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../lib/fontawesome-free-5.15.4-web/css/all.min.css">
 
     <!--"Roboto" & "M PLUS Rounded 1c font" -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap">
-
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../icon/fontawesome-free-5.15.4-web/css/all.min.css">
 </head>
 
 <body>
@@ -159,7 +158,7 @@ if (isset($_POST['submit'])) {
                     var doctor = document.forms["Form"]["doctor_name"].value;
                     if (pId == null || pId == "" || pName == null || pName == "" || pAge == null || pAge == "" || pAddress == null || pAddress == "" ||
                         pPhone == null || pPhone == "" || pJob == null || pJob == "" || reason == null || reason == "" || request == null || request == "" ||
-                        result == null || result == "" || testArea == null || testArea == "" || doctor == null || doctor == "" ) {
+                        result == null || result == "" || testArea == null || testArea == "" || doctor == null || doctor == "") {
                         errorLog.classList.remove('hide');
                         // alert("AAAAa")
                         return false;

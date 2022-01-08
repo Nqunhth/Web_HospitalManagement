@@ -1,14 +1,14 @@
 <?php
 session_start();
-require "../php/ConnectionConfig/DataBase.php";
-require "../php/Invoice/Invoice.php";
-require "../php/Invoice/InvoiceMedicine.php";
+require "../Models/ConnectionConfig/DataBase.php";
+require "../Models/Invoice/Invoice.php";
+require "../Models/Invoice/InvoiceMedicine.php";
 
 $db = new Database();
 $conn = $db->dbConnect();
 
 $count = Invoice::fetchCountTotal();
-if($count->num_rows > 0){
+if ($count->num_rows > 0) {
     $row = $count->fetch_assoc();
     $total_records = $row['total'];
 }
@@ -45,14 +45,14 @@ if (isset($_POST['switch-change'])) {
 <head>
     <meta charset="UTF-8">
     <title>HealthCareManagement</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../lib/fontawesome-free-5.15.4-web/css/all.min.css">
 
     <!--"Roboto" & "M PLUS Rounded 1c font" -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap">
 
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../icon/fontawesome-free-5.15.4-web/css/all.min.css">
 </head>
 
 <body>
@@ -146,7 +146,7 @@ if (isset($_POST['switch-change'])) {
             </div>
             <div class="container__content">
                 <ul class="card-list">
-                <?php if ($result->num_rows > 0) {
+                    <?php if ($result->num_rows > 0) {
                         // Load dữ liệu lên website
                         while ($row = $result->fetch_assoc()) {
                             $onShow = '';
@@ -154,37 +154,37 @@ if (isset($_POST['switch-change'])) {
                             if ($list_medi->num_rows > 0) {
                                 // Load dữ liệu lên website
                                 while ($medi = $list_medi->fetch_assoc()) {
-                                    if($onShow == '')
+                                    if ($onShow == '')
                                         $onShow = $medi['medicine_id'] . '-' . $medi['medicine_name'] . ' ' . $medi['quantity'] . ' ' . $medi['cost'] . ' ' . "VND";
                                     else
                                         $onShow = $onShow . '; ' . $medi['medicine_id'] . '-' . $medi['medicine_name'] . ' ' . $medi['quantity'] . ' ' . $medi['cost'] . ' ' . "VND";
                                 }
                             }
-                ?>
-                    <li class="card-drop">
-                        <input type="checkbox" />
-                        <div class="short-card">
-                            <div class="inner-card">
-                                <div class="inner-detail">
-                                    <div class="datetime-containter">
-                                        <p class="i-datetime">Date:
-                                        <p class="i-value i-datetime"><?php echo $row["created_date"]; ?></p>
-                                        </p>
-                                    </div>
-                                    <p class="i-title">
-                                        Customer Full Name:
-                                    <p class="i-value short-text"><?php echo $row["cus_name"]; ?></p>
-                                    </p>
-                                    <p class="i-title">
-                                        Address:
-                                    <p class="i-value short-text"><?php echo $row["cus_address"]; ?></p>
-                                    </p>
-                                    <p class="i-title">
-                                        Total Bill:
-                                    <p class="i-value short-text"><?php echo $row["sum_cost"]; ?> VND</p>
-                                    </p>
-                                </div>
-                                <form class="switch-container center" method="post" action="">
+                    ?>
+                            <li class="card-drop">
+                                <input type="checkbox" />
+                                <div class="short-card">
+                                    <div class="inner-card">
+                                        <div class="inner-detail">
+                                            <div class="datetime-containter">
+                                                <p class="i-datetime">Date:
+                                                <p class="i-value i-datetime"><?php echo $row["created_date"]; ?></p>
+                                                </p>
+                                            </div>
+                                            <p class="i-title">
+                                                Customer Full Name:
+                                            <p class="i-value short-text"><?php echo $row["cus_name"]; ?></p>
+                                            </p>
+                                            <p class="i-title">
+                                                Address:
+                                            <p class="i-value short-text"><?php echo $row["cus_address"]; ?></p>
+                                            </p>
+                                            <p class="i-title">
+                                                Total Bill:
+                                            <p class="i-value short-text"><?php echo $row["sum_cost"]; ?> VND</p>
+                                            </p>
+                                        </div>
+                                        <form class="switch-container center" method="post" action="">
                                             <p class="switch-lable">Status</p>
                                             <label class="switch">
                                                 <?php
@@ -208,29 +208,26 @@ if (isset($_POST['switch-change'])) {
                                                 } ?>
                                             </label>
                                         </form>
-                                <div class="icon-container center">
-                                    <i class="fas fa-chevron-down"></i>
+                                        <div class="icon-container center">
+                                            <i class="fas fa-chevron-down"></i>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="full-card">
-                            <div class="inner-card">
-                                <div class="inner-detail has-border-top">
-                                    <p class="i-title">
-                                        List of Medicines:
-                                    <p class="i-value long-text">
-                                        <?php echo $onShow; ?>
-                                    </p>
-                                    </p>
+                                <div class="full-card">
+                                    <div class="inner-card">
+                                        <div class="inner-detail has-border-top">
+                                            <p class="i-title">
+                                                List of Medicines:
+                                            <p class="i-value long-text">
+                                                <?php echo $onShow; ?>
+                                            </p>
+                                            </p>
+                                        </div>
+                                        <div class="switch-container center">
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="switch-container center">
-                                </div>
-                                <div class="icon-container center">
-                                    <i class="fas fa-print"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
+                            </li>
                     <?php
                         }
                     }
@@ -339,11 +336,10 @@ if (isset($_POST['switch-change'])) {
             // alert(val + sta);
             id.value = val;
             status.value = sta;
-            if (sta == "enable"){
+            if (sta == "enable") {
                 title.textContent = "Confirm Disable";
                 message.textContent = "Do you want to disable this form?";
-            }
-            else{
+            } else {
                 title.textContent = "Confirm Enable";
                 message.textContent = "Do you want to enable this form?";
             }

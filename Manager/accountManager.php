@@ -1,18 +1,18 @@
 <?php
-require "../php/ConnectionConfig/DataBase.php";
-require "../php/Mail/SendMail.php";
-require '../php/lib/PHPMailer/src/Exception.php';
-require '../php/lib/PHPMailer/src/PHPMailer.php';
-require '../php/lib/PHPMailer/src/SMTP.php';
-require "../php/LogIn-SignUp/signup.php";
-require "../php/Manager/Manager.php";
+require "../Models/ConnectionConfig/DataBase.php";
+require "../Controllers/Mail/SendMail.php";
+require '../lib/PHPMailer/src/Exception.php';
+require '../lib/PHPMailer/src/PHPMailer.php';
+require '../lib/PHPMailer/src/SMTP.php';
+require "../Controllers/LogIn-SignUp/signup.php";
+require "../Models/Manager/Manager.php";
 
 session_start();
 $db = new Database();
 $conn = $db->dbConnect();
 
 $count = Manager::fetchCountTotal();
-if($count->num_rows > 0){
+if ($count->num_rows > 0) {
     $row = $count->fetch_assoc();
     $total_records = $row['total'];
 }
@@ -43,14 +43,13 @@ if (isset($_POST['submit']) && $_POST['submit'] != "cancel") {
 <head>
     <meta charset="UTF-8">
     <title>HealthCareManagement</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../lib/fontawesome-free-5.15.4-web/css/all.min.css">
 
     <!--"Roboto" & "M PLUS Rounded 1c font" -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap">
-
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../icon/fontawesome-free-5.15.4-web/css/all.min.css">
 </head>
 
 <body>
@@ -117,7 +116,7 @@ if (isset($_POST['submit']) && $_POST['submit'] != "cancel") {
                     <ul>
                         <li class="has-border-bottom is-active-in-menu">
                             <i class="fas fa-users-cog"></i>
-                            <a href="/Web_HospitalManagement/Manager/accountManager.php">Manager Account</a>
+                            <a href="/Web_HospitalManagement/Manager/accountManager.php">Manager Accounts</a>
                         </li>
                         <li class="has-border-bottom">
                             <i class="fas fa-concierge-bell"></i>
@@ -125,11 +124,11 @@ if (isset($_POST['submit']) && $_POST['submit'] != "cancel") {
                         </li>
                         <li class="has-border-bottom">
                             <i class="fas fa-stethoscope"></i>
-                            <a href="/Web_HospitalManagement/Manager/accountDoctor.php">Doctor Account</a>
+                            <a href="/Web_HospitalManagement/Manager/accountDoctor.php">Doctor Accounts</a>
                         </li>
                         <li>
                             <i class="fas fa-pills"></i>
-                            <a href="/Web_HospitalManagement/Manager/accountPharma.php">Pharmacist Account</a>
+                            <a href="/Web_HospitalManagement/Manager/accountPharma.php">Pharmacist Accounts</a>
                         </li>
                     </ul>
                 </div>
@@ -180,7 +179,7 @@ if (isset($_POST['submit']) && $_POST['submit'] != "cancel") {
                                                 <?php echo $row["specialized_field"]; ?>
                                             </p>
                                         </div>
-                                    
+
                                         <div class="icon-container center">
                                             <i class="fas fa-chevron-down"></i>
                                         </div>
@@ -224,11 +223,11 @@ if (isset($_POST['submit']) && $_POST['submit'] != "cancel") {
                                                 Avatar:
                                             </p>
                                             <div class="i-avatar">
-                                            <?php if (empty($row['avatar'])) { ?>
-                                                <i class="fas fa-user-circle"></i>
-                                            <?php } else { ?>
-                                                <img class="card-avatar" src="<?php echo $row['avatar']; ?>"></img>
-                                            <?php } ?>
+                                                <?php if (empty($row['avatar'])) { ?>
+                                                    <i class="fas fa-user-circle"></i>
+                                                <?php } else { ?>
+                                                    <img class="card-avatar" src="<?php echo $row['avatar']; ?>"></img>
+                                                <?php } ?>
                                             </div>
                                         </div>
                                     </div>

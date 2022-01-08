@@ -1,7 +1,7 @@
 <?php
 session_start();
-require "../php/ConnectionConfig/DataBase.php";
-require "../php/Prescription/Prescription.php";
+require "../Models/ConnectionConfig/DataBase.php";
+require "../Models/Prescription/Prescription.php";
 
 
 $count = Prescription::fetchCountTotal();
@@ -42,14 +42,14 @@ if (isset($_POST['switch-change'])) {
 <head>
     <meta charset="UTF-8">
     <title>HealthCareManagement</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../lib/fontawesome-free-5.15.4-web/css/all.min.css">
 
     <!--"Roboto" & "M PLUS Rounded 1c font" -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap">
 
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../icon/fontawesome-free-5.15.4-web/css/all.min.css">
 </head>
 
 <body>
@@ -118,7 +118,7 @@ if (isset($_POST['switch-change'])) {
                     <ul>
                         <li class="has-border-bottom">
                             <i class="fas fa-users-cog"></i>
-                            <a href="/Web_HospitalManagement/Manager/accountManager.php">Manager Account</a>
+                            <a href="/Web_HospitalManagement/Manager/accountManager.php">Manager Accounts</a>
                         </li>
                         <li class="has-border-bottom">
                             <i class="fas fa-concierge-bell"></i>
@@ -126,11 +126,11 @@ if (isset($_POST['switch-change'])) {
                         </li>
                         <li class="has-border-bottom">
                             <i class="fas fa-stethoscope"></i>
-                            <a href="/Web_HospitalManagement/Manager/accountDoctor.php">Doctor Account</a>
+                            <a href="/Web_HospitalManagement/Manager/accountDoctor.php">Doctor Accounts</a>
                         </li>
                         <li>
                             <i class="fas fa-pills"></i>
-                            <a href="/Web_HospitalManagement/Manager/accountPharma.php">Pharmacist Account</a>
+                            <a href="/Web_HospitalManagement/Manager/accountPharma.php">Pharmacist Accounts</a>
                         </li>
                     </ul>
                 </div>

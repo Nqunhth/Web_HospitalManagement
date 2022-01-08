@@ -1,5 +1,5 @@
 <?php
-    require "../ConnectionConfig/DataBase.php";
+    require "../../Models/ConnectionConfig/DataBase.php";
 
     if (isset($_POST["submit"])) {
         if (isset($_GET["token"])) {

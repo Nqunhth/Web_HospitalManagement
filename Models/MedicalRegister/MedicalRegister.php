@@ -8,8 +8,6 @@ class MedicalRegister{
     private $reason;
     private $queueNumber;
 
-    // private $createdDate;
-    // private $status;
 
     //Constructor
     public function __construct(){

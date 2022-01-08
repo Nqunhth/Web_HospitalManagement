@@ -1,6 +1,6 @@
 <?php
-require "../php/ConnectionConfig/DataBase.php";
-require "../php/UserClass/changepassword.php";
+require "../Models/ConnectionConfig/DataBase.php";
+require "../Controllers/User/changepassword.php";
 
 session_start();
 
@@ -13,14 +13,14 @@ if (isset($_POST['submit'])) {
 <head>
     <meta charset="UTF-8">
     <title>HealthCareManagement</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../lib/fontawesome-free-5.15.4-web/css/all.min.css">
 
     <!--"Roboto" & "M PLUS Rounded 1c font" -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap">
 
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../icon/fontawesome-free-5.15.4-web/css/all.min.css">
 </head>
 
 <body>
@@ -107,34 +107,34 @@ if (isset($_POST['submit'])) {
                 <div class="box content__box">
                     <div class="inner-box inner-box-user-30">
                         <h2 class="passchange-header">Change Password</h1>
-                        <div class="i-title pass-change">
-                            Current Password:
-                            <div class="center">
-                                <input id="curr" type="password" name="current_pass" class="medium-input width440" value="<?php echo (isset($_POST['current_pass']) && $error != "Change password success" ? $_POST['current_pass'] : "") ?>">
-                                <i id="curr-eye" class="far fa-eye-slash eye-icon" onclick="return myFunction1();"></i>
+                            <div class="i-title pass-change">
+                                Current Password:
+                                <div class="center">
+                                    <input id="curr" type="password" name="current_pass" class="medium-input width440" value="<?php echo (isset($_POST['current_pass']) && $error != "Change password success" ? $_POST['current_pass'] : "") ?>">
+                                    <i id="curr-eye" class="far fa-eye-slash eye-icon" onclick="return myFunction1();"></i>
+                                </div>
                             </div>
-                        </div>
-                        <div class="i-title-user pass-change">
-                            New Password:
-                            <div class="center">
-                                <input id="new" type="password" name="new_pass" class="medium-input width440" value="<?php echo (isset($_POST['new_pass']) && $error != "Change password success" ? $_POST['new_pass'] : "") ?>">
-                                <i id="new-eye" class="far fa-eye-slash eye-icon" onclick="return myFunction2();"></i>
+                            <div class="i-title-user pass-change">
+                                New Password:
+                                <div class="center">
+                                    <input id="new" type="password" name="new_pass" class="medium-input width440" value="<?php echo (isset($_POST['new_pass']) && $error != "Change password success" ? $_POST['new_pass'] : "") ?>">
+                                    <i id="new-eye" class="far fa-eye-slash eye-icon" onclick="return myFunction2();"></i>
+                                </div>
                             </div>
-                        </div>
-                        <div class="i-title-user pass-change">
-                            Confirm New Password:
-                            <div class="center">
-                                <input id="confirm" type="password" name="confirm_pass" class="medium-input width440" value="<?php echo (isset($_POST['confirm_pass']) && $error != "Change password success" ? $_POST['confirm_pass'] : "") ?>">
-                                <i id="confirm-eye" class="far fa-eye-slash eye-icon" onclick="return myFunction3();"></i>
+                            <div class="i-title-user pass-change">
+                                Confirm New Password:
+                                <div class="center">
+                                    <input id="confirm" type="password" name="confirm_pass" class="medium-input width440" value="<?php echo (isset($_POST['confirm_pass']) && $error != "Change password success" ? $_POST['confirm_pass'] : "") ?>">
+                                    <i id="confirm-eye" class="far fa-eye-slash eye-icon" onclick="return myFunction3();"></i>
+                                </div>
                             </div>
-                        </div>
-                        <?php
-                        if (isset($error)) {
-                        ?>
-                            <p class="form-error changpass-error"><?php echo $error ?></p>
-                        <?php
-                        }
-                        ?>
+                            <?php
+                            if (isset($error)) {
+                            ?>
+                                <p class="form-error changpass-error"><?php echo $error ?></p>
+                            <?php
+                            }
+                            ?>
                     </div>
                 </div>
                 <div>
@@ -145,46 +145,48 @@ if (isset($_POST['submit'])) {
                 </div>
             </form>
             <script>
-                    function myFunction1() {
-                        var x1 = document.getElementById("curr");
-                        const eye = document.getElementById("curr-eye");
-                        if (x1.type === "password") {
-                            x1.type = "text";
-                            eye.classList.toggle("fa-eye"); 
-                            eye.classList.toggle("fa-eye-slash"); 
-                        } else {
-                            x1.type = "password";
-                            eye.classList.toggle("fa-eye"); 
-                            eye.classList.toggle("fa-eye-slash"); 
-                        }
+                function myFunction1() {
+                    var x1 = document.getElementById("curr");
+                    const eye = document.getElementById("curr-eye");
+                    if (x1.type === "password") {
+                        x1.type = "text";
+                        eye.classList.toggle("fa-eye");
+                        eye.classList.toggle("fa-eye-slash");
+                    } else {
+                        x1.type = "password";
+                        eye.classList.toggle("fa-eye");
+                        eye.classList.toggle("fa-eye-slash");
                     }
-                    function myFunction2() {
-                        var x1 = document.getElementById("new");
-                        const eye = document.getElementById("new-eye");
-                        if (x1.type === "password") {
-                            x1.type = "text";
-                            eye.classList.toggle("fa-eye"); 
-                            eye.classList.toggle("fa-eye-slash"); 
-                        } else {
-                            x1.type = "password";
-                            eye.classList.toggle("fa-eye"); 
-                            eye.classList.toggle("fa-eye-slash"); 
-                        }
+                }
+
+                function myFunction2() {
+                    var x1 = document.getElementById("new");
+                    const eye = document.getElementById("new-eye");
+                    if (x1.type === "password") {
+                        x1.type = "text";
+                        eye.classList.toggle("fa-eye");
+                        eye.classList.toggle("fa-eye-slash");
+                    } else {
+                        x1.type = "password";
+                        eye.classList.toggle("fa-eye");
+                        eye.classList.toggle("fa-eye-slash");
                     }
-                    function myFunction3() {
-                        var x1 = document.getElementById("confirm");
-                        const eye = document.getElementById("confirm-eye");
-                        if (x1.type === "password") {
-                            x1.type = "text";
-                            eye.classList.toggle("fa-eye"); 
-                            eye.classList.toggle("fa-eye-slash"); 
-                        } else {
-                            x1.type = "password";
-                            eye.classList.toggle("fa-eye"); 
-                            eye.classList.toggle("fa-eye-slash"); 
-                        }
+                }
+
+                function myFunction3() {
+                    var x1 = document.getElementById("confirm");
+                    const eye = document.getElementById("confirm-eye");
+                    if (x1.type === "password") {
+                        x1.type = "text";
+                        eye.classList.toggle("fa-eye");
+                        eye.classList.toggle("fa-eye-slash");
+                    } else {
+                        x1.type = "password";
+                        eye.classList.toggle("fa-eye");
+                        eye.classList.toggle("fa-eye-slash");
                     }
-                </script>
+                }
+            </script>
         </div>
     </div>
 

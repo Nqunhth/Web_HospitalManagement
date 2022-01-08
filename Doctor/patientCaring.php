@@ -1,9 +1,9 @@
 <?php
-require "../php/ConnectionConfig/DataBase.php";
-require "../php/Patient/Patient.php";
-require "../php/UserClass/User.php";
-require "../php/MedicalRegister/MedicalRegister.php";
-require "../php/MedicalRegister/CreateNewMediReg.php";
+require "../Models/ConnectionConfig/DataBase.php";
+require "../Models/Patient/Patient.php";
+require "../Models/User/User.php";
+require "../Models/MedicalRegister/MedicalRegister.php";
+require "../Controllers/MedicalRegister/CreateNewMediReg.php";
 
 session_start();
 
@@ -24,14 +24,14 @@ if (isset($_POST['queue'])) {
 <head>
     <meta charset="UTF-8">
     <title>HealthCareManagement</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../lib/fontawesome-free-5.15.4-web/css/all.min.css">
 
     <!--"Roboto" & "M PLUS Rounded 1c font" -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap">
 
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../icon/fontawesome-free-5.15.4-web/css/all.min.css">
 </head>
 
 <body>
@@ -216,7 +216,7 @@ if (isset($_POST['queue'])) {
                                                 </p>
                                                 <select name="specialist_id" id="doctors" class="long-input">
                                                     <option value="" disabled selected>--select--</option>
-                                                    <?php 
+                                                    <?php
                                                     $assignable->data_seek(0);
                                                     if ($assignable->num_rows > 0) {
                                                         // Load dữ liệu lên website
