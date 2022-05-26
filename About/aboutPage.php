@@ -244,7 +244,7 @@ session_start();
                 <ul class="photo_list center">
                     <li class="contain center">
                         <img class="photo fc-photo center" src="https://health.wyo.gov/wp-content/uploads/2017/05/busy-hospital-hallway.jpg"></img>
-                        <img class="photo fc-photo center" src="https://img.medicalexpo.com/images_me/photo-g/96423-16130609.jpg"></img>
+                        <img class="photo fc-photo center" src="https://tamanhhospital.vn/wp-content/uploads/2021/03/sanh-cho-rong-rai-f.jpg"></img>
                     </li>
                     <li class="contain center take_remain_space">
                         <img class="photo fc-photo whole center" src="https://i.pinimg.com/originals/0b/32/d3/0b32d3dd127e774a9847dd7653a9723d.jpg">
@@ -252,7 +252,7 @@ session_start();
                     </li>
                     <li class="contain center">
                         <img class="photo fc-photo center" src="https://callidus.ca/wp-content/uploads/2017/02/Callidus-Toronto-General-Hospital-Trigor.jpg"></img>
-                        <img class="photo fc-photo center" src="https://www.medistarcorp.com/wp-content/uploads/sites/9679/2016/07/PAM-Bay-Area-Rehab-Hospital-Therapy-Gym-a.jpg"></img>
+                        <img class="photo fc-photo center" src="https://image.cnbcfm.com/api/v1/image/106478983-1586284947918gettyimages-1209294299.jpeg"></img>
                     </li>
                 </ul>
             </div>

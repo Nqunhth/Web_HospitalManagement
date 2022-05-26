@@ -143,7 +143,8 @@ $result = MedicalRegister::fetchMediPage($start, $limit);
                 </div>
             </div>
             <div class="container__content">
-                <ul class="card-list">
+                <ul class="card-list" id="myUL">
+                <input class="search-list"type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
                     <?php if ($result->num_rows > 0) {
                         // Load dữ liệu lên website
                         while ($row = $result->fetch_assoc()) {
@@ -283,5 +284,22 @@ $result = MedicalRegister::fetchMediPage($start, $limit);
         </div>
     </div>
 </body>
-
+<script>
+    function myFunction() {
+        var input, filter, ul, li, a, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        ul = document.getElementById("myUL");
+        li = ul.getElementsByTagName("li");
+        for (i = 0; i < li.length; i++) {
+            a = li[i].getElementsByTagName("div")[0].getElementsByTagName("div")[0].getElementsByTagName("div")[0].getElementsByTagName("p")[4]
+            txtValue = a.textContent || a.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = "";
+            } else {
+                li[i].style.display = "none";
+            }
+        }
+    }
+</script>
 </html>
