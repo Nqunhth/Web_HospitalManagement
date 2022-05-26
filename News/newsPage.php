@@ -1,6 +1,7 @@
 <?php
 require "../Models/ConnectionConfig/DataBase.php";
 require "../Models/News/News.php";
+require "../AjaxControllers/NewsController.php";
 session_start();
 
 $list = News::fetchNews();
@@ -9,7 +10,6 @@ if (isset($_GET['news_id'])) {
     $curr = News::fetchNewsById($_GET['news_id']);
 } else
     $curr = News::fetchLatestNews();
-
 ?>
 
 <!DOCTYPE html>
@@ -27,7 +27,7 @@ if (isset($_GET['news_id'])) {
     <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
 </head>
 
-<body>
+<body onload="loadDB()">
     <div class="news-page center">
         <div class="header__navbar not_navbar_at_home">
             <ul class="navbar--list">
@@ -139,27 +139,8 @@ if (isset($_GET['news_id'])) {
             </div>
 
 
-            <div class="full_news center">
-                <?php if ($curr->num_rows > 0) {
-                    $curr = $curr->fetch_assoc() ?>
-                    <div class="fn_header">
-                        <div class="fn_title">
-                            <h1><?php echo $curr['news_title'] ?></h1>
-                        </div>
-                        <div class="author_time">
-                            <p><?php echo $curr['news_author'] ?></p>
-                            <p><?php echo $curr['news_date'] ?></p>
-                        </div>
-                    </div>
-                    <div class="fn_content center">
-                        <?php if ($curr['news_img'] != "") { ?>
-                            <img class="fn_image center" src="<?php echo $curr['news_img'] ?>"></img>
-                        <?php } ?>
-                        <p class="fn_paragraph">
-                            <?php echo $curr['news_content'] ?>
-                        </p>
-                    </div>
-                <?php } ?>
+            <div id="bb" class="full_news center">
+                
             </div>
         </div>
 
@@ -207,5 +188,21 @@ if (isset($_GET['news_id'])) {
     </div>
     </div>
 </body>
+<script language="javascript">
+    function loadDB() {
+        console.log("aaaaa")
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "../AjaxControllers/NewsController.php", true);
+        xhr.send(null);
+        xhr.onreadystatechange = function() {
+         
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                console.log("vmnvnvn")
+                console.log(xhr)
+                bb.innerHTML = xhr
+            }
 
+        }
+    }
+</script>
 </html>
