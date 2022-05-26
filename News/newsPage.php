@@ -140,7 +140,26 @@ if (isset($_GET['news_id'])) {
 
 
             <div id="bb" class="full_news center">
-                
+                <?php if ($curr->num_rows > 0) {
+                    $curr = $curr->fetch_assoc() ?>
+                    <div class="fn_header">
+                        <div class="fn_title">
+                            <h1><?php echo $curr['news_title'] ?></h1>
+                        </div>
+                        <div class="author_time">
+                            <p><?php echo $curr['news_author'] ?></p>
+                            <p><?php echo $curr['news_date'] ?></p>
+                        </div>
+                    </div>
+                    <div class="fn_content center">
+                        <?php if ($curr['news_img'] != "") { ?>
+                            <img class="fn_image center" src="<?php echo $curr['news_img'] ?>"></img>
+                        <?php } ?>
+                        <p class="fn_paragraph">
+                            <?php echo $curr['news_content'] ?>
+                        </p>
+                    </div>
+                <?php } ?>
             </div>
         </div>
 
@@ -199,7 +218,6 @@ if (isset($_GET['news_id'])) {
             if (xhr.readyState == 4 && xhr.status == 200) {
                 console.log("vmnvnvn")
                 console.log(xhr)
-                bb.innerHTML = xhr
             }
 
         }
