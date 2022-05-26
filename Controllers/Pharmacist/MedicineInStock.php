@@ -1,4 +1,6 @@
 <?php
+// require "../../Models/Medicine/Medicine.php";
+// require "../../Models/ConnectionConfig/Database.php";
 class MedicineInStock
 {
     public static function Pagination()
@@ -25,4 +27,13 @@ class MedicineInStock
         return $result;
     }
 }
+
+// $aa = MedicineInStock::Pagination();
+// $i = 0;
+// $temp = "";
+// while ($row = $aa->fetch_assoc()) {
+//     $temp .= "<div id='".$i."'>" . $row['medicine_name'] . "</div>" ;
+//     $i++;
+// }
+// echo $temp;
 ?>
