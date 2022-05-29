@@ -7,7 +7,8 @@ class News{
         $query = 
             "SELECT * 
             FROM `news`
-            ORDER BY news_date desc";
+            ORDER BY news_date desc
+            LIMIT 6";
         return $conn->query($query);
     }
 
