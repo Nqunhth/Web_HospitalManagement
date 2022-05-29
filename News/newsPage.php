@@ -1,15 +1,5 @@
 <?php
-require "../Models/ConnectionConfig/DataBase.php";
-require "../Models/News/News.php";
 session_start();
-
-$list = News::fetchNews();
-
-if (isset($_GET['news_id'])) {
-    $curr = News::fetchNewsById($_GET['news_id']);
-} else
-    $curr = News::fetchLatestNews();
-
 ?>
 
 <!DOCTYPE html>
@@ -27,7 +17,7 @@ if (isset($_GET['news_id'])) {
     <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
 </head>
 
-<body>
+<body onload="loadDB()">
     <div class="news-page center">
         <div class="header__navbar not_navbar_at_home">
             <ul class="navbar--list">
@@ -101,65 +91,15 @@ if (isset($_GET['news_id'])) {
                 <div class="bar_head">
                     News
                 </div>
-                <?php if ($list->num_rows > 0) { ?>
-                    <ul class="news_list">
-                        <?php while ($listItem = $list->fetch_assoc()) { ?>
-                            <li class="news_item center" onclick="document.getElementById('submit-<?php echo $listItem['news_id'] ?>').click();">
-                                <form class="hide" action="">
-                                    <input id="submit-<?php echo $listItem['news_id'] ?>" type="submit" name="news_id" value="<?php echo $listItem['news_id'] ?>" />
-                                </form>
-                                <?php if ($listItem['news_img'] == "") { ?>
-                                    <div class="thumpnail center">
-                                        <i class="fas fa-image"></i>
-                                    </div>
-                                <?php } else { ?>
-                                    <img class="thumpnail center" src="<?php echo $listItem['news_img'] ?>"></img>
-                                <?php } ?>
-                                <div class="news_description">
-                                    <div class="news_des_head">
-                                        <h2 class="title"><?php echo $listItem['news_title'] ?></h2>
-                                        <p class="author">- <?php echo $listItem['news_author'] ?></p>
-                                    </div>
-                                    <div class="des_content_container">
-                                        <p class="des_content">
-                                            <?php echo $listItem['news_content'] ?>
-                                        </p>
-                                    </div>
-                                    <p class="update_time">
-                                        <?php echo $listItem['news_date'] ?>
-                                    </p>
-                                </div>
-                            </li>
-                        <?php } ?>
-                    </ul>
-                <?php } ?>
+                <div id=news_list></div>
                 <div class="bar_foot">
                     See more
                 </div>
             </div>
 
 
-            <div class="full_news center">
-                <?php if ($curr->num_rows > 0) {
-                    $curr = $curr->fetch_assoc() ?>
-                    <div class="fn_header">
-                        <div class="fn_title">
-                            <h1><?php echo $curr['news_title'] ?></h1>
-                        </div>
-                        <div class="author_time">
-                            <p><?php echo $curr['news_author'] ?></p>
-                            <p><?php echo $curr['news_date'] ?></p>
-                        </div>
-                    </div>
-                    <div class="fn_content center">
-                        <?php if ($curr['news_img'] != "") { ?>
-                            <img class="fn_image center" src="<?php echo $curr['news_img'] ?>"></img>
-                        <?php } ?>
-                        <p class="fn_paragraph">
-                            <?php echo $curr['news_content'] ?>
-                        </p>
-                    </div>
-                <?php } ?>
+            <div id="bb" class="full_news center">
+
             </div>
         </div>
 
@@ -207,5 +147,47 @@ if (isset($_GET['news_id'])) {
     </div>
     </div>
 </body>
+<script language="javascript">
+    function loadDB() {
+        var url = new URL(window.location.href);
+        console.log(url.searchParams.get("news_id"));
+        var xhr = new XMLHttpRequest();
+        if (!url.searchParams.get("news_id")) {
+            xhr.open("GET", "../Ajax/NewsAjax/GetLatestNews.php", true);
+            xhr.send(null);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    bb.innerHTML = xhr.responseText
+                    console.log(xhr.responseText)
+                }
+            }
+        } else {
+            xhr.open("POST", "../Ajax/NewsAjax/GetNewsById.php", true);
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr.send("chosen_id=" + url.searchParams.get("news_id"));
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    bb.innerHTML = xhr.responseText
+                }
+            }
+        }
+
+        var listNews = new XMLHttpRequest();
+        listNews.open("GET", "../Ajax/NewsAjax/GetNewsList.php", true);
+        listNews.send(null);
+        listNews.onreadystatechange = function() {
+            if (listNews.readyState == 4 && listNews.status == 200) {
+                news_list.innerHTML = listNews.responseText
+            }
+        }
+    }
+
+    function onClickNewsItem(e) {
+        e = e || window.event;
+        var news = new XMLHttpRequest();
+
+        window.location.replace("/Web_HospitalManagement/News/newsPage.php?news_id=" + e.currentTarget.value)
+    }
+</script>
 
 </html>
