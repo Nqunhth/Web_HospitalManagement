@@ -269,18 +269,18 @@ if (isset($_POST['switch-change'])) {
                     <div class="pagination center">
                         <?php
                         if ($current_page > 1 && $total_page > 1) {
-                            echo '<a class="page" href="/Web_HospitalManagement/Manager/listPrescription.php?page=' . ($current_page - 1) . '">Prev</a> ';
+                            echo '<a class="page" href="/Web_HospitalManagement/Doctor/listPrescription.php?page=' . ($current_page - 1) . '">Prev</a> ';
                         }
 
                         for ($i = 1; $i <= $total_page; $i++) {
                             if ($i == $current_page) {
                                 echo '<span class="page active" >' . $i . '</span> ';
                             } else {
-                                echo '<a class="page" href="/Web_HospitalManagement/Manager/listPrescription.php?page=' . $i . '">' . $i . '</a> ';
+                                echo '<a class="page" href="/Web_HospitalManagement/Doctor/listPrescription.php?page=' . $i . '">' . $i . '</a> ';
                             }
                         }
                         if ($current_page < $total_page && $total_page > 1) {
-                            echo '<a class="page" href="/Web_HospitalManagement/Manager/listPrescription.php?page=' . ($current_page + 1) . '">Next</a> ';
+                            echo '<a class="page" href="/Web_HospitalManagement/Doctor/listPrescription.php?page=' . ($current_page + 1) . '">Next</a> ';
                         }
                         ?>
                     </div>
